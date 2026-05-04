@@ -4,6 +4,7 @@ public class Pool {
 	private int tilesAmounts;
 
 	
+	
 	// getteur
 	public int getTilesAmounts() {
 		return tilesAmounts;
