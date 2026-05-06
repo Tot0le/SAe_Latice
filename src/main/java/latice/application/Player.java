@@ -1,9 +1,12 @@
 package latice.application;
 
+import latice.gui.Console;
+
 public class Player {
 	
-	private Integer points ;
-	private Rack rack ;
+	private Integer points;
+	private Rack rack;
+	private Pool pool;
 	
 	public void buyANewAction(Integer points) {
 		points = points - 2;
@@ -15,8 +18,13 @@ public class Player {
 	public void placeATile() {
 		//TODO do a -1 on rack - tiles amount
 }
-	public void DrawATile() {
-		//TODO  do a + 1  on rack - tiles amouts
+	public void drawATile() {
+		Tile tileDrawn = pool.drawTile();
+		if(tileDrawn == null) {
+			Console.message("impossible de piocher, Pool vide.");
+		}else {
+			rack.addTile(tileDrawn);
+		}
 }
 	public void passTheTurn() {
 		//TODO Faire un compteur total pour le tour du nombre de joueurs et quand celui-ci = nb de joueur alors cycles = +1
