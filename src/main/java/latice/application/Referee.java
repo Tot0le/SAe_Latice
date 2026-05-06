@@ -1,6 +1,7 @@
 package latice.application;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -41,8 +42,8 @@ public class Referee {
 		return shuffledTiles;
 		
 	}
+	
 	public void pool2making(ArrayList<Tile> tiles) {
-		
 		ArrayList<Tile> pool1 = new ArrayList<>();
 		ArrayList<Tile> pool2 = new ArrayList<>();
 		Random nbTileRandom = new Random();
@@ -54,9 +55,30 @@ public class Referee {
 			pool1.add(tempTile);
 			tiles.remove(randomTileFromTiles);
 		}
-	pool2.addAll(tiles);
-	System.out.println("Pool 1  : "+ pool1 +".");
-	System.out.println("Pool 2  : "+ pool2 +".");
+		pool2.addAll(tiles);
+		System.out.println("Pool 1  : "+ pool1 +".");
+		System.out.println("Pool 2  : "+ pool2 +".");
+	}
+	
+	// second version in case it doesn't work properly
+	public static Pool[] dealTheCards(ArrayList<Tile> tiles) {
+		Pool pool1 = new Pool();
+		Pool pool2 = new Pool();
+		Integer tilesNumber = tiles.size();
+		
+		for (int i = 0; i < tilesNumber; i = i + 2) {
+			pool1.addTile(tiles.get(i));
+			pool2.addTile(tiles.get(i + 1));
+		}
+		
+		return new Pool[] { pool1, pool2 };
+		
+	}
+	// second version in case it doesn't work properly
+	public static ArrayList<Tile> shuffle2(ArrayList<Tile> tiles) {
+		Collections.shuffle(tiles);
+		return tiles;
+		
 	}
 	
 }
