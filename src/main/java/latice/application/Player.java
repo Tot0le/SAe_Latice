@@ -26,6 +26,7 @@ public class Player {
 			rack.addTile(tileDrawn);
 		}
 }
+
 	public void passTheTurn() {
 		//TODO Faire un compteur total pour le tour du nombre de joueurs et quand celui-ci = nb de joueur alors cycles = +1
 }	

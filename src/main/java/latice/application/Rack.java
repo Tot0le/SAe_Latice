@@ -6,7 +6,9 @@ public class Rack {
 	private int tilesAmounts;
 	private ArrayList<Tile> tiles;
 
-	
+	public void addTile(Tile tile) {
+        this.tiles.add(tile);
+    }
 	// getteur
 	public int getTilesAmounts() {
 		return tilesAmounts;

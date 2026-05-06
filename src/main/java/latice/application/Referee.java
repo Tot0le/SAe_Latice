@@ -27,24 +27,42 @@ public class Referee {
 				tiles.add(new Tile(color, shape));
 			}
 		}
-		final Integer nbTiles = 72;
 		
 		return tiles;
 	}
 	
-	public void shuffle(ArrayList<Tile> tiles, Integer nbTiles) {
+	public ArrayList<Tile> shuffle(ArrayList<Tile> tiles, Integer nbTiles) {
 		
 		ArrayList<Tile> shuffledTiles = new ArrayList<>();
 		Random nbTileRandom = new Random();
 		Integer nbTilesTotal = tiles.size();
 		
 		for (Tile tile : tiles) {
-			int tileAIndexer = nbTileRandom.nextInt(nbTilesTotal);
-			Tile tempTile = tiles.get(tileAIndexer);
+			int tileToIndex = nbTileRandom.nextInt(nbTilesTotal);
+			Tile tempTile = tiles.get(tileToIndex);
 			shuffledTiles.add(tempTile);
-			nbTilesTotal = nbTilesTotal - 1;
+			tiles.remove(tileToIndex);
 		}
-		
+		return shuffledTiles;
 		
 	}
+public void pool2making(ArrayList<Tile> tiles) {
+		
+		ArrayList<Tile> pool1 = new ArrayList<>();
+		ArrayList<Tile> pool2 = new ArrayList<>();
+		Random nbTileRandom = new Random();
+		Integer nbTilesPerPool = tiles.size()/2;
+		
+		for (int i = 0;nbTilesPerPool>0;) {
+			int randomTileFromTiles = nbTileRandom.nextInt(nbTilesPerPool);
+			Tile tempTile = tiles.get(randomTileFromTiles);
+			pool1.add(tempTile);
+			tiles.remove(randomTileFromTiles);
+			
+		}
+	pool2.addAll(tiles);
+	}
 }
+
+
+
