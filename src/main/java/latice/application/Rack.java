@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 public class Rack {
 	private ArrayList<Tile> tiles;
-
+	
+	public Rack() {
+		this.tiles = new ArrayList<Tile>();
+	}
 	// getteur
 	public int tilesAmounts() {
 		return tiles.size();
@@ -12,6 +15,14 @@ public class Rack {
 
 	public ArrayList<Tile> getTiles() {
 		return tiles;
+	}
+	
+	public Tile getTile(Integer index) {
+		return this.tiles.get(index);
+	}
+	
+	public boolean contains(Tile tile) {
+		return this.tiles.contains(tile);
 	}
 
 	public void setTiles(ArrayList<Tile> tiles) {

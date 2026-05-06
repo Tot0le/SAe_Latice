@@ -17,9 +17,9 @@ public class LaticeApplicationConsole extends Referee{
 		
 		Tile tiletest = new Tile(Color.Green, Shape.Bird);
 		System.out.println(tiletest);
-		Rack rack = new Rack();
+		
+		// real game preparation :
 		ArrayList<Tile> tiles = Referee.createAllTiles();
-		rack.setTiles(tiles);
-		System.out.println(rack);
+		tiles = Referee.shuffle(tiles);
 	}	
 }

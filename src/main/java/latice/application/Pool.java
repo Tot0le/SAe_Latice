@@ -13,4 +13,11 @@ public class Pool {
 		this.tiles = tiles;
 	}
 	
+	public Tile getTile(Integer index) {
+		return this.tiles.get(index);
+	}
+	
+	public boolean contains(Tile tile) {
+		return this.tiles.contains(tile);
+	}
 }

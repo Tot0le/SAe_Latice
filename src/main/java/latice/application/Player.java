@@ -10,6 +10,12 @@ public class Player {
 	private Rack rack;
 	private Pool pool;
 	
+	public Player(Integer points, Rack rack, Pool pool) {
+		this.points = points;
+		this.rack = rack;
+		this.pool = pool;
+	}
+	
 	public void buyANewAction(Integer points) {
 		points = points - 2;
 		// TODO  Implémenter une méthode permettant de rajouter une action au joueur

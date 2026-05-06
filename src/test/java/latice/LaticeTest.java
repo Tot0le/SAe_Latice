@@ -1,13 +1,18 @@
 package latice;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import latice.application.Color;
+import latice.application.Player;
 import latice.application.Pool;
 import latice.application.Rack;
-import latice.application.Referee;
 import latice.application.Shape;
 import latice.application.Tile;
 
@@ -21,21 +26,30 @@ public class LaticeTest {
 	Pool pool;
 	
 	@BeforeEach
-	public void clearGameBoard() {
+	public void clearElements() {
 		rack = new Rack();
 		pool = new Pool();
 	}
 	
-	@Disabled
+//	@Disabled
 	@Test
 	public void isATileDrawInTheRack() {
-		Object tiles = Referee.createAllTiles();
-		Referee.shuffle();
-//		Tile tiletest = new Tile(Color.Green, Shape.Bird);
-//		System.out.println(tiletest);
-//		Rack rack = new Rack();
-//		ArrayList<Tile> tiles = Referee.createAllTiles();
-//		rack.setTiles(tiles);
-//		System.out.println(rack);
+		
+		ArrayList<Tile> ourTestingTiles = new ArrayList<>();
+		ourTestingTiles.addAll(List.of(RED_DOLPHIN, NAVY_DOLPHIN, GREEN_TURTLE, RED_TURTLE, RED_GECKO));
+		pool.setTiles(ourTestingTiles);
+		
+		Player player = new Player(0,rack,pool);
+		player.drawATile();
+		assertTrue(rack.getTile(0) == RED_DOLPHIN);
+		
+		assertFalse(pool.contains(RED_DOLPHIN));
+		player.drawATile();
+		player.drawATile();
+		player.drawATile();
+		player.drawATile();
+		assertTrue(rack.contains(GREEN_TURTLE));
+		assertFalse(pool.contains(GREEN_TURTLE));
+		
 	}
 }
