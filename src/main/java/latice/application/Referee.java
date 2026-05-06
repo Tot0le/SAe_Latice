@@ -56,7 +56,10 @@ public void pool2making(ArrayList<Tile> tiles) {
 			
 		}
 	pool2.addAll(tiles);
+	System.out.println("Pool 1  : "+ pool1 +".");
+	System.out.println("Pool 2  : "+ pool2 +".");
 	}
+	
 }
 
 
