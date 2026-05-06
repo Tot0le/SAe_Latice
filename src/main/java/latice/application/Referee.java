@@ -1,4 +1,4 @@
-package latice.characters;
+package latice.application;
 
 public class Referee {
 

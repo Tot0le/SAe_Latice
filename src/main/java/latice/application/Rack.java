@@ -24,5 +24,4 @@ public class Rack {
 	public void setTiles(ArrayList<Tile> tiles) {
 		this.tiles = tiles;
 	}
-	
 }

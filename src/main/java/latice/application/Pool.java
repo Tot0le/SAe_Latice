@@ -7,13 +7,11 @@ public class Pool {
 	private ArrayList<Tile> tiles;
 
 	
-	
 	// getteur
 	public int getTilesAmounts() {
 		return tilesAmounts;
 	}
-
-		// setteur
+	// setteur
 	public void setTilesAmounts(int tilesAmounts) {
 		this.tilesAmounts = tilesAmounts;
 	}
