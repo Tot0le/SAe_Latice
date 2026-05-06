@@ -13,5 +13,4 @@ public class LaticeApplicationConsole extends Referee{
 		int nbJoueurs = scan.nextInt();
 		System.out.println("Il y a " + nbJoueurs+" joueurs");
 	}	
-
 }

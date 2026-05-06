@@ -7,7 +7,7 @@ public class Player {
 	
 	public void buyANewAction(Integer points) {
 		points = points - 2;
-		// TODO    Implémenter une méthode permettant de rakjouter une action au joueur
+		// TODO  Implémenter une méthode permettant de rajouter une action au joueur
 }
 	public void exchangeTheRack() {
 		//TODO tilesAmount -5 puis tiles Amount +5  
@@ -20,13 +20,11 @@ public class Player {
 }
 	public void passTheTurn() {
 		//TODO Faire un compteur total pour le tour du nombre de joueurs et quand celui-ci = nb de joueur alors cycles = +1
-}
-	
+}	
 	// getteurs : 
 	public Integer Points() {
 		return points;
 }
-	
 	// setteurs : 
 	public void player(Integer points) {
 		this.points = points;
