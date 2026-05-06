@@ -13,5 +13,4 @@ public class Rack {
 	public void setTilesAmounts(int tilesAmounts) {
 		this.tilesAmounts = tilesAmounts;
 	}
-	
 }
