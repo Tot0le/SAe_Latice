@@ -26,7 +26,7 @@ public class Referee {
 		return tiles;
 	}
 	
-	public ArrayList<Tile> shuffle(ArrayList<Tile> tiles, Integer nbTiles) {
+	public static ArrayList<Tile> shuffle(ArrayList<Tile> tiles, Integer nbTiles) {
 		
 		ArrayList<Tile> shuffledTiles = new ArrayList<>();
 		Random nbTileRandom = new Random();
