@@ -26,7 +26,7 @@ public class Referee {
 		return tiles;
 	}
 	
-	public static ArrayList<Tile> shuffle(ArrayList<Tile> tiles, Integer nbTiles) {
+	public static ArrayList<Tile> shuffle(ArrayList<Tile> tiles) {
 		
 		ArrayList<Tile> shuffledTiles = new ArrayList<>();
 		Random nbTileRandom = new Random();
@@ -41,7 +41,7 @@ public class Referee {
 		return shuffledTiles;
 		
 	}
-public void pool2making(ArrayList<Tile> tiles) {
+	public void pool2making(ArrayList<Tile> tiles) {
 		
 		ArrayList<Tile> pool1 = new ArrayList<>();
 		ArrayList<Tile> pool2 = new ArrayList<>();
@@ -53,7 +53,6 @@ public void pool2making(ArrayList<Tile> tiles) {
 			Tile tempTile = tiles.get(randomTileFromTiles);
 			pool1.add(tempTile);
 			tiles.remove(randomTileFromTiles);
-			
 		}
 	pool2.addAll(tiles);
 	System.out.println("Pool 1  : "+ pool1 +".");
