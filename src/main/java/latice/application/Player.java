@@ -1,5 +1,7 @@
 package latice.application;
 
+import java.util.ArrayList;
+
 import latice.gui.Console;
 
 public class Player {
@@ -11,29 +13,38 @@ public class Player {
 	public void buyANewAction(Integer points) {
 		points = points - 2;
 		// TODO  Implémenter une méthode permettant de rajouter une action au joueur
-}
+	}
 	public void exchangeTheRack() {
 		//TODO tilesAmount -5 puis tiles Amount +5  
-}
+	}
 	public void placeATile() {
 		//TODO do a -1 on rack - tiles amount
-}
+	}
+	
 	public void drawATile() {
-		Tile tileDrawn = pool.drawTile();
-		if(tileDrawn == null) {
-			Console.message("impossible de piocher, Pool vide.");
-		}else {
-			rack.addTile(tileDrawn);
+		ArrayList<Tile> poolTiles = pool.getTiles();
+		if (rack.getTiles().size() < 5) {
+			if (!poolTiles.isEmpty()) {
+				Tile tileDrawn = poolTiles.getFirst();
+				poolTiles.removeFirst();
+				
+				pool.setTiles(poolTiles);
+				rack.addTile(tileDrawn);
+			} else {
+				Console.message("Impossible de piocher, Pool vide.");
+			}
+		} else {
+			Console.message("Impossible de piocher, nombre maximum de tuile dans le Rack.");
 		}
-}
-
+	}
+	
 	public void passTheTurn() {
 		//TODO Faire un compteur total pour le tour du nombre de joueurs et quand celui-ci = nb de joueur alors cycles = +1
-}	
+	}	
 	// getteurs : 
 	public Integer Points() {
 		return points;
-}
+	}
 	// setteurs : 
 	public void player(Integer points) {
 		this.points = points;

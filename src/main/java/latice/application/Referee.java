@@ -2,12 +2,7 @@ package latice.application;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Random;
-
-import latice.application.Color;
-import latice.application.Shape;
-import latice.application.Tile;
 
 public class Referee {
 	
