@@ -11,8 +11,8 @@ import latice.application.Tile;
 
 public class Referee {
 	
-	
-	public ArrayList<Tile> createAllTiles(){
+
+	public static ArrayList<Tile> createAllTiles(){
 		ArrayList<Shape> shapes = new ArrayList<>(List.of(Shape.Dolphin, Shape.Bird, Shape.Feather, 
 				Shape.Flower, Shape.Gecko, Shape.Turtle));
 		

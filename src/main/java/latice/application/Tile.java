@@ -14,4 +14,9 @@ public class Tile {
 	public Shape getShape() {
 		return shape;
 	}
+	
+	@Override
+	public String toString() {
+		return this.color + " " + this.shape;
+	}
 }
