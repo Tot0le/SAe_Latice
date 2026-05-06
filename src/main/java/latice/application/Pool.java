@@ -3,19 +3,8 @@ package latice.application;
 import java.util.ArrayList;
 
 public class Pool {
-	private int tilesAmounts;
 	private ArrayList<Tile> tiles;
-
 	
-	// getteur
-	public int getTilesAmounts() {
-		return tilesAmounts;
-	}
-	// setteur
-	public void setTilesAmounts(int tilesAmounts) {
-		this.tilesAmounts = tilesAmounts;
-	}
-
 	public ArrayList<Tile> getTiles() {
 		return tiles;
 	}
@@ -24,4 +13,14 @@ public class Pool {
 		this.tiles = tiles;
 	}
 	
+	public Tile drawTile() {
+		if(this.tiles.size() > 0) {
+			Tile returnTile = this.tiles.getFirst();
+			this.tiles.removeFirst();
+			
+			return returnTile;
+		}else {
+			return null;
+		}
+	}
 }
