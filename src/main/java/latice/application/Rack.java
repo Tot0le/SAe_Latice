@@ -5,12 +5,6 @@ import java.util.ArrayList;
 public class Rack {
 	private ArrayList<Tile> tiles;
 
-<<<<<<< HEAD
-	public void addTile(Tile tile) {
-        this.tiles.add(tile);
-    }
-=======
->>>>>>> dd019042dae2d2fd054a07bde6ddc254f36c659e
 	// getteur
 	public int tilesAmounts() {
 		return tiles.size();
