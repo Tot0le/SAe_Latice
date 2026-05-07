@@ -34,7 +34,6 @@ public class LaticeTest {
 //	@Disabled
 	@Test
 	public void isATileDrawInTheRack() {
-		
 		ArrayList<Tile> ourTestingTiles = new ArrayList<>();
 		ourTestingTiles.addAll(List.of(RED_DOLPHIN, NAVY_DOLPHIN, GREEN_TURTLE, RED_TURTLE, RED_GECKO));
 		pool.setTiles(ourTestingTiles);
