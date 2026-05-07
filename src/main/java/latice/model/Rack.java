@@ -1,24 +1,22 @@
-package latice.application;
+package latice.model;
 
 import java.util.ArrayList;
 
-public class Pool {
+import latice.model.tile.Tile;
+
+public class Rack {
 	private ArrayList<Tile> tiles;
 	
-	public Pool() {
+	public Rack() {
 		this.tiles = new ArrayList<Tile>();
 	}
-	
-	public ArrayList<Tile> getTiles() {
-		return this.tiles;
-	}
-
+	// getteur
 	public int tilesAmounts() {
 		return tiles.size();
 	}
-	
-	public void setTiles(ArrayList<Tile> tiles) {
-		this.tiles = tiles;
+
+	public ArrayList<Tile> getTiles() {
+		return tiles;
 	}
 	
 	public Tile getTile(Integer index) {
@@ -27,6 +25,10 @@ public class Pool {
 	
 	public boolean contains(Tile tile) {
 		return this.tiles.contains(tile);
+	}
+
+	public void setTiles(ArrayList<Tile> tiles) {
+		this.tiles = tiles;
 	}
 	
 	public void addTile(Tile tile) {

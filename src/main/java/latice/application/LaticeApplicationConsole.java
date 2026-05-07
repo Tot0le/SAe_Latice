@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import latice.gui.Console;
+import latice.model.Player;
+import latice.model.Pool;
+import latice.model.Rack;
+import latice.model.Referee;
+import latice.model.tile.Tile;
 
 public class LaticeApplicationConsole extends Referee{
 	private final Integer nbTileMax = 72 ;

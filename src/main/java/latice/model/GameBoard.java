@@ -1,6 +1,9 @@
-package latice.application;
+package latice.model;
 
 import java.util.Map;
+
+import latice.model.tile.Tile;
+
 import java.util.HashMap;
 
 public class GameBoard {

@@ -1,4 +1,4 @@
-package latice.application;
+package latice.model.tile;
 
 public class Tile {
 	private final Color color;

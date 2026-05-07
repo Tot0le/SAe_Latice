@@ -9,12 +9,12 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import latice.application.Color;
-import latice.application.Player;
-import latice.application.Pool;
-import latice.application.Rack;
-import latice.application.Shape;
-import latice.application.Tile;
+import latice.model.Player;
+import latice.model.Pool;
+import latice.model.Rack;
+import latice.model.tile.Color;
+import latice.model.tile.Shape;
+import latice.model.tile.Tile;
 
 public class LaticeTest {
 	private static Tile RED_DOLPHIN = new Tile(Color.Red, Shape.Dolphin);
