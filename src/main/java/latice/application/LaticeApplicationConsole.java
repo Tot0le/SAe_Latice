@@ -11,12 +11,12 @@ public class LaticeApplicationConsole extends Referee{
 	public static void main(String[] args) {
 //		Console.title("-- Bienvenue dans notre magnifique jeu de latice ! -- ");
 //		Scanner scan = new Scanner(System.in);
-//		System.out.println("Veuillez saisir le nombre de joueurs :");
+//		Console.message("Veuillez saisir le nombre de joueurs :");
 //		int nbJoueurs = scan.nextInt();
-//		System.out.println("Il y a " + nbJoueurs+" joueurs");
+//		Console.message("Il y a " + nbJoueurs+" joueurs");
 //		
 //		Tile tiletest = new Tile(Color.Green, Shape.Bird);
-//		System.out.println(tiletest);
+//		Console.message(tiletest);
 		
 		// real game preparation :
 		ArrayList<Tile> tiles = Referee.createAllTiles();
@@ -26,10 +26,10 @@ public class LaticeApplicationConsole extends Referee{
 		Pool[] pools = dealTheCards(tiles);
 		poolPlayer1.setTiles(pools[0].getTiles());
 		poolPlayer2.setTiles(pools[1].getTiles());
-//		System.out.println(poolPlayer1);
-//		System.out.println(poolPlayer2);
-//		System.out.println(poolPlayer1.tilesAmounts());
-//		System.out.println(poolPlayer2.tilesAmounts());
+//		Console.message(poolPlayer1);
+//		Console.message(poolPlayer2);
+//		Console.message(poolPlayer1.tilesAmounts());
+//		Console.message(poolPlayer2.tilesAmounts());
 		
 		Rack rackPlayer1 = new Rack();
 		Rack rackPlayer2 = new Rack();
@@ -38,19 +38,19 @@ public class LaticeApplicationConsole extends Referee{
 		Player player2 = new Player(0, rackPlayer2, poolPlayer2);
 		
 		for (int i = 0; i < 5; i++) {
-			System.out.println("\n\n\n ---- " + i + "eme iteration ----" );
-			System.out.println("Rack player 1 : " + rackPlayer1);
-			System.out.println("Pool player 1 : \n" + poolPlayer1 + "\nTiles Amount : " + poolPlayer1.tilesAmounts());
+			Console.message("\n\n\n ---- " + i + "eme iteration ----" );
+			Console.message("Rack player 1 : " + rackPlayer1);
+			Console.message("Pool player 1 : \n" + poolPlayer1 + "\nTiles Amount : " + poolPlayer1.tilesAmounts());
 			player1.drawATile();
-			System.out.println("Rack player 2 : " + rackPlayer2);
-			System.out.println("Pool player 2 : \n" + poolPlayer2 + "\nTiles Amount : " + poolPlayer2.tilesAmounts());
+			Console.message("Rack player 2 : " + rackPlayer2);
+			Console.message("Pool player 2 : \n" + poolPlayer2 + "\nTiles Amount : " + poolPlayer2.tilesAmounts());
 			player2.drawATile();
 		}
-		System.out.println("\n\n\n ---- 5eme iteration ----" );
-		System.out.println("Rack player 1 : " + rackPlayer1);
-		System.out.println("Pool player 1 : \n" + poolPlayer1 + "\nTiles Amount : " + poolPlayer1.tilesAmounts());
-		System.out.println("Rack player 2 : " + rackPlayer2);
-		System.out.println("Pool player 2 : \n" + poolPlayer2 + "\nTiles Amount : " + poolPlayer2.tilesAmounts());
+		Console.message("\n\n\n ---- 5eme iteration ----" );
+		Console.message("Rack player 1 : " + rackPlayer1);
+		Console.message("Pool player 1 : \n" + poolPlayer1 + "\nTiles Amount : " + poolPlayer1.tilesAmounts());
+		Console.message("Rack player 2 : " + rackPlayer2);
+		Console.message("Pool player 2 : \n" + poolPlayer2 + "\nTiles Amount : " + poolPlayer2.tilesAmounts());
 		
 		
 	}	
