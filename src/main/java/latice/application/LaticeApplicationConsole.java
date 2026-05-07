@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import latice.gui.Console;
+import latice.model.GameBoard;
 import latice.model.Player;
 import latice.model.Pool;
 import latice.model.Rack;
@@ -63,6 +64,9 @@ public class LaticeApplicationConsole extends Referee{
 		Console.message("Pool player 1 : \n" + poolPlayer1 + "\nTiles Amount : " + poolPlayer1.tilesAmounts());
 		Console.message("Rack player 2 : " + rackPlayer2);
 		Console.message("Pool player 2 : \n" + poolPlayer2 + "\nTiles Amount : " + poolPlayer2.tilesAmounts());
-
+		
+		Console.message("\n\n\n\n\n\n\n");
+		GameBoard gameboard = new GameBoard(10, 9, 9);
+		
 	}	
 }
