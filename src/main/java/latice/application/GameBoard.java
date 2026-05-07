@@ -9,18 +9,16 @@ public class GameBoard {
 	
 	public GameBoard(Integer nbCycle) {
 		this.tiles = new HashMap<>();
-		this.nbCycle = nbCycle;
+		this.nbCycle = nbCycle;	
 	}
-
+	
 	public Integer getNbCycle() {
 		return nbCycle;
 	}
 
-
     public Map<Position, Tile> tiles() {
          return tiles;
      }
-
 
     public boolean isTileAt(Position position) {
         return tiles.containsKey(position);
@@ -51,13 +49,19 @@ public class GameBoard {
      }
 
      public Tile removeTileAt(Position position) {
-    	 Tile previousDisc = this.discAt(position);
- 		 this.tiles.remove(previousDisc);
- 		 return previousDisc;
+    	    return this.tiles.remove(position); 
+ 
      }
 
-     public String toAscii() {                                                                                                                                                                              
+     public String toAscii() {  
+    	 
          return "";
-         // TODO
-     }                           
+     }     
+     
+     
+     
+     
+     
+     
+     
 }

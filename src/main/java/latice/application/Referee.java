@@ -40,7 +40,7 @@ public class Referee {
 			tiles.remove(tileToIndex);
 		}
 		return shuffledTiles;
-		
+
 	}
 	
 	public void pool2making(ArrayList<Tile> tiles) {
