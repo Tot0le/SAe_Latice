@@ -1,5 +1,6 @@
 package latice;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,9 +10,13 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import latice.gui.Console;
+import latice.model.GameBoard;
 import latice.model.Player;
 import latice.model.Pool;
+import latice.model.Position;
 import latice.model.Rack;
+import latice.model.Referee;
 import latice.model.tile.Color;
 import latice.model.tile.Shape;
 import latice.model.tile.Tile;
@@ -22,13 +27,17 @@ public class LaticeTest {
 	private static Tile GREEN_TURTLE = new Tile(Color.Green, Shape.Turtle);
 	private static Tile RED_TURTLE = new Tile(Color.Red, Shape.Turtle);
 	private static Tile RED_GECKO = new Tile(Color.Red, Shape.Gecko);
+	private static Tile TEAL_FEATHER = new Tile(Color.Teal, Shape.Feather);
+	private final Integer nbTileMax = 72 ;
 	Rack rack;
 	Pool pool;
+	GameBoard gameboard;
 	
 	@BeforeEach
 	public void clearElements() {
 		rack = new Rack();
 		pool = new Pool();
+		gameboard = new GameBoard(10, 9, 9);
 	}
 	
 //	@Disabled
@@ -49,6 +58,44 @@ public class LaticeTest {
 		player.drawATile();
 		assertTrue(rack.contains(GREEN_TURTLE));
 		assertFalse(pool.contains(GREEN_TURTLE));
+		
+	}
+	
+	@Test
+	public void playerDrawTiles() {
+		ArrayList<Tile> tiles = Referee.createAllTiles();
+		tiles = Referee.shuffle2(tiles);
+		Pool poolPlayer1 = new Pool();
+		Pool poolPlayer2 = new Pool();
+		Pool[] pools = Referee.dealTheCards(tiles);
+		poolPlayer1.setTiles(pools[0].getTiles());
+		poolPlayer2.setTiles(pools[1].getTiles());
+		
+		Rack rackPlayer1 = new Rack();
+		Rack rackPlayer2 = new Rack();
+		
+		Player player1 = new Player(0, rackPlayer1, poolPlayer1);
+		Player player2 = new Player(0, rackPlayer2, poolPlayer2);
+		
+		for (int i = 0; i < 5; i++) {
+			assertEquals(poolPlayer1.tilesAmounts(), (nbTileMax/2) -i);
+			assertEquals(poolPlayer2.tilesAmounts(), (nbTileMax/2) -i);
+			assertEquals(rackPlayer1.tilesAmounts(), i);
+			assertEquals(rackPlayer2.tilesAmounts(), i);
+
+			player1.drawATile();
+			player2.drawATile();
+	}
+		assertEquals(poolPlayer1.tilesAmounts(), (nbTileMax/2) -5);
+		assertEquals(poolPlayer2.tilesAmounts(), (nbTileMax/2) -5);
+		assertEquals(rackPlayer1.tilesAmounts(), 5);
+		assertEquals(rackPlayer2.tilesAmounts(), 5);
+		
+		player1.drawATile();
+		// shouldn't change because the rack is full
+		
+		assertEquals(poolPlayer1.tilesAmounts(), (nbTileMax/2) -5);
+		assertEquals(rackPlayer1.tilesAmounts(), 5);
 		
 	}
 }
