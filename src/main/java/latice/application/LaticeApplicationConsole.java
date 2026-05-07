@@ -52,6 +52,11 @@ public class LaticeApplicationConsole extends Referee{
 		Console.message("Rack player 2 : " + rackPlayer2);
 		Console.message("Pool player 2 : \n" + poolPlayer2 + "\nTiles Amount : " + poolPlayer2.tilesAmounts());
 		
-		
+		player1.drawATile();
+		Console.message("\n\n\n ---- 6eme iteration ----" );
+		Console.message("Rack player 1 : " + rackPlayer1);
+		Console.message("Pool player 1 : \n" + poolPlayer1 + "\nTiles Amount : " + poolPlayer1.tilesAmounts());
+		Console.message("Rack player 2 : " + rackPlayer2);
+		Console.message("Pool player 2 : \n" + poolPlayer2 + "\nTiles Amount : " + poolPlayer2.tilesAmounts());
 	}	
 }
