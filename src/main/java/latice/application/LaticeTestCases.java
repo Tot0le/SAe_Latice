@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import latice.gui.Console;
+import latice.model.Player;
+import latice.model.Pool;
+import latice.model.Rack;
+import latice.model.tile.Color;
+import latice.model.tile.Shape;
+import latice.model.tile.Tile;
 
 public class LaticeTestCases {
 	private static Tile RED_DOLPHIN = new Tile(Color.Red, Shape.Dolphin);
