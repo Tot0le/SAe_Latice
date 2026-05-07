@@ -98,4 +98,35 @@ public class LaticeTest {
 		assertEquals(rackPlayer1.tilesAmounts(), 5);
 		
 	}
+	
+	@Test
+	public void placeATileInGameBoard() {
+
+		Pool poolPlayer1 = new Pool();
+		Pool poolPlayer2 = new Pool();
+		
+		Rack rackPlayer1 = new Rack();
+		Rack rackPlayer2 = new Rack();
+		
+		Player player1 = new Player(0, rackPlayer1, poolPlayer1);
+		Player player2 = new Player(0, rackPlayer2, poolPlayer2);
+		
+		ArrayList<Tile> rackPreparation = new ArrayList<>();
+		rackPreparation.addAll(List.of(RED_DOLPHIN, RED_TURTLE, TEAL_FEATHER, GREEN_TURTLE));
+		rackPlayer1.setTiles(rackPreparation);
+		
+		GameBoard gameboard = new GameBoard(10, 9, 9);
+		Console.message(gameboard.toAscii());
+		
+		assertEquals(rackPlayer1.tilesAmounts(), 4);
+		Position center_4_4 = new Position(1,1);
+		gameboard.put(center_4_4, rackPlayer1.popTile(0));
+		assertEquals(rackPlayer1.tilesAmounts(), 3);
+		assertEquals(gameboard.getTile(center_4_4), RED_DOLPHIN);
+		
+		Position pos_4_5 = new Position(4,5);
+		gameboard.put(pos_4_5, rackPlayer1.popTile(0));
+		assertEquals(gameboard.getTile(pos_4_5), RED_TURTLE);
+		assertEquals(rackPlayer1.tilesAmounts(), );
+	}
 }
