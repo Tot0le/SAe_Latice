@@ -1,5 +1,7 @@
 package latice.model;
 
+import java.util.Objects;
+
 public class Position {
 	Integer row;
 	Integer column;
@@ -9,11 +11,11 @@ public class Position {
 		this.column = column;
 	}
 	
-	public Integer getRow() {
+	public Integer row() {
 		return row;
 	}
 	
-	public Integer getColumn() {
+	public Integer column() {
 		return column;
 	}
 	
@@ -32,6 +34,24 @@ public class Position {
 //			}
 //		}
 //	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		boolean result = false;
+		if (obj instanceof Position) {
+			Position position = (Position) obj;
+			if (this.row.equals(position.row()) && this.column.equals(position.column())) {
+				result = true;
+			}
+		}
+		return result;
+	}
+	
+	@Override
+	public int hashCode() {
+	    return Objects.hash(this.row, this.column);
+	}
+
 	
 	@Override
 	public String toString() {

@@ -15,6 +15,13 @@ public class Rack {
 		return tiles.size();
 	}
 
+	public Tile popTile(Integer index) {
+		Tile tile = getTile(index);
+		tiles.remove(index); //TODO the tile is not remove
+		return tile;
+		
+	}
+	
 	public ArrayList<Tile> getTiles() {
 		return tiles;
 	}

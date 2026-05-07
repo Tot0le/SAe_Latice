@@ -1,7 +1,10 @@
 package latice.gui;
 
 public class Console {
-
+	//source : https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	
 	public static void message(String text) {
 		System.out.println(text);
 	}

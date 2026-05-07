@@ -1,13 +1,12 @@
 package latice.application;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 import latice.gui.Console;
 import latice.model.GameBoard;
 import latice.model.Player;
 import latice.model.Pool;
+import latice.model.Position;
 import latice.model.Rack;
 import latice.model.Referee;
 import latice.model.tile.Tile;
@@ -67,6 +66,12 @@ public class LaticeApplicationConsole extends Referee{
 		
 		Console.message("\n\n\n\n\n\n\n");
 		GameBoard gameboard = new GameBoard(10, 9, 9);
+		Console.message(gameboard.toAscii());
 		
+		gameboard.put(new Position(1,1), rackPlayer1.popTile(0));
+		Console.message(gameboard.toAscii());
+		gameboard.put(new Position(1,2), rackPlayer1.popTile(0));
+		Console.message(gameboard.toAscii());
+		Console.message(rackPlayer1.tilesAmounts() + "");
 	}	
 }
