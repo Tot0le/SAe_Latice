@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import latice.gui.Console;
+import latice.model.Player;
+import latice.model.Pool;
+import latice.model.Rack;
+import latice.model.Referee;
+import latice.model.tile.Tile;
 
 public class LaticeApplicationConsole extends Referee{
 	private final Integer nbTileMax = 72 ;
@@ -51,7 +56,13 @@ public class LaticeApplicationConsole extends Referee{
 		Console.message("Pool player 1 : \n" + poolPlayer1 + "\nTiles Amount : " + poolPlayer1.tilesAmounts());
 		Console.message("Rack player 2 : " + rackPlayer2);
 		Console.message("Pool player 2 : \n" + poolPlayer2 + "\nTiles Amount : " + poolPlayer2.tilesAmounts());
-	
-	
+		
+		player1.drawATile();
+		Console.message("\n\n\n ---- 6eme iteration ----" );
+		Console.message("Rack player 1 : " + rackPlayer1);
+		Console.message("Pool player 1 : \n" + poolPlayer1 + "\nTiles Amount : " + poolPlayer1.tilesAmounts());
+		Console.message("Rack player 2 : " + rackPlayer2);
+		Console.message("Pool player 2 : \n" + poolPlayer2 + "\nTiles Amount : " + poolPlayer2.tilesAmounts());
+
 	}	
 }

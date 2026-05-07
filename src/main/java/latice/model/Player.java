@@ -1,8 +1,9 @@
-package latice.application;
+package latice.model;
 
 import java.util.ArrayList;
 
 import latice.gui.Console;
+import latice.model.tile.Tile;
 
 public class Player {
 	
