@@ -64,10 +64,11 @@ public class LaticeTest {
 	@Test
 	public void playerDrawTiles() {
 		ArrayList<Tile> tiles = Referee.createAllTiles();
-		tiles = Referee.shuffle2(tiles);
+		Pool bigPool = new Pool(tiles);
+		Referee.shuffle(bigPool);
 		Pool poolPlayer1 = new Pool();
 		Pool poolPlayer2 = new Pool();
-		Pool[] pools = Referee.dealTheCards(tiles);
+		Pool[] pools = Referee.dealTheCards(bigPool);
 		poolPlayer1.setTiles(pools[0].getTiles());
 		poolPlayer2.setTiles(pools[1].getTiles());
 		
