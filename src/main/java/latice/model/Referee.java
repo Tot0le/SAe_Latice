@@ -31,40 +31,6 @@ public class Referee {
 		return tiles;
 	}
 	
-	public static ArrayList<Tile> shuffle(ArrayList<Tile> tiles) {
-		
-		ArrayList<Tile> shuffledTiles = new ArrayList<>();
-		Random nbTileRandom = new Random();
-		Integer nbTilesTotal = tiles.size();
-		
-		for (Tile tile : tiles) {
-			int tileToIndex = nbTileRandom.nextInt(nbTilesTotal);
-			Tile tempTile = tiles.get(tileToIndex);
-			shuffledTiles.add(tempTile);
-			tiles.remove(tileToIndex);
-		}
-		return shuffledTiles;
-
-	}
-	
-	public void pool2making(ArrayList<Tile> tiles) {
-		ArrayList<Tile> pool1 = new ArrayList<>();
-		ArrayList<Tile> pool2 = new ArrayList<>();
-		Random nbTileRandom = new Random();
-		Integer nbTilesPerPool = tiles.size()/2;
-		
-		for (int i = 0;nbTilesPerPool>0;) {
-			int randomTileFromTiles = nbTileRandom.nextInt(nbTilesPerPool);
-			Tile tempTile = tiles.get(randomTileFromTiles);
-			pool1.add(tempTile);
-			tiles.remove(randomTileFromTiles);
-		}
-		pool2.addAll(tiles);
-		System.out.println("Pool 1  : "+ pool1 +".");
-		System.out.println("Pool 2  : "+ pool2 +".");
-	}
-	
-	// second version in case it doesn't work properly
 	public static Pool[] dealTheCards(ArrayList<Tile> tiles) {
 		Pool pool1 = new Pool();
 		Pool pool2 = new Pool();
@@ -78,10 +44,9 @@ public class Referee {
 		return new Pool[] { pool1, pool2 };
 		
 	}
-	// second version in case it doesn't work properly
-	public static ArrayList<Tile> shuffle2(ArrayList<Tile> tiles) {
-		Collections.shuffle(tiles);
-		return tiles;
+
+	public static void shuffle(Pool pool) {
+		pool.shuffle();
 		
 	}
 	
