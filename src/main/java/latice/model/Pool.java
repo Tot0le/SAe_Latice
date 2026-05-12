@@ -1,6 +1,8 @@
 package latice.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 import latice.model.tile.Tile;
 
@@ -10,7 +12,7 @@ public class Pool {
 	public Pool() {
 		this.tiles = new ArrayList<Tile>();
 	}
-	
+
 	public ArrayList<Tile> getTiles() {
 		return this.tiles;
 	}
@@ -33,6 +35,10 @@ public class Pool {
 	
 	public void addTile(Tile tile) {
 		this.tiles.add(tile);
+	}
+	
+	public void shuffle() {
+		Collections.shuffle(this.getTiles());
 	}
 	
 	@Override
