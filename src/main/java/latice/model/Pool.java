@@ -10,7 +10,11 @@ public class Pool {
 	private ArrayList<Tile> tiles;
 	
 	public Pool() {
-		this.tiles = new ArrayList<Tile>();
+		this.tiles = new ArrayList<>();
+	}
+	
+	public Pool(ArrayList<Tile> tiles) {
+		this.tiles = new ArrayList<>(tiles);
 	}
 
 	public ArrayList<Tile> getTiles() {

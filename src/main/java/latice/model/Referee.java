@@ -31,14 +31,14 @@ public class Referee {
 		return tiles;
 	}
 	
-	public static Pool[] dealTheCards(ArrayList<Tile> tiles) {
+	public static Pool[] dealTheCards(Pool pool) {
 		Pool pool1 = new Pool();
 		Pool pool2 = new Pool();
-		Integer tilesNumber = tiles.size();
+		Integer tilesNumber = pool.tilesAmounts();
 		
 		for (int i = 0; i < tilesNumber; i = i + 2) {
-			pool1.addTile(tiles.get(i));
-			pool2.addTile(tiles.get(i + 1));
+			pool1.addTile(pool.getTile(i));
+			pool2.addTile(pool.getTile(i + 1));
 		}
 		
 		return new Pool[] { pool1, pool2 };
