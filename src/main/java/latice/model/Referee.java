@@ -1,9 +1,7 @@
 package latice.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import latice.model.tile.Color;
 import latice.model.tile.Shape;
