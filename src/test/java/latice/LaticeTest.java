@@ -127,6 +127,6 @@ public class LaticeTest {
 		Position pos_4_5 = new Position(4,5);
 		gameboard.put(pos_4_5, rackPlayer1.popTile(0));
 		assertEquals(gameboard.getTile(pos_4_5), RED_TURTLE);
-		assertEquals(rackPlayer1.tilesAmounts(), );
+		assertEquals(rackPlayer1.tilesAmounts(), 2);
 	}
 }

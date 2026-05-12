@@ -25,7 +25,7 @@ public class Rack {
 
 	public Tile popTile(Integer index) {
 		Tile tile = getTile(index);
-		tiles.remove(index); //TODO the tile is not remove
+		tiles.remove(getTile(index));
 		return tile;
 		
 	}
