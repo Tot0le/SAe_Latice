@@ -6,10 +6,18 @@ import latice.model.tile.Tile;
 
 public class Rack {
 	private ArrayList<Tile> tiles;
+	private final Integer maxTiles;
 	
 	public Rack() {
 		this.tiles = new ArrayList<Tile>();
+		this.maxTiles = 5;
 	}
+	
+	public Rack(Integer maxTiles) {
+		this.tiles = new ArrayList<Tile>();
+		this.maxTiles = maxTiles;
+	}
+	
 	// getteur
 	public int tilesAmounts() {
 		return tiles.size();
@@ -50,5 +58,9 @@ public class Rack {
 		}
 		result = result + "]";
 		return result;
+	}
+
+	public Integer maxTiles() {
+		return maxTiles;
 	}
 }

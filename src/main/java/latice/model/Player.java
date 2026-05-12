@@ -30,7 +30,7 @@ public class Player {
 	
 	public void drawATile() {
 		ArrayList<Tile> poolTiles = pool.getTiles();
-		if (rack.getTiles().size() < 5) {
+		if (rack.getTiles().size() < rack.maxTiles()) {
 			if (!poolTiles.isEmpty()) {
 				Tile tileDrawn = poolTiles.getFirst();
 				poolTiles.removeFirst();
@@ -46,7 +46,7 @@ public class Player {
 	}
 	
 	public void drawMaxTile() {
-		while (rack.getTiles().size() < 5) {
+		while (rack.getTiles().size() < rack.maxTiles()) {
 			drawATile();
 		}
 	}
