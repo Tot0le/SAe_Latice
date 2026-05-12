@@ -45,6 +45,12 @@ public class Player {
 		}
 	}
 	
+	public void drawMaxTile() {
+		while (rack.getTiles().size() < 5) {
+			drawATile();
+		}
+	}
+	
 	public void passTheTurn() {
 		//TODO Faire un compteur total pour le tour du nombre de joueurs et quand celui-ci = nb de joueur alors cycles = +1
 	}	
