@@ -1,9 +1,7 @@
 package latice.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import latice.model.Factory;
 import latice.gui.Console;
 import latice.model.tile.Tile;
 
@@ -24,9 +22,6 @@ public class GameBoard {
 		Factory.createSpecialSquares(lenght, specialSquares, moonSquarePosition);
 		
 	}
-	
-	
-	
 	
 	public Integer getNbCycle() {
 		return nbCycle;
