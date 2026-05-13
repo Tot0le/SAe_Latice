@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import latice.gui.Console;
+import latice.model.Factory;
 import latice.model.GameBoard;
 import latice.model.Player;
 import latice.model.Pool;
@@ -37,7 +38,7 @@ class LaticeTest {
 	void clearElements() {
 		rack = new Rack();
 		pool = new Pool();
-		gameboard = new GameBoard(10, 9, 9);
+		gameboard = new GameBoard(10, 9);
 	}
 	
 //	@Disabled
@@ -63,7 +64,7 @@ class LaticeTest {
 	
 	@Test
 	void playerDrawTiles() {
-		ArrayList<Tile> tiles = Referee.createAllTiles();
+		ArrayList<Tile> tiles = Factory.createAllTiles();
 		Pool bigPool = new Pool(tiles);
 		Referee.shuffle(bigPool);
 		Pool poolPlayer1 = new Pool();
@@ -113,7 +114,6 @@ class LaticeTest {
 		rackPreparation.addAll(List.of(RED_DOLPHIN, RED_TURTLE, TEAL_FEATHER, GREEN_TURTLE));
 		rackPlayer1.setTiles(rackPreparation);
 
-		GameBoard gameboard = new GameBoard(10, 9, 9);
 		Console.message(gameboard.toAscii());
 
 		assertEquals(4, rackPlayer1.tilesAmounts());

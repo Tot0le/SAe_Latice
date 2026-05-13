@@ -3,6 +3,7 @@ package latice.application;
 import java.util.ArrayList;
 
 import latice.gui.Console;
+import latice.model.Factory;
 import latice.model.GameBoard;
 import latice.model.Player;
 import latice.model.Pool;
@@ -25,7 +26,7 @@ public class LaticeApplicationConsole extends Referee{
 		
 		// real game preparation :
 		
-		ArrayList<Tile> tiles = Referee.createAllTiles();
+		ArrayList<Tile> tiles = Factory.createAllTiles();
 		Pool bigPool = new Pool(tiles);
 		Pool poolPlayer1 = new Pool();
 		Pool poolPlayer2 = new Pool();
@@ -69,7 +70,7 @@ public class LaticeApplicationConsole extends Referee{
 		Console.message("Pool player 2 : \n" + poolPlayer2 + "\nTiles Amount : " + poolPlayer2.tilesAmounts());
 		
 		Console.message("\n\n\n\n\n\n\n");
-		GameBoard gameboard = new GameBoard(10, 9, 9);
+		GameBoard gameboard = new GameBoard(10, 9);
 		Console.message(gameboard.toAscii());
 		
 		gameboard.put(new Position(1,1), rackPlayer1.popTile(0));
