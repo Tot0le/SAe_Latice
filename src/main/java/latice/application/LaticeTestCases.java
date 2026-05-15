@@ -10,7 +10,7 @@ import latice.model.Rack;
 import latice.model.tile.Color;
 import latice.model.tile.Shape;
 import latice.model.tile.Tile;
-
+//TODO verifier si les tests ici sont implémenté en automatique, si oui supprimer cette classe.
 public class LaticeTestCases {
 	private static Tile RED_DOLPHIN = new Tile(Color.Red, Shape.Dolphin);
 	private static Tile NAVY_DOLPHIN = new Tile(Color.Navy, Shape.Dolphin);
