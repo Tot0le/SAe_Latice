@@ -1,49 +1,40 @@
 package latice.application;
 
-import java.util.ArrayList;
 
-import latice.gui.Console;
-import latice.model.Factory;
-import latice.model.GameBoard;
-import latice.model.Player;
-import latice.model.Pool;
-import latice.model.Position;
-import latice.model.Rack;
-import latice.model.Referee;
-import latice.model.tile.Tile;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-public class LaticeApplicationConsole extends Referee{
-	private final Integer nbTileMax = 72 ;
+public class LaticeApplicationConsole extends javafx.application.Application {
+	
 	public static void main(String[] args) {
-		
-		// real game preparation :
-		
-		ArrayList<Tile> tiles = Factory.createAllTiles();
-		Pool bigPool = new Pool(tiles);
-		Pool poolPlayer1 = new Pool();
-		Pool poolPlayer2 = new Pool();
-		Referee.shuffle(bigPool);
-		Referee.dealTheCards(bigPool, poolPlayer1, poolPlayer2); 
-
-		Rack rackPlayer1 = new Rack();
-		Rack rackPlayer2 = new Rack();
-		
-		Player player1 = new Player(0, rackPlayer1, poolPlayer1);
-		Player player2 = new Player(0, rackPlayer2, poolPlayer2);
-		
-		for (int i = 0; i < 5; i++) {
-			player1.drawATile();
-			player2.drawATile();
+		Application.launch(args);
 	}
-		player1.drawATile();
-
-		GameBoard gameboard = new GameBoard(10, 9);
-		Console.message(gameboard.toAscii());
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		//TODO 
+		//code venant d'un TP (exemple)
+		Group root = new Group();
 		
-		gameboard.put(new Position(1,1), rackPlayer1.popTile(0));
-		Console.message(gameboard.toAscii());
-		gameboard.put(new Position(1,2), rackPlayer1.popTile(0));
-		Console.message(gameboard.toAscii());
-		Console.message(rackPlayer1.tilesAmounts() + "");
+		Text txt1 = new Text(50,50,"DRAG ME");
+		Text txt2 = new Text(300,50,"DROP HERE");
+		
+		Rectangle rectPremier = new Rectangle(150, 100, Color.DARKBLUE);
+		Rectangle rectDeuxieme = new Rectangle(150, 100, Color.DARKGREEN);
+		rectPremier.setX(50);
+		rectPremier.setY(100);
+		rectDeuxieme.setX(300);
+		rectDeuxieme.setY(200);
+		root.getChildren().addAll(txt1,txt2, rectPremier, rectDeuxieme);
+		Scene scene = new Scene(root,500,350);
+		scene.setFill(Color.LIGHTGREEN);
+		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
+		primaryStage.show();
 	}	
 }
