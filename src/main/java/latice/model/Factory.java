@@ -66,4 +66,14 @@ public class Factory {
 			specialSquares.put(position, SquareType.SUN);
 		}
 	}
+	
+	public static List<Position> createAllPositions(Integer maxLenght){
+		ArrayList<Position> positions = new ArrayList<Position>();
+		for (int i = 0; i < maxLenght; i++) {
+			for (int j = 0; j < maxLenght; j++) {
+				positions.add(new Position(i,j));
+			}
+		}
+		return positions;
+	}
 }
