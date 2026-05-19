@@ -9,7 +9,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class LaticeApplicationConsole extends javafx.application.Application {
+public class LaticeApplication extends javafx.application.Application {
 	
 	public static void main(String[] args) {
 		Application.launch(args);
