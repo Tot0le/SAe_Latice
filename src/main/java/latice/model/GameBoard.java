@@ -12,6 +12,26 @@ public class GameBoard {
 	private final Map<Position, SquareType> specialSquares;
 	private final Position moonSquarePosition;
 	
+	public GameBoard() {
+		this.nbCycle = 10;
+		this.lenght = 9;
+		this.tiles = new HashMap<>();
+		this.specialSquares = new HashMap<>();
+		this.moonSquarePosition = new Position(Math.round((lenght-1)/2), Math.round((lenght-1)/2));
+		
+		Factory.createSpecialSquares(lenght, specialSquares, moonSquarePosition);
+	}
+	
+	public GameBoard(Integer nbCycle) {
+		this.nbCycle = nbCycle;
+		this.lenght = 9;
+		this.tiles = new HashMap<>();
+		this.specialSquares = new HashMap<>();
+		this.moonSquarePosition = new Position(Math.round((lenght-1)/2), Math.round((lenght-1)/2));
+		
+		Factory.createSpecialSquares(lenght, specialSquares, moonSquarePosition);
+	}
+	
 	public GameBoard(Integer nbCycle, Integer lenght) {
 		this.nbCycle = nbCycle;
 		this.lenght = lenght;
@@ -20,7 +40,6 @@ public class GameBoard {
 		this.moonSquarePosition = new Position(Math.round((lenght-1)/2), Math.round((lenght-1)/2));
 		
 		Factory.createSpecialSquares(lenght, specialSquares, moonSquarePosition);
-		
 	}
 	
 	public Integer getNbCycle() {
@@ -108,6 +127,22 @@ public class GameBoard {
     		 result = result + "\n";
     	 }
          return result;
-     }     
+     }
+
+	 public Integer getLenght() {
+		 return lenght;
+	 }
+
+	 public Map<Position, Tile> getTiles() {
+		 return tiles;
+	 }
+
+	 public Map<Position, SquareType> getSpecialSquares() {
+		 return specialSquares;
+	 }
+
+	 public Position getMoonSquarePosition() {
+		 return moonSquarePosition;
+	 }     
 
 }
