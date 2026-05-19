@@ -50,7 +50,7 @@ class LaticeTest {
 		
 		Player player = new Player(0,rack,pool);
 		player.drawATile();
-		assertTrue(rack.getTile(0) == RED_DOLPHIN);
+		assertEquals(rack.getTile(0), RED_DOLPHIN);
 		
 		assertFalse(pool.contains(RED_DOLPHIN));
 		player.drawATile();
