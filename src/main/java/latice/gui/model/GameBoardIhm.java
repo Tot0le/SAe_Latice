@@ -8,19 +8,31 @@ import latice.model.Factory;
 import latice.model.GameBoard;
 import latice.model.Position;
 import latice.util.ImageLoader;
+import latice.util.ImageNotFoundException;
+import latice.util.ImagePath;
 
 public class GameBoardIhm extends GridPane {
-	Image backgroundImage = ImageLoader.loadImage("/images/bg_sea.png");
-
+	private Image backgroundImage = new Image(ImageLoader.class.getResourceAsStream("/images/bg_sea.png"));
+	
 	public GameBoardIhm(GameBoard gameboard) {
+		Image image;
+		ArrayList<Position> positions = (ArrayList<Position>) Factory.createAllPositions(gameboard.getLength());
+
+		for (Position position : positions) {
+			try {
+				//TODO change image if sun square or a moon one
+				image = ImageLoader.loadImage(ImagePath.BACKGROUND_SEA.path());
+				
+			} catch(ImageNotFoundException e) {
+				System.err.println("Image not found " + e.getMessage());
+				image = backgroundImage;
+			}
+			
+			ImageView currentImageViewBackground = new ImageView(image);
+			this.add(currentImageViewBackground, position.row(), position.column());
+		}
 		this.setHgap(10);
 		this.setVgap(10);
 		
-		ArrayList<Position> positions = (ArrayList<Position>) Factory.createAllPositions(gameboard.getLenght());
-		System.out.println(positions);
-		for (Position position : positions) {
-			ImageView currentImageViewBackground = new ImageView(backgroundImage);
-			this.add(currentImageViewBackground, position.row(), position.column());
-		}
 	}
 }

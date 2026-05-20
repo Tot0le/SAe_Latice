@@ -1,5 +1,7 @@
 package latice.util;
 
+import java.io.InputStream;
+
 import javafx.scene.image.Image;
 
 public class ImageLoader {
@@ -7,16 +9,16 @@ public class ImageLoader {
 		
 	}
 	
-	public static Image loadImage(String path) {
+	public static Image loadImage(String path) throws ImageNotFoundException {
 		Image image = null;
 		
-		try {
-			image = new Image(ImageLoader.class.getResourceAsStream(path));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		InputStream imageStream = ImageLoader.class.getResourceAsStream(path);
 		
+		if (imageStream == null) {
+			throw new ImageNotFoundException("Image with the path " + path + " not found.");
+		} else {
+			image = new Image(imageStream);
+		}
 		return image;
 		
 	}
