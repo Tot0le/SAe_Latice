@@ -1,8 +1,5 @@
 package latice.application;
-
-
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -16,7 +13,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import latice.gui.model.GameBoardIhm;
+import latice.model.GameBoard;
 
 @SuppressWarnings("unused")
 public class LaticeApplication extends javafx.application.Application {
@@ -24,7 +24,7 @@ public class LaticeApplication extends javafx.application.Application {
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		//TODO 
@@ -61,6 +61,12 @@ public class LaticeApplication extends javafx.application.Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Game starting window");
 		primaryStage.setResizable(false);
+		GameBoard gameboard = new GameBoard();
+//		GameBoardIhm visualGameboard = new GameBoardIhm(gameboard);
+//		
+//		root.getChildren().addAll(visualGameboard);
+		
+		primaryStage.setScene(scene);
 		primaryStage.show();
 	}	
 }
