@@ -17,6 +17,7 @@ public class GameScene {
 		
 		BorderPane.setAlignment(visualGameboard, Pos.CENTER);
 		Scene scene = new Scene(root,1920,1080);
+		// note that the size of the window does not change if the scene change their size during the program execution
 		
 		return scene;
 	}
