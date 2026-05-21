@@ -10,11 +10,13 @@ public class Player {
 	private Integer points;
 	private Rack rack;
 	private Pool pool;
+	private GameBoard gameboard;
 
-	public Player(Integer points, Rack rack, Pool pool) {
+	public Player(Integer points, Rack rack, Pool pool, GameBoard gameboard) {
 		this.points = points;
 		this.rack = rack;
 		this.pool = pool;
+		this.gameboard = gameboard;
 	}
 
 	public void buyANewAction(Integer points) {
@@ -24,8 +26,9 @@ public class Player {
 	public void exchangeTheRack() {
 		//TODO tilesAmount -5 puis tiles Amount +5
 	}
-	public void placeATile() {
-		//TODO do a -1 on rack - tiles amount
+	public boolean placeATile(Integer rackIndex, Position placementPosition) {
+		Tile tile = rack.popTile(rackIndex);
+		return gameboard.put(placementPosition, tile);
 	}
 
 	public void drawATile() {

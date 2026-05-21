@@ -48,7 +48,7 @@ class LaticeTest {
 		ourTestingTiles.addAll(List.of(RED_DOLPHIN, NAVY_DOLPHIN, GREEN_TURTLE, RED_TURTLE, RED_GECKO));
 		pool.setTiles(ourTestingTiles);
 
-		Player player = new Player(0,rack,pool);
+		Player player = new Player(0,rack,pool, gameboard);
 		player.drawATile();
 		assertEquals(rack.getTile(0), RED_DOLPHIN);
 
@@ -74,8 +74,8 @@ class LaticeTest {
 		Rack rackPlayer1 = new Rack();
 		Rack rackPlayer2 = new Rack();
 
-		Player player1 = new Player(0, rackPlayer1, poolPlayer1);
-		Player player2 = new Player(0, rackPlayer2, poolPlayer2);
+		Player player1 = new Player(0, rackPlayer1, poolPlayer1, gameboard);
+		Player player2 = new Player(0, rackPlayer2, poolPlayer2, gameboard);
 
 		for (int i = 0; i < 5; i++) {
 			assertEquals((nbTileMax/2) -i, poolPlayer1.tilesAmounts());
