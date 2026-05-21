@@ -1,19 +1,26 @@
 package latice.model.tile;
 
+import latice.util.ImagePath;
+
 public class Tile {
 	private final Color color;
 	private final Shape shape;
-	//TODO add directly an ImagePath here and then modify in Factory the tiles creations
-	
+	private final ImagePath path;
+
 	public Tile(Color color, Shape shape){
 		this.color = color;
 		this.shape = shape;
+		this.path = ImagePath.getImagePath(shape, color);
 	}
-	public Color getColor() {
+	
+	public Color color() {
 		return color;
 	}
-	public Shape getShape() {
+	public Shape shape() {
 		return shape;
+	}
+	public ImagePath path() {
+		return path;
 	}
 	
 	@Override

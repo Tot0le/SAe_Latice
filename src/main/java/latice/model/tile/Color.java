@@ -6,5 +6,6 @@ public enum Color {
 	Magenta,
 	Red,
 	Green,
-	Teal
+	Teal,
+	None
 }
