@@ -12,7 +12,7 @@ public class Tile {
 		this.shape = shape;
 		this.path = ImagePath.getImagePath(shape, color);
 	}
-	
+
 	public Color color() {
 		return color;
 	}
@@ -22,9 +22,21 @@ public class Tile {
 	public ImagePath path() {
 		return path;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.color + " " + this.shape;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		boolean result = false;
+		if (obj instanceof Tile) {
+			Tile tile = (Tile) obj;
+			if (this.color.equals(tile.color()) && this.shape.equals(tile.shape()) && this.path.equals(tile.path())) {
+				result = true;
+			}
+		}
+		return result;
 	}
 }

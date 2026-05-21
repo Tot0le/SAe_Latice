@@ -4,15 +4,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import latice.gui.view.GameScene;
 import latice.gui.view.MainMenu;
-import latice.model.GameBoard;
-import latice.model.Position;
-import latice.model.tile.Color;
-import latice.model.tile.Shape;
-import latice.model.tile.Tile;
 
 @SuppressWarnings("unused")
 public class LaticeApplication extends javafx.application.Application {
-	
+
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
@@ -20,14 +15,14 @@ public class LaticeApplication extends javafx.application.Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Scene scene = MainMenu.createMainMenuScene();
-		
+
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Game starting window");
 		primaryStage.setResizable(true);
 		primaryStage.show();
-		
+
 		// TODO when the button start is pressed do that :
-		
+
 		scene = GameScene.createGameScene();
 		primaryStage.setScene(scene);
 	}

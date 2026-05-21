@@ -15,15 +15,19 @@ public class GameScene {
 		BorderPane root = new BorderPane();
 		GameBoard gameboard = new GameBoard();
 		GameBoardIhm visualGameboard = new GameBoardIhm(gameboard);
-		gameboard.put(new Position(5,5), new Tile(Color.Green, Shape.Bird));
+		gameboard.put(new Position(7,7), new Tile(Color.Green, Shape.Bird)); // testing if the tiles appears
+		gameboard.put(new Position(0,0), new Tile(Color.Green, Shape.Bird));
+		gameboard.put(new Position(8,8), new Tile(Color.Green, Shape.Bird));
+		gameboard.put(new Position(8,9), new Tile(Color.Green, Shape.Bird));
+		gameboard.put(new Position(9,8), new Tile(Color.Green, Shape.Bird));
 		visualGameboard.update();
-		
+
 		root.setCenter(visualGameboard);
-		
+
 		BorderPane.setAlignment(visualGameboard, Pos.CENTER);
 		Scene scene = new Scene(root,1920,1080);
 		// note that the size of the window does not change if the scene change their size during the program execution
-		
+
 		return scene;
 	}
 }

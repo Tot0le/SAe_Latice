@@ -33,25 +33,25 @@ class LaticeTest {
 	Rack rack;
 	Pool pool;
 	GameBoard gameboard;
-	
+
 	@BeforeEach
 	void clearElements() {
 		rack = new Rack();
 		pool = new Pool();
 		gameboard = new GameBoard(10, 9);
 	}
-	
+
 //	@Disabled
 	@Test
 	void isATileDrawInTheRack() {
 		ArrayList<Tile> ourTestingTiles = new ArrayList<>();
 		ourTestingTiles.addAll(List.of(RED_DOLPHIN, NAVY_DOLPHIN, GREEN_TURTLE, RED_TURTLE, RED_GECKO));
 		pool.setTiles(ourTestingTiles);
-		
+
 		Player player = new Player(0,rack,pool);
 		player.drawATile();
 		assertEquals(rack.getTile(0), RED_DOLPHIN);
-		
+
 		assertFalse(pool.contains(RED_DOLPHIN));
 		player.drawATile();
 		player.drawATile();
@@ -59,9 +59,9 @@ class LaticeTest {
 		player.drawATile();
 		assertTrue(rack.contains(GREEN_TURTLE));
 		assertFalse(pool.contains(GREEN_TURTLE));
-		
+
 	}
-	
+
 	@Test
 	void playerDrawTiles() {
 		ArrayList<Tile> tiles = Factory.createAllTiles();
@@ -70,13 +70,13 @@ class LaticeTest {
 		Pool poolPlayer1 = new Pool();
 		Pool poolPlayer2 = new Pool();
 		Referee.dealTheCards(bigPool, poolPlayer1, poolPlayer2);
-		
+
 		Rack rackPlayer1 = new Rack();
 		Rack rackPlayer2 = new Rack();
-		
+
 		Player player1 = new Player(0, rackPlayer1, poolPlayer1);
 		Player player2 = new Player(0, rackPlayer2, poolPlayer2);
-		
+
 		for (int i = 0; i < 5; i++) {
 			assertEquals((nbTileMax/2) -i, poolPlayer1.tilesAmounts());
 			assertEquals((nbTileMax/2) -i, poolPlayer2.tilesAmounts());
@@ -90,21 +90,21 @@ class LaticeTest {
 		assertEquals((nbTileMax/2) -5, poolPlayer2.tilesAmounts());
 		assertEquals(5, rackPlayer1.tilesAmounts());
 		assertEquals(5, rackPlayer2.tilesAmounts());
-		
+
 		player1.drawATile();
 		// shouldn't change because the rack is full
-		
+
 		assertEquals((nbTileMax/2) -5, poolPlayer1.tilesAmounts()) ;
 		assertEquals(5, rackPlayer1.tilesAmounts());
-		
+
 	}
-	
+
 	@Test
 	void placeATileInGameBoard() {
 
 		Pool poolPlayer1 = new Pool();
 		Pool poolPlayer2 = new Pool();
-		
+
 		Rack rackPlayer1 = new Rack();
 		Rack rackPlayer2 = new Rack();
 
@@ -124,5 +124,29 @@ class LaticeTest {
 		gameboard.put(pos_4_5, rackPlayer1.popTile(0));
 		assertEquals(RED_TURTLE, gameboard.getTile(pos_4_5));
 		assertEquals(2, rackPlayer1.tilesAmounts());
+	}
+	
+	@Test
+	void testingLimitsOfGameBoard() {
+		Position pos_7_7 = new Position(7,7);
+		gameboard.put(pos_7_7, new Tile(Color.Green, Shape.Turtle));
+		assertEquals(GREEN_TURTLE, gameboard.getTile(pos_7_7));
+
+		Position pos_0_0 = new Position(0,0);
+		gameboard.put(pos_0_0, new Tile(Color.Green, Shape.Turtle));
+		assertEquals(GREEN_TURTLE, gameboard.getTile(pos_0_0));
+
+		Position pos_8_8 = new Position(8,8);
+		gameboard.put(pos_8_8, new Tile(Color.Green, Shape.Turtle));
+		assertEquals(GREEN_TURTLE, gameboard.getTile(pos_8_8));
+
+		Position pos_8_9 = new Position(8,9);
+		gameboard.put(pos_8_9, new Tile(Color.Green, Shape.Turtle));
+		assertEquals(null, gameboard.getTile(pos_8_9));
+
+		Position pos_9_8 = new Position(9,8);
+		gameboard.put(pos_9_8, new Tile(Color.Green, Shape.Turtle));
+		assertEquals(null, gameboard.getTile(pos_9_8));
+
 	}
 }
