@@ -3,6 +3,7 @@ package latice.model.tile;
 public class Tile {
 	private final Color color;
 	private final Shape shape;
+	//TODO add directly an ImagePath here and then modify in Factory the tiles creations
 	
 	public Tile(Color color, Shape shape){
 		this.color = color;

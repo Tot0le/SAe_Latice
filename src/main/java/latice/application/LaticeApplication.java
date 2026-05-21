@@ -2,7 +2,13 @@ package latice.application;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import latice.gui.view.GameScene;
 import latice.gui.view.MainMenu;
+import latice.model.GameBoard;
+import latice.model.Position;
+import latice.model.tile.Color;
+import latice.model.tile.Shape;
+import latice.model.tile.Tile;
 
 @SuppressWarnings("unused")
 public class LaticeApplication extends javafx.application.Application {
@@ -21,8 +27,8 @@ public class LaticeApplication extends javafx.application.Application {
 		primaryStage.show();
 		
 		// TODO when the button start is pressed do that :
-//		GameBoard gameboard = new GameBoard();
-//		scene = GameScene.createGameScene();
-//		primaryStage.setScene(scene);
+		
+		scene = GameScene.createGameScene();
+		primaryStage.setScene(scene);
 	}
 }

@@ -5,13 +5,18 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import latice.gui.model.GameBoardIhm;
 import latice.model.GameBoard;
+import latice.model.Position;
+import latice.model.tile.Color;
+import latice.model.tile.Shape;
+import latice.model.tile.Tile;
 
 public class GameScene {
 	public static Scene createGameScene() {
 		BorderPane root = new BorderPane();
 		GameBoard gameboard = new GameBoard();
 		GameBoardIhm visualGameboard = new GameBoardIhm(gameboard);
-		
+		gameboard.put(new Position(5,5), new Tile(Color.Green, Shape.Bird));
+		visualGameboard.update();
 		
 		root.setCenter(visualGameboard);
 		
