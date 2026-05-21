@@ -1,0 +1,38 @@
+package latice.gui.view;
+
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import latice.gui.model.GameBoardIhm;
+import latice.gui.model.RackIhm;
+import latice.model.GameBoard;
+import latice.model.Position;
+import latice.model.tile.Color;
+import latice.model.tile.Shape;
+import latice.model.tile.Tile;
+
+public class GameScene {
+	public static Scene createGameScene() {
+		BorderPane root = new BorderPane();
+		
+		//GAMEBOARD
+		GameBoard gameboard = new GameBoard();
+		GameBoardIhm visualGameboard = new GameBoardIhm(gameboard);
+//		gameboard.put(new Position(7,7), new Tile(Color.Green, Shape.Bird)); // testing if the tiles appears
+//		visualGameboard.update();
+
+		BorderPane.setAlignment(visualGameboard, Pos.CENTER);
+		
+		//RACK
+		root.setCenter(visualGameboard);
+		RackIhm visualRack = new RackIhm();
+		root.setBottom(visualRack);
+		BorderPane.setAlignment(visualRack, Pos.TOP_CENTER);
+		
+		
+		Scene scene = new Scene(root,1920,1080);
+		// note that the size of the window does not change if the scene change their size during the program execution
+
+		return scene;
+	}
+}

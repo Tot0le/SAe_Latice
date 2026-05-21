@@ -10,23 +10,23 @@ public class Position {
 		this.row = row;
 		this.column = column;
 	}
-	
+
 	public Integer row() {
 		return row;
 	}
-	
+
 	public Integer column() {
 		return column;
 	}
-	
+
 //	public void IndexPositions() {
 //		for(int i=1; i<10; i++) {
 //			for(int j=1;j<10;j++) {
 //				new Position(i, j);
 //			}
-//		}		
+//		}
 //	}
-//	
+//
 //	public boolean PositionExists(Position coords) {
 //		for(int i=1; i<10; i++) {
 //			for(int j=1;j<10;j++) {
@@ -34,7 +34,7 @@ public class Position {
 //			}
 //		}
 //	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		boolean result = false;
@@ -46,17 +46,17 @@ public class Position {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public int hashCode() {
 	    return Objects.hash(this.row, this.column);
 	}
 
-	
+
 	@Override
 	public String toString() {
 		return "[Pos : " + row + "," + column + "]";
 	}
-	
-	
+
+
 }

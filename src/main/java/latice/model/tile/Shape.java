@@ -6,5 +6,6 @@ public enum Shape {
 	Flower,
 	Turtle,
 	Bird,
-	Feather
+	Feather,
+	None
 }
