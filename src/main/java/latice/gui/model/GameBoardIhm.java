@@ -20,19 +20,26 @@ public class GameBoardIhm extends GridPane {
 
 		for (Position position : positions) {
 			try {
-				//TODO change image if sun square or a moon one
-				image = ImageLoader.loadImage(ImagePath.BACKGROUND_SEA.path());
+				if (gameboard.isSunAt(position)) {
+					image = ImageLoader.loadImage(ImagePath.BACKGROUND_SUN.path());
+				} else if (gameboard.isMoonAt(position)) {
+					image = ImageLoader.loadImage(ImagePath.BACKGROUND_MOON.path());
+				} else {
+					image = ImageLoader.loadImage(ImagePath.BACKGROUND_SEA.path());
+				}
 				
 			} catch(ImageNotFoundException e) {
 				System.err.println("Image not found " + e.getMessage());
 				image = backgroundImage;
 			}
-			
+
 			ImageView currentImageViewBackground = new ImageView(image);
+			currentImageViewBackground.setFitHeight(50);
+			currentImageViewBackground.setPreserveRatio(true);
 			this.add(currentImageViewBackground, position.row(), position.column());
 		}
-		this.setHgap(10);
-		this.setVgap(10);
+		this.setHgap(2);
+		this.setVgap(2);
 		
 	}
 }
