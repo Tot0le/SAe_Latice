@@ -3,7 +3,6 @@ package latice.application;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-<<<<<<< HEAD
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -16,9 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-=======
-import javafx.scene.layout.VBox;
->>>>>>> 59a1ba56dd1c4b63da1c5f54dbb48f9a502bb502
 import javafx.stage.Stage;
 import latice.gui.model.GameBoardIhm;
 import latice.model.GameBoard;
@@ -32,7 +28,6 @@ public class LaticeApplication extends javafx.application.Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-<<<<<<< HEAD
 		//TODO 
 		//code venant d'un TP (exemple)
 		StackPane root = new StackPane();
@@ -67,16 +62,7 @@ public class LaticeApplication extends javafx.application.Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Game starting window");
 		primaryStage.setResizable(false);
-=======
-		VBox root = new VBox();
-		GameBoard gameboard = new GameBoard();
-//		GameBoardIhm visualGameboard = new GameBoardIhm(gameboard);
-//		
-//		root.getChildren().addAll(visualGameboard);
-		Scene scene = new Scene(root,1000,700);
-		
-		primaryStage.setScene(scene);
->>>>>>> 59a1ba56dd1c4b63da1c5f54dbb48f9a502bb502
+
 		primaryStage.show();
 	}	
 }
