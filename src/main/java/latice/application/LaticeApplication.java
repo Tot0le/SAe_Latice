@@ -52,6 +52,9 @@ public class LaticeApplication extends javafx.application.Application {
 		VBox caseTop = new VBox();
 		VBox caseBottom = new VBox();
 		
+		//  Création des boutons avec image
+		
+		
 		caseTop.getChildren().addAll(rectPlay, play);
 		caseTop.setAlignment(Pos.TOP_CENTER);
 		caseTop.setSpacing(10);
