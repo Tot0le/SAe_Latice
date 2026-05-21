@@ -7,34 +7,34 @@ import latice.model.tile.Tile;
 
 public class GameBoard {
 	private final Integer nbCycle;
-	private final Integer lenght;
+	private final Integer length;
 	private final Map<Position, Tile> tiles;
 	private final Map<Position, SquareType> specialSquares;
 	private final Position moonSquarePosition;
 	
 	public GameBoard() {
 		this.nbCycle = 10;
-		this.lenght = 9;
+		this.length = 9;
 		this.tiles = new HashMap<>();
 		this.specialSquares = new HashMap<>();
-		this.moonSquarePosition = new Position(Math.round((lenght-1)/2), Math.round((lenght-1)/2));
+		this.moonSquarePosition = new Position(Math.round((length-1)/2), Math.round((length-1)/2));
 		
-		Factory.createSpecialSquares(lenght, specialSquares, moonSquarePosition);
+		Factory.createSpecialSquares(length, specialSquares, moonSquarePosition);
 	}
 	
 	public GameBoard(Integer nbCycle) {
 		this.nbCycle = nbCycle;
-		this.lenght = 9;
+		this.length = 9;
 		this.tiles = new HashMap<>();
 		this.specialSquares = new HashMap<>();
-		this.moonSquarePosition = new Position(Math.round((lenght-1)/2), Math.round((lenght-1)/2));
+		this.moonSquarePosition = new Position(Math.round((length-1)/2), Math.round((length-1)/2));
 		
-		Factory.createSpecialSquares(lenght, specialSquares, moonSquarePosition);
+		Factory.createSpecialSquares(length, specialSquares, moonSquarePosition);
 	}
 	
 	public GameBoard(Integer nbCycle, Integer lenght) {
 		this.nbCycle = nbCycle;
-		this.lenght = lenght;
+		this.length = lenght;
 		this.tiles = new HashMap<>();
 		this.specialSquares = new HashMap<>();
 		this.moonSquarePosition = new Position(Math.round((lenght-1)/2), Math.round((lenght-1)/2));
@@ -99,8 +99,8 @@ public class GameBoard {
     	 Position currentPos;
     	 String result = "";
     	 
-    	 for (int i = 0; i < lenght; i++) {
-    		 for (int j = 0; j < lenght; j++) {
+    	 for (int i = 0; i < length; i++) {
+    		 for (int j = 0; j < length; j++) {
     			 currentPos = new Position(j,i);
     			 
     			 if (isTileAt(currentPos)) {
@@ -129,8 +129,8 @@ public class GameBoard {
          return result;
      }
 
-	 public Integer getLenght() {
-		 return lenght;
+	 public Integer getLength() {
+		 return length;
 	 }
 
 	 public Map<Position, Tile> getTiles() {
