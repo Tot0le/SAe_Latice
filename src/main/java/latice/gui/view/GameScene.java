@@ -15,12 +15,8 @@ public class GameScene {
 		BorderPane root = new BorderPane();
 		GameBoard gameboard = new GameBoard();
 		GameBoardIhm visualGameboard = new GameBoardIhm(gameboard);
-		gameboard.put(new Position(7,7), new Tile(Color.Green, Shape.Bird)); // testing if the tiles appears
-		gameboard.put(new Position(0,0), new Tile(Color.Green, Shape.Bird));
-		gameboard.put(new Position(8,8), new Tile(Color.Green, Shape.Bird));
-		gameboard.put(new Position(8,9), new Tile(Color.Green, Shape.Bird));
-		gameboard.put(new Position(9,8), new Tile(Color.Green, Shape.Bird));
-		visualGameboard.update();
+//		gameboard.put(new Position(7,7), new Tile(Color.Green, Shape.Bird)); // testing if the tiles appears
+//		visualGameboard.update();
 
 		root.setCenter(visualGameboard);
 
