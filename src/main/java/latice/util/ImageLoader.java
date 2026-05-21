@@ -30,10 +30,22 @@ public class ImageLoader {
 		try {
 			image = loadImage(path);
 		} catch (ImageNotFoundException e) {
-			System.err.println(e.getMessage() + " Backup image applied");
 			Rectangle fallbackRectangleImage = new Rectangle(backupImageWidth, backupImageHeight, Color.CYAN);
 			
 			image = fallbackRectangleImage.snapshot(null, null);
+			System.err.println(e.getMessage() + " Backup image applied");
+		}
+		
+		return image;
+	}
+	
+	public static Image loadImageSafe(String path, Image backupImage) {
+		Image image;
+		try {
+			image = loadImage(path);
+		} catch (ImageNotFoundException e) {
+			image = backupImage;
+			System.err.println(e.getMessage() + " Backup image applied");
 		}
 		
 		return image;

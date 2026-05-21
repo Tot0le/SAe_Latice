@@ -14,27 +14,21 @@ import latice.util.ImageNotFoundException;
 import latice.util.ImagePath;
 
 public class GameBoardIhm extends GridPane {
-	private Image backgroundImage = new Image(ImageLoader.class.getResourceAsStream("/images/bg_sea.png"));
-	
+	private Integer tileSize = 100;
 	public GameBoardIhm(GameBoard gameboard) {
+		Image backgroundImage = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SEA.path(), tileSize, tileSize);
 		Image image;
 		ArrayList<Position> positions = (ArrayList<Position>) Factory.createAllPositions(gameboard.getLength());
 
 		for (Position position : positions) {
-			try {
-				if (gameboard.isSunAt(position)) {
-					image = ImageLoader.loadImage(ImagePath.BACKGROUND_SUN.path());
-				} else if (gameboard.isMoonAt(position)) {
-					image = ImageLoader.loadImage(ImagePath.BACKGROUND_MOON.path());
-				} else {
-					image = ImageLoader.loadImage(ImagePath.BACKGROUND_SEA.path());
-				}
-				
-			} catch(ImageNotFoundException e) {
-				System.err.println("Image not found " + e.getMessage());
-				image = backgroundImage;
+			if (gameboard.isSunAt(position)) {
+				image = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SUN.path(), backgroundImage);
+			} else if (gameboard.isMoonAt(position)) {
+				image = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_MOON.path(), backgroundImage);
+			} else {
+				image = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SEA.path(), backgroundImage);
 			}
-
+			
 			ImageView currentImageViewBackground = new ImageView(image);
 			currentImageViewBackground.setFitHeight(50);
 			currentImageViewBackground.setPreserveRatio(true);

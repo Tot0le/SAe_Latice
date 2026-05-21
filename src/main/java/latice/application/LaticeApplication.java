@@ -15,8 +15,8 @@ public class LaticeApplication extends javafx.application.Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-//		Scene scene = GameScene.createGameScene();
-		Scene scene = MainMenu.createMainMenuScene();
+		Scene scene = GameScene.createGameScene();
+//		Scene scene = MainMenu.createMainMenuScene();
 		GameBoard gameboard = new GameBoard();
 //		GameBoardIhm visualGameboard = new GameBoardIhm(gameboard);
 //		root.getChildren().addAll(visualGameboard);
