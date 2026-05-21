@@ -1,7 +1,10 @@
 package latice.application;
-
-
 import javafx.application.Application;
+<<<<<<< HEAD
+=======
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+>>>>>>> ihm_temp
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -10,6 +13,8 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -25,44 +30,67 @@ public class LaticeApplication extends javafx.application.Application {
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		//TODO 
 		//code venant d'un TP (exemple)
-		StackPane root = new StackPane();
+		BorderPane root = new BorderPane();
 		
 		//Labels
 		Label play = new Label("PLAY");
 		Label quit = new Label("QUIT");
 		
 		// rectangles 
-		Rectangle rectPlay = new Rectangle(150, 100, Color.DARKBLUE);
-		Rectangle rectQuit = new Rectangle(150, 100, Color.DARKGREEN);
-		rectPlay.setX(50);
-		rectPlay.setY(100);
-		rectQuit.setX(300);
-		rectQuit.setY(200);
+		Rectangle rectPlay = new Rectangle(150, 100, Color.RED);
+		Rectangle rectQuit = new Rectangle(150, 100, Color.PINK);
 		
-		
-		//image
-		Image image = new Image(getClass().getResource("/latice_background.png").toExternalForm());
+		// Va chercher l'image dans la dossier ressources
+		Image image = new Image(getClass().getResource("/images/latice_background.png").toExternalForm());
 
-		System.out.println(image.isError());
+		// sélectionne les paramètres de background ainsi que l'image affichée
+		BackgroundImage background = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));
 		
-		BackgroundImage background = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(500, 500, false, false, true, false));
+		// VBox création
+		VBox caseTop = new VBox();
+		VBox caseBottom = new VBox();
+		
+		//  Création des boutons avec image
 		
 		
-		root.getChildren().addAll(play, quit, rectPlay, rectQuit);
+		caseTop.getChildren().addAll(rectPlay, play);
+		caseTop.setAlignment(Pos.TOP_CENTER);
+		caseTop.setSpacing(10);
 		
-		Scene scene = new Scene(root,500,500);
+		caseBottom.getChildren().addAll(rectQuit, quit);
+		caseBottom.setAlignment(Pos.BOTTOM_CENTER);
+		caseBottom.setSpacing(10);
+		
+		// Ajout des éléments au StackPane
+		root.setTop(caseTop);
+		root.setBottom(caseBottom);
+		
+		
+		Scene scene = new Scene(root,900,600);
 		root.setBackground(new Background(background));
+		
+		BorderPane.setMargin(caseTop, new Insets(100, 0, 150, 0));
+		BorderPane.setMargin(caseBottom, new Insets(0, 0, 200, 0));
 		
 		// Sélection de la fenetre à afficher 
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Game starting window");
 		primaryStage.setResizable(false);
+<<<<<<< HEAD
 
+=======
+		GameBoard gameboard = new GameBoard();
+//		GameBoardIhm visualGameboard = new GameBoardIhm(gameboard);
+//		
+//		root.getChildren().addAll(visualGameboard);
+		
+		primaryStage.setScene(scene);
+>>>>>>> ihm_temp
 		primaryStage.show();
 	}	
 }
