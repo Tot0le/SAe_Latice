@@ -1,10 +1,8 @@
-package latice.application;
+	package latice.application;
 import javafx.application.Application;
-<<<<<<< HEAD
-=======
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
->>>>>>> ihm_temp
+
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -81,16 +79,14 @@ public class LaticeApplication extends javafx.application.Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Game starting window");
 		primaryStage.setResizable(false);
-<<<<<<< HEAD
 
-=======
 		GameBoard gameboard = new GameBoard();
 //		GameBoardIhm visualGameboard = new GameBoardIhm(gameboard);
 //		
 //		root.getChildren().addAll(visualGameboard);
 		
 		primaryStage.setScene(scene);
->>>>>>> ihm_temp
+
 		primaryStage.show();
 	}	
 }
