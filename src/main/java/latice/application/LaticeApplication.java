@@ -24,8 +24,11 @@ public class LaticeApplication extends javafx.application.Application {
 		primaryStage.show();
 
 		// TODO when the button start is pressed do that :
-
-		scene = GameScene.createGameScene();
+		GameScene gameScene = new GameScene();
+		scene = gameScene.createGameScene();
+		
+		
 		primaryStage.setScene(scene);
+		gameScene.launchGame();
 	}
 }

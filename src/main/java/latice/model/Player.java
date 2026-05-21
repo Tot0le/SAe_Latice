@@ -11,12 +11,14 @@ public class Player {
 	private Rack rack;
 	private Pool pool;
 	private GameBoard gameboard;
+	private Integer orderNumber;
 
 	public Player(Integer points, Rack rack, Pool pool, GameBoard gameboard) {
 		this.points = points;
 		this.rack = rack;
 		this.pool = pool;
 		this.gameboard = gameboard;
+		this.orderNumber = null;
 	}
 
 	public void buyANewAction(Integer points) {
@@ -64,5 +66,8 @@ public class Player {
 	// setteurs :
 	public void player(Integer points) {
 		this.points = points;
+	}
+	public void setOrderNumber(Integer orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 }
