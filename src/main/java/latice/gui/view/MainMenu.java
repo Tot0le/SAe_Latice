@@ -14,6 +14,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import latice.util.ImageLoader;
+import latice.util.ImagePath;
 
 public class MainMenu {
 	public static Scene createMainMenuScene() {			
@@ -27,17 +29,17 @@ public class MainMenu {
 		Rectangle rectPlay = new Rectangle(150, 100, Color.RED);
 		Rectangle rectQuit = new Rectangle(150, 100, Color.PINK);
 		
-		// Va chercher l'image dans la dossier ressources
-		Image image = latice.util.ImageLoader.loadImageSafe("/images/latice_background.png", 250,250);
+		// load the image via a safe image load function and its path in ImagePath enum
+		Image image = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_MENU.path(), 250,250);
 
 		// sélectionne les paramètres de background ainsi que l'image affichée
 		BackgroundImage background = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));
 		
-		// VBox création
+		// VBox creation
 		VBox caseTop = new VBox();
 		VBox caseBottom = new VBox();
 		
-		//  Création des boutons avec image
+		//  buttons creations with image
 		
 		
 		caseTop.getChildren().addAll(rectPlay, play);
@@ -48,7 +50,7 @@ public class MainMenu {
 		caseBottom.setAlignment(Pos.BOTTOM_CENTER);
 		caseBottom.setSpacing(10);
 		
-		// Ajout des éléments au StackPane
+		// add the elements to the StackPane
 		root.setTop(caseTop);
 		root.setBottom(caseBottom);
 		

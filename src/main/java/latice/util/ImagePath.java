@@ -3,7 +3,9 @@ package latice.util;
 public enum ImagePath {
 	BACKGROUND_SEA("/images/bg_sea.png"),
 	BACKGROUND_MOON("/images/bg_moon.png"),
-	BACKGROUND_SUN("/images/bg_sun.png");
+	BACKGROUND_SUN("/images/bg_sun.png"),
+	
+	BACKGROUND_MENU("/images/latice_background.png");
 	
 	
 	private String path;
