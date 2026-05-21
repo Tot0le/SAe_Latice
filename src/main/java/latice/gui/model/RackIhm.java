@@ -16,7 +16,7 @@ public class RackIhm extends GridPane{
 	ImageView cellImg5View;
 	
 	public RackIhm() {
-		cellImg = new Image(getClass().getResource("/images/rack_cell.png").toExternalForm());
+		cellImg = new Image(getClass().getResource("/images/rack_cell.png").toExternalForm()); //TODO changer pour que ça utilise l'enum
 		
 		cellImg1View = new ImageView(cellImg);
 		cellImg2View = new ImageView(cellImg);
@@ -37,7 +37,9 @@ public class RackIhm extends GridPane{
         this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         
         //debug color
-		this.setStyle("-fx-background-color:#00ff00; -fx-opacity:1;"); 
+		//this.setStyle("-fx-background-color:#00ff00; -fx-opacity:1;"); 
+        
+		this.setStyle("-fx-background-color:#0a10ad; -fx-opacity:1;"); 
 		
 		this.setPadding(new Insets(10));
 		this.setHgap(10);
