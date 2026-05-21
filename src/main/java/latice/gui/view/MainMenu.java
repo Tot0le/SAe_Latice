@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class MainMenu {
-	public static Scene createMainMenuScene() {
+	public static Scene createMainMenuScene() {			
 		BorderPane root = new BorderPane();
 		
 		//Labels
@@ -28,7 +28,7 @@ public class MainMenu {
 		Rectangle rectQuit = new Rectangle(150, 100, Color.PINK);
 		
 		// Va chercher l'image dans la dossier ressources
-		Image image = new Image(getClass().getResource("/images/latice_background.png").toExternalForm());
+		Image image = latice.util.ImageLoader.loadImageSafe("/images/latice_background.png", 250,250);
 
 		// sélectionne les paramètres de background ainsi que l'image affichée
 		BackgroundImage background = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));

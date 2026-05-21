@@ -3,6 +3,8 @@ package latice.util;
 import java.io.InputStream;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class ImageLoader {
 	public ImageLoader() {
@@ -21,5 +23,19 @@ public class ImageLoader {
 		}
 		return image;
 		
+	}
+	
+	public static Image loadImageSafe(String path, int backupImageWidth, int backupImageHeight) {
+		Image image;
+		try {
+			image = loadImage(path);
+		} catch (ImageNotFoundException e) {
+			System.err.println(e.getMessage() + " Backup image applied");
+			Rectangle fallbackRectangleImage = new Rectangle(backupImageWidth, backupImageHeight, Color.CYAN);
+			
+			image = fallbackRectangleImage.snapshot(null, null);
+		}
+		
+		return image;
 	}
 }
