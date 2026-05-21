@@ -1,9 +1,11 @@
 package latice.gui.model;
 import java.util.ArrayList;
 
+import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import latice.model.Factory;
 import latice.model.GameBoard;
 import latice.model.Position;
@@ -38,8 +40,13 @@ public class GameBoardIhm extends GridPane {
 			currentImageViewBackground.setPreserveRatio(true);
 			this.add(currentImageViewBackground, position.row(), position.column());
 		}
-		this.setHgap(2);
-		this.setVgap(2);
+		this.setHgap(1);
+		this.setVgap(1);
+		
+		// Set the max size to be able to move it freely
+		this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+		this.setStyle("-fx-background-color:#053367; -fx-opacity:1;"); // navy blue font
+		this.setPadding(new Insets(15));
 		
 	}
 }
