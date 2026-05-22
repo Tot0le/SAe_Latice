@@ -52,7 +52,10 @@ public enum ImagePath {
     YELLOW_TURTLE("/images/tiles/turtle_y.png", Color.Yellow, Shape.Turtle),
 
 	// Menu related image
-	BACKGROUND_MENU("/images/latice_background.png", Color.None, Shape.None);
+	BACKGROUND_MENU("/images/latice_background.png", Color.None, Shape.None),
+	
+	// Rack cell image
+	RACK_CELL("/images/rack_cell.png", Color.None, Shape.None);
 
 
 	private String imagePath;

@@ -11,8 +11,11 @@ import latice.model.Factory;
 import latice.model.GameBoard;
 import latice.model.Player;
 import latice.model.Pool;
+import latice.model.Position;
 import latice.model.Rack;
 import latice.model.Referee;
+import latice.model.tile.Color;
+import latice.model.tile.Shape;
 import latice.model.tile.Tile;
 
 public class GameScene {
@@ -27,6 +30,25 @@ public class GameScene {
 	public Scene createGameScene() {
 		BorderPane root = new BorderPane();
 		
+		//Test RackIhm
+		Rack rack1 = new Rack();
+		ArrayList<Tile> tiles = new ArrayList<>();
+		
+		Tile tile1 = new Tile(Color.Green, Shape.Bird);
+		Tile tile2 = new Tile(Color.Navy, Shape.Gecko);
+		Tile tile3 = new Tile(Color.Red, Shape.Feather);
+		
+		tiles.add(tile1);
+		tiles.add(tile2);
+		tiles.add(tile3);
+		
+		rack1.setTiles(tiles);
+		
+		//Test Rack
+		System.out.println(rack1.getTiles());
+		RackIhm visualRack = new RackIhm(rack1);
+		visualRack.updateRackTiles();
+		
 		//GAMEBOARD
 //		gameboard.put(new Position(7,7), new Tile(Color.Green, Shape.Bird)); // testing if the tiles appears
 //		visualGameboard.update();
@@ -37,7 +59,6 @@ public class GameScene {
 		
 		//RACK
 		root.setCenter(visualGameboard);
-		RackIhm visualRack = new RackIhm();
 		root.setBottom(visualRack);
 		BorderPane.setAlignment(visualRack, Pos.TOP_CENTER);
 		
