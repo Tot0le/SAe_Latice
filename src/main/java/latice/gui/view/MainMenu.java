@@ -15,9 +15,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import latice.util.ImageLoader;
 import latice.util.ImagePath;
 import latice.util.SetImageView;
+import latice.gui.view.GameScene;
 
 public class MainMenu {
 	public static Scene createMainMenuScene() {
@@ -27,17 +29,16 @@ public class MainMenu {
 		Image image_background = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_MENU.imagePath(), 250,250);
 		Image image_play = ImageLoader.loadImageSafe(ImagePath.PLAY_BUTTON.imagePath(), 250,250);
 		Image image_quit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 250,250);
-		
 		//Buttons creation, image attribution and size
 		Button btnPlay = new Button("PLAY");
 		btnPlay.setPrefSize(150, 100);
 		btnPlay = SetImageView.getImageInButton(btnPlay, image_play);
+		final Button btnFinalPlay = btnPlay;
 		
 		Button btnQuit = new Button("QUIT"); 
 		btnQuit.setPrefSize(150, 100);
 		btnQuit = SetImageView.getImageInButton(btnQuit, image_quit);
-		
-
+		final Button btnFinalQuit = btnQuit;
 		
 		// sélectionne les paramètres de background ainsi que l'image affichée
 		BackgroundImage background = new BackgroundImage(image_background, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));
@@ -67,9 +68,18 @@ public class MainMenu {
 
 		BorderPane.setMargin(caseTop, new Insets(100, 0, 150, 0));
 		BorderPane.setMargin(caseBottom, new Insets(0, 0, 200, 0));
-
+		
+		btnPlay.setOnAction(e -> goToGameScene(btnFinalPlay));
 
 		return scene;
 
 	}
+	public static void goToGameScene(Button bouton) {
+		GameScene gameScene = new GameScene();
+		Scene scene = gameScene.createGameScene();
+		
+		gameScene.launchGame();
+		
+	}
+	
 }
