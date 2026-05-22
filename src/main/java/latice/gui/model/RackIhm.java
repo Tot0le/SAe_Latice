@@ -1,6 +1,7 @@
 package latice.gui.model;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -9,28 +10,28 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import latice.gui.controller.GameController;
+import latice.model.Position;
 import latice.model.Rack;
 import latice.model.tile.Tile;
 import latice.util.ImageLoader;
 import latice.util.ImagePath;
-
+//TODO see if an interface for the IHMs class would be good
 public class RackIhm extends GridPane{
-	Image cellImg;
-	
-	ImageView cellImgView;
-	
+	Image cellBackgroundImg;
+
 	Rack rack;
 	
-	ArrayList<Tile> tiles;
+	ArrayList<Tile> tilesIhm;
 	
 	public RackIhm(Rack rack) {
 		this.rack = rack;
 		
-		this.cellImg = ImageLoader.loadImageSafe(ImagePath.RACK_CELL.imagePath(), 90, 90);
+		this.cellBackgroundImg = ImageLoader.loadImageSafe(ImagePath.RACK_CELL.imagePath(), 90, 90);
 		
-		for (int i = 0; i < 5; i++) {
-			cellImgView = new ImageView(cellImg);
-			this.add(cellImgView, i, 0);
+		ImageView cellImgView;
+		for (int tileIndex = 0; tileIndex < rack.maxTiles(); tileIndex++) {
+			cellImgView = new ImageView(cellBackgroundImg);
+			this.add(cellImgView, tileIndex, 0);
 		}
 		
 		// Set the rack in the middle
@@ -44,20 +45,24 @@ public class RackIhm extends GridPane{
 		this.setPadding(new Insets(10));
 		this.setHgap(10);
 	}
-	
+	/**
+	 * Methods must be called when something change on the rack
+	 */
 	public void updateRackTiles() {
-		tiles = this.rack.getTiles();
-		ArrayList<Image> images = new ArrayList<>();
+		tilesIhm = this.rack.getTiles();
 		Image image;
+		ImageView cellImgView;
 		
-		for (int i = 0; i < this.rack.tilesAmounts(); i++) {
-			image = ImageLoader.loadImageSafe(tiles.get(i).path().imagePath(), 90, 90);
-			images.add(i, image);
+		// Reset the ihm rack
+		for (int tileIndex = 0; tileIndex < rack.maxTiles(); tileIndex++) {
+			cellImgView = new ImageView(cellBackgroundImg);
+			this.add(cellImgView, tileIndex, 0);
 		}
 		
-		for (int i = 0; i < this.rack.tilesAmounts(); i++) {
-			cellImgView = new ImageView(images.get(i));
-			this.add(cellImgView, i, 0);
+		for (int tileIndex = 0; tileIndex < rack.maxTiles(); tileIndex++) {
+			image = ImageLoader.loadImageSafe(tilesIhm.get(tileIndex).path().imagePath(), 90, 90);
+			cellImgView = new ImageView(image);
+			this.add(cellImgView, tileIndex, 0);
 		}
 		
 		// Debug prints

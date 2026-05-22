@@ -62,7 +62,8 @@ public class GameBoardIhm extends GridPane {
 	
 	public void bindController(GameController gameController) {
 		this.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
-			//TODO 
+			//TODO Exception in thread "JavaFX Application Thread" java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+			//TODO and also deselect tile on the rack when placing a tile
 			Node clickedNode = (Node) event.getTarget();
 			if (clickedNode instanceof ImageView) {
 				Integer columnIndex = GridPane.getColumnIndex(clickedNode);
