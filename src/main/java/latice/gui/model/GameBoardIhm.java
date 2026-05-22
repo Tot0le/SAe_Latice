@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import latice.gui.controller.GameController;
 import latice.model.Factory;
 import latice.model.GameBoard;
 import latice.model.Position;
@@ -56,6 +57,12 @@ public class GameBoardIhm extends GridPane {
 			image = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SEA.imagePath(), backgroundImage);
 		}
 		return image;
+	}
+	
+	public void bindController(GameController gameController) {
+		this.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+			//TODO 
+		});
 	}
 	
 	/**

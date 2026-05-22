@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import latice.gui.controller.GameController;
 import latice.gui.model.GameBoardIhm;
 import latice.gui.model.RackIhm;
 import latice.model.Factory;
@@ -71,13 +72,10 @@ public class GameScene {
 		
 		// The game can now start
 		
-		// TODO : doesn't work because the window doesn't appear when the loop is not finish
-//		int nbTurn = 0;
-//		while (nbTurn < gameboard.getNbCycle()) {
-//			for (Player player : playerList) {
-//				
-//			}
-//		}
+		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList);
+//		gameController.nextTurn();
+		
+		
 		
 	}
 }
