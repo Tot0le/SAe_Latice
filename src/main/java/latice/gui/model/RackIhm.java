@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import latice.gui.controller.GameController;
 import latice.model.Rack;
 import latice.model.tile.Tile;
 import latice.util.ImageLoader;
@@ -61,5 +62,11 @@ public class RackIhm extends GridPane{
 		// Debug prints
 		//System.out.println("rack tiles amounts : " + this.rack.tilesAmounts());
 		//System.out.println("image amount : " + images.size());
+	}
+
+	public void bindController(GameController gameController) {
+		this.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+			//TODO 
+		});
 	}
 }

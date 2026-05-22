@@ -61,8 +61,17 @@ public class Player {
 	}
 	// getteurs :
 	public Integer Points() {
-		return points;
+		return this.points;
 	}
+	
+	public Rack rack() {
+		return this.rack;
+	}
+	
+	public Pool pool() {
+		return this.pool;
+	}
+	
 	// setteurs :
 	public void player(Integer points) {
 		this.points = points;

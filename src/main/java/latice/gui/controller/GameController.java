@@ -1,16 +1,17 @@
 package latice.gui.controller;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import latice.gui.model.GameBoardIhm;
+import latice.gui.model.RackIhm;
 import latice.model.GameBoard;
 import latice.model.Player;
 
 public class GameController {
 	private final GameBoard gameboard;
 	private final GameBoardIhm gameboardIhm;
-	private ArrayList<Player> playerList;
-	
+	private LinkedHashMap<Player, RackIhm> playerList;
 	private Player currentPlayer;
 	private int currentPlayerIndex = 0;
 	private int roundCount = 0;
@@ -18,12 +19,15 @@ public class GameController {
 	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList) {
 		this.gameboard = gameboard;
 		this.gameboardIhm = gameboardIhm;
-		this.playerList = playerList;
+		
+		for (Player player: playerList) {
+			RackIhm newRackIhm = new RackIhm(player.rack());
+			newRackIhm.bindController(this);
+			this.playerList.put(player, newRackIhm);
+			
+		}
 		
 		this.gameboardIhm.bindController(this);
-		
-		// TODO list of rack and iterate it
-//		this.rackIhm.bindController(this);
 	}
 	
 	public void nextRound() {
@@ -39,7 +43,7 @@ public class GameController {
 		}
 		// TODO check the roundCount number
 		
-		this.currentPlayer = this.playerList.get(this.currentPlayerIndex);
+		this.currentPlayer = new ArrayList<>(this.playerList.keySet()).get(this.currentPlayerIndex);
 		
 	}
 	
