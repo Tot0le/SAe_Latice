@@ -11,6 +11,19 @@ public class ImageLoader {
 
 	}
 
+	public static Image loadImage(String path, int preferedWidth, int preferedHeight) throws ImageNotFoundException {
+		Image image = null;
+
+		InputStream imageStream = ImageLoader.class.getResourceAsStream(path);
+
+		if (imageStream == null) {
+			throw new ImageNotFoundException("Image with the path " + path + " not found.");
+		} else {
+			image = new Image(imageStream, preferedWidth, preferedHeight, true, false);
+		}
+		return image;
+	}
+	
 	public static Image loadImage(String path) throws ImageNotFoundException {
 		Image image = null;
 
@@ -22,13 +35,12 @@ public class ImageLoader {
 			image = new Image(imageStream);
 		}
 		return image;
-
 	}
 
 	public static Image loadImageSafe(String path, int backupImageWidth, int backupImageHeight) {
 		Image image;
 		try {
-			image = loadImage(path);
+			image = loadImage(path, backupImageWidth, backupImageHeight);
 		} catch (ImageNotFoundException e) {
 			Rectangle fallbackRectangleImage = new Rectangle(backupImageWidth, backupImageHeight, Color.CYAN);
 

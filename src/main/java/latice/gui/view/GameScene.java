@@ -30,6 +30,8 @@ public class GameScene {
 		//GAMEBOARD
 //		gameboard.put(new Position(7,7), new Tile(Color.Green, Shape.Bird)); // testing if the tiles appears
 //		visualGameboard.update();
+//		gameboard.removeTileAt(new Position(7,7));
+//		visualGameboard.update();
 
 		BorderPane.setAlignment(visualGameboard, Pos.CENTER);
 		

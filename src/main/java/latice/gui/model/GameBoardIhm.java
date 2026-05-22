@@ -1,5 +1,6 @@
 package latice.gui.model;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
 
 import javafx.geometry.Insets;
@@ -17,21 +18,17 @@ import latice.util.ImagePath;
 public class GameBoardIhm extends GridPane {
 	private GameBoard gameboard;
 	private Integer tileSize = 100;
+	private final HashSet<Position> tilesPlacedPlacement;
 
 	public GameBoardIhm(GameBoard gameboard) {
 		this.gameboard = gameboard;
-		Image backgroundImage = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SEA.imagePath(), tileSize, tileSize);
+		this.tilesPlacedPlacement = new HashSet<>();
+		
 		Image image;
 		ArrayList<Position> positions = (ArrayList<Position>) Factory.createAllPositions(gameboard.getLength());
 
 		for (Position position : positions) {
-			if (gameboard.isSunAt(position)) {
-				image = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SUN.imagePath(), backgroundImage);
-			} else if (gameboard.isMoonAt(position)) {
-				image = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_MOON.imagePath(), backgroundImage);
-			} else {
-				image = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SEA.imagePath(), backgroundImage);
-			}
+			image = this.chooseRightBackgroundImage(position);
 
 			ImageView currentImageViewBackground = new ImageView(image);
 			currentImageViewBackground.setFitHeight(50);
@@ -47,23 +44,58 @@ public class GameBoardIhm extends GridPane {
 		this.setPadding(new Insets(15));
 
 	}
-
+	
+	private Image chooseRightBackgroundImage(Position position) {
+		Image image;
+		Image backgroundImage = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SEA.imagePath(), tileSize, tileSize);
+		if (gameboard.isSunAt(position)) {
+			image = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SUN.imagePath(), backgroundImage);
+		} else if (gameboard.isMoonAt(position)) {
+			image = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_MOON.imagePath(), backgroundImage);
+		} else {
+			image = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SEA.imagePath(), backgroundImage);
+		}
+		return image;
+	}
+	
 	/**
 	 * Methods must be called when something change on the board
 	 */
 	public void update() {
+		ImageView currentImageView;
+		
 		Map<Position, Tile> tiles = gameboard.getTiles();
 		Image image;
+		// check if a position is not in the gameboard anymore  
+		for (Position posOfaTilePlaced: tilesPlacedPlacement) {
+			if (! tiles.containsKey(posOfaTilePlaced)) {
+				Position notATileHereAnymore = posOfaTilePlaced;
+				image = this.chooseRightBackgroundImage(posOfaTilePlaced);
+
+				currentImageView = new ImageView(image);
+				
+				// parameters of the imageview
+				currentImageView.setFitHeight(50);
+				currentImageView.setPreserveRatio(true);
+
+				// add the image at the right position
+				this.tilesPlacedPlacement.remove(notATileHereAnymore);
+				this.add(currentImageView, notATileHereAnymore.row(), notATileHereAnymore.column());
+			}
+		}
+		
+		
 		for (Position position : tiles.keySet()) {
 			// this get the path by getting the path in the ImagePath
 			image = ImageLoader.loadImageSafe(tiles.get(position).path().imagePath(), tileSize, tileSize);
-			ImageView currentImageView = new ImageView(image);
+			currentImageView = new ImageView(image);
 
 			// parameters of the imageview
 			currentImageView.setFitHeight(50);
 			currentImageView.setPreserveRatio(true);
 
 			// add the image at the right position
+			this.tilesPlacedPlacement.add(position); // usefull later if a tile is push
 			this.add(currentImageView, position.row(), position.column());
 		}
 	}
