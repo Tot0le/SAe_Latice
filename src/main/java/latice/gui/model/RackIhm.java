@@ -9,7 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import latice.gui.controller.GameController;
-import latice.model.Position;
 import latice.model.Rack;
 import latice.model.tile.Tile;
 import latice.util.ImageLoader;
@@ -69,6 +68,7 @@ public class RackIhm extends GridPane{
 	public void bindController(GameController gameController) {
 		this.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
 			//TODO 
+			System.out.println("mouse clicked");
 			Node clickedNode = (Node) event.getTarget();
 			if (clickedNode instanceof ImageView) {
 				Integer columnIndex = GridPane.getColumnIndex(clickedNode);

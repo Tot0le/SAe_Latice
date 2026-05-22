@@ -3,6 +3,7 @@ package latice.gui.view;
 import java.util.ArrayList;
 
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import latice.gui.controller.GameController;
@@ -12,7 +13,6 @@ import latice.model.Factory;
 import latice.model.GameBoard;
 import latice.model.Player;
 import latice.model.Pool;
-import latice.model.Position;
 import latice.model.Rack;
 import latice.model.Referee;
 import latice.model.tile.Color;
@@ -22,14 +22,17 @@ import latice.model.tile.Tile;
 public class GameScene {
 	private GameBoard gameboard;
 	private GameBoardIhm visualGameboard;
+	private Group rackEmplacement;
+	private BorderPane root;
 	
 	public GameScene() {
 		this.gameboard = new GameBoard();
 		this.visualGameboard = new GameBoardIhm(this.gameboard);
+		this.rackEmplacement = new Group();
 	}
 	
 	public Scene createGameScene() {
-		BorderPane root = new BorderPane();
+		root = new BorderPane();
 		
 		//Test RackIhm
 		Rack rack1 = new Rack();
@@ -47,8 +50,8 @@ public class GameScene {
 		
 		//Test Rack
 		System.out.println(rack1.getTiles());
-		RackIhm visualRack = new RackIhm(rack1);
-		visualRack.updateRackTiles();
+//		RackIhm visualRack = new RackIhm(rack1);
+//		visualRack.updateRackTiles();
 		
 		//GAMEBOARD
 //		gameboard.put(new Position(7,7), new Tile(Color.Green, Shape.Bird)); // testing if the tiles appears
@@ -60,8 +63,8 @@ public class GameScene {
 		
 		//RACK
 		root.setCenter(visualGameboard);
-		root.setBottom(visualRack);
-		BorderPane.setAlignment(visualRack, Pos.TOP_CENTER);
+		root.setBottom(rackEmplacement);
+		BorderPane.setAlignment(rackEmplacement, Pos.TOP_CENTER);
 		
 		
 		Scene scene = new Scene(root,1920,1080);
@@ -88,15 +91,19 @@ public class GameScene {
 		player2.drawMaxTile();
 		
 		ArrayList<Player> playerList = new ArrayList<>();
-		
+		playerList.add(player1);
+		playerList.add(player2);
 		playerList = (ArrayList<Player>) Referee.randomChoosePlayerOrder(playerList);
 		
 		// The game can now start
 		
-		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList);
+		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this);
+		gameController.displayCurrentPlayerRack();
 //		gameController.nextTurn();
-		
-		
-		
+//		gameController.displayCurrentPlayerRack();
+	}
+	
+	public Group rackEmplacement() {
+		return this.rackEmplacement;
 	}
 }
