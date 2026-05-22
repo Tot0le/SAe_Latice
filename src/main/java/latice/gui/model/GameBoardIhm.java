@@ -35,7 +35,7 @@ public class GameBoardIhm extends GridPane {
 			ImageView currentImageViewBackground = new ImageView(image);
 			currentImageViewBackground.setFitHeight(50);
 			currentImageViewBackground.setPreserveRatio(true);
-			this.add(currentImageViewBackground, position.row(), position.column());
+			this.add(currentImageViewBackground, position.column(), position.row());
 		}
 		this.setHgap(1);
 		this.setVgap(1);
@@ -96,7 +96,7 @@ public class GameBoardIhm extends GridPane {
 
 				// add the image at the right position
 				this.tilesPlacedPlacement.remove(notATileHereAnymore);
-				this.add(currentImageView, notATileHereAnymore.row(), notATileHereAnymore.column());
+				this.add(currentImageView, notATileHereAnymore.column(), notATileHereAnymore.row());
 			}
 		}
 		
@@ -112,7 +112,7 @@ public class GameBoardIhm extends GridPane {
 
 			// add the image at the right position
 			this.tilesPlacedPlacement.add(position); // usefull later if a tile is push
-			this.add(currentImageView, position.row(), position.column());
+			this.add(currentImageView, position.column(), position.row());
 		}
 	}
 }

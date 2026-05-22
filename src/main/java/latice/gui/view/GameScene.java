@@ -35,21 +35,21 @@ public class GameScene {
 		root = new BorderPane();
 		
 		//Test RackIhm
-		Rack rack1 = new Rack();
-		ArrayList<Tile> tiles = new ArrayList<>();
-		
-		Tile tile1 = new Tile(Color.Green, Shape.Bird);
-		Tile tile2 = new Tile(Color.Navy, Shape.Gecko);
-		Tile tile3 = new Tile(Color.Red, Shape.Feather);
-		
-		tiles.add(tile1);
-		tiles.add(tile2);
-		tiles.add(tile3);
-		
-		rack1.setTiles(tiles);
-		
+//		Rack rack1 = new Rack();
+//		ArrayList<Tile> tiles = new ArrayList<>();
+//		
+//		Tile tile1 = new Tile(Color.Green, Shape.Bird);
+//		Tile tile2 = new Tile(Color.Navy, Shape.Gecko);
+//		Tile tile3 = new Tile(Color.Red, Shape.Feather);
+//		
+//		tiles.add(tile1);
+//		tiles.add(tile2);
+//		tiles.add(tile3);
+//		
+//		rack1.setTiles(tiles);
+//		
 		//Test Rack
-		System.out.println(rack1.getTiles());
+//		System.out.println(rack1.getTiles());
 //		RackIhm visualRack = new RackIhm(rack1);
 //		visualRack.updateRackTiles();
 		
@@ -83,7 +83,8 @@ public class GameScene {
 		
 		Rack rackPlayer1 = new Rack();
 		Rack rackPlayer2 = new Rack();
-		
+		rackPlayer1.addTile(new Tile(Color.Green, Shape.Bird));
+		rackPlayer2.addTile(new Tile(Color.Magenta, Shape.Bird));
 		Player player1 = new Player(0, rackPlayer1, poolPlayer1, gameboard);
 		Player player2 = new Player(0, rackPlayer2, poolPlayer2, gameboard);
 		

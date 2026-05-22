@@ -3,6 +3,7 @@ package latice.model;
 import java.util.ArrayList;
 
 import latice.model.tile.Tile;
+import latice.util.TileChoosedFromRackOutOfRangeException;
 
 public class Rack {
 	private ArrayList<Tile> tiles;
@@ -35,7 +36,13 @@ public class Rack {
 	}
 
 	public Tile getTile(Integer index) {
-		return this.tiles.get(index);
+		Tile tile;
+		if (index < this.tilesAmounts()) {
+			tile = this.tiles.get(index);
+		} else {
+			tile = null;
+		}
+		return tile;
 	}
 
 	public boolean contains(Tile tile) {

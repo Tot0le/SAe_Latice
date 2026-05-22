@@ -60,19 +60,22 @@ public class GameController {
 	}
 	
 	public void handleTileSelection(Integer indexRack) {
-		// TODO
 		System.out.println("Mouse clicked on rack index : " + indexRack);
-		if (currentPlayer.rack().getTile(indexRack) != null) {
+
+		if (currentPlayer.rack().getTile(indexRack) != null ) {
 			this.selectedTileIndex = indexRack;
+		} else {
+			this.selectedTileIndex = null;
 		}
 	}
 	
 	public void handleTilePlacement(Position gameboardPosition) {
-		// TODO
 		System.out.println("Mouse clicked on board position : " + gameboardPosition);
 		if (selectedTileIndex != null) {
 			Tile selectedTile = currentPlayer.rack().popTile(selectedTileIndex);
 			gameboard.put(gameboardPosition, selectedTile);
+			gameboardIhm.update();
+			getCurrentPlayerRack().updateRackTiles();
 		}
 	}
 
