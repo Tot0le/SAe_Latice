@@ -7,6 +7,9 @@ import latice.gui.model.GameBoardIhm;
 import latice.gui.model.RackIhm;
 import latice.model.GameBoard;
 import latice.model.Player;
+import latice.model.Position;
+import latice.model.Rack;
+import latice.model.tile.Tile;
 
 public class GameController {
 	private final GameBoard gameboard;
@@ -15,7 +18,8 @@ public class GameController {
 	private Player currentPlayer;
 	private int currentPlayerIndex = 0;
 	private int roundCount = 0;
-	
+	private Integer selectedTileIndex = null;
+	 
 	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList) {
 		this.gameboard = gameboard;
 		this.gameboardIhm = gameboardIhm;
@@ -51,10 +55,23 @@ public class GameController {
 		
 	}
 	
-	public void handleTilePlacement() {
+	public void handleTileSelection(Integer indexRack) {
 		// TODO
+		System.out.println("Mouse clicked on rack index : " + indexRack);
+		if (currentPlayer.rack().getTile(indexRack) != null) {
+			this.selectedTileIndex = indexRack;
+		}
 	}
 	
+	public void handleTilePlacement(Position gameboardPosition) {
+		// TODO
+		System.out.println("Mouse clicked on board position : " + gameboardPosition);
+		if (selectedTileIndex != null) {
+			Tile selectedTile = currentPlayer.rack().popTile(selectedTileIndex);
+			gameboard.put(gameboardPosition, selectedTile);
+		}
+	}
+
 	public void exchangeTiles() {
 		// TODO
 	}

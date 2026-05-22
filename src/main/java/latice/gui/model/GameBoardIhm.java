@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Map;
 
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -62,6 +63,14 @@ public class GameBoardIhm extends GridPane {
 	public void bindController(GameController gameController) {
 		this.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
 			//TODO 
+			Node clickedNode = (Node) event.getTarget();
+			if (clickedNode instanceof ImageView) {
+				Integer columnIndex = GridPane.getColumnIndex(clickedNode);
+				Integer rowIndex = GridPane.getRowIndex(clickedNode);
+				if (columnIndex != null && rowIndex != null) {
+					gameController.handleTilePlacement(new Position(rowIndex, columnIndex));
+				}
+			}
 		});
 	}
 	
