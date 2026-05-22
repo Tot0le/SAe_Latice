@@ -1,10 +1,14 @@
 package latice.gui.model;
 
+import java.util.ArrayList;
+
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import latice.model.Rack;
+import latice.model.tile.Tile;
 import latice.util.ImageLoader;
 import latice.util.ImagePath;
 
@@ -16,23 +20,29 @@ public class RackIhm extends GridPane{
 	ImageView cellImg3View;
 	ImageView cellImg4View;
 	ImageView cellImg5View;
+
+	Rack rack;
 	
-	public RackIhm() {
-		cellImg = ImageLoader.loadImageSafe(ImagePath.RACK_CELL.imagePath(), 90, 90);
+	ArrayList<Tile> tiles;
+	
+	public RackIhm(Rack rack) {
+		this.rack = rack;
 		
-		cellImg1View = new ImageView(cellImg);
-		cellImg2View = new ImageView(cellImg);
-		cellImg3View = new ImageView(cellImg);
-		cellImg4View = new ImageView(cellImg);
-		cellImg5View = new ImageView(cellImg);
+		this.cellImg = ImageLoader.loadImageSafe(ImagePath.RACK_CELL.imagePath(), 90, 90);
 		
-		GridPane.setColumnIndex(cellImg1View, 0);
-		GridPane.setColumnIndex(cellImg2View, 1);
-		GridPane.setColumnIndex(cellImg3View, 2);
-		GridPane.setColumnIndex(cellImg4View, 3);
-		GridPane.setColumnIndex(cellImg5View, 4);
+		this.cellImg1View = new ImageView(cellImg);
+		this.cellImg2View = new ImageView(cellImg);
+		this.cellImg3View = new ImageView(cellImg);
+		this.cellImg4View = new ImageView(cellImg);
+		this.cellImg5View = new ImageView(cellImg);
 		
-		this.getChildren().addAll(cellImg1View,cellImg2View,cellImg3View,cellImg4View,cellImg5View);
+		GridPane.setColumnIndex(this.cellImg1View, 0);
+		GridPane.setColumnIndex(this.cellImg2View, 1);
+		GridPane.setColumnIndex(this.cellImg3View, 2);
+		GridPane.setColumnIndex(this.cellImg4View, 3);
+		GridPane.setColumnIndex(this.cellImg5View, 4);
+		
+		this.getChildren().addAll(this.cellImg1View,this.cellImg2View,this.cellImg3View,this.cellImg4View,this.cellImg5View);
 		
 		
 		// Set the rack in the middle
@@ -48,6 +58,32 @@ public class RackIhm extends GridPane{
 	}
 	
 	public void updateRackTiles() {
-		//TODO updateRackTile method
+		tiles = this.rack.getTiles();
+		ArrayList<Image> images = new ArrayList<>();
+		Image image;
+		
+		for (int i = 0; i < this.rack.tilesAmounts(); i++) {
+			image = ImageLoader.loadImageSafe(tiles.get(i).path().imagePath(), 90, 90);
+			images.add(i, image);
+		}
+		
+		System.out.println("rack tiles amounts : " + this.rack.tilesAmounts());
+		System.out.println("image amount : " + images.size());
+		
+		if (this.rack.tilesAmounts() >= 1) {
+			this.cellImg1View.setImage(images.get(0));
+		}
+		if (this.rack.tilesAmounts() >= 2) {
+			this.cellImg2View.setImage(images.get(1));
+		}
+		if (this.rack.tilesAmounts() >= 3) {
+			this.cellImg3View.setImage(images.get(2));
+		}
+		if (this.rack.tilesAmounts() >= 4) {
+			this.cellImg4View.setImage(images.get(3));
+		}
+		if (this.rack.tilesAmounts() >= 5) {
+			this.cellImg5View.setImage(images.get(4));
+		}
 	}
 }
