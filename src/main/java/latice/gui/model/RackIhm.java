@@ -15,12 +15,8 @@ import latice.util.ImagePath;
 public class RackIhm extends GridPane{
 	Image cellImg;
 	
-	ImageView cellImg1View;
-	ImageView cellImg2View;
-	ImageView cellImg3View;
-	ImageView cellImg4View;
-	ImageView cellImg5View;
-
+	ImageView cellImgView;
+	
 	Rack rack;
 	
 	ArrayList<Tile> tiles;
@@ -30,20 +26,10 @@ public class RackIhm extends GridPane{
 		
 		this.cellImg = ImageLoader.loadImageSafe(ImagePath.RACK_CELL.imagePath(), 90, 90);
 		
-		this.cellImg1View = new ImageView(cellImg);
-		this.cellImg2View = new ImageView(cellImg);
-		this.cellImg3View = new ImageView(cellImg);
-		this.cellImg4View = new ImageView(cellImg);
-		this.cellImg5View = new ImageView(cellImg);
-		
-		GridPane.setColumnIndex(this.cellImg1View, 0);
-		GridPane.setColumnIndex(this.cellImg2View, 1);
-		GridPane.setColumnIndex(this.cellImg3View, 2);
-		GridPane.setColumnIndex(this.cellImg4View, 3);
-		GridPane.setColumnIndex(this.cellImg5View, 4);
-		
-		this.getChildren().addAll(this.cellImg1View,this.cellImg2View,this.cellImg3View,this.cellImg4View,this.cellImg5View);
-		
+		for (int i = 0; i < 5; i++) {
+			cellImgView = new ImageView(cellImg);
+			this.add(cellImgView, i, 0);
+		}
 		
 		// Set the rack in the middle
         this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
@@ -67,23 +53,13 @@ public class RackIhm extends GridPane{
 			images.add(i, image);
 		}
 		
-		System.out.println("rack tiles amounts : " + this.rack.tilesAmounts());
-		System.out.println("image amount : " + images.size());
+		for (int i = 0; i < this.rack.tilesAmounts(); i++) {
+			cellImgView = new ImageView(images.get(i));
+			this.add(cellImgView, i, 0);
+		}
 		
-		if (this.rack.tilesAmounts() >= 1) {
-			this.cellImg1View.setImage(images.get(0));
-		}
-		if (this.rack.tilesAmounts() >= 2) {
-			this.cellImg2View.setImage(images.get(1));
-		}
-		if (this.rack.tilesAmounts() >= 3) {
-			this.cellImg3View.setImage(images.get(2));
-		}
-		if (this.rack.tilesAmounts() >= 4) {
-			this.cellImg4View.setImage(images.get(3));
-		}
-		if (this.rack.tilesAmounts() >= 5) {
-			this.cellImg5View.setImage(images.get(4));
-		}
+		// Debug prints
+		//System.out.println("rack tiles amounts : " + this.rack.tilesAmounts());
+		//System.out.println("image amount : " + images.size());
 	}
 }
