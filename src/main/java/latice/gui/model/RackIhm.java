@@ -5,6 +5,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import latice.util.ImageLoader;
+import latice.util.ImagePath;
 
 public class RackIhm extends GridPane{
 	Image cellImg;
@@ -16,7 +18,7 @@ public class RackIhm extends GridPane{
 	ImageView cellImg5View;
 	
 	public RackIhm() {
-		cellImg = new Image(getClass().getResource("/images/rack_cell.png").toExternalForm()); //TODO changer pour que ça utilise l'enum
+		cellImg = ImageLoader.loadImageSafe(ImagePath.RACK_CELL.imagePath(), 90, 90);
 		
 		cellImg1View = new ImageView(cellImg);
 		cellImg2View = new ImageView(cellImg);
