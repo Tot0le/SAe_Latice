@@ -1,37 +1,35 @@
 package latice.gui.model;
 
+import java.util.ArrayList;
+
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import latice.model.Rack;
+import latice.model.tile.Tile;
+import latice.util.ImageLoader;
+import latice.util.ImagePath;
 
 public class RackIhm extends GridPane{
 	Image cellImg;
 	
-	ImageView cellImg1View;
-	ImageView cellImg2View;
-	ImageView cellImg3View;
-	ImageView cellImg4View;
-	ImageView cellImg5View;
+	ImageView cellImgView;
 	
-	public RackIhm() {
-		cellImg = new Image(getClass().getResource("/images/rack_cell.png").toExternalForm()); //TODO changer pour que ça utilise l'enum
+	Rack rack;
+	
+	ArrayList<Tile> tiles;
+	
+	public RackIhm(Rack rack) {
+		this.rack = rack;
 		
-		cellImg1View = new ImageView(cellImg);
-		cellImg2View = new ImageView(cellImg);
-		cellImg3View = new ImageView(cellImg);
-		cellImg4View = new ImageView(cellImg);
-		cellImg5View = new ImageView(cellImg);
+		this.cellImg = ImageLoader.loadImageSafe(ImagePath.RACK_CELL.imagePath(), 90, 90);
 		
-		GridPane.setColumnIndex(cellImg1View, 0);
-		GridPane.setColumnIndex(cellImg2View, 1);
-		GridPane.setColumnIndex(cellImg3View, 2);
-		GridPane.setColumnIndex(cellImg4View, 3);
-		GridPane.setColumnIndex(cellImg5View, 4);
-		
-		this.getChildren().addAll(cellImg1View,cellImg2View,cellImg3View,cellImg4View,cellImg5View);
-		
+		for (int i = 0; i < 5; i++) {
+			cellImgView = new ImageView(cellImg);
+			this.add(cellImgView, i, 0);
+		}
 		
 		// Set the rack in the middle
         this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
@@ -46,6 +44,22 @@ public class RackIhm extends GridPane{
 	}
 	
 	public void updateRackTiles() {
-		//TODO updateRackTile method
+		tiles = this.rack.getTiles();
+		ArrayList<Image> images = new ArrayList<>();
+		Image image;
+		
+		for (int i = 0; i < this.rack.tilesAmounts(); i++) {
+			image = ImageLoader.loadImageSafe(tiles.get(i).path().imagePath(), 90, 90);
+			images.add(i, image);
+		}
+		
+		for (int i = 0; i < this.rack.tilesAmounts(); i++) {
+			cellImgView = new ImageView(images.get(i));
+			this.add(cellImgView, i, 0);
+		}
+		
+		// Debug prints
+		//System.out.println("rack tiles amounts : " + this.rack.tilesAmounts());
+		//System.out.println("image amount : " + images.size());
 	}
 }

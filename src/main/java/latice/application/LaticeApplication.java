@@ -21,6 +21,7 @@ public class LaticeApplication extends javafx.application.Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Game starting window");
 		primaryStage.setResizable(true);
+		primaryStage.setFullScreen(true);
 		primaryStage.show();
 
 		// TODO when the button start is pressed do that :
