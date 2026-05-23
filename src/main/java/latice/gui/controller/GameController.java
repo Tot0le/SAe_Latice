@@ -76,6 +76,7 @@ public class GameController {
 			gameboard.put(gameboardPosition, selectedTile);
 			gameboardIhm.update();
 			getCurrentPlayerRack().updateRackTiles();
+			selectedTileIndex = null;
 		}
 	}
 

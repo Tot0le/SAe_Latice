@@ -62,7 +62,6 @@ public class GameBoardIhm extends GridPane {
 	
 	public void bindController(GameController gameController) {
 		this.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
-			//TODO deselect tile on the rack when placing a tile
 			Node clickedNode = (Node) event.getTarget();
 			if (clickedNode instanceof ImageView) {
 				Integer columnIndex = GridPane.getColumnIndex(clickedNode);
