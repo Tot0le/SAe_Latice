@@ -100,6 +100,7 @@ public class GameScene {
 		
 		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this);
 		gameController.displayCurrentPlayerRack();
+		gameController.getCurrentPlayerRack().updateRackTiles();
 //		gameController.nextTurn();
 //		gameController.displayCurrentPlayerRack();
 	}
