@@ -59,7 +59,7 @@ public class RackIhm extends GridPane{
 			this.add(cellImgView, tileIndex, 0);
 		}
 		
-		for (int tileIndex = 0; tileIndex < rack.maxTiles(); tileIndex++) {
+		for (int tileIndex = 0; tileIndex < rack.tilesAmount(); tileIndex++) {
 			image = ImageLoader.loadImageSafe(tilesIhm.get(tileIndex).path().imagePath(), 90, 90);
 			cellImgView = new ImageView(image);
 			this.add(cellImgView, tileIndex, 0);

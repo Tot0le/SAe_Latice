@@ -80,22 +80,22 @@ class LaticeTest {
 		for (int i = 0; i < 5; i++) {
 			assertEquals((nbTileMax/2) -i, poolPlayer1.tilesAmounts());
 			assertEquals((nbTileMax/2) -i, poolPlayer2.tilesAmounts());
-			assertEquals(i, rackPlayer1.tilesAmounts());
-			assertEquals(i, rackPlayer2.tilesAmounts());
+			assertEquals(i, rackPlayer1.tilesAmount());
+			assertEquals(i, rackPlayer2.tilesAmount());
 
 			player1.drawATile();
 			player2.drawATile();
 	}
 		assertEquals((nbTileMax/2) -5, poolPlayer1.tilesAmounts());
 		assertEquals((nbTileMax/2) -5, poolPlayer2.tilesAmounts());
-		assertEquals(5, rackPlayer1.tilesAmounts());
-		assertEquals(5, rackPlayer2.tilesAmounts());
+		assertEquals(5, rackPlayer1.tilesAmount());
+		assertEquals(5, rackPlayer2.tilesAmount());
 
 		player1.drawATile();
 		// shouldn't change because the rack is full
 
 		assertEquals((nbTileMax/2) -5, poolPlayer1.tilesAmounts()) ;
-		assertEquals(5, rackPlayer1.tilesAmounts());
+		assertEquals(5, rackPlayer1.tilesAmount());
 
 	}
 
@@ -114,16 +114,16 @@ class LaticeTest {
 
 		Console.message(gameboard.toAscii());
 
-		assertEquals(4, rackPlayer1.tilesAmounts());
+		assertEquals(4, rackPlayer1.tilesAmount());
 		Position center_4_4 = new Position(1,1);
 		gameboard.put(center_4_4, rackPlayer1.popTile(0));
-		assertEquals(3, rackPlayer1.tilesAmounts());
+		assertEquals(3, rackPlayer1.tilesAmount());
 		assertEquals(RED_DOLPHIN, gameboard.getTile(center_4_4));
 
 		Position pos_4_5 = new Position(4,5);
 		gameboard.put(pos_4_5, rackPlayer1.popTile(0));
 		assertEquals(RED_TURTLE, gameboard.getTile(pos_4_5));
-		assertEquals(2, rackPlayer1.tilesAmounts());
+		assertEquals(2, rackPlayer1.tilesAmount());
 	}
 	
 	@Test

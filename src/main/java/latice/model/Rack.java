@@ -20,7 +20,7 @@ public class Rack {
 	}
 
 	// getteur
-	public int tilesAmounts() {
+	public int tilesAmount() {
 		return tiles.size();
 	}
 
@@ -37,7 +37,7 @@ public class Rack {
 
 	public Tile getTile(Integer index) {
 		Tile tile;
-		if (index < this.tilesAmounts()) {
+		if (index < this.tilesAmount()) {
 			tile = this.tiles.get(index);
 		} else {
 			tile = null;
