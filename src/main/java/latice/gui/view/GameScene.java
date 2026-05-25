@@ -85,7 +85,7 @@ public class GameScene {
 		
 		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this);
 		gameController.displayCurrentPlayerRack();
-		gameController.getCurrentPlayerRack().updateRackTiles();
+		gameController.getCurrentPlayerRackIhm().updateRackTiles();
 		
 		// the end turn button now listen
 		endTurnBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {

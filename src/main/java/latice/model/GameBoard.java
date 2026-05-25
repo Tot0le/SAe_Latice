@@ -106,6 +106,9 @@ public class GameBoard {
     	 nearbyTiles.add(this.tiles.get(new Position(row - 1, column)));
     	 nearbyTiles.add(this.tiles.get(new Position(row, column + 1)));
     	 nearbyTiles.add(this.tiles.get(new Position(row, column - 1)));
+    	 
+    	// remove all null of the list, code from : https://www.baeldung.com/java-remove-nulls-from-list
+    	 while (nearbyTiles.remove(null)); 
 		 return nearbyTiles;
      }
 

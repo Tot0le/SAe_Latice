@@ -55,7 +55,7 @@ public class GameController {
 		
 		this.currentPlayer = new ArrayList<>(this.playerAndRackMap.keySet()).get(this.currentPlayerIndex);
 		this.displayCurrentPlayerRack();
-		this.getCurrentPlayerRack().updateRackTiles();
+		this.getCurrentPlayerRackIhm().updateRackTiles();
 		
 	}
 	
@@ -77,12 +77,32 @@ public class GameController {
 		//TODO handle if the movement is valid or not
 		System.out.println("Mouse clicked on board position : " + gameboardPosition);
 		if (selectedTileIndex != null) {
+			Tile selectedTile = this.currentPlayer.rack().getTile(this.selectedTileIndex);
+			ArrayList<Tile> nearbyTiles = this.gameboard.getNearbyTiles(gameboardPosition);
+			boolean isLegal = true;
+			System.out.println(nearbyTiles);
+			if (nearbyTiles.isEmpty() && ! this.gameboard.isEmpty() || !this.gameboard.isMoonAt(gameboardPosition) ){
+				isLegal = false;
+			} //TODO fix it
+			if (isLegal) {
+				System.out.println(nearbyTiles);
+				for (Tile tile : nearbyTiles) {
+					System.out.println(selectedTile);
+					if (tile.color() != selectedTile.color() && tile.shape() != selectedTile.shape()) {
+						isLegal = false;
+						System.out.println("here");
+					}
+		
+				}
+			}
 			
-			Tile selectedTile = currentPlayer.rack().popTile(selectedTileIndex);
-			gameboard.put(gameboardPosition, selectedTile);
-			gameboardIhm.update();
-			getCurrentPlayerRack().updateRackTiles();
-			selectedTileIndex = null;
+			if (isLegal) {
+				currentPlayer.rack().popTile(selectedTileIndex);
+				gameboard.put(gameboardPosition, selectedTile);
+				gameboardIhm.update();
+				getCurrentPlayerRackIhm().updateRackTiles();
+				selectedTileIndex = null;
+			}
 		}
 	}
 
@@ -99,13 +119,13 @@ public class GameController {
 		// TODO
 	}
 	
-	public RackIhm getCurrentPlayerRack() {
+	public RackIhm getCurrentPlayerRackIhm() {
 		return this.playerAndRackMap.get(this.currentPlayer);
 	}
 	
 	public void displayCurrentPlayerRack() {
 		this.gameScene.rackEmplacement().getChildren().clear();
-		this.gameScene.rackEmplacement().getChildren().add(this.getCurrentPlayerRack());
+		this.gameScene.rackEmplacement().getChildren().add(this.getCurrentPlayerRackIhm());
 	}
 	
 	
