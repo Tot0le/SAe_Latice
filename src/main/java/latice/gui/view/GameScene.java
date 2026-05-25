@@ -4,15 +4,21 @@ import java.util.ArrayList;
 
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import latice.gui.controller.BtnController;
 import latice.gui.controller.GameController;
 import latice.gui.model.GameBoardIhm;
 import latice.model.Factory;
 import latice.model.GameBoard;
 import latice.model.Player;
 import latice.model.Pool;
+import latice.model.Position;
 import latice.model.Rack;
 import latice.model.Referee;
 import latice.model.tile.Color;
@@ -24,6 +30,7 @@ public class GameScene {
 	private GameBoardIhm visualGameboard;
 	private Group rackEmplacement;
 	private BorderPane root;
+	private Button endTurnBtn;
 	
 	public GameScene() {
 		this.gameboard = new GameBoard();
@@ -36,9 +43,9 @@ public class GameScene {
 
 		BorderPane.setAlignment(visualGameboard, Pos.CENTER);
 		Group groupTop = new Group();
-		Button endTurnBtn = new Button("End Turn");
+		endTurnBtn = new Button("End Turn");
 		groupTop.getChildren().add(endTurnBtn); //TODO continue button implementation
-		
+
 		root.setTop(groupTop);
 		root.setCenter(visualGameboard);
 		root.setBottom(rackEmplacement);
@@ -73,12 +80,18 @@ public class GameScene {
 		playerList.add(player1);
 		playerList.add(player2);
 		playerList = (ArrayList<Player>) Referee.randomChoosePlayerOrder(playerList);
-		
+		System.out.println(playerList);
 		// The game can now start
 		
 		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this);
 		gameController.displayCurrentPlayerRack();
 		gameController.getCurrentPlayerRack().updateRackTiles();
+		
+		// the end turn button now listen
+		endTurnBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+			gameController.endTurnBtnHandler();
+			
+		});
 //		gameController.nextTurn();
 //		gameController.displayCurrentPlayerRack();
 	}
@@ -86,4 +99,8 @@ public class GameScene {
 	public Group rackEmplacement() {
 		return this.rackEmplacement;
 	}
+	
+//	public void bindButtonController(GameController gameController) {
+//		this
+//	}
 }

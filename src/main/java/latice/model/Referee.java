@@ -21,19 +21,20 @@ public class Referee {
 	
 	public static List<Player> randomChoosePlayerOrder(List<Player> players) {
 		ArrayList<Player> sortedListOfPlayer = new ArrayList<>();
-		Player nexPlayer;
+		Player nextPlayer;
 		Integer nbIteration = 0; 
-		ArrayList<Player> copyPlayers = (ArrayList<Player>) players;
+		List<Player> copyPlayers = new ArrayList<>(players);
+		Integer initialSize = copyPlayers.size();
 		
-		for (Player player : players) {
+		for (int i = 0; i < initialSize; i++) {
 			nbIteration += 1;
 			
-			int randomPlayerChoose = (int)(Math.random() * players.size());
+			int randomPlayerChoose = (int)(Math.random() * copyPlayers.size());
 			
-			nexPlayer = copyPlayers.get(randomPlayerChoose);
-			nexPlayer.setOrderNumber(nbIteration);
+			nextPlayer = copyPlayers.get(randomPlayerChoose);
+			nextPlayer.setOrderNumber(nbIteration);
 			
-			sortedListOfPlayer.add(nexPlayer);
+			sortedListOfPlayer.add(nextPlayer);
 			
 			copyPlayers.remove(randomPlayerChoose);
 		}

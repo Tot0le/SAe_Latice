@@ -3,6 +3,8 @@ package latice.gui.controller;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import latice.gui.model.GameBoardIhm;
 import latice.gui.model.RackIhm;
 import latice.gui.view.GameScene;
@@ -52,6 +54,8 @@ public class GameController {
 		// TODO check the roundCount number
 		
 		this.currentPlayer = new ArrayList<>(this.playerAndRackMap.keySet()).get(this.currentPlayerIndex);
+		this.displayCurrentPlayerRack();
+		this.getCurrentPlayerRack().updateRackTiles();
 		
 	}
 	
@@ -80,6 +84,11 @@ public class GameController {
 		}
 	}
 
+	public void endTurnBtnHandler() {        
+    	nextTurn();
+    	System.out.println("handle");
+    }
+	
 	public void exchangeTiles() {
 		// TODO
 	}
@@ -96,4 +105,6 @@ public class GameController {
 		this.gameScene.rackEmplacement().getChildren().clear();
 		this.gameScene.rackEmplacement().getChildren().add(this.getCurrentPlayerRack());
 	}
+	
+	
 }
