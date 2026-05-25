@@ -32,11 +32,15 @@ public class MainMenu {
 		//Buttons creation, image attribution and size
 		Button btnPlay = new Button("PLAY");
 		btnPlay.setPrefSize(150, 100);
+		btnPlay.setMinSize(150, 100);
+		btnPlay.setMaxSize(150, 100);
 		btnPlay = SetImageView.getImageInButton(btnPlay, image_play);
 		final Button btnFinalPlay = btnPlay;
 		
 		Button btnQuit = new Button("QUIT"); 
 		btnQuit.setPrefSize(150, 100);
+		btnQuit.setMinSize(150, 100);
+		btnQuit.setMaxSize(150, 100);
 		btnQuit = SetImageView.getImageInButton(btnQuit, image_quit);
 		final Button btnFinalQuit = btnQuit;
 		
