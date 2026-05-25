@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import latice.gui.controller.GameController;
 import latice.gui.model.GameBoardIhm;
-import latice.gui.model.RackIhm;
 import latice.model.Factory;
 import latice.model.GameBoard;
 import latice.model.Player;
@@ -33,35 +33,13 @@ public class GameScene {
 	
 	public Scene createGameScene() {
 		root = new BorderPane();
-		
-		//Test RackIhm
-//		Rack rack1 = new Rack();
-//		ArrayList<Tile> tiles = new ArrayList<>();
-//		
-//		Tile tile1 = new Tile(Color.Green, Shape.Bird);
-//		Tile tile2 = new Tile(Color.Navy, Shape.Gecko);
-//		Tile tile3 = new Tile(Color.Red, Shape.Feather);
-//		
-//		tiles.add(tile1);
-//		tiles.add(tile2);
-//		tiles.add(tile3);
-//		
-//		rack1.setTiles(tiles);
-//		
-		//Test Rack
-//		System.out.println(rack1.getTiles());
-//		RackIhm visualRack = new RackIhm(rack1);
-//		visualRack.updateRackTiles();
-		
-		//GAMEBOARD
-//		gameboard.put(new Position(7,7), new Tile(Color.Green, Shape.Bird)); // testing if the tiles appears
-//		visualGameboard.update();
-//		gameboard.removeTileAt(new Position(7,7));
-//		visualGameboard.update();
 
 		BorderPane.setAlignment(visualGameboard, Pos.CENTER);
+		Group groupTop = new Group();
+		Button endTurnBtn = new Button("End Turn");
+		groupTop.getChildren().add(endTurnBtn); //TODO continue button implementation
 		
-		//RACK
+		root.setTop(groupTop);
 		root.setCenter(visualGameboard);
 		root.setBottom(rackEmplacement);
 		BorderPane.setAlignment(rackEmplacement, Pos.TOP_CENTER);
