@@ -20,9 +20,10 @@ import latice.util.ImageLoader;
 import latice.util.ImagePath;
 import latice.util.SetImageView;
 import latice.gui.view.GameScene;
+import latice.gui.controller.*;
 
 public class MainMenu {
-	public static Scene createMainMenuScene() {
+	public static Scene createMainMenuScene(Stage primaryStage) {
 		BorderPane root = new BorderPane();
 
 		// load the image via a safe image load function and its path in ImagePath enum
@@ -44,7 +45,12 @@ public class MainMenu {
 		btnQuit = SetImageView.getImageInButton(btnQuit, image_quit);
 		final Button btnFinalQuit = btnQuit;
 		
-		// sélectionne les paramètres de background ainsi que l'image affichée
+		// Buttons listeners    we make a new primaryStage to bypass the static restrictions
+		BtnController controller = new BtnController(primaryStage);
+		btnPlay.setOnMouseClicked(controller.playBtnHandler());
+	    btnQuit.setOnMouseClicked(controller.quitBtnHandler());
+		
+		// select the background parameters and the display
 		BackgroundImage background = new BackgroundImage(image_background, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));
 
 		// VBox creation
@@ -72,18 +78,9 @@ public class MainMenu {
 
 		BorderPane.setMargin(caseTop, new Insets(100, 0, 150, 0));
 		BorderPane.setMargin(caseBottom, new Insets(0, 0, 200, 0));
-		
-		btnPlay.setOnAction(e -> goToGameScene(btnFinalPlay));
 
 		return scene;
 
-	}
-	public static void goToGameScene(Button bouton) {
-		GameScene gameScene = new GameScene();
-		Scene scene = gameScene.createGameScene();
-		
-		gameScene.launchGame();
-		
 	}
 	
 }

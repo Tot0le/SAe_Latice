@@ -16,7 +16,7 @@ public class LaticeApplication extends javafx.application.Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Scene scene = MainMenu.createMainMenuScene();
+		Scene scene = MainMenu.createMainMenuScene(primaryStage);
 
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Game starting window");
