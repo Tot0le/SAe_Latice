@@ -53,6 +53,8 @@ public enum ImagePath {
 
 	// Menu related image
 	BACKGROUND_MENU("/images/latice_background.png", Color.None, Shape.None),
+	QUIT_BUTTON("/images/quit_button.png", Color.None, Shape.None),
+	PLAY_BUTTON("/images/play_button.png", Color.None, Shape.None);
 	
 	// Rack cell image
 	RACK_CELL("/images/rack_cell.png", Color.None, Shape.None);
