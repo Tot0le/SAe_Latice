@@ -22,7 +22,7 @@ public class Referee {
 	}
 	
 	public static List<Player> randomChoosePlayerOrder(List<Player> players) {
-		ArrayList<Player> orderedListOfPlayer = new ArrayList<>();
+		ArrayList<Player> orderedListOfPlayer = new ArrayList<>(players); // ordered means by the play order of the player
 		
 		Integer orderNumber = 0;
 		

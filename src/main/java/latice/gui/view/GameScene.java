@@ -92,8 +92,7 @@ public class GameScene {
 			gameController.endTurnBtnHandler();
 			
 		});
-//		gameController.nextTurn();
-//		gameController.displayCurrentPlayerRack();
+		
 	}
 	
 	public Group rackEmplacement() {

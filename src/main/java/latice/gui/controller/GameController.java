@@ -74,8 +74,10 @@ public class GameController {
 	}
 	
 	public void handleTilePlacement(Position gameboardPosition) {
+		//TODO handle if the movement is valid or not
 		System.out.println("Mouse clicked on board position : " + gameboardPosition);
 		if (selectedTileIndex != null) {
+			
 			Tile selectedTile = currentPlayer.rack().popTile(selectedTileIndex);
 			gameboard.put(gameboardPosition, selectedTile);
 			gameboardIhm.update();

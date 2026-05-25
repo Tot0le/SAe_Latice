@@ -24,12 +24,5 @@ public class LaticeApplication extends javafx.application.Application {
 		primaryStage.setFullScreen(true);
 		primaryStage.show();
 
-		// TODO when the button start is pressed do that :
-//		GameScene gameScene = new GameScene();
-//		scene = gameScene.createGameScene();
-//		
-//		
-//		primaryStage.setScene(scene);
-//		gameScene.launchGame();
 	}
 }

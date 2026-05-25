@@ -1,5 +1,6 @@
 package latice.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -95,6 +96,17 @@ public class GameBoard {
      public Tile removeTileAt(Position position) {
     	    return this.tiles.remove(position);
 
+     }
+     
+     public ArrayList<Tile> getNearbyTiles(Position position){
+    	 ArrayList<Tile> nearbyTiles = new ArrayList<Tile>();
+    	 Integer row = position.row();
+    	 Integer column = position.column();
+    	 nearbyTiles.add(this.tiles.get(new Position(row + 1, column)));
+    	 nearbyTiles.add(this.tiles.get(new Position(row - 1, column)));
+    	 nearbyTiles.add(this.tiles.get(new Position(row, column + 1)));
+    	 nearbyTiles.add(this.tiles.get(new Position(row, column - 1)));
+		 return nearbyTiles;
      }
 
      public String toAscii() {
