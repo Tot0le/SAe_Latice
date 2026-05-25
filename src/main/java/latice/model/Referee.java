@@ -1,6 +1,8 @@
 package latice.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Referee {
@@ -20,26 +22,18 @@ public class Referee {
 	}
 	
 	public static List<Player> randomChoosePlayerOrder(List<Player> players) {
-		ArrayList<Player> sortedListOfPlayer = new ArrayList<>();
-		Player nextPlayer;
-		Integer nbIteration = 0; 
-		List<Player> copyPlayers = new ArrayList<>(players);
-		Integer initialSize = copyPlayers.size();
+		ArrayList<Player> orderedListOfPlayer = new ArrayList<>();
 		
-		for (int i = 0; i < initialSize; i++) {
-			nbIteration += 1;
-			
-			int randomPlayerChoose = (int)(Math.random() * copyPlayers.size());
-			
-			nextPlayer = copyPlayers.get(randomPlayerChoose);
-			nextPlayer.setOrderNumber(nbIteration);
-			
-			sortedListOfPlayer.add(nextPlayer);
-			
-			copyPlayers.remove(randomPlayerChoose);
+		Integer orderNumber = 0;
+		
+		Collections.shuffle(orderedListOfPlayer);
+		
+		for (Player player: orderedListOfPlayer) {
+			orderNumber += 1;
+			player.setOrderNumber(orderNumber);
 		}
 		
-		return sortedListOfPlayer;
+		return orderedListOfPlayer;
 		
 	}
 
