@@ -11,6 +11,7 @@ import latice.gui.view.GameScene;
 import latice.model.GameBoard;
 import latice.model.Player;
 import latice.model.Position;
+import latice.model.Referee;
 import latice.model.tile.Tile;
 
 public class GameController {
@@ -78,22 +79,8 @@ public class GameController {
 		if (selectedTileIndex != null) {
 			Tile selectedTile = this.currentPlayer.rack().getTile(this.selectedTileIndex);
 			ArrayList<Tile> nearbyTiles = this.gameboard.getNearbyTiles(gameboardPosition);
-			boolean isLegal = true;
-			//System.out.println(nearbyTiles);
-			if (nearbyTiles.isEmpty() && ! this.gameboard.isEmpty() || ! this.gameboard.isMoonAt(gameboardPosition) && this.gameboard.isEmpty() ){
-				isLegal = false;
-			}
-			if (isLegal) {
-				//System.out.println(nearbyTiles);
-				for (Tile tile : nearbyTiles) {
-					//System.out.println(selectedTile);
-					if (tile.color() != selectedTile.color() && tile.shape() != selectedTile.shape()) {
-						isLegal = false;
-						//System.out.println("here");
-					}
-		
-				}
-			}
+			
+			boolean isLegal = Referee.checkIfMoveIsLegal(nearbyTiles, gameboard, gameboardPosition, selectedTile);
 			
 			if (isLegal) {
 				currentPlayer.rack().popTile(selectedTileIndex);
@@ -102,6 +89,7 @@ public class GameController {
 				getCurrentPlayerRackIhm().updateRackTiles();
 				selectedTileIndex = null;
 			}
+			
 		}
 	}
 
