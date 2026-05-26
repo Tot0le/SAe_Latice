@@ -7,8 +7,7 @@ import java.util.List;
 import latice.model.tile.Color;
 import latice.model.tile.Shape;
 import latice.model.tile.Tile;
-import latice.gui.model.GameBoardIhm;
-import latice.model.tile.Tile;
+
 public class Referee {
 
 	public static void dealTheCards(Pool originPool, Pool poolPlayer1, Pool poolPlayer2) {
@@ -43,22 +42,17 @@ public class Referee {
 	
 	public static boolean checkIfMoveIsLegal(ArrayList<Tile> nearbyTiles, GameBoard gameboard, Position gameboardPosition, Tile selectedTile ) {
 		boolean isLegal = true;
-		//System.out.println(nearbyTiles);
+		
 		if (nearbyTiles.isEmpty() && ! gameboard.isEmpty() || ! gameboard.isMoonAt(gameboardPosition) && gameboard.isEmpty() ){
 			isLegal = false;
-		}
-		if (isLegal) {
-			//System.out.println(nearbyTiles);
+		} else {
 			for (Tile tile : nearbyTiles) {
-				//System.out.println(selectedTile);
 				if (tile.color() != selectedTile.color() && tile.shape() != selectedTile.shape()) {
 					isLegal = false;
-					//System.out.println("here");
 				}
-	
 			}
 		}
-	return isLegal;
+		return isLegal;
 	}
 
 

@@ -83,6 +83,8 @@ public class GameController {
 			if (isLegal) {
 				currentPlayer.rack().popTile(selectedTileIndex);
 				gameboard.put(gameboardPosition, selectedTile);
+				this.currentPlayer.addPoints(Referee.calculatePoints(nearbyTiles, selectedTile));
+				System.out.println(this.currentPlayer.points());
 				gameboardIhm.update();
 				getCurrentPlayerRackIhm().updateRackTiles();
 				selectedTileIndex = null;

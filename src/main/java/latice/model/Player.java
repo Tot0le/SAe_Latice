@@ -59,8 +59,13 @@ public class Player {
 	public void passTheTurn() {
 		//TODO Faire un compteur total pour le tour du nombre de joueurs et quand celui-ci = nb de joueur alors cycles = +1
 	}
+	
+	public void addPoints(Integer addPoints) {
+		this.points += addPoints;
+	}
+	
 	// getteurs :
-	public Integer Points() {
+	public Integer points() {
 		return this.points;
 	}
 	
