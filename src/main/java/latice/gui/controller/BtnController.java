@@ -37,4 +37,14 @@ public class BtnController {
 	            }
 	        };
 	    }
+	    
+	    public EventHandler<MouseEvent> rulesBtnHandler() {
+	        return new EventHandler<MouseEvent>() {
+	            @Override
+	            public void handle(MouseEvent event) {
+	            	
+	            	System.out.println("Ouverture de la fenetre regles imaginaire");
+	            }
+	        };
+	    }
 	}

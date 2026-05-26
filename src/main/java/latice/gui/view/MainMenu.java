@@ -30,25 +30,32 @@ public class MainMenu {
 		Image image_background = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_MENU.imagePath(), 250,250);
 		Image image_play = ImageLoader.loadImageSafe(ImagePath.PLAY_BUTTON.imagePath(), 250,250);
 		Image image_quit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 250,250);
+		Image image_rules = ImageLoader.loadImageSafe(ImagePath.RULES_BUTTON.imagePath(),250, 250);
+		
 		//Buttons creation, image attribution and size
 		Button btnPlay = new Button("PLAY");
 		btnPlay.setPrefSize(150, 100);
 		btnPlay.setMinSize(150, 100);
 		btnPlay.setMaxSize(150, 100);
 		btnPlay = SetImageView.getImageInButton(btnPlay, image_play);
-		final Button btnFinalPlay = btnPlay;
 		
 		Button btnQuit = new Button("QUIT"); 
 		btnQuit.setPrefSize(150, 100);
 		btnQuit.setMinSize(150, 100);
 		btnQuit.setMaxSize(150, 100);
 		btnQuit = SetImageView.getImageInButton(btnQuit, image_quit);
-		final Button btnFinalQuit = btnQuit;
+		
+		Button btnRules = new Button("RULES");
+		btnRules.setPrefSize(150, 100);
+		btnRules.setMinSize(150, 100);
+		btnRules.setMaxSize(150, 100);
+		btnRules = SetImageView.getImageInButton(btnRules, image_rules);
 		
 		// Buttons listeners    we make a new primaryStage to bypass the static restrictions
 		BtnController controller = new BtnController(primaryStage);
 		btnPlay.setOnMouseClicked(controller.playBtnHandler());
 	    btnQuit.setOnMouseClicked(controller.quitBtnHandler());
+	    btnRules.setOnMouseClicked(controller.rulesBtnHandler());
 		
 		// select the background parameters and the display
 		BackgroundImage background = new BackgroundImage(image_background, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));
@@ -56,10 +63,14 @@ public class MainMenu {
 		// VBox creation
 		VBox caseTop = new VBox();
 		VBox caseBottom = new VBox();
+		VBox caseRight = new VBox();
 
 		//  buttons creations with image
-
-
+		
+		caseRight.getChildren().addAll(btnRules);
+		caseRight.setAlignment(Pos.TOP_RIGHT);
+		caseRight.setSpacing(10);
+		
 		caseTop.getChildren().addAll(btnPlay);
 		caseTop.setAlignment(Pos.TOP_CENTER);
 		caseTop.setSpacing(10);
@@ -71,13 +82,14 @@ public class MainMenu {
 		// add the elements to the StackPane
 		root.setTop(caseTop);
 		root.setBottom(caseBottom);
-
-
+		root.setRight(caseRight);
+		
 		Scene scene = new Scene(root,900,600);
 		root.setBackground(new Background(background));
 
 		BorderPane.setMargin(caseTop, new Insets(100, 0, 150, 0));
 		BorderPane.setMargin(caseBottom, new Insets(0, 0, 200, 0));
+		BorderPane.setMargin(caseRight, new Insets(0,100,0,0));
 
 		return scene;
 

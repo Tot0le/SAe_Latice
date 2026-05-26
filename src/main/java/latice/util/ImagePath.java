@@ -54,7 +54,8 @@ public enum ImagePath {
 	// Menu related image
 	BACKGROUND_MENU("/images/latice_background.png", Color.None, Shape.None),
 	QUIT_BUTTON("/images/quit_button.png", Color.None, Shape.None),
-	PLAY_BUTTON("/images/play_button.png", Color.None, Shape.None);
+	PLAY_BUTTON("/images/play_button.png", Color.None, Shape.None),
+	RULES_BUTTON("/images/rules_button.png", Color.None, Shape.None);
 
 
 	private String imagePath;
@@ -76,7 +77,6 @@ public enum ImagePath {
 			}
 		}
 		return returnedImagePath;
-
 	}
 
 	public String imagePath() {
