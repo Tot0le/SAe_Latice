@@ -1,9 +1,12 @@
 package latice.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import latice.model.tile.Color;
+import latice.model.tile.Shape;
+import latice.model.tile.Tile;
 
 public class Referee {
 
@@ -36,6 +39,30 @@ public class Referee {
 		return orderedListOfPlayer;
 		
 	}
+
+
+	public static Integer calculatePoints(ArrayList<Tile> nearbyTiles, Tile tilePlaced) {
+		Integer numberOfTileMatches = 0;
+		Integer points = 0;
+		Color colorOfTilePlaced = tilePlaced.color();
+		Shape shapeOfTilePlaced = tilePlaced.shape();
+		
+		for (Tile tile : nearbyTiles) {
+			if (tile.color() == colorOfTilePlaced || tile.shape() == shapeOfTilePlaced) {
+				numberOfTileMatches += 1;
+			}
+		}
+		if (numberOfTileMatches == 2) {
+			points = 1;
+		}else if (numberOfTileMatches == 3) {
+			points = 2;
+		}else if (numberOfTileMatches == 4) {
+			points = 4;
+		}
+		
+		return points;
+	}
+
 
 }
 

@@ -3,8 +3,6 @@ package latice.gui.controller;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 import latice.gui.model.GameBoardIhm;
 import latice.gui.model.RackIhm;
 import latice.gui.view.GameScene;
