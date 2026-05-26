@@ -74,23 +74,22 @@ public class GameController {
 	}
 	
 	public void handleTilePlacement(Position gameboardPosition) {
-		//TODO handle if the movement is valid or not
-		System.out.println("Mouse clicked on board position : " + gameboardPosition);
+		//System.out.println("Mouse clicked on board position : " + gameboardPosition);
 		if (selectedTileIndex != null) {
 			Tile selectedTile = this.currentPlayer.rack().getTile(this.selectedTileIndex);
 			ArrayList<Tile> nearbyTiles = this.gameboard.getNearbyTiles(gameboardPosition);
 			boolean isLegal = true;
-			System.out.println(nearbyTiles);
-			if (nearbyTiles.isEmpty() && ! this.gameboard.isEmpty() || !this.gameboard.isMoonAt(gameboardPosition) ){
+			//System.out.println(nearbyTiles);
+			if (nearbyTiles.isEmpty() && ! this.gameboard.isEmpty() || ! this.gameboard.isMoonAt(gameboardPosition) && this.gameboard.isEmpty() ){
 				isLegal = false;
-			} //TODO fix it
+			}
 			if (isLegal) {
-				System.out.println(nearbyTiles);
+				//System.out.println(nearbyTiles);
 				for (Tile tile : nearbyTiles) {
-					System.out.println(selectedTile);
+					//System.out.println(selectedTile);
 					if (tile.color() != selectedTile.color() && tile.shape() != selectedTile.shape()) {
 						isLegal = false;
-						System.out.println("here");
+						//System.out.println("here");
 					}
 		
 				}
