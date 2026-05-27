@@ -1,5 +1,7 @@
 package latice.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Position {
@@ -18,7 +20,18 @@ public class Position {
 	public Integer column() {
 		return column;
 	}
-
+	
+	public List<Position> getNearbyPositions(){
+		ArrayList<Position> nearbyPositions= new ArrayList<>();
+		
+		nearbyPositions.add(new Position(row + 1, column));
+		nearbyPositions.add(new Position(row - 1, column));
+		nearbyPositions.add(new Position(row, column + 1));
+		nearbyPositions.add(new Position(row, column - 1));
+		 
+		return nearbyPositions;
+    }
+	
 //	public void IndexPositions() {
 //		for(int i=1; i<10; i++) {
 //			for(int j=1;j<10;j++) {

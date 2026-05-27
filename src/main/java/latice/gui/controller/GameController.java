@@ -76,7 +76,7 @@ public class GameController {
 		//System.out.println("Mouse clicked on board position : " + gameboardPosition);
 		if (selectedTileIndex != null) {
 			Tile selectedTile = this.currentPlayer.rack().getTile(this.selectedTileIndex);
-			ArrayList<Tile> nearbyTiles = this.gameboard.getNearbyTiles(gameboardPosition);
+			ArrayList<Tile> nearbyTiles = (ArrayList<Tile>) this.gameboard.getNearbyTiles(gameboardPosition);
 			
 			boolean isLegal = Referee.checkIfMoveIsLegal(nearbyTiles, gameboard, gameboardPosition, selectedTile);
 			
