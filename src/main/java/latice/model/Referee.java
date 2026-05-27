@@ -40,10 +40,11 @@ public class Referee {
 		
 	}
 	
-	public static boolean checkIfMoveIsLegal(ArrayList<Tile> nearbyTiles, GameBoard gameboard, Position gameboardPosition, Tile selectedTile ) {
+	public static boolean checkIfMoveIsLegal(List<Tile> nearbyTiles, GameBoard gameboard, Position selectedTilePosition, Tile selectedTile ) {
 		boolean isLegal = true;
-		
-		if (nearbyTiles.isEmpty() && ! gameboard.isEmpty() || ! gameboard.isMoonAt(gameboardPosition) && gameboard.isEmpty() ){
+		if (gameboard.getTile(selectedTilePosition) != null) {
+			isLegal = false;
+		} else if (nearbyTiles.isEmpty() && ! gameboard.isEmpty() || ! gameboard.isMoonAt(selectedTilePosition) && gameboard.isEmpty() ){
 			isLegal = false;
 		} else {
 			for (Tile tile : nearbyTiles) {
