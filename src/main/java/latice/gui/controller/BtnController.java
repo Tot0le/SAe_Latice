@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import latice.gui.view.GameScene;
+import latice.gui.view.RulesScene;
 
 public class BtnController {
 		
@@ -21,7 +22,7 @@ public class BtnController {
 	            public void handle(MouseEvent event) {
 	        		GameScene gameScene = new GameScene();
 	        		Scene scene = gameScene.createGameScene();
-	        		
+
 	        		primaryStage.setScene(scene);
 	        		gameScene.launchGame();
 	            }
@@ -43,7 +44,10 @@ public class BtnController {
 	            @Override
 	            public void handle(MouseEvent event) {
 	            	
-	            	System.out.println("Ouverture de la fenetre regles imaginaire");
+	            	RulesScene rulesScene = new RulesScene();
+	            	Scene scene = rulesScene.createRulesScene(primaryStage);
+	            	
+	            	primaryStage.setScene(scene);
 	            }
 	        };
 	    }

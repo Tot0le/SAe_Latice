@@ -28,28 +28,28 @@ public class MainMenu {
 
 		// load the image via a safe image load function and its path in ImagePath enum
 		Image image_background = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_MENU.imagePath(), 250,250);
-		Image image_play = ImageLoader.loadImageSafe(ImagePath.PLAY_BUTTON.imagePath(), 250,250);
-		Image image_quit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 250,250);
-		Image image_rules = ImageLoader.loadImageSafe(ImagePath.RULES_BUTTON.imagePath(),250, 250);
+		Image imagePlay = ImageLoader.loadImageSafe(ImagePath.PLAY_BUTTON.imagePath(), 250,250);
+		Image imageQuit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 250,250);
+		Image imageRules = ImageLoader.loadImageSafe(ImagePath.RULES_BUTTON.imagePath(),250, 250);
 		
 		//Buttons creation, image attribution and size
 		Button btnPlay = new Button("PLAY");
 		btnPlay.setPrefSize(150, 100);
 		btnPlay.setMinSize(150, 100);
 		btnPlay.setMaxSize(150, 100);
-		btnPlay = SetImageView.getImageInButton(btnPlay, image_play);
+		btnPlay = SetImageView.getImageInButton(btnPlay, imagePlay);
 		
 		Button btnQuit = new Button("QUIT"); 
 		btnQuit.setPrefSize(150, 100);
 		btnQuit.setMinSize(150, 100);
 		btnQuit.setMaxSize(150, 100);
-		btnQuit = SetImageView.getImageInButton(btnQuit, image_quit);
+		btnQuit = SetImageView.getImageInButton(btnQuit, imageQuit);
 		
 		Button btnRules = new Button("RULES");
 		btnRules.setPrefSize(150, 100);
 		btnRules.setMinSize(150, 100);
 		btnRules.setMaxSize(150, 100);
-		btnRules = SetImageView.getImageInButton(btnRules, image_rules);
+		btnRules = SetImageView.getImageInButton(btnRules, imageRules);
 		
 		// Buttons listeners    we make a new primaryStage to bypass the static restrictions
 		BtnController controller = new BtnController(primaryStage);
