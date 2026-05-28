@@ -1,6 +1,7 @@
 package latice.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import latice.model.tile.Tile;
 import latice.util.TileChoosedFromRackOutOfRangeException;
@@ -68,6 +69,8 @@ public class Rack {
 	public ArrayList<Tile> takeTilesFromRack(ArrayList<Integer> indexesOfTilesInRack) {
 		
 		ArrayList<Tile> tilesToBeExchanged = new ArrayList<>();
+		Collections.sort(indexesOfTilesInRack);
+		Collections.reverse(indexesOfTilesInRack);
 		
 		for (int indexOfTiles : indexesOfTilesInRack) {
 			tilesToBeExchanged.add(this.tiles.get(indexOfTiles));
