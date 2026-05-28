@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import latice.model.tile.Tile;
-import latice.util.TileChoosedFromRackOutOfRangeException;
 
 public class Rack {
 	private ArrayList<Tile> tiles;

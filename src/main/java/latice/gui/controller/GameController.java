@@ -26,10 +26,12 @@ public class GameController {
 	private GameScene gameScene;
 	private List<Label> scorePlayerLabels;
 	private boolean currentPlayerFreeMoveAvailable;
-	private boolean multipleSelection;
-	private ArrayList<Integer> selectedTilesIndex;
-	private Button confirmButton;
-	 
+	/// V8 FEATURE DO NOT DELETE //////
+//	private boolean multipleSelection;
+//	private ArrayList<Integer> selectedTilesIndex;
+//	private Button confirmButton;
+	/// V8 FEATURE DO NOT DELETE //////
+
 	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList, GameScene gameScene, List<Label> scorePlayerLabels) {
 		this.gameboard = gameboard;
 		this.gameboardIhm = gameboardIhm;
@@ -38,8 +40,9 @@ public class GameController {
 		this.playerAndRackMap = new LinkedHashMap<>();
 		this.scorePlayerLabels = scorePlayerLabels;
 		this.currentPlayerFreeMoveAvailable = true;
-		this.multipleSelection = false;
-		this.selectedTilesIndex = new ArrayList<Integer>();
+		/// V8 FEATURE DO NOT DELETE //////
+//		this.multipleSelection = false;
+//		this.selectedTilesIndex = new ArrayList<Integer>();
 		
 		for (Player player: playerList) {
 			RackIhm newRackIhm = new RackIhm(player.rack());
@@ -52,8 +55,7 @@ public class GameController {
 	}
 	
 	public void endGame() {
-		System.out.println("GG, you finished the game");
-		//TODO endgame
+
 		Player winner = null;
 		Integer winnerTotalNumber = (int) Double.POSITIVE_INFINITY;
 		for (Player player: this.playerAndRackMap.keySet()) {
@@ -62,12 +64,9 @@ public class GameController {
 				winnerTotalNumber = winner.totalTilesNumber();
 			}
 		}
-		System.out.println("Le gagnant est " + winner.orderNumber());
+		System.out.println("The winner is the player : " + winner.orderNumber());
 	}
-	public void nextRound() {
-		//TODO
-	}
-	
+
 	public void nextTurn() {
 		// the previous player has to draw one tile if their rack is not full
 		if (!this.currentPlayer.rack().isFull()) {
@@ -100,26 +99,23 @@ public class GameController {
 		
 	}
 	
-	public void playerChoices(Player player) {
-		
-	}
-	
 	public void handleTileSelection(Integer indexRack) {
 		System.out.println("Mouse clicked on rack index : " + indexRack);
-		if (this.multipleSelection) {
-			this.selectedTilesIndex.add(indexRack);
+		/// V8 FEATURE DO NOT DELETE //////
+//		if (this.multipleSelection) {
+//			this.selectedTilesIndex.add(indexRack);
+//		} else {
+		/// V8 FEATURE DO NOT DELETE //////
+		if (currentPlayer.rack().getTile(indexRack) != null ) {
+			this.selectedTileIndex = indexRack;
 		} else {
-			if (currentPlayer.rack().getTile(indexRack) != null ) {
-				this.selectedTileIndex = indexRack;
-			} else {
-				this.selectedTileIndex = null;
-			}
+			this.selectedTileIndex = null;
 		}
 		
+	//	}
 	}
 	
 	public void handleTilePlacement(Position gameboardPosition) {
-		//System.out.println("Mouse clicked on board position : " + gameboardPosition);
 		if (selectedTileIndex != null) {
 			if (this.currentPlayerFreeMoveAvailable) {
 				Tile selectedTile = this.currentPlayer.rack().getTile(this.selectedTileIndex);
@@ -148,48 +144,48 @@ public class GameController {
     	nextTurn();
     }
 	
-	public void exchangeTilesBtnHandler() {
+	public void exchangeAllTilesBtnHandler() {
 		if (this.currentPlayerFreeMoveAvailable) {
-			if (this.multipleSelection) {
-				deselectMultipleBtn();
-				System.out.println("deselect multiple");
-			} else {
-				this.multipleSelection = true;
-				System.out.println("select multiple");
-			}
-//			this.btnConfirm.show()
-		}
-	}
-	
-	public void confirmBtnHandler() {
-		if (this.multipleSelection) {
-			this.currentPlayer.exchangeTheRack(selectedTilesIndex);
+			this.currentPlayer.exchangeAllTheRack();
 			System.out.println("exchange complete");
 			this.getCurrentPlayerRackIhm().updateRackTiles();
-			
-			deselectMultipleBtn();
+			this.currentPlayerFreeMoveAvailable = false;
 		}
 	}
-	
-	public void deselectMultipleBtn() {
-		this.multipleSelection = false;
-		this.selectedTilesIndex.clear();
-	}
-	
-//	public void selectMultiplesTilesIndex(){
-//		ArrayList<Integer> selectedTilesIndex = new ArrayList<>();
-//		
-//		
-//		return selectedTilesIndex;
+	////////////////////////////////////// V8 FEATURE DO NOT DELETE ////////////////////////////////////////
+	////////////////////////////////////// V8 FEATURE DO NOT DELETE ////////////////////////////////////////
+	////////////////////////////////////// V8 FEATURE DO NOT DELETE ////////////////////////////////////////
+//	public void exchangeTilesBtnHandler() {
+//		if (this.currentPlayerFreeMoveAvailable) {
+//			if (this.multipleSelection) {
+//				deselectMultipleBtn();
+//				System.out.println("deselect multiple");
+//			} else {
+//				this.multipleSelection = true;
+//				System.out.println("select multiple");
+//			}
+////			this.btnConfirm.show()
+//		}
 //	}
-	public void exchangeTiles() {
-		// TODO
-	}
-	
-	public void pass() {
-		// TODO
-	}
-	
+//	
+//	public void confirmBtnHandler() {
+//		if (this.multipleSelection) {
+//			this.currentPlayer.exchangeTheRack(selectedTilesIndex);
+//			System.out.println("exchange complete");
+//			this.getCurrentPlayerRackIhm().updateRackTiles();
+//			
+//			deselectMultipleBtn();
+//		}
+//	}
+//	
+//	public void deselectMultipleBtn() {
+//		this.multipleSelection = false;
+//		this.selectedTilesIndex.clear();
+//	}
+	////////////////////////////////////// V8 FEATURE DO NOT DELETE ////////////////////////////////////////
+	////////////////////////////////////// V8 FEATURE DO NOT DELETE ////////////////////////////////////////
+	////////////////////////////////////// V8 FEATURE DO NOT DELETE ////////////////////////////////////////
+
 	public RackIhm getCurrentPlayerRackIhm() {
 		return this.playerAndRackMap.get(this.currentPlayer);
 	}

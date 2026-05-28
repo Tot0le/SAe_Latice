@@ -27,8 +27,27 @@ public class Player {
 		points = points - 2;
 		// TODO  Implémenter une méthode permettant de rajouter une action au joueur
 	}
+	
+	// V8 FEATURE DO NOT DELETE even if not used
 	public void exchangeTheRack(ArrayList<Integer> indexesOfTiles) {
+		ArrayList<Tile> tilesToBeExchanged;
 		
+		tilesToBeExchanged = this.rack.takeTilesFromRack(indexesOfTiles);
+		
+		for (int i = 0; i < indexesOfTiles.size(); i++) {
+			drawATile();
+		}
+		
+		for (int i = 0; i < tilesToBeExchanged.size(); i++) {
+			pool.addTile(tilesToBeExchanged.get(i));
+		}
+		
+		pool.shuffle();
+	}
+	
+	public void exchangeAllTheRack() {
+		ArrayList<Integer> indexesOfTiles = new ArrayList<>();
+		for (int index = 0; index < this.rack.maxTiles()-1;index++) indexesOfTiles.add(index);
 		ArrayList<Tile> tilesToBeExchanged;
 		
 		tilesToBeExchanged = this.rack.takeTilesFromRack(indexesOfTiles);
@@ -70,10 +89,6 @@ public class Player {
 		while (rack.getTiles().size() < rack.maxTiles() && pool.size() > 0) {
 			drawATile();
 		}
-	}
-
-	public void passTheTurn() {
-		//TODO Faire un compteur total pour le tour du nombre de joueurs et quand celui-ci = nb de joueur alors cycles = +1
 	}
 	
 	public void addPoints(Integer addPoints) {

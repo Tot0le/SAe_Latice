@@ -29,7 +29,8 @@ public class GameScene {
 	private BorderPane root;
 	private Group rackIhmEmplacement;
 	private Button endTurnBtn;
-	private Button exchangeTilesBtn;
+	private Button exchangeAllTilesBtn;
+//	private Button exchangeTilesBtn;
 	private Button confirmBtn;
 	private ArrayList<Label> scoreLabels;
 	
@@ -64,13 +65,16 @@ public class GameScene {
 		root.setCenter(visualGameboard);
 		
 		hboxBottom.getChildren().add(rackIhmEmplacement);
-		
-		exchangeTilesBtn = new Button("Exchange Tiles");
-		hboxBottom.getChildren().add(exchangeTilesBtn);
-		
-		confirmBtn = new Button("Confirm");
-		hboxBottom.getChildren().add(confirmBtn);
-		
+		exchangeAllTilesBtn = new Button("Exchange All Tiles");
+		hboxBottom.getChildren().add(exchangeAllTilesBtn);
+		///// V8 FEATURE DO NOT DELETE :
+//		exchangeTilesBtn = new Button("Exchange Tiles");
+//		hboxBottom.getChildren().add(exchangeTilesBtn);
+//		
+//		confirmBtn = new Button("Confirm");
+//		hboxBottom.getChildren().add(confirmBtn);
+		///// V8 FEATURE DO NOT DELETE
+
 		root.setBottom(hboxBottom);
 		BorderPane.setAlignment(hboxBottom, Pos.BOTTOM_CENTER);
 		
@@ -115,18 +119,24 @@ public class GameScene {
 			
 		});
 		
-		// the exchangeTilesBtn now listen
-		exchangeTilesBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
-			gameController.exchangeTilesBtnHandler();
+		// the exchangeAllTilesBtn now listen
+		exchangeAllTilesBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+			gameController.exchangeAllTilesBtnHandler();
 			
 		});
-		
-		// the exchangeTilesBtn now listen
-		confirmBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
-			gameController.confirmBtnHandler();
-			
-		});
-		
+		///// V8 FEATURE DO NOT DELETE :
+//		// the exchangeTilesBtn now listen
+//		exchangeTilesBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+//			gameController.exchangeTilesBtnHandler();
+//			
+//		});
+//		
+//		// the exchangeTilesBtn now listen
+//		confirmBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+//			gameController.confirmBtnHandler();
+//			
+//		});
+		///// V8 FEATURE DO NOT DELETE
 	}
 	
 	public Group rackEmplacement() {
