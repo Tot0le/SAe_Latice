@@ -67,6 +67,9 @@ public class Rack {
 		
 		for (int indexOfTiles : indexesOfTilesInRack) {
 			tilesToBeExchanged.add(this.tiles.get(indexOfTiles));
+		}
+		
+		for (int indexOfTiles : indexesOfTilesInRack) {
 			this.tiles.remove(indexOfTiles);
 		}
 		
