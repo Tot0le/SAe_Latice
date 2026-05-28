@@ -181,4 +181,37 @@ class LaticeTest {
 		assertEquals(imageSun.getUrl(), ihm.chooseRightBackgroundImage(pos_5_5).getUrl());
 		assertEquals(imageMoon.getUrl(), ihm.chooseRightBackgroundImage(pos_5_9).getUrl());
 	}
+	
+	@Test 
+	void testNearbyPositionsAndTiles(){
+		Position pos_5_5 = new Position(5, 5);
+		Position pos_6_5 = new Position(6,5);
+		Position pos_4_5 = new Position(4, 5);
+		Position pos_5_6 = new Position(5, 6);
+		Position pos_5_4 = new Position(5, 4);
+		ArrayList<Position> listPositions = new ArrayList<>();
+		listPositions.add(pos_6_5);
+		listPositions.add(pos_4_5);
+		listPositions.add(pos_5_6);
+		listPositions.add(pos_5_4);
+		assertEquals(listPositions, pos_5_5.getNearbyPositions());
+		
+		Tile greenTurtle = new Tile(Color.Green, Shape.Turtle);
+		Tile greenDolphin = new Tile(Color.Green, Shape.Dolphin);
+		Tile greenBird= new Tile(Color.Green, Shape.Bird);
+		Tile greenFeather = new Tile(Color.Green, Shape.Feather);
+		Tile greenGecko = new Tile(Color.Green, Shape.Gecko);
+		gameboard.put(pos_5_5, greenTurtle);
+		gameboard.put(pos_6_5, greenDolphin);
+		gameboard.put(pos_4_5, greenBird);
+		gameboard.put(pos_5_6, greenFeather);
+		gameboard.put(pos_5_4, greenGecko);
+		ArrayList<Tile> listTiles = new ArrayList<>();
+		listTiles.add(greenDolphin);
+		listTiles.add(greenBird);
+		listTiles.add(greenFeather);
+		listTiles.add(greenGecko);
+		assertEquals(listTiles, gameboard.getNearbyTiles(pos_5_5));
+		
+	}
 }
