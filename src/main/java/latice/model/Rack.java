@@ -57,7 +57,7 @@ public class Rack {
 		this.tiles.add(tile);
 	}
 	
-	public ArrayList<Tile> exchangeTilesFromRack(ArrayList<Integer> indexesOfTiles) {
+	public ArrayList<Tile> takeTilesFromRack(ArrayList<Integer> indexesOfTiles) {
 		
 		ArrayList<Tile> tilesToBeExchanged = new ArrayList<>();
 		

@@ -25,9 +25,23 @@ public class Player {
 		points = points - 2;
 		// TODO  Implémenter une méthode permettant de rajouter une action au joueur
 	}
-	public void exchangeTheRack() {
-		//TODO tilesAmount -5 puis tiles Amount +5
+	public void exchangeTheRack(ArrayList<Integer> indexesOfTiles) {
+		
+		ArrayList<Tile> tilesToBeExchanged;
+		
+		tilesToBeExchanged = this.rack.takeTilesFromRack(indexesOfTiles);
+		
+		for (int i = 0; i < indexesOfTiles.size(); i++) {
+			drawATile();
+		}
+		
+		for (int i = 0; i < tilesToBeExchanged.size(); i++) {
+			pool.addTile(tilesToBeExchanged.get(i));
+		}
+		
+		pool.shuffle();
 	}
+	
 	public boolean placeATile(Integer rackIndex, Position placementPosition) {
 		Tile tile = rack.popTile(rackIndex);
 		return gameboard.put(placementPosition, tile);
