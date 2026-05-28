@@ -64,7 +64,7 @@ public class GameController {
 				winnerTotalNumber = winner.totalTilesNumber();
 			}
 		}
-		System.out.println("The winner is the player : " + winner.orderNumber());
+		System.out.println("The winner is the player : " + winner.username());
 	}
 
 	public void nextTurn() {

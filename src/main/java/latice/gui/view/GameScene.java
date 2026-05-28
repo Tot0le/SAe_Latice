@@ -33,8 +33,10 @@ public class GameScene {
 //	private Button exchangeTilesBtn;
 	private Button confirmBtn;
 	private ArrayList<Label> scoreLabels;
+	private ArrayList<String> usernames;
 	
-	public GameScene() {
+	public GameScene(ArrayList<String> usernames) {
+		this.usernames = usernames;
 		this.gameboard = new GameBoard();
 		this.visualGameboard = new GameBoardIhm(this.gameboard);
 		this.hboxBottom = new HBox();
@@ -96,8 +98,8 @@ public class GameScene {
 		Rack rackPlayer2 = new Rack();
 		rackPlayer1.addTile(new Tile(Color.Green, Shape.Bird));
 		rackPlayer2.addTile(new Tile(Color.Magenta, Shape.Bird));
-		Player player1 = new Player(0, rackPlayer1, poolPlayer1, gameboard);
-		Player player2 = new Player(0, rackPlayer2, poolPlayer2, gameboard);
+		Player player1 = new Player(usernames.get(0), 0, rackPlayer1, poolPlayer1, gameboard);
+		Player player2 = new Player(usernames.get(1), 0, rackPlayer2, poolPlayer2, gameboard);
 		
 		player1.drawMaxTile();
 		player2.drawMaxTile();

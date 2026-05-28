@@ -6,7 +6,7 @@ import latice.gui.Console;
 import latice.model.tile.Tile;
 
 public class Player {
-
+	private String username;
 	private Integer points;
 	private Rack rack;
 	private Pool pool;
@@ -14,7 +14,8 @@ public class Player {
 	private Integer orderNumber;
 	private Integer totalTilesNumber;
 
-	public Player(Integer points, Rack rack, Pool pool, GameBoard gameboard) {
+	public Player(String username, Integer points, Rack rack, Pool pool, GameBoard gameboard) {
+		this.username = username;
 		this.points = points;
 		this.rack = rack;
 		this.pool = pool;
@@ -118,6 +119,10 @@ public class Player {
 	
 	public Integer orderNumber() {
 		return this.orderNumber;
+	}
+	
+	public String username() {
+		return this.username;
 	}
 	
 	// setteurs :

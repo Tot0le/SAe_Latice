@@ -47,7 +47,9 @@ public class MainMenu {
 		
 		// Buttons listeners    we make a new primaryStage to bypass the static restrictions
 		BtnController controller = new BtnController(primaryStage);
-		btnPlay.setOnMouseClicked(controller.playBtnHandler());
+		btnPlay.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+			controller.playBtnHandler();
+		});
 	    btnQuit.setOnMouseClicked(controller.quitBtnHandler());
 		
 		// select the background parameters and the display
