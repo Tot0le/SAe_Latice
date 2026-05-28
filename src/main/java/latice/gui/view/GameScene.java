@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import latice.gui.controller.GameController;
 import latice.gui.model.GameBoardIhm;
@@ -24,15 +25,19 @@ import latice.model.tile.Tile;
 public class GameScene {
 	private GameBoard gameboard;
 	private GameBoardIhm visualGameboard;
-	private Group rackEmplacement;
+	private HBox hboxBottom;
 	private BorderPane root;
+	private Group rackIhmEmplacement;
 	private Button endTurnBtn;
+	private Button exchangeTilesBtn;
+	private Button confirmBtn;
 	private ArrayList<Label> scoreLabels;
 	
 	public GameScene() {
 		this.gameboard = new GameBoard();
 		this.visualGameboard = new GameBoardIhm(this.gameboard);
-		this.rackEmplacement = new Group();
+		this.hboxBottom = new HBox();
+		this.rackIhmEmplacement = new Group();
 	}
 	
 	public Scene createGameScene() {
@@ -57,8 +62,17 @@ public class GameScene {
 		
 		root.setTop(groupTop);
 		root.setCenter(visualGameboard);
-		root.setBottom(rackEmplacement);
-		BorderPane.setAlignment(rackEmplacement, Pos.TOP_CENTER);
+		
+		hboxBottom.getChildren().add(rackIhmEmplacement);
+		
+		exchangeTilesBtn = new Button("Exchange Tiles");
+		hboxBottom.getChildren().add(exchangeTilesBtn);
+		
+		confirmBtn = new Button("Confirm");
+		hboxBottom.getChildren().add(confirmBtn);
+		
+		root.setBottom(hboxBottom);
+		BorderPane.setAlignment(hboxBottom, Pos.BOTTOM_CENTER);
 		
 		
 		Scene scene = new Scene(root,1920,1080);
@@ -101,10 +115,22 @@ public class GameScene {
 			
 		});
 		
+		// the exchangeTilesBtn now listen
+		exchangeTilesBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+			gameController.exchangeTilesBtnHandler();
+			
+		});
+		
+		// the exchangeTilesBtn now listen
+		confirmBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+			gameController.confirmBtnHandler();
+			
+		});
+		
 	}
 	
 	public Group rackEmplacement() {
-		return this.rackEmplacement;
+		return this.rackIhmEmplacement;
 	}
 	
 //	public void bindButtonController(GameController gameController) {

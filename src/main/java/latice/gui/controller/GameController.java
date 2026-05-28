@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import latice.gui.model.GameBoardIhm;
 import latice.gui.model.RackIhm;
@@ -25,6 +26,9 @@ public class GameController {
 	private GameScene gameScene;
 	private List<Label> scorePlayerLabels; //TODO fix it because player 1 should be the first to play
 	private boolean currentPlayerFreeMoveAvailable; //TODO fix it because player 1 should be the first to play
+	private boolean multipleSelection;
+	private ArrayList<Integer> selectedTilesIndex;
+	private Button confirmButton;
 	 
 	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList, GameScene gameScene, List<Label> scorePlayerLabels) {
 		this.gameboard = gameboard;
@@ -34,6 +38,8 @@ public class GameController {
 		this.playerAndRackMap = new LinkedHashMap<>();
 		this.scorePlayerLabels = scorePlayerLabels;
 		this.currentPlayerFreeMoveAvailable = true;
+		this.multipleSelection = false;
+		this.selectedTilesIndex = new ArrayList<Integer>();
 		
 		for (Player player: playerList) {
 			RackIhm newRackIhm = new RackIhm(player.rack());
@@ -88,17 +94,20 @@ public class GameController {
 	
 	public void handleTileSelection(Integer indexRack) {
 		System.out.println("Mouse clicked on rack index : " + indexRack);
-
-		if (currentPlayer.rack().getTile(indexRack) != null ) {
-			this.selectedTileIndex = indexRack;
+		if (this.multipleSelection) {
+			this.selectedTilesIndex.add(indexRack);
 		} else {
-			this.selectedTileIndex = null;
+			if (currentPlayer.rack().getTile(indexRack) != null ) {
+				this.selectedTileIndex = indexRack;
+			} else {
+				this.selectedTileIndex = null;
+			}
 		}
+		
 	}
 	
 	public void handleTilePlacement(Position gameboardPosition) {
 		//System.out.println("Mouse clicked on board position : " + gameboardPosition);
-		// TODO determine end of a turn
 		if (selectedTileIndex != null) {
 			if (this.currentPlayerFreeMoveAvailable) {
 				Tile selectedTile = this.currentPlayer.rack().getTile(this.selectedTileIndex);
@@ -125,9 +134,40 @@ public class GameController {
 
 	public void endTurnBtnHandler() {        
     	nextTurn();
-    	System.out.println("handle");
     }
 	
+	public void exchangeTilesBtnHandler() {
+		if (this.multipleSelection) {
+			deselectMultipleBtn();
+			System.out.println("deselect multiple");
+		} else {
+			this.multipleSelection = true;
+			System.out.println("select multiple");
+		}
+//		this.btnConfirm.show()
+	}
+	
+	public void confirmBtnHandler() {
+		if (this.multipleSelection) {
+			this.currentPlayer.exchangeTheRack(selectedTilesIndex);
+			System.out.println("exchange complete");
+			this.getCurrentPlayerRackIhm().updateRackTiles();
+			
+			deselectMultipleBtn();
+		}
+	}
+	
+	public void deselectMultipleBtn() {
+		this.multipleSelection = false;
+		this.selectedTilesIndex.clear();
+	}
+	
+//	public void selectMultiplesTilesIndex(){
+//		ArrayList<Integer> selectedTilesIndex = new ArrayList<>();
+//		
+//		
+//		return selectedTilesIndex;
+//	}
 	public void exchangeTiles() {
 		// TODO
 	}
