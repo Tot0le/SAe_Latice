@@ -6,10 +6,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import latice.gui.controller.GameController;
 import latice.gui.model.GameBoardIhm;
-import latice.model.Factory;
 import latice.model.GameBoard;
 import latice.model.Player;
 import latice.model.Pool;
@@ -26,6 +27,7 @@ public class GameScene {
 	private Group rackEmplacement;
 	private BorderPane root;
 	private Button endTurnBtn;
+	private ArrayList<Label> scoreLabels;
 	
 	public GameScene() {
 		this.gameboard = new GameBoard();
@@ -39,8 +41,20 @@ public class GameScene {
 		BorderPane.setAlignment(visualGameboard, Pos.CENTER);
 		Group groupTop = new Group();
 		endTurnBtn = new Button("End Turn");
-		groupTop.getChildren().add(endTurnBtn); //TODO continue button implementation
 
+		groupTop.getChildren().add(endTurnBtn);
+		
+		Label scorePlayer1 = new Label("Score player 1 : 0");
+		Label scorePlayer2 = new Label("Score player 2 : 0");
+		VBox vboxRight = new VBox();
+		vboxRight.getChildren().addAll(scorePlayer1, scorePlayer2);
+		
+		scoreLabels = new ArrayList<>();
+		scoreLabels.add(scorePlayer1);
+		scoreLabels.add(scorePlayer2);
+		
+		root.setRight(vboxRight);
+		
 		root.setTop(groupTop);
 		root.setCenter(visualGameboard);
 		root.setBottom(rackEmplacement);
@@ -77,7 +91,8 @@ public class GameScene {
 		System.out.println(playerList);
 		// The game can now start
 		
-		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this);
+		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this, scoreLabels);
+		scoreLabels.getFirst().setText("Test");
 		gameController.displayCurrentPlayerRack();
 		gameController.getCurrentPlayerRackIhm().updateRackTiles();
 		

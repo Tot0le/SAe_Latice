@@ -2,7 +2,9 @@ package latice.gui.controller;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 
+import javafx.scene.control.Label;
 import latice.gui.model.GameBoardIhm;
 import latice.gui.model.RackIhm;
 import latice.gui.view.GameScene;
@@ -21,13 +23,15 @@ public class GameController {
 	private int roundCount = 0;
 	private Integer selectedTileIndex = null;
 	private GameScene gameScene;
+	private List<Label> scorePlayerLabels;
 	 
-	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList, GameScene gameScene) {
+	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList, GameScene gameScene, List<Label> scorePlayerLabels) {
 		this.gameboard = gameboard;
 		this.gameboardIhm = gameboardIhm;
 		this.gameScene = gameScene;
 		this.currentPlayer = playerList.getFirst();
 		this.playerAndRackMap = new LinkedHashMap<>();
+		this.scorePlayerLabels = scorePlayerLabels;
 		
 		for (Player player: playerList) {
 			RackIhm newRackIhm = new RackIhm(player.rack());
@@ -40,7 +44,7 @@ public class GameController {
 	}
 	
 	public void nextRound() {
-		
+		//TODO
 	}
 	
 	public void nextTurn() {
@@ -85,6 +89,7 @@ public class GameController {
 				gameboard.put(gameboardPosition, selectedTile);
 				this.currentPlayer.addPoints(Referee.calculatePoints(nearbyTiles, selectedTile));
 				System.out.println(this.currentPlayer.points());
+				scorePlayerLabels.get(currentPlayerIndex).setText("Score player " + this.currentPlayerIndex + " : " + this.currentPlayer.points());
 				gameboardIhm.update();
 				getCurrentPlayerRackIhm().updateRackTiles();
 				selectedTileIndex = null;
