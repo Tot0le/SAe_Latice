@@ -7,6 +7,9 @@ import java.util.HashSet;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import latice.gui.model.GameBoardIhm;
 import latice.gui.model.RackIhm;
 import latice.gui.view.GameScene;
@@ -28,18 +31,21 @@ public class GameController {
 	private List<Label> scorePlayerLabels;
 	private boolean currentPlayerFreeMoveAvailable;
 	private Label currentPlayerLabel;
+	private Label endMessageLbl;
 	/// V8 FEATURE DO NOT DELETE //////
 //	private boolean multipleSelection;
 //	private ArrayList<Integer> selectedTilesIndex;
 //	private Button confirmButton;
 	/// V8 FEATURE DO NOT DELETE //////
 
-	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList, GameScene gameScene, List<Label> scorePlayerLabels, Label currentPlayerLabel) {
+	// TODO create a LabelController to simplify 
+	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList, GameScene gameScene, List<Label> scorePlayerLabels, Label currentPlayerLabel, Label endMessageLbl) {
 		this.gameboard = gameboard;
 		this.gameboardIhm = gameboardIhm;
 		this.gameScene = gameScene;
 		this.currentPlayer = playerList.getFirst();
 		this.currentPlayerLabel = currentPlayerLabel;
+		this.endMessageLbl = endMessageLbl;
 		this.currentPlayerLabel.setText(this.currentPlayer.username() + "'s turn");
 		this.playerAndRackMap = new LinkedHashMap<>();
 		this.scorePlayerLabels = scorePlayerLabels;
@@ -62,22 +68,30 @@ public class GameController {
 
 		Player winner = null;
 		Integer winnerTotalNumber = (int) Double.POSITIVE_INFINITY;
-		ArrayList<Integer> numberTilesLeftPerPlayer = new ArrayList<>();
+		boolean isDraw = false;
 		for (Player player: this.playerAndRackMap.keySet()) {
-			numberTilesLeftPerPlayer.add(player.totalTilesNumber());
 			if (player.totalTilesNumber() < winnerTotalNumber) {
 				winner = player;
 				winnerTotalNumber = winner.totalTilesNumber();
+				isDraw = false;
+			} else if (player.totalTilesNumber() == (int) winnerTotalNumber) {
+				isDraw = true;
 			}
 		}
-		HashSet<Integer> setOfNumbers = new HashSet<>(numberTilesLeftPerPlayer);
-		if (setOfNumbers.size() <= 1) {
+
+		if (isDraw) {
 			winner = null;
 		}
 		if (winner == null) {
 			System.out.println("It's a draw !");
+			this.endMessageLbl.setTextFill(Color.GRAY);
+			this.endMessageLbl.setFont(Font.font("", FontWeight.BOLD, 30));
+			this.endMessageLbl.setText("It's a draw !");
 		} else {
 			System.out.println("The winner is the player : " + winner.username());
+			this.endMessageLbl.setTextFill(Color.GOLD);
+			this.endMessageLbl.setFont(Font.font("", FontWeight.BOLD, 30));
+			this.endMessageLbl.setText("The winner is the player : " + winner.username());
 		}
 	}
 

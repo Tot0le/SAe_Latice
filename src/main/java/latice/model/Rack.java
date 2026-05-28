@@ -21,7 +21,7 @@ public class Rack {
 	
 	public Integer size() {
 		return this.tiles.size();
-	}
+	} // TODO remove one of the two same getters
 
 	// getteur
 	public int tilesAmount() {

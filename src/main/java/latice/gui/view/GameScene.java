@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import latice.gui.controller.GameController;
 import latice.gui.model.GameBoardIhm;
 import latice.model.GameBoard;
@@ -35,6 +37,7 @@ public class GameScene {
 	private ArrayList<Label> scoreLabels;
 	private ArrayList<String> usernames;
 	private Label currentPlayer;
+	private Label endMessageLbl;
 	
 	public GameScene(ArrayList<String> usernames) {
 		this.usernames = usernames;
@@ -48,10 +51,12 @@ public class GameScene {
 		root = new BorderPane();
 
 		BorderPane.setAlignment(visualGameboard, Pos.CENTER);
-		Group groupTop = new Group();
+		VBox vboxTop = new VBox();
 		endTurnBtn = new Button("End Turn");
+		
+		endMessageLbl = new Label("");
 
-		groupTop.getChildren().add(endTurnBtn);
+		vboxTop.getChildren().addAll(endTurnBtn, endMessageLbl);
 		
 		Label scorePlayer1 = new Label("Score player 1 : 0");
 		Label scorePlayer2 = new Label("Score player 2 : 0");
@@ -66,7 +71,7 @@ public class GameScene {
 		
 		root.setRight(vboxRight);
 		
-		root.setTop(groupTop);
+		root.setTop(vboxTop);
 		
 		root.setCenter(visualGameboard);
 		
@@ -83,7 +88,7 @@ public class GameScene {
 
 		root.setBottom(hboxBottom);
 		BorderPane.setAlignment(hboxBottom, Pos.BOTTOM_CENTER);
-		
+		BorderPane.setAlignment(vboxTop, Pos.TOP_CENTER);
 		
 		Scene scene = new Scene(root,1920,1080);
 		// note that the size of the window does not change if the scene change their size during the program execution
@@ -115,7 +120,7 @@ public class GameScene {
 		System.out.println(playerList);
 		// The game can now start
 		
-		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this, scoreLabels, currentPlayer);
+		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this, scoreLabels, currentPlayer, endMessageLbl);
 		gameController.displayCurrentPlayerRack();
 		gameController.getCurrentPlayerRackIhm().updateRackTiles();
 		
