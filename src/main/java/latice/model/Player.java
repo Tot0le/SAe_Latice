@@ -23,6 +23,15 @@ public class Player {
 		this.orderNumber = null;
 		this.countTotalTiles();
 	}
+	
+	public Player(Integer points, Rack rack, Pool pool, GameBoard gameboard) {
+		this.points = points;
+		this.rack = rack;
+		this.pool = pool;
+		this.gameboard = gameboard;
+		this.orderNumber = null;
+		this.countTotalTiles();
+	}
 
 	public void buyANewAction(Integer points) {
 		points = points - 2;
