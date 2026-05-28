@@ -56,6 +56,25 @@ public class Rack {
 	public void addTile(Tile tile) {
 		this.tiles.add(tile);
 	}
+	
+	public ArrayList<Tile> exchangeTilesFromRack(ArrayList<Integer> indexesOfTiles) {
+		
+		ArrayList<Tile> tilesToBeExchanged = new ArrayList<>();
+		
+		int indexOfTiles;
+		
+		for (int i = 0; i < indexesOfTiles.size(); i++) {
+			indexOfTiles = indexesOfTiles.get(i);
+			tilesToBeExchanged.add(this.tiles.get(indexOfTiles));
+		}
+		
+		for (int i = 0; i < indexesOfTiles.size(); i++) {
+			indexOfTiles = indexesOfTiles.get(i);
+			this.tiles.remove(indexOfTiles);
+		}
+		
+		return tilesToBeExchanged;
+	}
 
 	@Override
 	public String toString() {
