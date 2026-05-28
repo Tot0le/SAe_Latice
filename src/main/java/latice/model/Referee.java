@@ -35,7 +35,7 @@ public class Referee {
 			orderNumber += 1;
 			player.setOrderNumber(orderNumber);
 		}
-		
+
 		return orderedListOfPlayer;
 		
 	}

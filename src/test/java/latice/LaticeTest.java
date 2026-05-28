@@ -211,7 +211,27 @@ class LaticeTest {
 		listTiles.add(greenBird);
 		listTiles.add(greenFeather);
 		listTiles.add(greenGecko);
-		assertEquals(listTiles, gameboard.getNearbyTiles(pos_5_5));
+		assertEquals(listTiles, gameboard.getNearbyTiles(pos_5_5));	
+	}
+	
+	@Test
+	void  testingTheRefereeBehavior() {
+		Rack rackPlayer1 = new Rack();
+		Rack rackPlayer2 = new Rack();
+		Player player1 = new Player(2, rackPlayer1, pool, gameboard);
+		Player player2 = new Player(2, rackPlayer2, pool, gameboard);
+		List<Player> listPlayers1 = new ArrayList<>();
+		List<Player> listPlayers2 = new ArrayList<>();
+		boolean randomBoolean = false;
+		listPlayers1.add(player2);
+		listPlayers1.add(player1);
+		listPlayers2.add(player1);
+		listPlayers2.add(player2);
 		
+		List<Player> listOrdered = Referee.randomChoosePlayerOrder(listPlayers1);
+		if(listOrdered.equals(listPlayers1) || listOrdered.equals(listPlayers2)) {
+			randomBoolean = true;
+		}
+		assertTrue(randomBoolean);
 	}
 }
