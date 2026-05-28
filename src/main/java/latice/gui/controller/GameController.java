@@ -3,6 +3,7 @@ package latice.gui.controller;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.HashSet;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,17 +27,20 @@ public class GameController {
 	private GameScene gameScene;
 	private List<Label> scorePlayerLabels;
 	private boolean currentPlayerFreeMoveAvailable;
+	private Label currentPlayerLabel;
 	/// V8 FEATURE DO NOT DELETE //////
 //	private boolean multipleSelection;
 //	private ArrayList<Integer> selectedTilesIndex;
 //	private Button confirmButton;
 	/// V8 FEATURE DO NOT DELETE //////
 
-	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList, GameScene gameScene, List<Label> scorePlayerLabels) {
+	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList, GameScene gameScene, List<Label> scorePlayerLabels, Label currentPlayerLabel) {
 		this.gameboard = gameboard;
 		this.gameboardIhm = gameboardIhm;
 		this.gameScene = gameScene;
 		this.currentPlayer = playerList.getFirst();
+		this.currentPlayerLabel = currentPlayerLabel;
+		this.currentPlayerLabel.setText(this.currentPlayer.username() + "'s turn");
 		this.playerAndRackMap = new LinkedHashMap<>();
 		this.scorePlayerLabels = scorePlayerLabels;
 		this.currentPlayerFreeMoveAvailable = true;
@@ -58,13 +62,23 @@ public class GameController {
 
 		Player winner = null;
 		Integer winnerTotalNumber = (int) Double.POSITIVE_INFINITY;
+		ArrayList<Integer> numberTilesLeftPerPlayer = new ArrayList<>();
 		for (Player player: this.playerAndRackMap.keySet()) {
+			numberTilesLeftPerPlayer.add(player.totalTilesNumber());
 			if (player.totalTilesNumber() < winnerTotalNumber) {
 				winner = player;
 				winnerTotalNumber = winner.totalTilesNumber();
 			}
 		}
-		System.out.println("The winner is the player : " + winner.username());
+		HashSet<Integer> setOfNumbers = new HashSet<>(numberTilesLeftPerPlayer);
+		if (setOfNumbers.size() < 1) {
+			winner = null;
+		}
+		if (winner == null) {
+			System.out.println("It's a draw !");
+		} else {
+			System.out.println("The winner is the player : " + winner.username());
+		}
 	}
 
 	public void nextTurn() {
@@ -74,7 +88,7 @@ public class GameController {
 		}
 		
 		// if the game is not finished, 
-		if (this.cycleCount < this.gameboard.nbCycle() || this.currentPlayer.totalTilesNumber() > 0) {
+		if (this.cycleCount < this.gameboard.nbCycle() && this.currentPlayer.totalTilesNumber() > 0) {
 			
 			// change current player
 			this.currentPlayerIndex = this.currentPlayerIndex + 1;
@@ -84,6 +98,7 @@ public class GameController {
 			}
 		
 			// update the current player
+			this.currentPlayerLabel.setText(this.currentPlayer.username() + "'s turn");
 			this.currentPlayer = new ArrayList<>(this.playerAndRackMap.keySet()).get(this.currentPlayerIndex);
 			
 			// update ihm rack related content

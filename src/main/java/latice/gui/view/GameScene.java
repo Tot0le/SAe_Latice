@@ -34,6 +34,7 @@ public class GameScene {
 	private Button confirmBtn;
 	private ArrayList<Label> scoreLabels;
 	private ArrayList<String> usernames;
+	private Label currentPlayer;
 	
 	public GameScene(ArrayList<String> usernames) {
 		this.usernames = usernames;
@@ -54,8 +55,10 @@ public class GameScene {
 		
 		Label scorePlayer1 = new Label("Score player 1 : 0");
 		Label scorePlayer2 = new Label("Score player 2 : 0");
+		
+		currentPlayer = new Label();
 		VBox vboxRight = new VBox();
-		vboxRight.getChildren().addAll(scorePlayer1, scorePlayer2);
+		vboxRight.getChildren().addAll(scorePlayer1, scorePlayer2, currentPlayer);
 		
 		scoreLabels = new ArrayList<>();
 		scoreLabels.add(scorePlayer1);
@@ -64,6 +67,7 @@ public class GameScene {
 		root.setRight(vboxRight);
 		
 		root.setTop(groupTop);
+		
 		root.setCenter(visualGameboard);
 		
 		hboxBottom.getChildren().add(rackIhmEmplacement);
@@ -111,7 +115,7 @@ public class GameScene {
 		System.out.println(playerList);
 		// The game can now start
 		
-		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this, scoreLabels);
+		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this, scoreLabels, currentPlayer);
 		gameController.displayCurrentPlayerRack();
 		gameController.getCurrentPlayerRackIhm().updateRackTiles();
 		
