@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javafx.scene.image.Image;
 import latice.gui.Console;
 import latice.model.Factory;
 import latice.model.GameBoard;
@@ -21,6 +22,9 @@ import latice.model.Referee;
 import latice.model.tile.Color;
 import latice.model.tile.Shape;
 import latice.model.tile.Tile;
+import latice.util.ImageLoader;
+import latice.util.ImagePath;
+import latice.gui.model.GameBoardIhm;
 
 class LaticeTest {
 	private static Tile RED_DOLPHIN = new Tile(Color.Red, Shape.Dolphin);
@@ -48,7 +52,7 @@ class LaticeTest {
 		ourTestingTiles.addAll(List.of(RED_DOLPHIN, NAVY_DOLPHIN, GREEN_TURTLE, RED_TURTLE, RED_GECKO));
 		pool.setTiles(ourTestingTiles);
 
-		Player player = new Player(0,rack,pool, gameboard);
+		Player player = new Player(0,rack, pool, gameboard);
 		player.drawATile();
 		assertEquals(rack.getTile(0), RED_DOLPHIN);
 
@@ -124,6 +128,21 @@ class LaticeTest {
 		gameboard.put(pos_4_5, rackPlayer1.popTile(0));
 		assertEquals(RED_TURTLE, gameboard.getTile(pos_4_5));
 		assertEquals(2, rackPlayer1.tilesAmount());
+		
+		String testDescription = "Red Dolphin";
+		assertEquals(testDescription, RED_DOLPHIN.toString());
+	}
+	
+	@Test
+	void testingNumberOfCycles() {
+		assertEquals(10, gameboard.getNbCycle());
+	}
+	@Test
+	void testGameboardClearAndTileEmpty() {
+		Position center_5_5 = new Position(5,5);
+		assertTrue(gameboard.isEmpty());
+		gameboard.put(center_5_5, RED_DOLPHIN);
+		assertFalse(gameboard.isEmpty());
 	}
 	
 	@Test
@@ -147,6 +166,19 @@ class LaticeTest {
 		Position pos_9_8 = new Position(9,8);
 		gameboard.put(pos_9_8, new Tile(Color.Green, Shape.Turtle));
 		assertEquals(null, gameboard.getTile(pos_9_8));
-
+	}
+	
+	@Test
+	void testGoodBackgroundImage() {
+		Image imageSea = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SEA.imagePath(), 100, 100);
+		Image imageSun = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SUN.imagePath(), 100, 100);
+		Image imageMoon = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_MOON.imagePath(), 100, 100);
+		GameBoardIhm ihm = new GameBoardIhm(gameboard);
+		Position pos_6_7 = new Position(6, 7);
+		Position pos_5_5 = new Position(5, 5);
+		Position pos_5_9 = new Position(5, 9);
+		assertEquals(imageSea.getUrl(), ihm.chooseRightBackgroundImage(pos_6_7).getUrl());
+		assertEquals(imageSun.getUrl(), ihm.chooseRightBackgroundImage(pos_5_5).getUrl());
+		assertEquals(imageMoon.getUrl(), ihm.chooseRightBackgroundImage(pos_5_9).getUrl());
 	}
 }
