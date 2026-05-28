@@ -24,8 +24,8 @@ public class GameController {
 	private int cycleCount = 0;
 	private Integer selectedTileIndex = null;
 	private GameScene gameScene;
-	private List<Label> scorePlayerLabels; //TODO fix it because player 1 should be the first to play
-	private boolean currentPlayerFreeMoveAvailable; //TODO fix it because player 1 should be the first to play
+	private List<Label> scorePlayerLabels;
+	private boolean currentPlayerFreeMoveAvailable;
 	private boolean multipleSelection;
 	private ArrayList<Integer> selectedTilesIndex;
 	private Button confirmButton;
@@ -71,7 +71,7 @@ public class GameController {
 	public void nextTurn() {
 		// the previous player has to draw one tile if their rack is not full
 		if (!this.currentPlayer.rack().isFull()) {
-			this.currentPlayer.drawATile();
+			this.currentPlayer.drawMaxTile();
 		}
 		
 		// if the game is not finished, 
@@ -149,14 +149,16 @@ public class GameController {
     }
 	
 	public void exchangeTilesBtnHandler() {
-		if (this.multipleSelection) {
-			deselectMultipleBtn();
-			System.out.println("deselect multiple");
-		} else {
-			this.multipleSelection = true;
-			System.out.println("select multiple");
+		if (this.currentPlayerFreeMoveAvailable) {
+			if (this.multipleSelection) {
+				deselectMultipleBtn();
+				System.out.println("deselect multiple");
+			} else {
+				this.multipleSelection = true;
+				System.out.println("select multiple");
+			}
+//			this.btnConfirm.show()
 		}
-//		this.btnConfirm.show()
 	}
 	
 	public void confirmBtnHandler() {

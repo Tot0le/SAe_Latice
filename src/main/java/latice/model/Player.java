@@ -67,7 +67,7 @@ public class Player {
 	}
 
 	public void drawMaxTile() {
-		while (rack.getTiles().size() < rack.maxTiles()) {
+		while (rack.getTiles().size() < rack.maxTiles() && pool.size() > 0) {
 			drawATile();
 		}
 	}
