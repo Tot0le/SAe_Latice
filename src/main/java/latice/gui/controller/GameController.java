@@ -69,17 +69,29 @@ public class GameController {
 	}
 	
 	public void nextTurn() {
-		
-		this.currentPlayerIndex = this.currentPlayerIndex + 1;
-		if (this.currentPlayerIndex >= this.playerAndRackMap.size()) {
-			this.cycleCount += 1;
-			this.currentPlayerIndex = this.currentPlayerIndex % this.playerAndRackMap.size();
+		// the previous player has to draw one tile if their rack is not full
+		if (!this.currentPlayer.rack().isFull()) {
+			this.currentPlayer.drawATile();
 		}
 		
-		if (this.cycleCount < this.gameboard.nbCycle()) {
+		// if the game is not finished, 
+		if (this.cycleCount < this.gameboard.nbCycle() || this.currentPlayer.totalTilesNumber() > 0) {
+			
+			// change current player
+			this.currentPlayerIndex = this.currentPlayerIndex + 1;
+			if (this.currentPlayerIndex >= this.playerAndRackMap.size()) {
+				this.cycleCount += 1;
+				this.currentPlayerIndex = this.currentPlayerIndex % this.playerAndRackMap.size();
+			}
+		
+			// update the current player
 			this.currentPlayer = new ArrayList<>(this.playerAndRackMap.keySet()).get(this.currentPlayerIndex);
+			
+			// update ihm rack related content
 			this.displayCurrentPlayerRack();
 			this.getCurrentPlayerRackIhm().updateRackTiles();
+			
+			// regive the player a free move
 			this.currentPlayerFreeMoveAvailable = true;
 		} else {
 			this.endGame();

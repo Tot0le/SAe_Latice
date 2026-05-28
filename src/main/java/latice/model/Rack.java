@@ -61,6 +61,10 @@ public class Rack {
 		this.tiles.add(tile);
 	}
 	
+	public boolean isFull() {
+		return this.tilesAmount() >= maxTiles();
+	}
+	
 	public ArrayList<Tile> takeTilesFromRack(ArrayList<Integer> indexesOfTilesInRack) {
 		
 		ArrayList<Tile> tilesToBeExchanged = new ArrayList<>();
