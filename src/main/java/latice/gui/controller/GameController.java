@@ -23,8 +23,8 @@ public class GameController {
 	private int cycleCount = 0;
 	private Integer selectedTileIndex = null;
 	private GameScene gameScene;
-	private List<Label> scorePlayerLabels;
-	private boolean currentPlayerFreeMoveAvailable;
+	private List<Label> scorePlayerLabels; //TODO fix it because player 1 should be the first to play
+	private boolean currentPlayerFreeMoveAvailable; //TODO fix it because player 1 should be the first to play
 	 
 	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList, GameScene gameScene, List<Label> scorePlayerLabels) {
 		this.gameboard = gameboard;
@@ -48,6 +48,15 @@ public class GameController {
 	public void endGame() {
 		System.out.println("GG, you finished the game");
 		//TODO endgame
+		Player winner = null;
+		Integer winnerTotalNumber = (int) Double.POSITIVE_INFINITY;
+		for (Player player: this.playerAndRackMap.keySet()) {
+			if (player.totalTilesNumber() < winnerTotalNumber) {
+				winner = player;
+				winnerTotalNumber = winner.totalTilesNumber();
+			}
+		}
+		System.out.println("Le gagnant est " + winner.orderNumber());
 	}
 	public void nextRound() {
 		//TODO
@@ -101,8 +110,8 @@ public class GameController {
 					currentPlayer.rack().popTile(selectedTileIndex);
 					gameboard.put(gameboardPosition, selectedTile);
 					this.currentPlayer.addPoints(Referee.calculatePoints(nearbyTiles, selectedTile));
-					
-					scorePlayerLabels.get(currentPlayerIndex).setText("Score player " + this.currentPlayerIndex + " : " + this.currentPlayer.points());
+					System.out.println(currentPlayerIndex);
+					updateScoreLabel();
 					gameboardIhm.update();
 					getCurrentPlayerRackIhm().updateRackTiles();
 					selectedTileIndex = null;
@@ -136,5 +145,8 @@ public class GameController {
 		this.gameScene.rackEmplacement().getChildren().add(this.getCurrentPlayerRackIhm());
 	}
 	
+	public void updateScoreLabel() {
+		scorePlayerLabels.get(currentPlayerIndex).setText("Score player " + (this.currentPlayerIndex + 1) + " : " + this.currentPlayer.points());
+	}
 	
 }

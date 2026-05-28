@@ -12,6 +12,7 @@ public class Player {
 	private Pool pool;
 	private GameBoard gameboard;
 	private Integer orderNumber;
+	private Integer totalTilesNumber;
 
 	public Player(Integer points, Rack rack, Pool pool, GameBoard gameboard) {
 		this.points = points;
@@ -19,6 +20,7 @@ public class Player {
 		this.pool = pool;
 		this.gameboard = gameboard;
 		this.orderNumber = null;
+		this.countTotalTiles();
 	}
 
 	public void buyANewAction(Integer points) {
@@ -78,6 +80,10 @@ public class Player {
 		this.points += addPoints;
 	}
 	
+	public void countTotalTiles() {
+		this.totalTilesNumber = this.pool.size() + this.rack.size();
+	}
+	
 	// getteurs :
 	public Integer points() {
 		return this.points;
@@ -89,6 +95,14 @@ public class Player {
 	
 	public Pool pool() {
 		return this.pool;
+	}
+	
+	public Integer totalTilesNumber() {
+		return this.totalTilesNumber;
+	}
+	
+	public Integer orderNumber() {
+		return this.orderNumber;
 	}
 	
 	// setteurs :

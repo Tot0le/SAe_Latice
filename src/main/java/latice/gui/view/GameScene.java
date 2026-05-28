@@ -92,7 +92,6 @@ public class GameScene {
 		// The game can now start
 		
 		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this, scoreLabels);
-		scoreLabels.getFirst().setText("Test");
 		gameController.displayCurrentPlayerRack();
 		gameController.getCurrentPlayerRackIhm().updateRackTiles();
 		

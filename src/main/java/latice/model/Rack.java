@@ -18,6 +18,10 @@ public class Rack {
 		this.tiles = new ArrayList<>();
 		this.maxTiles = maxTiles;
 	}
+	
+	public Integer size() {
+		return this.tiles.size();
+	}
 
 	// getteur
 	public int tilesAmount() {
