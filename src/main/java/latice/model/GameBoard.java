@@ -161,5 +161,9 @@ public class GameBoard {
 	 public Position getMoonSquarePosition() {
 		 return moonSquarePosition;
 	 }
+	 
+	 public Integer nbCycle() {
+		 return nbCycle;
+	 }
 
 }

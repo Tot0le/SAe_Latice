@@ -20,10 +20,11 @@ public class GameController {
 	private LinkedHashMap<Player, RackIhm> playerAndRackMap;
 	private Player currentPlayer;
 	private int currentPlayerIndex = 0;
-	private int roundCount = 0;
+	private int cycleCount = 0;
 	private Integer selectedTileIndex = null;
 	private GameScene gameScene;
 	private List<Label> scorePlayerLabels;
+	private boolean currentPlayerFreeMoveAvailable;
 	 
 	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList, GameScene gameScene, List<Label> scorePlayerLabels) {
 		this.gameboard = gameboard;
@@ -32,6 +33,7 @@ public class GameController {
 		this.currentPlayer = playerList.getFirst();
 		this.playerAndRackMap = new LinkedHashMap<>();
 		this.scorePlayerLabels = scorePlayerLabels;
+		this.currentPlayerFreeMoveAvailable = true;
 		
 		for (Player player: playerList) {
 			RackIhm newRackIhm = new RackIhm(player.rack());
@@ -43,6 +45,10 @@ public class GameController {
 		this.gameboardIhm.bindController(this);
 	}
 	
+	public void endGame() {
+		System.out.println("GG, you finished the game");
+		//TODO endgame
+	}
 	public void nextRound() {
 		//TODO
 	}
@@ -51,14 +57,19 @@ public class GameController {
 		
 		this.currentPlayerIndex = this.currentPlayerIndex + 1;
 		if (this.currentPlayerIndex >= this.playerAndRackMap.size()) {
-			this.roundCount += 1;
+			this.cycleCount += 1;
 			this.currentPlayerIndex = this.currentPlayerIndex % this.playerAndRackMap.size();
 		}
-		// TODO check the roundCount number
 		
-		this.currentPlayer = new ArrayList<>(this.playerAndRackMap.keySet()).get(this.currentPlayerIndex);
-		this.displayCurrentPlayerRack();
-		this.getCurrentPlayerRackIhm().updateRackTiles();
+		if (this.cycleCount < this.gameboard.nbCycle()) {
+			this.currentPlayer = new ArrayList<>(this.playerAndRackMap.keySet()).get(this.currentPlayerIndex);
+			this.displayCurrentPlayerRack();
+			this.getCurrentPlayerRackIhm().updateRackTiles();
+			this.currentPlayerFreeMoveAvailable = true;
+		} else {
+			this.endGame();
+		}
+		
 		
 	}
 	
@@ -78,21 +89,26 @@ public class GameController {
 	
 	public void handleTilePlacement(Position gameboardPosition) {
 		//System.out.println("Mouse clicked on board position : " + gameboardPosition);
+		// TODO determine end of a turn
 		if (selectedTileIndex != null) {
-			Tile selectedTile = this.currentPlayer.rack().getTile(this.selectedTileIndex);
-			ArrayList<Tile> nearbyTiles = (ArrayList<Tile>) this.gameboard.getNearbyTiles(gameboardPosition);
+			if (this.currentPlayerFreeMoveAvailable) {
+				Tile selectedTile = this.currentPlayer.rack().getTile(this.selectedTileIndex);
+				ArrayList<Tile> nearbyTiles = (ArrayList<Tile>) this.gameboard.getNearbyTiles(gameboardPosition);
+				
+				boolean isLegal = Referee.checkIfMoveIsLegal(nearbyTiles, gameboard, gameboardPosition, selectedTile);
+				
+				if (isLegal) {
+					currentPlayer.rack().popTile(selectedTileIndex);
+					gameboard.put(gameboardPosition, selectedTile);
+					this.currentPlayer.addPoints(Referee.calculatePoints(nearbyTiles, selectedTile));
+					
+					scorePlayerLabels.get(currentPlayerIndex).setText("Score player " + this.currentPlayerIndex + " : " + this.currentPlayer.points());
+					gameboardIhm.update();
+					getCurrentPlayerRackIhm().updateRackTiles();
+					selectedTileIndex = null;
+					this.currentPlayerFreeMoveAvailable = false;
+				}
 			
-			boolean isLegal = Referee.checkIfMoveIsLegal(nearbyTiles, gameboard, gameboardPosition, selectedTile);
-			
-			if (isLegal) {
-				currentPlayer.rack().popTile(selectedTileIndex);
-				gameboard.put(gameboardPosition, selectedTile);
-				this.currentPlayer.addPoints(Referee.calculatePoints(nearbyTiles, selectedTile));
-				System.out.println(this.currentPlayer.points());
-				scorePlayerLabels.get(currentPlayerIndex).setText("Score player " + this.currentPlayerIndex + " : " + this.currentPlayer.points());
-				gameboardIhm.update();
-				getCurrentPlayerRackIhm().updateRackTiles();
-				selectedTileIndex = null;
 			}
 			
 		}
