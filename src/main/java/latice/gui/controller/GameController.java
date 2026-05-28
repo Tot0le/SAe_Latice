@@ -71,7 +71,7 @@ public class GameController {
 			}
 		}
 		HashSet<Integer> setOfNumbers = new HashSet<>(numberTilesLeftPerPlayer);
-		if (setOfNumbers.size() < 1) {
+		if (setOfNumbers.size() <= 1) {
 			winner = null;
 		}
 		if (winner == null) {
