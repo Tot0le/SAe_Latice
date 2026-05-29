@@ -122,19 +122,7 @@ public class GameScene extends Scene {
 			gameController.exchangeAllTilesBtnHandler();
 			
 		});
-		///// V8 FEATURE DO NOT DELETE :
-//		// the exchangeTilesBtn now listen
-//		exchangeTilesBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
-//			gameController.exchangeTilesBtnHandler();
-//			
-//		});
-//		
-//		// the exchangeTilesBtn now listen
-//		confirmBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
-//			gameController.confirmBtnHandler();
-//			
-//		});
-		///// V8 FEATURE DO NOT DELETE
+
 	}
 	
 	public Group rackEmplacement() {
