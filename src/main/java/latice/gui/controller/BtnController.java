@@ -53,11 +53,9 @@ public class BtnController {
 	        return new EventHandler<MouseEvent>() {
 	            @Override
 	            public void handle(MouseEvent event) {
+	            	RulesScene rulesScene = new RulesScene(primaryStage);
 	            	
-	            	RulesScene rulesScene = new RulesScene();
-	            	Scene scene = rulesScene.createRulesScene(primaryStage);
-	            	
-	            	primaryStage.setScene(scene);
+	            	primaryStage.setScene(rulesScene);
 	            }
 	        };
 	    }
