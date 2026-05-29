@@ -10,9 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import latice.gui.controller.GameController;
+import latice.gui.controller.LabelController;
 import latice.gui.model.GameBoardIhm;
 import latice.model.GameBoard;
 import latice.model.Player;
@@ -117,10 +116,10 @@ public class GameScene {
 		playerList.add(player1);
 		playerList.add(player2);
 		playerList = (ArrayList<Player>) Referee.randomChoosePlayerOrder(playerList);
-		System.out.println(playerList);
 		// The game can now start
 		
-		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this, scoreLabels, currentPlayer, endMessageLbl);
+		LabelController lblController = new LabelController(scoreLabels, currentPlayer, endMessageLbl);
+		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this, lblController);
 		gameController.displayCurrentPlayerRack();
 		gameController.getCurrentPlayerRackIhm().updateRackTiles();
 		
