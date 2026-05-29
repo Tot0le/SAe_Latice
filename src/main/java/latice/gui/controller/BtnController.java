@@ -18,7 +18,7 @@ public class BtnController {
 		public BtnController(Stage primaryStage) {
 	        this.primaryStage = primaryStage;
 	    }
-		
+	
 		public void launchBtnHandler() {
 			ArrayList<String> usernames = settingScene.getUsernames();
 			if (!usernames.isEmpty()) {
@@ -30,7 +30,7 @@ public class BtnController {
 			}
 			
 		}
-		
+
 		// handler of play button is starting a was scene with gameScene
 		public void playBtnHandler() {
         	settingScene = new SettingGameScene();
@@ -49,7 +49,7 @@ public class BtnController {
 	            }
 	        };
 	    }
-	    
+
 	    public EventHandler<MouseEvent> rulesBtnHandler() {
 	        return new EventHandler<MouseEvent>() {
 	            @Override

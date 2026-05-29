@@ -12,6 +12,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -34,22 +35,22 @@ public class MainMenu {
 		
 		//Buttons creation and image attribution + size min and max
 		Button btnPlay = new Button("PLAY");
-		btnPlay.setPrefSize(150, 100);
-		btnPlay.setMinSize(150, 100);
-		btnPlay.setMaxSize(150, 100);
-		btnPlay = SetImageView.getImageInButton(btnPlay, imagePlay);
+		btnPlay.setPrefSize(300, 200);
+		btnPlay.setMinSize(300, 200);
+		btnPlay.setMaxSize(300, 200);
+		btnPlay = SetImageView.getImageInButtonPlay(btnPlay, imagePlay);
 		
 		Button btnQuit = new Button("QUIT");
 		btnQuit.setPrefSize(150, 100);
 		btnQuit.setMinSize(150, 100);
 		btnQuit.setMaxSize(150, 100);
-		btnQuit = SetImageView.getImageInButton(btnQuit, imageQuit);
+		btnQuit = SetImageView.getImageInButtonQuitAndRules(btnQuit, imageQuit);
 		
 		Button btnRules = new Button("RULES");
 		btnRules.setPrefSize(150, 100);
 		btnRules.setMinSize(150, 100);
 		btnRules.setMaxSize(150, 100);
-		btnRules = SetImageView.getImageInButton(btnRules, imageRules);
+		btnRules = SetImageView.getImageInButtonQuitAndRules(btnRules, imageRules);
 		
 		// Buttons listeners    we make a new primaryStage to bypass the static restrictions
 		BtnController controller = new BtnController(primaryStage);
@@ -65,25 +66,22 @@ public class MainMenu {
 		// VBox creation
 		VBox caseTop = new VBox();
 		VBox caseBottom = new VBox();
-		VBox caseRight = new VBox();
-
-		//  adding the buttons to the VBOXs
-		caseRight.getChildren().addAll(btnRules);
-		caseRight.setAlignment(Pos.TOP_RIGHT);
-		caseRight.setSpacing(10);
+		VBox caseBottom2 = new VBox();
 		
+		// HBox creation
+		HBox hboxBottom = new HBox();
+		//  adding the buttons to the VBOXs	
 		caseTop.getChildren().addAll(btnPlay);
 		caseTop.setAlignment(Pos.TOP_CENTER);
 		caseTop.setSpacing(10);
 
-		caseBottom.getChildren().addAll(btnQuit);
-		caseBottom.setAlignment(Pos.BOTTOM_CENTER);
-		caseBottom.setSpacing(10);
+		hboxBottom.getChildren().addAll(btnQuit, btnRules);
+		hboxBottom.setAlignment(Pos.BOTTOM_CENTER);
+		hboxBottom.setSpacing(50);
 
 		// add the VBoxs to the StackPane
 		root.setTop(caseTop);
-		root.setBottom(caseBottom);
-		root.setRight(caseRight);
+		root.setBottom(hboxBottom);
 		
 		// Attribution of the background and the root to the scene
 		Scene scene = new Scene(root,900,600);
@@ -91,8 +89,7 @@ public class MainMenu {
 
 		// Position attribution of the VBoxs in the BorderPane
 		BorderPane.setMargin(caseTop, new Insets(100, 0, 150, 0));
-		BorderPane.setMargin(caseBottom, new Insets(0, 0, 200, 0));
-		BorderPane.setMargin(caseRight, new Insets(0,100,0,0));
+		BorderPane.setMargin(hboxBottom, new Insets(0, 0, 200, 0));
 
 		return scene;
 

@@ -30,7 +30,7 @@ public class RulesScene {
 		btnQuitRules.setPrefSize(150, 100);
 		btnQuitRules.setMinSize(150, 100);
 		btnQuitRules.setMaxSize(150, 100);
-		btnQuitRules = SetImageView.getImageInButton(btnQuitRules, imageQuit);
+		btnQuitRules = SetImageView.getImageInButtonQuitAndRules(btnQuitRules, imageQuit);
 		
 		BtnController controller = new BtnController(primaryStage);
 	    btnQuitRules.setOnMouseClicked(controller.quitBtnHandler());
