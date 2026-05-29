@@ -12,6 +12,7 @@ public class Player {
 	private Pool pool;
 	private GameBoard gameboard;
 	private Integer orderNumber;
+	private boolean moveAvailable;
 
 	public Player(String username, Integer points, Rack rack, Pool pool, GameBoard gameboard) {
 		this.username = username;
@@ -20,6 +21,7 @@ public class Player {
 		this.pool = pool;
 		this.gameboard = gameboard;
 		this.orderNumber = null;
+		this.setMoveAvailable(true);
 	}
 	
 	public Player(Integer points, Rack rack, Pool pool, GameBoard gameboard) {
@@ -127,11 +129,19 @@ public class Player {
 		return this.username;
 	}
 	
+	public boolean isMoveAvailable() {
+		return moveAvailable;
+	}
+	
 	// setteurs :
 	public void player(Integer points) {
 		this.points = points;
 	}
 	public void setOrderNumber(Integer orderNumber) {
 		this.orderNumber = orderNumber;
+	}
+
+	public void setMoveAvailable(boolean moveAvailable) {
+		this.moveAvailable = moveAvailable;
 	}
 }

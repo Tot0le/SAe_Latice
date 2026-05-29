@@ -33,7 +33,7 @@ public class BtnController {
 		
 		// handler of play button is starting a was scene with gameScene
 		public void playBtnHandler() {
-        	SettingGameScene settingScene = new SettingGameScene();
+        	settingScene = new SettingGameScene();
     		
     		Scene scene = settingScene.createSettingScene(this);
     		primaryStage.setScene(scene);

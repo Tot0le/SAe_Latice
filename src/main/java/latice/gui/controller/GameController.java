@@ -24,7 +24,6 @@ public class GameController {
 	private int cycleCount = 0;
 	private Integer selectedTileIndex = null;
 	private GameScene gameScene;
-	private boolean currentPlayerFreeMoveAvailable;
 	private LabelController lblController;
 	/// V8 FEATURE DO NOT DELETE //////
 //	private boolean multipleSelection;
@@ -37,7 +36,6 @@ public class GameController {
 		this.gameboardIhm = gameboardIhm;
 		this.gameScene = gameScene;
 		this.currentPlayer = playerList.getFirst();
-		this.currentPlayerFreeMoveAvailable = true;
 		this.playerAndRackMap = new LinkedHashMap<>();
 		
 		this.lblController = lblController;
@@ -105,15 +103,15 @@ public class GameController {
 			}
 		
 			// update the current player
-			this.lblController.currentPlayerLabel().setText(this.currentPlayer.username() + "'s turn");
 			this.currentPlayer = new ArrayList<>(this.playerAndRackMap.keySet()).get(this.currentPlayerIndex);
+			this.lblController.currentPlayerLabel().setText(this.currentPlayer.username() + "'s turn");
 			
 			// update ihm rack related content
 			this.displayCurrentPlayerRack();
 			this.getCurrentPlayerRackIhm().updateRackTiles();
 			
 			// regive the player a free move
-			this.currentPlayerFreeMoveAvailable = true;
+			this.currentPlayer.setMoveAvailable(true);
 		} else {
 			this.endGame();
 		}
@@ -139,7 +137,7 @@ public class GameController {
 	
 	public void handleTilePlacement(Position gameboardPosition) {
 		if (selectedTileIndex != null) {
-			if (this.currentPlayerFreeMoveAvailable) {
+			if (this.currentPlayer.isMoveAvailable()) {
 				Tile selectedTile = this.currentPlayer.rack().getTile(this.selectedTileIndex);
 				ArrayList<Tile> nearbyTiles = (ArrayList<Tile>) this.gameboard.getNearbyTiles(gameboardPosition);
 				
@@ -154,7 +152,7 @@ public class GameController {
 					gameboardIhm.update();
 					getCurrentPlayerRackIhm().updateRackTiles();
 					selectedTileIndex = null;
-					this.currentPlayerFreeMoveAvailable = false;
+					this.currentPlayer.setMoveAvailable(false);
 				}
 			
 			}
@@ -167,11 +165,11 @@ public class GameController {
     }
 	
 	public void exchangeAllTilesBtnHandler() {
-		if (this.currentPlayerFreeMoveAvailable) {
+		if (this.currentPlayer.isMoveAvailable()) {
 			this.currentPlayer.exchangeAllTheRack();
 			System.out.println("exchange complete");
 			this.getCurrentPlayerRackIhm().updateRackTiles();
-			this.currentPlayerFreeMoveAvailable = false;
+			this.currentPlayer.setMoveAvailable(false);
 		}
 	}
 	////////////////////////////////////// V8 FEATURE DO NOT DELETE ////////////////////////////////////////

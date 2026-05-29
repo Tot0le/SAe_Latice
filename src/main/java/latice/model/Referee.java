@@ -35,11 +35,11 @@ public class Referee {
 			orderNumber += 1;
 			player.setOrderNumber(orderNumber);
 		}
-		
+
 		return orderedListOfPlayer;
 		
 	}
-	
+
 	public static boolean checkIfMoveIsLegal(List<Tile> nearbyTiles, GameBoard gameboard, Position selectedTilePosition, Tile selectedTile ) {
 		boolean isLegal = true;
 		if (gameboard.getTile(selectedTilePosition) != null) {
@@ -56,13 +56,12 @@ public class Referee {
 		return isLegal;
 	}
 
-
 	public static Integer calculatePoints(ArrayList<Tile> nearbyTiles, Tile tilePlaced) {
 		Integer numberOfTileMatches = 0;
 		Integer points = 0;
 		Color colorOfTilePlaced = tilePlaced.color();
 		Shape shapeOfTilePlaced = tilePlaced.shape();
-		
+	
 		for (Tile tile : nearbyTiles) {
 			if (tile.color() == colorOfTilePlaced || tile.shape() == shapeOfTilePlaced) {
 				numberOfTileMatches += 1;
