@@ -4,7 +4,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -13,14 +12,11 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import latice.gui.controller.BtnController;
 import latice.util.ImageLoader;
 import latice.util.ImagePath;
 import latice.util.SetImageView;
-import latice.gui.view.GameScene;
-import latice.gui.controller.*;
 
 public class MainMenu extends Scene {
 	public MainMenu(Stage primaryStage) {

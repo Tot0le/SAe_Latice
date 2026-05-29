@@ -25,11 +25,6 @@ public class GameController {
 	private Integer selectedTileIndex = null;
 	private GameScene gameScene;
 	private LabelController lblController;
-	/// V8 FEATURE DO NOT DELETE //////
-//	private boolean multipleSelection;
-//	private ArrayList<Integer> selectedTilesIndex;
-//	private Button confirmButton;
-	/// V8 FEATURE DO NOT DELETE //////
 
 	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, Referee referee, GameScene gameScene, LabelController lblController) {
 		this.gameboard = gameboard;
@@ -44,9 +39,6 @@ public class GameController {
 		this.lblController = lblController;
 
 		this.lblController.currentPlayerLabel().setText(this.referee.currentPlayer().username() + "'s turn");
-		/// V8 FEATURE DO NOT DELETE //////
-//		this.multipleSelection = false;
-//		this.selectedTilesIndex = new ArrayList<Integer>();
 		
 		this.gameboardIhm.bindController(this);
 	}
@@ -81,11 +73,7 @@ public class GameController {
 	
 	public void handleTileSelection(Integer indexRack) {
 		Console.message("Mouse clicked on rack index : " + indexRack);
-		/// V8 FEATURE DO NOT DELETE //////
-//		if (this.multipleSelection) {
-//			this.selectedTilesIndex.add(indexRack);
-//		} else {
-		/// V8 FEATURE DO NOT DELETE //////
+		
 		if (referee.currentPlayer().rack().getTile(indexRack) != null ) {
 			this.selectedTileIndex = indexRack;
 		} else {
@@ -133,39 +121,6 @@ public class GameController {
 			currentPlayer.setMoveAvailable(false);
 		}
 	}
-	////////////////////////////////////// V8 FEATURE DO NOT DELETE ////////////////////////////////////////
-	////////////////////////////////////// V8 FEATURE DO NOT DELETE ////////////////////////////////////////
-	////////////////////////////////////// V8 FEATURE DO NOT DELETE ////////////////////////////////////////
-//	public void exchangeTilesBtnHandler() {
-//		if (this.currentPlayerFreeMoveAvailable) {
-//			if (this.multipleSelection) {
-//				deselectMultipleBtn();
-//				System.out.println("deselect multiple");
-//			} else {
-//				this.multipleSelection = true;
-//				System.out.println("select multiple");
-//			}
-////			this.btnConfirm.show()
-//		}
-//	}
-//	
-//	public void confirmBtnHandler() {
-//		if (this.multipleSelection) {
-//			this.currentPlayer.exchangeTheRack(selectedTilesIndex);
-//			System.out.println("exchange complete");
-//			this.getCurrentPlayerRackIhm().updateRackTiles();
-//			
-//			deselectMultipleBtn();
-//		}
-//	}
-//	
-//	public void deselectMultipleBtn() {
-//		this.multipleSelection = false;
-//		this.selectedTilesIndex.clear();
-//	}
-	////////////////////////////////////// V8 FEATURE DO NOT DELETE ////////////////////////////////////////
-	////////////////////////////////////// V8 FEATURE DO NOT DELETE ////////////////////////////////////////
-	////////////////////////////////////// V8 FEATURE DO NOT DELETE ////////////////////////////////////////
 
 	public void updateScoreLabel() {
 		int currentPlayerIndex = referee.currentPlayerIndex();

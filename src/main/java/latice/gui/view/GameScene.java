@@ -76,13 +76,6 @@ public class GameScene extends Scene {
 		hboxBottom.getChildren().add(rackIhmEmplacement);
 		exchangeAllTilesBtn = new Button("Exchange All Tiles");
 		hboxBottom.getChildren().add(exchangeAllTilesBtn);
-		///// V8 FEATURE DO NOT DELETE :
-//		exchangeTilesBtn = new Button("Exchange Tiles");
-//		hboxBottom.getChildren().add(exchangeTilesBtn);
-//		
-//		confirmBtn = new Button("Confirm");
-//		hboxBottom.getChildren().add(confirmBtn);
-		///// V8 FEATURE DO NOT DELETE
 
 		root.setBottom(hboxBottom);
 		BorderPane.setAlignment(hboxBottom, Pos.BOTTOM_CENTER);
