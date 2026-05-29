@@ -234,4 +234,32 @@ class LaticeTest {
 		}
 		assertTrue(randomBoolean);
 	}
+	
+	@Test
+	void testForALegalMove() {
+		Tile greenGecko = new Tile(Color.Green, Shape.Gecko);
+		Tile tealDolphin = new Tile(Color.Teal, Shape.Dolphin);
+		Tile magentaDolphin = new Tile(Color.Magenta, Shape.Dolphin);
+		
+		Position pos_6_6 = new Position(6, 6);
+		Position pos_7_6 = new Position(7,6);
+		Position pos_6_7 = new Position(6, 7);
+		Position pos_6_5 = new Position(6, 5);
+		Position pos_5_6 = new Position(5, 6);
+		
+		List<Tile> listNearbyTiles = new ArrayList<>();
+		listNearbyTiles.add(RED_DOLPHIN);
+		listNearbyTiles.add(NAVY_DOLPHIN);
+		listNearbyTiles.add(tealDolphin);
+		listNearbyTiles.add(magentaDolphin);
+		
+		gameboard.put(pos_7_6, RED_DOLPHIN);
+		gameboard.put(pos_6_7, NAVY_DOLPHIN);
+		gameboard.put(pos_6_5, tealDolphin);
+		gameboard.put(pos_5_6, magentaDolphin);
+		
+		boolean testResult = Referee.checkIfMoveIsLegal(listNearbyTiles, gameboard, pos_6_6, greenGecko);
+		assertFalse(testResult);
+		
+	}
 }
