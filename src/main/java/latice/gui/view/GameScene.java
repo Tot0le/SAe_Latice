@@ -131,7 +131,6 @@ public class GameScene extends Scene {
 		// the exchangeAllTilesBtn now listen
 		buyANewActionBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
 			gameController.buyANewActionBtnHandler();
-			buyANewActionBtn.setDisable(false);
 		});
 	}
 	
