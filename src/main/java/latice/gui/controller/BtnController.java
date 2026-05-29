@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import latice.gui.view.GameScene;
+import latice.gui.view.RulesScene;
 import latice.gui.view.SettingGameScene;
 
 public class BtnController {
@@ -17,8 +18,6 @@ public class BtnController {
 		public BtnController(Stage primaryStage) {
 	        this.primaryStage = primaryStage;
 	    }
-		
-
 		
 		public void launchBtnHandler() {
 			ArrayList<String> usernames = settingScene.getUsernames();
@@ -31,40 +30,15 @@ public class BtnController {
 			}
 			
 		}
-//		// handler of launch button is starting a was scene with gameScene
-//		public EventHandler<MouseEvent> launchBtnHandler() {
-//	        return new EventHandler<MouseEvent>() {
-//	            @Override
-//	            public void handle(MouseEvent event) {
-//	            	
-//	        		GameScene gameScene = new GameScene(usernames);
-//	        		Scene scene = gameScene.createGameScene();
-//	        		
-//	        		primaryStage.setScene(scene);
-//	        		gameScene.launchGame();
-//	            }
-//	        };
-//	    }
 		
 		// handler of play button is starting a was scene with gameScene
 		public void playBtnHandler() {
         	SettingGameScene settingScene = new SettingGameScene();
-    		Scene scene = settingScene.createSettingScene(this);
     		
+    		Scene scene = settingScene.createSettingScene(this);
     		primaryStage.setScene(scene);
 	    }
-//		// handler of play button is starting a was scene with gameScene
-//		public EventHandler<MouseEvent> playBtnHandler() {
-//	        return new EventHandler<MouseEvent>() {
-//	            @Override
-//	            public void handle(MouseEvent event) {
-//	            	SettingGameScene settingScene = new SettingGameScene();
-//	        		Scene scene = settingScene.createSettingScene(this);
-//	        		
-//	        		primaryStage.setScene(scene);
-//	            }
-//	        };
-//	    }
+
 //		handler of quit button is exiting the window
 	    public EventHandler<MouseEvent> quitBtnHandler() {
 	        return new EventHandler<MouseEvent>() {
@@ -72,6 +46,19 @@ public class BtnController {
 	            public void handle(MouseEvent event) {
 	            		
 	            	primaryStage.close();
+	            }
+	        };
+	    }
+	    
+	    public EventHandler<MouseEvent> rulesBtnHandler() {
+	        return new EventHandler<MouseEvent>() {
+	            @Override
+	            public void handle(MouseEvent event) {
+	            	
+	            	RulesScene rulesScene = new RulesScene();
+	            	Scene scene = rulesScene.createRulesScene(primaryStage);
+	            	
+	            	primaryStage.setScene(scene);
 	            }
 	        };
 	    }
