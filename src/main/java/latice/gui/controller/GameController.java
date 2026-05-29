@@ -105,8 +105,8 @@ public class GameController {
 			}
 		
 			// update the current player
-			this.lblController.currentPlayerLabel().setText(this.currentPlayer.username() + "'s turn");
 			this.currentPlayer = new ArrayList<>(this.playerAndRackMap.keySet()).get(this.currentPlayerIndex);
+			this.lblController.currentPlayerLabel().setText(this.currentPlayer.username() + "'s turn");
 			
 			// update ihm rack related content
 			this.displayCurrentPlayerRack();
