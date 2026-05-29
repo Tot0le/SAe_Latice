@@ -58,8 +58,8 @@ public class GameScene extends Scene {
 
 		vboxTop.getChildren().addAll(endTurnBtn, endMessageLbl);
 		
-		Label scorePlayer1 = new Label("Score player 1 : 0");
-		Label scorePlayer2 = new Label("Score player 2 : 0");
+		Label scorePlayer1 = new Label("Score " + usernames.get(0) + " : 0");
+		Label scorePlayer2 = new Label("Score " + usernames.get(1) + " : 0");
 		
 		currentPlayer = new Label();
 		VBox vboxRight = new VBox();
@@ -99,8 +99,8 @@ public class GameScene extends Scene {
 		Rack rackPlayer2 = new Rack();
 		rackPlayer1.addTile(new Tile(Color.Green, Shape.Bird));
 		rackPlayer2.addTile(new Tile(Color.Magenta, Shape.Bird));
-		Player player1 = new Player(usernames.get(0), 1, rackPlayer1, poolPlayer1, gameboard);
-		Player player2 = new Player(usernames.get(1), 1, rackPlayer2, poolPlayer2, gameboard);
+		Player player1 = new Player(usernames.get(0), 0, rackPlayer1, poolPlayer1, gameboard);
+		Player player2 = new Player(usernames.get(1), 0, rackPlayer2, poolPlayer2, gameboard);
 		
 		player1.drawMaxTile();
 		player2.drawMaxTile();

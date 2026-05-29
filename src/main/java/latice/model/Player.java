@@ -14,6 +14,7 @@ public class Player {
 	private GameBoard gameboard;
 	private Integer orderNumber;
 	private boolean moveAvailable;
+	private int priceNewAction; //TODO move it to Referee I think
 
 	public Player(String username, Integer points, Rack rack, Pool pool, GameBoard gameboard) {
 		this.username = username;
@@ -23,6 +24,7 @@ public class Player {
 		this.gameboard = gameboard;
 		this.orderNumber = null;
 		this.setMoveAvailable(true);
+		this.priceNewAction = 2;
 	}
 	
 	public Player(Integer points, Rack rack, Pool pool, GameBoard gameboard) {
@@ -37,7 +39,7 @@ public class Player {
 		if (moveAvailable) {
 			throw new ShouldNotBePossibleException("The user should not be able to click on the button \"buy a new action\" if a move is already available.");
 		} else {
-			this.points = this.points - 2;
+			this.points = this.points - this.priceNewAction;
 			this.moveAvailable = true;
 		}
 	}
