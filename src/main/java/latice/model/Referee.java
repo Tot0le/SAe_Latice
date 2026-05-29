@@ -9,7 +9,18 @@ import latice.model.tile.Shape;
 import latice.model.tile.Tile;
 
 public class Referee {
-
+	private ArrayList<Player> playerList;
+	private Player currentPlayer;
+	private int currentPlayerIndex = 0;
+	private int cycleCount = 0;
+	private boolean isTheGameEnd;
+	
+	public Referee(ArrayList<Player> playerList) {
+		this.currentPlayer = playerList.getFirst();
+		this.setPlayerList(playerList);
+		
+	}
+	
 	public static void dealTheCards(Pool originPool, Pool poolPlayer1, Pool poolPlayer2) {
 		Integer tilesNumber = originPool.tilesAmounts();
 
@@ -77,8 +88,94 @@ public class Referee {
 		
 		return points;
 	}
+	
+	public void nextTurn(GameBoard gameboard) {
+//		isTheGameEnd = 
+		// the previous player has to draw one tile if their rack is not full
+		if (!this.currentPlayer.rack().isFull()) {
+			this.currentPlayer.drawMaxTile();
+		}
+		
+		// if the game is not finished, 
+		if (this.cycleCount < gameboard.nbCycle() && this.currentPlayer.totalTilesNumber() > 0) {
+			
+			// change current player
+			this.currentPlayerIndex = this.currentPlayerIndex + 1;
+			if (this.currentPlayerIndex >= this.playerList.size()) {
+				this.cycleCount += 1;
+				this.currentPlayerIndex = this.currentPlayerIndex % this.playerList.size();
+			}
+		
+			// update the current player
+			this.currentPlayer = playerList.get(this.currentPlayerIndex);
+			
+			// regive the player a free move
+			this.currentPlayer.setMoveAvailable(true);
+			this.isTheGameEnd = false;
+		} else {
+			this.isTheGameEnd = true;
+		}
+	}
+	
+	public Player endGame() {
+		Player winner = null;
+		Integer winnerTotalNumber = (int) Double.POSITIVE_INFINITY;
+		boolean isDraw = false;
+		for (Player player: this.playerList) {
+			if (player.totalTilesNumber() < winnerTotalNumber) {
+				winner = player;
+				winnerTotalNumber = winner.totalTilesNumber();
+				isDraw = false;
+			} else if (player.totalTilesNumber() == (int) winnerTotalNumber) {
+				isDraw = true;
+			}
+		}
 
+		if (isDraw) {
+			winner = null;
+		}
+		return winner;
+	}
 
+	public Player currentPlayer() {
+		return currentPlayer;
+	}
+
+	public void setCurrentPlayer(Player currentPlayer) {
+		this.currentPlayer = currentPlayer;
+	}
+
+	public int currentPlayerIndex() {
+		return currentPlayerIndex;
+	}
+
+	public void setCurrentPlayerIndex(int currentPlayerIndex) {
+		this.currentPlayerIndex = currentPlayerIndex;
+	}
+
+	public int cycleCount() {
+		return cycleCount;
+	}
+
+	public void setCycleCount(int cycleCount) {
+		this.cycleCount = cycleCount;
+	}
+
+	public ArrayList<Player> playerList() {
+		return playerList;
+	}
+
+	public void setPlayerList(ArrayList<Player> playerList) {
+		this.playerList = playerList;
+	}
+
+	public boolean isTheGameEnd() {
+		return isTheGameEnd;
+	}
+
+	public void setTheGameEnd(boolean isTheGameEnd) {
+		this.isTheGameEnd = isTheGameEnd;
+	}
 }
 
 

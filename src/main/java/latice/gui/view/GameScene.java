@@ -119,9 +119,10 @@ public class GameScene {
 		// The game can now start
 		
 		LabelController lblController = new LabelController(scoreLabels, currentPlayer, endMessageLbl);
-		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this, lblController);
-		gameController.displayCurrentPlayerRack();
-		gameController.getCurrentPlayerRackIhm().updateRackTiles();
+		Referee referee = new Referee(playerList);
+		GameController gameController = new GameController(this.gameboard, this.visualGameboard, referee, this, lblController);
+//		gameController.displayCurrentPlayerRack();
+//		gameController.getCurrentPlayerRackIhm().updateRackTiles();
 		
 		// the end turn button now listen
 		endTurnBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {

@@ -10,9 +10,9 @@ public class LabelController {
 	private Label endMessageLbl;
 	
 	public LabelController(List<Label> scorePlayerLabels, Label currentPlayerLabel, Label endMessageLbl) {
+		this.setScorePlayerLabels(scorePlayerLabels);
 		this.setCurrentPlayerLabel(currentPlayerLabel);
 		this.setEndMessageLbl(endMessageLbl);
-		this.setScorePlayerLabels(scorePlayerLabels);
 	}
 
 	public Label currentPlayerLabel() {
