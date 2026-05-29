@@ -32,10 +32,9 @@ public class BtnController {
 		
 		// handler of play button is starting a was scene with gameScene
 		public void playBtnHandler() {
-        	settingScene = new SettingGameScene();
+        	settingScene = new SettingGameScene(this);
     		
-    		Scene scene = settingScene.createSettingScene(this);
-    		primaryStage.setScene(scene);
+    		primaryStage.setScene(settingScene);
 	    }
 
 //		handler of quit button is exiting the window
