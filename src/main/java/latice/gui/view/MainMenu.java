@@ -22,9 +22,10 @@ import latice.util.SetImageView;
 import latice.gui.view.GameScene;
 import latice.gui.controller.*;
 
-public class MainMenu {
-	public static Scene createMainMenuScene(Stage primaryStage) {
-		BorderPane root = new BorderPane();
+public class MainMenu extends Scene {
+	public MainMenu(Stage primaryStage) {
+		super(new BorderPane(), 900, 600);
+		BorderPane root = (BorderPane) getRoot();
 
 		// load the image via a safe image load function and its path in ImagePath enum
 		Image image_background = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_MENU.imagePath(), 250,250);
@@ -85,16 +86,13 @@ public class MainMenu {
 		root.setBottom(caseBottom);
 		root.setRight(caseRight);
 		
-		// Attribution of the background and the root to the scene
-		Scene scene = new Scene(root,900,600);
+		// Attribution of the background
 		root.setBackground(new Background(background));
 
 		// Position attribution of the VBoxs in the BorderPane
 		BorderPane.setMargin(caseTop, new Insets(100, 0, 150, 0));
 		BorderPane.setMargin(caseBottom, new Insets(0, 0, 200, 0));
 		BorderPane.setMargin(caseRight, new Insets(0,100,0,0));
-
-		return scene;
 
 	}
 	
