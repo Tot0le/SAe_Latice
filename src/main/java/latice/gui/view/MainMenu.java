@@ -13,7 +13,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import latice.gui.controller.BtnController;
+import latice.gui.controller.MenuBtnController;
 import latice.util.ImageLoader;
 import latice.util.ImagePath;
 import latice.util.SetImageView;
@@ -49,7 +49,7 @@ public class MainMenu extends Scene {
 		btnRules = SetImageView.getImageInButton(btnRules, imageRules);
 		
 		// Buttons listeners    we make a new primaryStage to bypass the static restrictions
-		BtnController controller = new BtnController(primaryStage);
+		MenuBtnController controller = new MenuBtnController(primaryStage);
 		btnPlay.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
 			controller.playBtnHandler();
 		});

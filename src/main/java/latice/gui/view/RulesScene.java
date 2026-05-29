@@ -13,7 +13,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import latice.gui.controller.BtnController;
+import latice.gui.controller.MenuBtnController;
 import latice.util.ImageLoader;
 import latice.util.ImagePath;
 import latice.util.SetImageView;
@@ -33,7 +33,7 @@ public class RulesScene extends Scene {
 		btnQuitRules.setMaxSize(150, 100);
 		btnQuitRules = SetImageView.getImageInButton(btnQuitRules, imageQuit);
 		
-		BtnController controller = new BtnController(primaryStage);
+		MenuBtnController controller = new MenuBtnController(primaryStage);
 	    btnQuitRules.setOnMouseClicked(controller.quitBtnHandler());
 		
 		BackgroundImage rulesBackground = new BackgroundImage(imageRulesBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));

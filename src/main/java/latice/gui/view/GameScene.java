@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import latice.gui.controller.GameBtnController;
 import latice.gui.controller.GameController;
 import latice.gui.controller.LabelController;
 import latice.gui.model.GameBoardIhm;
@@ -33,6 +34,7 @@ public class GameScene extends Scene {
 	private Button exchangeAllTilesBtn;
 //	private Button exchangeTilesBtn;
 	private Button confirmBtn;
+	private Button buyANewActionBtn;
 	private ArrayList<Label> scoreLabels;
 	private ArrayList<String> usernames;
 	private Label currentPlayer;
@@ -76,6 +78,10 @@ public class GameScene extends Scene {
 		hboxBottom.getChildren().add(rackIhmEmplacement);
 		exchangeAllTilesBtn = new Button("Exchange All Tiles");
 		hboxBottom.getChildren().add(exchangeAllTilesBtn);
+		
+		buyANewActionBtn = new Button("Buy an action.");
+		buyANewActionBtn.setDisable(true);
+		hboxBottom.getChildren().add(buyANewActionBtn);
 
 		root.setBottom(hboxBottom);
 		BorderPane.setAlignment(hboxBottom, Pos.BOTTOM_CENTER);
@@ -93,8 +99,8 @@ public class GameScene extends Scene {
 		Rack rackPlayer2 = new Rack();
 		rackPlayer1.addTile(new Tile(Color.Green, Shape.Bird));
 		rackPlayer2.addTile(new Tile(Color.Magenta, Shape.Bird));
-		Player player1 = new Player(usernames.get(0), 0, rackPlayer1, poolPlayer1, gameboard);
-		Player player2 = new Player(usernames.get(1), 0, rackPlayer2, poolPlayer2, gameboard);
+		Player player1 = new Player(usernames.get(0), 1, rackPlayer1, poolPlayer1, gameboard);
+		Player player2 = new Player(usernames.get(1), 1, rackPlayer2, poolPlayer2, gameboard);
 		
 		player1.drawMaxTile();
 		player2.drawMaxTile();
@@ -106,10 +112,9 @@ public class GameScene extends Scene {
 		// The game can now start
 		
 		LabelController lblController = new LabelController(scoreLabels, currentPlayer, endMessageLbl);
+		GameBtnController gameBtnController = new GameBtnController(buyANewActionBtn);
 		Referee referee = new Referee(playerList);
-		GameController gameController = new GameController(this.gameboard, this.visualGameboard, referee, this, lblController);
-//		gameController.displayCurrentPlayerRack();
-//		gameController.getCurrentPlayerRackIhm().updateRackTiles();
+		GameController gameController = new GameController(this.gameboard, this.visualGameboard, referee, this, lblController, gameBtnController);
 		
 		// the end turn button now listen
 		endTurnBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
@@ -122,7 +127,12 @@ public class GameScene extends Scene {
 			gameController.exchangeAllTilesBtnHandler();
 			
 		});
-
+		
+		// the exchangeAllTilesBtn now listen
+		buyANewActionBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+			gameController.buyANewActionBtnHandler();
+			buyANewActionBtn.setDisable(false);
+		});
 	}
 	
 	public Group rackEmplacement() {

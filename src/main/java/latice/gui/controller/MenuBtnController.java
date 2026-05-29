@@ -9,12 +9,12 @@ import latice.gui.view.GameScene;
 import latice.gui.view.RulesScene;
 import latice.gui.view.SettingGameScene;
 
-public class BtnController {
+public class MenuBtnController {
 		
 		private Stage primaryStage ;
 		private SettingGameScene settingScene;
 		
-		public BtnController(Stage primaryStage) {
+		public MenuBtnController(Stage primaryStage) {
 	        this.primaryStage = primaryStage;
 	    }
 		

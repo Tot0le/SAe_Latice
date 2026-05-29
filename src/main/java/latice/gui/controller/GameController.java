@@ -14,6 +14,7 @@ import latice.model.Player;
 import latice.model.Position;
 import latice.model.Referee;
 import latice.model.tile.Tile;
+import latice.util.ShouldNotBePossibleException;
 
 public class GameController {
 	private final GameBoard gameboard;
@@ -25,8 +26,9 @@ public class GameController {
 	private Integer selectedTileIndex = null;
 	private GameScene gameScene;
 	private LabelController lblController;
+	private GameBtnController gameBtnController;
 
-	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, Referee referee, GameScene gameScene, LabelController lblController) {
+	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, Referee referee, GameScene gameScene, LabelController lblController, GameBtnController gameBtnController) {
 		this.gameboard = gameboard;
 		this.gameboardIhm = gameboardIhm;
 		this.gameScene = gameScene;
@@ -37,6 +39,7 @@ public class GameController {
 		this.rackIhm.updateRackTiles(referee.currentPlayer());
 		
 		this.lblController = lblController;
+		this.gameBtnController = gameBtnController;
 
 		this.lblController.currentPlayerLabel().setText(this.referee.currentPlayer().username() + "'s turn");
 		
@@ -66,8 +69,9 @@ public class GameController {
 		} else {
 			this.lblController.currentPlayerLabel().setText(referee.currentPlayer().username() + "'s turn");
 			
-			// update ihm rack related content
+			// update ihm related content
 			this.rackIhm.updateRackTiles(referee.currentPlayer());
+			this.gameBtnController.updateBuyAnActionBtn(referee.currentPlayer().isMoveAvailable(), referee.currentPlayer());
 		}
 	}
 	
@@ -101,6 +105,7 @@ public class GameController {
 					this.rackIhm.updateRackTiles(currentPlayer);
 					selectedTileIndex = null;
 					currentPlayer.setMoveAvailable(false);
+					this.gameBtnController.updateBuyAnActionBtn(referee.currentPlayer().isMoveAvailable(), referee.currentPlayer());
 				}
 			
 			}
@@ -112,14 +117,26 @@ public class GameController {
     	nextTurn();
     }
 	
-	public void exchangeAllTilesBtnHandler() {
+	public void exchangeAllTilesBtnHandler() { // TODO move btn handler to GameBtnController
 		Player currentPlayer = referee.currentPlayer();
 		if (currentPlayer.isMoveAvailable()) {
 			currentPlayer.exchangeAllTheRack();
-			System.out.println("exchange complete");
+			Console.message("exchange complete");
 			this.rackIhm.updateRackTiles(currentPlayer);
 			currentPlayer.setMoveAvailable(false);
+			this.gameBtnController.updateBuyAnActionBtn(referee.currentPlayer().isMoveAvailable(), referee.currentPlayer());
 		}
+	}
+	
+	public void buyANewActionBtnHandler() {
+		try {
+			this.referee.currentPlayer().buyANewAction();
+		} catch (ShouldNotBePossibleException e) {
+			Console.message(e.getMessage());
+		}
+		this.gameBtnController.updateBuyAnActionBtn(referee.currentPlayer().isMoveAvailable(), referee.currentPlayer());
+		this.updateScoreLabel();
+		
 	}
 
 	public void updateScoreLabel() {
