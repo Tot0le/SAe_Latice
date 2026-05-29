@@ -2,11 +2,7 @@ package latice.gui.controller;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.HashSet;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -28,28 +24,25 @@ public class GameController {
 	private int cycleCount = 0;
 	private Integer selectedTileIndex = null;
 	private GameScene gameScene;
-	private List<Label> scorePlayerLabels;
 	private boolean currentPlayerFreeMoveAvailable;
-	private Label currentPlayerLabel;
-	private Label endMessageLbl;
+	private LabelController lblController;
 	/// V8 FEATURE DO NOT DELETE //////
 //	private boolean multipleSelection;
 //	private ArrayList<Integer> selectedTilesIndex;
 //	private Button confirmButton;
 	/// V8 FEATURE DO NOT DELETE //////
 
-	// TODO create a LabelController to simplify 
-	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList, GameScene gameScene, List<Label> scorePlayerLabels, Label currentPlayerLabel, Label endMessageLbl) {
+	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, ArrayList<Player> playerList, GameScene gameScene, LabelController lblController) {
 		this.gameboard = gameboard;
 		this.gameboardIhm = gameboardIhm;
 		this.gameScene = gameScene;
 		this.currentPlayer = playerList.getFirst();
-		this.currentPlayerLabel = currentPlayerLabel;
-		this.endMessageLbl = endMessageLbl;
-		this.currentPlayerLabel.setText(this.currentPlayer.username() + "'s turn");
-		this.playerAndRackMap = new LinkedHashMap<>();
-		this.scorePlayerLabels = scorePlayerLabels;
 		this.currentPlayerFreeMoveAvailable = true;
+		this.playerAndRackMap = new LinkedHashMap<>();
+		
+		this.lblController = lblController;
+
+		this.lblController.currentPlayerLabel().setText(this.currentPlayer.username() + "'s turn");
 		/// V8 FEATURE DO NOT DELETE //////
 //		this.multipleSelection = false;
 //		this.selectedTilesIndex = new ArrayList<Integer>();
@@ -84,14 +77,14 @@ public class GameController {
 		}
 		if (winner == null) {
 			System.out.println("It's a draw !");
-			this.endMessageLbl.setTextFill(Color.GRAY);
-			this.endMessageLbl.setFont(Font.font("", FontWeight.BOLD, 30));
-			this.endMessageLbl.setText("It's a draw !");
+			this.lblController.endMessageLbl().setTextFill(Color.GRAY);
+			this.lblController.endMessageLbl().setFont(Font.font("", FontWeight.BOLD, 30));
+			this.lblController.endMessageLbl().setText("It's a draw !");
 		} else {
 			System.out.println("The winner is the player : " + winner.username());
-			this.endMessageLbl.setTextFill(Color.GOLD);
-			this.endMessageLbl.setFont(Font.font("", FontWeight.BOLD, 30));
-			this.endMessageLbl.setText("The winner is the player : " + winner.username());
+			this.lblController.endMessageLbl().setTextFill(Color.GOLD);
+			this.lblController.endMessageLbl().setFont(Font.font("", FontWeight.BOLD, 30));
+			this.lblController.endMessageLbl().setText("The winner is the player : " + winner.username());
 		}
 	}
 
@@ -112,7 +105,7 @@ public class GameController {
 			}
 		
 			// update the current player
-			this.currentPlayerLabel.setText(this.currentPlayer.username() + "'s turn");
+			this.lblController.currentPlayerLabel().setText(this.currentPlayer.username() + "'s turn");
 			this.currentPlayer = new ArrayList<>(this.playerAndRackMap.keySet()).get(this.currentPlayerIndex);
 			
 			// update ihm rack related content
@@ -225,7 +218,7 @@ public class GameController {
 	}
 	
 	public void updateScoreLabel() {
-		scorePlayerLabels.get(currentPlayerIndex).setText("Score player " + (this.currentPlayerIndex + 1) + " : " + this.currentPlayer.points());
+		this.lblController.scorePlayerLabels().get(currentPlayerIndex).setText("Score player " + (this.currentPlayerIndex + 1) + " : " + this.currentPlayer.points());
 	}
 	
 }
