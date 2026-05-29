@@ -1,7 +1,6 @@
 package latice.gui.model;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -10,7 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import latice.gui.controller.GameController;
-import latice.model.Position;
 import latice.model.Rack;
 import latice.model.tile.Tile;
 import latice.util.ImageLoader;

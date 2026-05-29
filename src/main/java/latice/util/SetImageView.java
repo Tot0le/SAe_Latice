@@ -21,8 +21,7 @@ public class SetImageView{
         
         // On fait en sorte que il n'y ait pas de petite marge dans le bouton
         btn.setGraphic(iv);
-        btn.setPadding(new Insets(0, 0, 0, 0));
-        
+        btn.setPadding(new Insets(0, 0, 0, 0));     
         return btn;
 	}
 }

@@ -1,13 +1,12 @@
 package latice.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import latice.gui.model.GameBoardIhm;
+import latice.model.tile.Color;
+import latice.model.tile.Shape;
 import latice.model.tile.Tile;
-
 
 public class Referee {
 
@@ -41,25 +40,45 @@ public class Referee {
 		
 	}
 	
-	public static boolean checkIfMoveIsLegal(ArrayList<Tile> nearbyTiles, GameBoard gameboard, Position gameboardPosition, Tile selectedTile ) {
+	public static boolean checkIfMoveIsLegal(List<Tile> nearbyTiles, GameBoard gameboard, Position selectedTilePosition, Tile selectedTile ) {
 		boolean isLegal = true;
-		//System.out.println(nearbyTiles);
-		if (nearbyTiles.isEmpty() && ! gameboard.isEmpty() || ! gameboard.isMoonAt(gameboardPosition) && gameboard.isEmpty() ){
+		if (gameboard.getTile(selectedTilePosition) != null) {
 			isLegal = false;
-		}
-		if (isLegal) {
-			//System.out.println(nearbyTiles);
+		} else if (nearbyTiles.isEmpty() && ! gameboard.isEmpty() || ! gameboard.isMoonAt(selectedTilePosition) && gameboard.isEmpty() ){
+			isLegal = false;
+		} else {
 			for (Tile tile : nearbyTiles) {
-				//System.out.println(selectedTile);
 				if (tile.color() != selectedTile.color() && tile.shape() != selectedTile.shape()) {
 					isLegal = false;
-					//System.out.println("here");
 				}
-	
 			}
 		}
-	return isLegal;
+		return isLegal;
 	}
+
+
+	public static Integer calculatePoints(ArrayList<Tile> nearbyTiles, Tile tilePlaced) {
+		Integer numberOfTileMatches = 0;
+		Integer points = 0;
+		Color colorOfTilePlaced = tilePlaced.color();
+		Shape shapeOfTilePlaced = tilePlaced.shape();
+		
+		for (Tile tile : nearbyTiles) {
+			if (tile.color() == colorOfTilePlaced || tile.shape() == shapeOfTilePlaced) {
+				numberOfTileMatches += 1;
+			}
+		}
+		if (numberOfTileMatches == 2) {
+			points = 1;
+		}else if (numberOfTileMatches == 3) {
+			points = 2;
+		}else if (numberOfTileMatches == 4) {
+			points = 4;
+		}
+		
+		return points;
+	}
+
 
 }
 

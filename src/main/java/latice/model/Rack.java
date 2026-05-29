@@ -1,9 +1,9 @@
 package latice.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import latice.model.tile.Tile;
-import latice.util.TileChoosedFromRackOutOfRangeException;
 
 public class Rack {
 	private ArrayList<Tile> tiles;
@@ -18,6 +18,10 @@ public class Rack {
 		this.tiles = new ArrayList<>();
 		this.maxTiles = maxTiles;
 	}
+	
+	public Integer size() {
+		return this.tiles.size();
+	} // TODO remove one of the two same getters
 
 	// getteur
 	public int tilesAmount() {
@@ -55,6 +59,27 @@ public class Rack {
 
 	public void addTile(Tile tile) {
 		this.tiles.add(tile);
+	}
+	
+	public boolean isFull() {
+		return this.tilesAmount() >= maxTiles();
+	}
+	
+	public ArrayList<Tile> takeTilesFromRack(ArrayList<Integer> indexesOfTilesInRack) {
+		
+		ArrayList<Tile> tilesToBeExchanged = new ArrayList<>();
+		Collections.sort(indexesOfTilesInRack);
+		Collections.reverse(indexesOfTilesInRack);
+		
+		for (int indexOfTiles : indexesOfTilesInRack) {
+			tilesToBeExchanged.add(this.tiles.get(indexOfTiles));
+		}
+		
+		for (int indexOfTiles : indexesOfTilesInRack) {
+			this.tiles.remove(indexOfTiles);
+		}
+		
+		return tilesToBeExchanged;
 	}
 
 	@Override
