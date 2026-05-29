@@ -23,9 +23,8 @@ public class BtnController {
 			ArrayList<String> usernames = settingScene.getUsernames();
 			if (!usernames.isEmpty()) {
 				GameScene gameScene = new GameScene(usernames);
-	    		Scene scene = gameScene.createGameScene();
 	    		
-	    		primaryStage.setScene(scene);
+	    		primaryStage.setScene(gameScene);
 	    		gameScene.launchGame();
 			}
 			

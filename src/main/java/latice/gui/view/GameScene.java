@@ -23,7 +23,7 @@ import latice.model.tile.Color;
 import latice.model.tile.Shape;
 import latice.model.tile.Tile;
 
-public class GameScene {
+public class GameScene extends Scene {
 	private GameBoard gameboard;
 	private GameBoardIhm visualGameboard;
 	private HBox hboxBottom;
@@ -39,16 +39,15 @@ public class GameScene {
 	private Label endMessageLbl;
 	
 	public GameScene(ArrayList<String> usernames) {
+		super(new BorderPane(), 1920, 1080);
 		this.usernames = usernames;
 		this.gameboard = new GameBoard();
 		this.visualGameboard = new GameBoardIhm(this.gameboard);
 		this.hboxBottom = new HBox();
 		this.rackIhmEmplacement = new Group();
-	}
-	
-	public Scene createGameScene() {
-		root = new BorderPane();
-
+		
+		this.root = (BorderPane) this.getRoot();
+		
 		BorderPane.setAlignment(visualGameboard, Pos.CENTER);
 		VBox vboxTop = new VBox();
 		endTurnBtn = new Button("End Turn");
@@ -88,11 +87,6 @@ public class GameScene {
 		root.setBottom(hboxBottom);
 		BorderPane.setAlignment(hboxBottom, Pos.BOTTOM_CENTER);
 		BorderPane.setAlignment(vboxTop, Pos.TOP_CENTER);
-		
-		Scene scene = new Scene(root,1920,1080);
-		// note that the size of the window does not change if the scene change their size during the program execution
-
-		return scene;
 	}
 	
 	public void launchGame() {
