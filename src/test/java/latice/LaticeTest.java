@@ -232,7 +232,12 @@ class LaticeTest {
 		if(listOrdered.equals(listPlayers1) || listOrdered.equals(listPlayers2)) {
 			randomBoolean = true;
 		}
+		ArrayList<Tile> ourTestingTiles = new ArrayList<>();
+		ourTestingTiles.addAll(List.of(RED_DOLPHIN, NAVY_DOLPHIN, GREEN_TURTLE, RED_TURTLE, RED_GECKO));
+		pool.setTiles(ourTestingTiles);
 		assertTrue(randomBoolean);
+		player1.drawMaxTile();
+		assertEquals(5, player1.rack().getTiles().size());
 	}
 	
 	@Test
