@@ -46,7 +46,7 @@ public class GameBoardIhm extends GridPane {
 
 	}
 	
-	private Image chooseRightBackgroundImage(Position position) {
+	public Image chooseRightBackgroundImage(Position position) {
 		Image image;
 		Image backgroundImage = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SEA.imagePath(), tileSize, tileSize);
 		if (gameboard.isSunAt(position)) {
@@ -58,7 +58,8 @@ public class GameBoardIhm extends GridPane {
 		}
 		return image;
 	}
-	
+
+
 	public void bindController(GameController gameController) {
 		this.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
 			Node clickedNode = (Node) event.getTarget();
