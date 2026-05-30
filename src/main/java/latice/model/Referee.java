@@ -67,7 +67,7 @@ public class Referee {
 		return isLegal;
 	}
 
-	public static Integer calculatePoints(ArrayList<Tile> nearbyTiles, Tile tilePlaced) {
+	public static Integer calculatePoints(ArrayList<Tile> nearbyTiles, Tile tilePlaced, boolean isSunAt) {
 		Integer numberOfTileMatches = 0;
 		Integer points = 0;
 		Color colorOfTilePlaced = tilePlaced.color();
@@ -84,6 +84,10 @@ public class Referee {
 			points = 2;
 		}else if (numberOfTileMatches == 4) {
 			points = 4;
+		}
+		
+		if (isSunAt) {
+			points += 2;
 		}
 		
 		return points;

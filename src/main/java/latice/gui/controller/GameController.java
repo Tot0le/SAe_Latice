@@ -99,7 +99,7 @@ public class GameController {
 				if (isLegal) {
 					currentPlayer.rack().popTile(selectedTileIndex);
 					gameboard.put(gameboardPosition, selectedTile);
-					currentPlayer.addPoints(Referee.calculatePoints(nearbyTiles, selectedTile));
+					currentPlayer.addPoints(Referee.calculatePoints(nearbyTiles, selectedTile, gameboard.isSunAt(gameboardPosition)));
 					updateScoreLabel();
 					gameboardIhm.update();
 					this.rackIhm.updateRackTiles(currentPlayer);
@@ -141,7 +141,7 @@ public class GameController {
 
 	public void updateScoreLabel() {
 		int currentPlayerIndex = referee.currentPlayerIndex();
-		this.lblController.scorePlayerLabels().get(currentPlayerIndex).setText("Score player " + (currentPlayerIndex + 1) + " : " + referee.currentPlayer().points());
+		this.lblController.scorePlayerLabels().get(currentPlayerIndex).setText("Score " + referee.currentPlayer().username() + " : " + referee.currentPlayer().points());
 	}
 	
 }
