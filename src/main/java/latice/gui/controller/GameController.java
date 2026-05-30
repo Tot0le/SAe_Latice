@@ -1,7 +1,5 @@
 package latice.gui.controller;
 
-import java.util.ArrayList;
-
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -13,7 +11,6 @@ import latice.model.GameBoard;
 import latice.model.Player;
 import latice.model.Position;
 import latice.model.Referee;
-import latice.model.tile.Tile;
 import latice.util.ShouldNotBePossibleException;
 
 public class GameController {
@@ -71,6 +68,7 @@ public class GameController {
 			
 			// update ihm related content
 			this.rackIhm.updateRackTiles(referee.currentPlayer());
+			this.gameBtnController.updateExchangeAllBtn(referee);
 			this.gameBtnController.updateBuyAnActionBtn(referee);
 		}
 	}
@@ -89,27 +87,16 @@ public class GameController {
 	
 	public void handleTilePlacement(Position gameboardPosition) {
 		if (selectedTileIndex != null) {
-			Player currentPlayer = referee.currentPlayer();
-			if (currentPlayer.isMoveAvailable()) {
-				Tile selectedTile = currentPlayer.rack().getTile(this.selectedTileIndex);
-				ArrayList<Tile> nearbyTiles = (ArrayList<Tile>) this.gameboard.getNearbyTiles(gameboardPosition);
-				
-				boolean isLegal = Referee.checkIfMoveIsLegal(nearbyTiles, gameboard, gameboardPosition, selectedTile);
-				
-				if (isLegal) {
-					currentPlayer.rack().popTile(selectedTileIndex);
-					gameboard.put(gameboardPosition, selectedTile);
-					currentPlayer.addPoints(Referee.calculatePoints(nearbyTiles, selectedTile, gameboard.isSunAt(gameboardPosition)));
-					updateScoreLabel();
-					gameboardIhm.update();
-					this.rackIhm.updateRackTiles(currentPlayer);
-					selectedTileIndex = null;
-					currentPlayer.setMoveAvailable(false);
-					this.gameBtnController.updateBuyAnActionBtn(referee);
-				}
-			
+			boolean isLegal = referee.checkIfMoveIsLegal(selectedTileIndex, gameboardPosition);
+			if (isLegal) {
+				selectedTileIndex = null;
+				// IHM related :
+				updateScoreLabel();
+				gameboardIhm.update();
+				this.rackIhm.updateRackTiles(referee.currentPlayer());
+				this.gameBtnController.updateExchangeAllBtn(referee);
+				this.gameBtnController.updateBuyAnActionBtn(referee);
 			}
-			
 		}
 	}
 
@@ -124,6 +111,8 @@ public class GameController {
 			Console.message("exchange complete");
 			this.rackIhm.updateRackTiles(currentPlayer);
 			currentPlayer.setMoveAvailable(false);
+			
+			this.gameBtnController.updateExchangeAllBtn(referee);
 			this.gameBtnController.updateBuyAnActionBtn(referee);
 		}
 	}
@@ -134,6 +123,7 @@ public class GameController {
 		} catch (ShouldNotBePossibleException e) {
 			Console.message(e.getMessage());
 		}
+		this.gameBtnController.updateExchangeAllBtn(referee);
 		this.gameBtnController.updateBuyAnActionBtn(referee);
 		this.updateScoreLabel();
 		
