@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import latice.gui.controller.BtnController;
+import latice.gui.controller.MenuBtnController;
 
 public class SettingGameScene extends Scene {
 	private BorderPane root;
@@ -24,7 +24,7 @@ public class SettingGameScene extends Scene {
 	private Label lblErrorTypePlayer1;
 	private Label lblErrorTypePlayer2;
 	
-	public SettingGameScene(BtnController btnController) {
+	public SettingGameScene(MenuBtnController btnController) {
 		super(new BorderPane(), 1920, 1080);
 		
 		this.root = (BorderPane) this.getRoot();

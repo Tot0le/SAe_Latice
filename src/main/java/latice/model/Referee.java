@@ -9,16 +9,19 @@ import latice.model.tile.Shape;
 import latice.model.tile.Tile;
 
 public class Referee {
+	private GameBoard gameboard;
 	private ArrayList<Player> playerList;
 	private Player currentPlayer;
 	private int currentPlayerIndex = 0;
 	private int cycleCount = 0;
 	private boolean isTheGameEnd;
+	private int priceNewAction;
 	
-	public Referee(ArrayList<Player> playerList) {
+	public Referee(GameBoard gameboard, ArrayList<Player> playerList) {
+		this.gameboard = gameboard;
 		this.currentPlayer = playerList.getFirst();
 		this.setPlayerList(playerList);
-		
+		this.priceNewAction = 2;
 	}
 	
 	public static void dealTheCards(Pool originPool, Pool poolPlayer1, Pool poolPlayer2) {
@@ -51,23 +54,36 @@ public class Referee {
 		
 	}
 
-	public static boolean checkIfMoveIsLegal(List<Tile> nearbyTiles, GameBoard gameboard, Position selectedTilePosition, Tile selectedTile ) {
-		boolean isLegal = true;
-		if (gameboard.getTile(selectedTilePosition) != null) {
-			isLegal = false;
-		} else if (nearbyTiles.isEmpty() && ! gameboard.isEmpty() || ! gameboard.isMoonAt(selectedTilePosition) && gameboard.isEmpty() ){
-			isLegal = false;
-		} else {
-			for (Tile tile : nearbyTiles) {
-				if (tile.color() != selectedTile.color() && tile.shape() != selectedTile.shape()) {
-					isLegal = false;
+	public boolean checkIfMoveIsLegal(Integer selectedTileIndexRack, Position selectedTilePositionGmBrd ) {
+		boolean isLegal = false;
+		Tile selectedTile = currentPlayer.rack().getTile(selectedTileIndexRack);
+		ArrayList<Tile> nearbyTiles = (ArrayList<Tile>) this.gameboard.getNearbyTiles(selectedTilePositionGmBrd);
+		if (currentPlayer.isMoveAvailable()) {
+			isLegal = true;
+			
+			if (gameboard.getTile(selectedTilePositionGmBrd) != null) {
+				isLegal = false;
+			} else if (nearbyTiles.isEmpty() && ! gameboard.isEmpty() || ! gameboard.isMoonAt(selectedTilePositionGmBrd) && gameboard.isEmpty() ){
+				isLegal = false;
+			} else {
+				for (Tile tile : nearbyTiles) {
+					if (tile.color() != selectedTile.color() && tile.shape() != selectedTile.shape()) {
+						isLegal = false;
+					}
 				}
 			}
+		}
+		
+		if (isLegal) {
+			currentPlayer.rack().popTile(selectedTileIndexRack);
+			gameboard.put(selectedTilePositionGmBrd, selectedTile);
+			currentPlayer.addPoints(Referee.calculatePoints(nearbyTiles, selectedTile, gameboard.isSunAt(selectedTilePositionGmBrd)));
+			currentPlayer.setMoveAvailable(false);
 		}
 		return isLegal;
 	}
 
-	public static Integer calculatePoints(ArrayList<Tile> nearbyTiles, Tile tilePlaced) {
+	public static Integer calculatePoints(ArrayList<Tile> nearbyTiles, Tile tilePlaced, boolean isSunAt) {
 		Integer numberOfTileMatches = 0;
 		Integer points = 0;
 		Color colorOfTilePlaced = tilePlaced.color();
@@ -84,6 +100,10 @@ public class Referee {
 			points = 2;
 		}else if (numberOfTileMatches == 4) {
 			points = 4;
+		}
+		
+		if (isSunAt) {
+			points += 2;
 		}
 		
 		return points;
@@ -174,6 +194,10 @@ public class Referee {
 
 	public void setTheGameEnd(boolean isTheGameEnd) {
 		this.isTheGameEnd = isTheGameEnd;
+	}
+
+	public int priceNewAction() {
+		return priceNewAction;
 	}
 }
 

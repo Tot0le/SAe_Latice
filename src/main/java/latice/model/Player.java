@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import latice.gui.Console;
 import latice.model.tile.Tile;
+import latice.util.ShouldNotBePossibleException;
 
 public class Player {
 	private String username;
@@ -32,9 +33,13 @@ public class Player {
 		this.orderNumber = null;
 	}
 
-	public void buyANewAction(Integer points) {
-		points = points - 2;
-		// TODO  Implémenter une méthode permettant de rajouter une action au joueur
+	public void buyANewAction(Referee referee) throws ShouldNotBePossibleException {
+		if (moveAvailable) {
+			throw new ShouldNotBePossibleException("The user should not be able to click on the button \"buy a new action\" if a move is already available.");
+		} else {
+			this.points = this.points - referee.priceNewAction();
+			this.moveAvailable = true;
+		}
 	}
 	
 	public void exchangeAllTheRack() {
@@ -117,7 +122,7 @@ public class Player {
 	}
 	
 	// setteurs :
-	public void player(Integer points) {
+	public void setPoints(Integer points) {
 		this.points = points;
 	}
 	public void setOrderNumber(Integer orderNumber) {
