@@ -19,6 +19,7 @@ import latice.model.Pool;
 import latice.model.Position;
 import latice.model.Rack;
 import latice.model.Referee;
+import latice.model.StandartPool;
 import latice.model.tile.Color;
 import latice.model.tile.Shape;
 import latice.model.tile.Tile;
@@ -37,12 +38,35 @@ class LaticeTest {
 	Rack rack;
 	Pool pool;
 	GameBoard gameboard;
+	Pool poolPlayer1;
+	Pool poolPlayer2;
+	Rack rackPlayer1;
+	Rack rackPlayer2;
+	Player player1;
+	Player player2;
+	ArrayList<Player> playerList;
 
 	@BeforeEach
 	void clearElements() {
 		rack = new Rack();
 		pool = new Pool();
 		gameboard = new GameBoard(10, 9);
+
+		poolPlayer1 = new Pool();
+		poolPlayer2 = new Pool();
+		
+		rackPlayer1 = new Rack();
+		rackPlayer2 = new Rack();
+
+		player1 = new Player("Username 1", 0, rackPlayer1, poolPlayer1, gameboard);
+		player2 = new Player("Username 2", 0, rackPlayer2, poolPlayer2, gameboard);
+		
+		player1.drawMaxTile();
+		player2.drawMaxTile();
+		
+		playerList = new ArrayList<>();
+		playerList.add(player1);
+		playerList.add(player2);
 	}
 
 //	@Disabled
@@ -71,15 +95,11 @@ class LaticeTest {
 		ArrayList<Tile> tiles = Factory.createAllTiles();
 		Pool bigPool = new Pool(tiles);
 		Referee.shuffle(bigPool);
-		Pool poolPlayer1 = new Pool();
-		Pool poolPlayer2 = new Pool();
+
 		Referee.dealTheCards(bigPool, poolPlayer1, poolPlayer2);
 
-		Rack rackPlayer1 = new Rack();
-		Rack rackPlayer2 = new Rack();
-
-		Player player1 = new Player(0, rackPlayer1, poolPlayer1, gameboard);
-		Player player2 = new Player(0, rackPlayer2, poolPlayer2, gameboard);
+		player1 = new Player(0, rackPlayer1, poolPlayer1, gameboard);
+		player2 = new Player(0, rackPlayer2, poolPlayer2, gameboard);
 
 		for (int i = 0; i < 5; i++) {
 			assertEquals((nbTileMax/2) -i, poolPlayer1.tilesAmounts());
@@ -105,12 +125,6 @@ class LaticeTest {
 
 	@Test
 	void placeATileInGameBoard() {
-
-		Pool poolPlayer1 = new Pool();
-		Pool poolPlayer2 = new Pool();
-
-		Rack rackPlayer1 = new Rack();
-		Rack rackPlayer2 = new Rack();
 
 		ArrayList<Tile> rackPreparation = new ArrayList<>();
 		rackPreparation.addAll(List.of(RED_DOLPHIN, RED_TURTLE, TEAL_FEATHER, GREEN_TURTLE));
@@ -215,11 +229,9 @@ class LaticeTest {
 	}
 	
 	@Test
-	void  testingTheRefereeBehavior() {
-		Rack rackPlayer1 = new Rack();
-		Rack rackPlayer2 = new Rack();
-		Player player1 = new Player(2, rackPlayer1, pool, gameboard);
-		Player player2 = new Player(2, rackPlayer2, pool, gameboard);
+	void testingTheRefereeBehavior() {
+		player1.setPoints(2);
+		player2.setPoints(2);
 		List<Player> listPlayers1 = new ArrayList<>();
 		List<Player> listPlayers2 = new ArrayList<>();
 		boolean randomBoolean = false;
@@ -234,7 +246,7 @@ class LaticeTest {
 		}
 		ArrayList<Tile> ourTestingTiles = new ArrayList<>();
 		ourTestingTiles.addAll(List.of(RED_DOLPHIN, NAVY_DOLPHIN, GREEN_TURTLE, RED_TURTLE, RED_GECKO));
-		pool.setTiles(ourTestingTiles);
+		poolPlayer1.setTiles(ourTestingTiles);
 		assertTrue(randomBoolean);
 		player1.drawMaxTile();
 		assertEquals(5, player1.rack().getTiles().size());
@@ -263,7 +275,13 @@ class LaticeTest {
 		gameboard.put(pos_6_5, tealDolphin);
 		gameboard.put(pos_5_6, magentaDolphin);
 		
-		boolean testResult = Referee.checkIfMoveIsLegal(listNearbyTiles, gameboard, pos_6_6, greenGecko);
+		player1.drawMaxTile();
+		player2.drawMaxTile();
+		
+		Referee referee = new Referee(gameboard, playerList);
+		referee.setCurrentPlayer(player1);
+		referee.currentPlayer().rack().addTile(greenGecko);
+		boolean testResult = referee.checkIfMoveIsLegal(0, pos_6_6); // attempt to put greenGecko to pos 6_6
 		assertFalse(testResult);
 		
 	}

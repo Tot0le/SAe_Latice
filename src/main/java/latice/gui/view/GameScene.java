@@ -97,8 +97,7 @@ public class GameScene extends Scene {
 		
 		Rack rackPlayer1 = new Rack();
 		Rack rackPlayer2 = new Rack();
-		rackPlayer1.addTile(new Tile(Color.Green, Shape.Bird));
-		rackPlayer2.addTile(new Tile(Color.Magenta, Shape.Bird));
+
 		Player player1 = new Player(usernames.get(0), 0, rackPlayer1, poolPlayer1, gameboard);
 		Player player2 = new Player(usernames.get(1), 0, rackPlayer2, poolPlayer2, gameboard);
 		

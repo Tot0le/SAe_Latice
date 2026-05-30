@@ -72,7 +72,6 @@ public class Referee {
 					}
 				}
 			}
-			
 		}
 		
 		if (isLegal) {

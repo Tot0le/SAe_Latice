@@ -122,7 +122,7 @@ public class Player {
 	}
 	
 	// setteurs :
-	public void player(Integer points) {
+	public void setPoints(Integer points) {
 		this.points = points;
 	}
 	public void setOrderNumber(Integer orderNumber) {
