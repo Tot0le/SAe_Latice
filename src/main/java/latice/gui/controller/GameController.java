@@ -11,7 +11,6 @@ import latice.model.GameBoard;
 import latice.model.Player;
 import latice.model.Position;
 import latice.model.Referee;
-import latice.util.ShouldNotBePossibleException;
 
 public class GameController {
 	private final GameBoard gameboard;
@@ -91,7 +90,7 @@ public class GameController {
 			if (isLegal) {
 				selectedTileIndex = null;
 				// IHM related :
-				updateScoreLabel();
+				lblController.updateScoreLabel();
 				gameboardIhm.update();
 				this.rackIhm.updateRackTiles(referee.currentPlayer());
 				this.gameBtnController.updateExchangeAllBtn();
@@ -109,20 +108,7 @@ public class GameController {
 	}
 	
 	public void buyANewActionBtnHandler() {
-		try {
-			this.referee.currentPlayer().buyANewAction(referee);
-		} catch (ShouldNotBePossibleException e) {
-			Console.message(e.getMessage());
-		}
-		this.gameBtnController.updateExchangeAllBtn();
-		this.gameBtnController.updateBuyAnActionBtn();
-		this.updateScoreLabel();
-		
+		gameBtnController.buyANewActionBtnHandler(lblController);
 	}
 
-	public void updateScoreLabel() {
-		int currentPlayerIndex = referee.currentPlayerIndex();
-		this.lblController.scorePlayerLabels().get(currentPlayerIndex).setText("Score " + referee.currentPlayer().username() + " : " + referee.currentPlayer().points());
-	}
-	
 }

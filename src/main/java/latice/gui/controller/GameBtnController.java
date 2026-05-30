@@ -5,6 +5,7 @@ import latice.gui.Console;
 import latice.gui.model.RackIhm;
 import latice.model.Player;
 import latice.model.Referee;
+import latice.util.ShouldNotBePossibleException;
 
 public class GameBtnController {
 	private Referee referee;
@@ -27,6 +28,18 @@ public class GameBtnController {
 		}
 	}
 
+	public void buyANewActionBtnHandler(LabelController lblController) {
+		try {
+			this.referee.currentPlayer().buyANewAction(referee);
+		} catch (ShouldNotBePossibleException e) {
+			Console.message(e.getMessage());
+		}
+		this.updateExchangeAllBtn();
+		this.updateBuyAnActionBtn();
+		lblController.updateScoreLabel();
+		
+	}
+	
 	public Button buyANewActionBtn() {
 		return buyANewActionBtn;
 	}

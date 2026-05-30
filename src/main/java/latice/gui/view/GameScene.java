@@ -110,8 +110,8 @@ public class GameScene extends Scene {
 		playerList = (ArrayList<Player>) Referee.randomChoosePlayerOrder(playerList);
 		// The game can now start
 		
-		LabelController lblController = new LabelController(scoreLabels, currentPlayer, endMessageLbl);
 		Referee referee = new Referee(gameboard, playerList);
+		LabelController lblController = new LabelController(referee, scoreLabels, currentPlayer, endMessageLbl);
 		GameBtnController gameBtnController = new GameBtnController(referee, exchangeAllTilesBtn, buyANewActionBtn);
 		GameController gameController = new GameController(this.gameboard, this.visualGameboard, referee, this, lblController, gameBtnController);
 		
