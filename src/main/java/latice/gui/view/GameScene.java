@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import latice.gui.controller.GameBtnController;
 import latice.gui.controller.GameController;
 import latice.gui.controller.LabelController;
 import latice.gui.model.GameBoardIhm;
@@ -23,7 +24,7 @@ import latice.model.tile.Color;
 import latice.model.tile.Shape;
 import latice.model.tile.Tile;
 
-public class GameScene {
+public class GameScene extends Scene {
 	private GameBoard gameboard;
 	private GameBoardIhm visualGameboard;
 	private HBox hboxBottom;
@@ -33,22 +34,22 @@ public class GameScene {
 	private Button exchangeAllTilesBtn;
 //	private Button exchangeTilesBtn;
 	private Button confirmBtn;
+	private Button buyANewActionBtn;
 	private ArrayList<Label> scoreLabels;
 	private ArrayList<String> usernames;
 	private Label currentPlayer;
 	private Label endMessageLbl;
 	
 	public GameScene(ArrayList<String> usernames) {
+		super(new BorderPane(), 1920, 1080);
 		this.usernames = usernames;
 		this.gameboard = new GameBoard();
 		this.visualGameboard = new GameBoardIhm(this.gameboard);
 		this.hboxBottom = new HBox();
 		this.rackIhmEmplacement = new Group();
-	}
-	
-	public Scene createGameScene() {
-		root = new BorderPane();
-
+		
+		this.root = (BorderPane) this.getRoot();
+		
 		BorderPane.setAlignment(visualGameboard, Pos.CENTER);
 		VBox vboxTop = new VBox();
 		endTurnBtn = new Button("End Turn");
@@ -57,8 +58,8 @@ public class GameScene {
 
 		vboxTop.getChildren().addAll(endTurnBtn, endMessageLbl);
 		
-		Label scorePlayer1 = new Label("Score player 1 : 0");
-		Label scorePlayer2 = new Label("Score player 2 : 0");
+		Label scorePlayer1 = new Label("Score " + usernames.get(0) + " : 0");
+		Label scorePlayer2 = new Label("Score " + usernames.get(1) + " : 0");
 		
 		currentPlayer = new Label();
 		VBox vboxRight = new VBox();
@@ -77,22 +78,14 @@ public class GameScene {
 		hboxBottom.getChildren().add(rackIhmEmplacement);
 		exchangeAllTilesBtn = new Button("Exchange All Tiles");
 		hboxBottom.getChildren().add(exchangeAllTilesBtn);
-		///// V8 FEATURE DO NOT DELETE :
-//		exchangeTilesBtn = new Button("Exchange Tiles");
-//		hboxBottom.getChildren().add(exchangeTilesBtn);
-//		
-//		confirmBtn = new Button("Confirm");
-//		hboxBottom.getChildren().add(confirmBtn);
-		///// V8 FEATURE DO NOT DELETE
+		
+		buyANewActionBtn = new Button("Buy an action.");
+		buyANewActionBtn.setDisable(true);
+		hboxBottom.getChildren().add(buyANewActionBtn);
 
 		root.setBottom(hboxBottom);
 		BorderPane.setAlignment(hboxBottom, Pos.BOTTOM_CENTER);
 		BorderPane.setAlignment(vboxTop, Pos.TOP_CENTER);
-		
-		Scene scene = new Scene(root,1920,1080);
-		// note that the size of the window does not change if the scene change their size during the program execution
-
-		return scene;
 	}
 	
 	public void launchGame() {
@@ -104,8 +97,7 @@ public class GameScene {
 		
 		Rack rackPlayer1 = new Rack();
 		Rack rackPlayer2 = new Rack();
-		rackPlayer1.addTile(new Tile(Color.Green, Shape.Bird));
-		rackPlayer2.addTile(new Tile(Color.Magenta, Shape.Bird));
+
 		Player player1 = new Player(usernames.get(0), 0, rackPlayer1, poolPlayer1, gameboard);
 		Player player2 = new Player(usernames.get(1), 0, rackPlayer2, poolPlayer2, gameboard);
 		
@@ -118,10 +110,10 @@ public class GameScene {
 		playerList = (ArrayList<Player>) Referee.randomChoosePlayerOrder(playerList);
 		// The game can now start
 		
-		LabelController lblController = new LabelController(scoreLabels, currentPlayer, endMessageLbl);
-		GameController gameController = new GameController(this.gameboard, this.visualGameboard, playerList, this, lblController);
-		gameController.displayCurrentPlayerRack();
-		gameController.getCurrentPlayerRackIhm().updateRackTiles();
+		Referee referee = new Referee(gameboard, playerList);
+		LabelController lblController = new LabelController(referee, scoreLabels, currentPlayer, endMessageLbl);
+		GameBtnController gameBtnController = new GameBtnController(referee, exchangeAllTilesBtn, buyANewActionBtn);
+		GameController gameController = new GameController(this.gameboard, this.visualGameboard, referee, this, lblController, gameBtnController);
 		
 		// the end turn button now listen
 		endTurnBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
@@ -134,19 +126,11 @@ public class GameScene {
 			gameController.exchangeAllTilesBtnHandler();
 			
 		});
-		///// V8 FEATURE DO NOT DELETE :
-//		// the exchangeTilesBtn now listen
-//		exchangeTilesBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
-//			gameController.exchangeTilesBtnHandler();
-//			
-//		});
-//		
-//		// the exchangeTilesBtn now listen
-//		confirmBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
-//			gameController.confirmBtnHandler();
-//			
-//		});
-		///// V8 FEATURE DO NOT DELETE
+		
+		// the exchangeAllTilesBtn now listen
+		buyANewActionBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+			gameController.buyANewActionBtnHandler();
+		});
 	}
 	
 	public Group rackEmplacement() {

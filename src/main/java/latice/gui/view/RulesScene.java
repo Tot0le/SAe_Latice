@@ -13,16 +13,17 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import latice.gui.controller.BtnController;
+import latice.gui.controller.MenuBtnController;
 import latice.util.ImageLoader;
 import latice.util.ImagePath;
 import latice.util.SetImageView;
 
-public class RulesScene {
+public class RulesScene extends Scene {
 	
-	public Scene createRulesScene(Stage primaryStage) {
-		BorderPane root = new BorderPane();
+	public RulesScene(Stage primaryStage) {
+		super(new BorderPane(), 1920, 1080);
 		
+		BorderPane root = (BorderPane) this.getRoot();
 		Image imageRulesBackground = ImageLoader.loadImageSafe(ImagePath.RULES_BACKGROUND.imagePath(), 250,250);
 		Image imageQuit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 250,250);
 		
@@ -32,7 +33,7 @@ public class RulesScene {
 		btnQuitRules.setMaxSize(150, 100);
 		btnQuitRules = SetImageView.getImageInButtonQuitAndRules(btnQuitRules, imageQuit);
 		
-		BtnController controller = new BtnController(primaryStage);
+		MenuBtnController controller = new MenuBtnController(primaryStage);
 	    btnQuitRules.setOnMouseClicked(controller.quitBtnHandler());
 		
 		BackgroundImage rulesBackground = new BackgroundImage(imageRulesBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));
@@ -49,8 +50,5 @@ public class RulesScene {
 		
 		BorderPane.setMargin(caseRight, new Insets(0,100,100,0));
 		
-		Scene scene = new Scene(root,1920,1080);
-		
-		return scene;
 	}
 }

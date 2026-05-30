@@ -12,10 +12,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
-import latice.gui.controller.BtnController;
+import latice.gui.controller.MenuBtnController;
 
-public class SettingGameScene {
+public class SettingGameScene extends Scene {
 	private BorderPane root;
 	private Button launchBtn;
 	private Label lblTypePlayer1;
@@ -25,12 +24,10 @@ public class SettingGameScene {
 	private Label lblErrorTypePlayer1;
 	private Label lblErrorTypePlayer2;
 	
-	public SettingGameScene() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public Scene createSettingScene(BtnController btnController) {
-		root = new BorderPane();
+	public SettingGameScene(MenuBtnController btnController) {
+		super(new BorderPane(), 1920, 1080);
+		
+		this.root = (BorderPane) this.getRoot();
 		
 		lblTypePlayer1 = new Label("First player username :");
 		lblTypePlayer2 = new Label("Second player username :");
@@ -56,12 +53,6 @@ public class SettingGameScene {
 			btnController.launchBtnHandler();
 		});
 
-		Scene scene = new Scene(root,1920,1080);
-		// note that the size of the window does not change if the scene change their size during the program execution
-		
-		
-
-		return scene;
 	}
 	
 	public ArrayList<String> getUsernames(){

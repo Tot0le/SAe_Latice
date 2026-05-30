@@ -4,7 +4,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -14,18 +13,16 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import latice.gui.controller.MenuBtnController;
 import latice.util.ImageLoader;
 import latice.util.ImagePath;
 import latice.util.SetImageView;
-import latice.gui.view.GameScene;
-import latice.gui.controller.*;
 
-public class MainMenu {
-	public static Scene createMainMenuScene(Stage primaryStage) {
-		BorderPane root = new BorderPane();
+public class MainMenu extends Scene {
+	public MainMenu(Stage primaryStage) {
+		super(new BorderPane(), 900, 600);
+		BorderPane root = (BorderPane) getRoot();
 
 		// load the image via a safe image load function and its path in ImagePath enum
 		Image image_background = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_MENU.imagePath(), 250,250);
@@ -53,7 +50,7 @@ public class MainMenu {
 		btnRules = SetImageView.getImageInButtonQuitAndRules(btnRules, imageRules);
 		
 		// Buttons listeners    we make a new primaryStage to bypass the static restrictions
-		BtnController controller = new BtnController(primaryStage);
+		MenuBtnController controller = new MenuBtnController(primaryStage);
 		btnPlay.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
 			controller.playBtnHandler();
 		});
@@ -83,15 +80,12 @@ public class MainMenu {
 		root.setTop(caseTop);
 		root.setBottom(hboxBottom);
 		
-		// Attribution of the background and the root to the scene
-		Scene scene = new Scene(root,900,600);
+		// Attribution of the background
 		root.setBackground(new Background(background));
 
 		// Position attribution of the VBoxs in the BorderPane
 		BorderPane.setMargin(caseTop, new Insets(100, 0, 150, 0));
 		BorderPane.setMargin(hboxBottom, new Insets(0, 0, 200, 0));
-
-		return scene;
 
 	}
 	

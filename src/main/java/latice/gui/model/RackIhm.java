@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import latice.gui.controller.GameController;
+import latice.model.Player;
 import latice.model.Rack;
 import latice.model.tile.Tile;
 import latice.util.ImageLoader;
@@ -17,13 +18,10 @@ import latice.util.ImagePath;
 public class RackIhm extends GridPane{
 	Image cellBackgroundImg;
 
-	Rack rack;
-	
 	ArrayList<Tile> tilesIhm;
 	
-	public RackIhm(Rack rack) {
-		this.rack = rack;
-		
+	public RackIhm() {
+		Rack rack = new Rack();
 		this.cellBackgroundImg = ImageLoader.loadImageSafe(ImagePath.RACK_CELL.imagePath(), 90, 90);
 		
 		ImageView cellImgView;
@@ -46,8 +44,9 @@ public class RackIhm extends GridPane{
 	/**
 	 * Methods must be called when something change on the rack
 	 */
-	public void updateRackTiles() {
-		tilesIhm = this.rack.getTiles();
+	public void updateRackTiles(Player player) {
+		Rack rack = player.rack();
+		tilesIhm = rack.getTiles();
 		Image image;
 		ImageView cellImgView;
 		

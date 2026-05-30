@@ -3,18 +3,26 @@ package latice.gui.controller;
 import java.util.List;
 
 import javafx.scene.control.Label;
+import latice.model.Referee;
 
 public class LabelController {
+	private Referee referee;
 	private List<Label> scorePlayerLabels;
 	private Label currentPlayerLabel;
 	private Label endMessageLbl;
 	
-	public LabelController(List<Label> scorePlayerLabels, Label currentPlayerLabel, Label endMessageLbl) {
+	public LabelController(Referee referee, List<Label> scorePlayerLabels, Label currentPlayerLabel, Label endMessageLbl) {
+		this.referee = referee;
+		this.setScorePlayerLabels(scorePlayerLabels);
 		this.setCurrentPlayerLabel(currentPlayerLabel);
 		this.setEndMessageLbl(endMessageLbl);
-		this.setScorePlayerLabels(scorePlayerLabels);
 	}
 
+	public void updateScoreLabel() {
+		int currentPlayerIndex = referee.currentPlayerIndex();
+		this.scorePlayerLabels().get(currentPlayerIndex).setText("Score " + referee.currentPlayer().username() + " : " + referee.currentPlayer().points());
+	}
+	
 	public Label currentPlayerLabel() {
 		return currentPlayerLabel;
 	}
