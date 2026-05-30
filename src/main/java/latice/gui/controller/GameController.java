@@ -68,8 +68,8 @@ public class GameController {
 			
 			// update ihm related content
 			this.rackIhm.updateRackTiles(referee.currentPlayer());
-			this.gameBtnController.updateExchangeAllBtn(referee);
-			this.gameBtnController.updateBuyAnActionBtn(referee);
+			this.gameBtnController.updateExchangeAllBtn();
+			this.gameBtnController.updateBuyAnActionBtn();
 		}
 	}
 	
@@ -94,8 +94,8 @@ public class GameController {
 				updateScoreLabel();
 				gameboardIhm.update();
 				this.rackIhm.updateRackTiles(referee.currentPlayer());
-				this.gameBtnController.updateExchangeAllBtn(referee);
-				this.gameBtnController.updateBuyAnActionBtn(referee);
+				this.gameBtnController.updateExchangeAllBtn();
+				this.gameBtnController.updateBuyAnActionBtn();
 			}
 		}
 	}
@@ -104,17 +104,8 @@ public class GameController {
     	nextTurn();
     }
 	
-	public void exchangeAllTilesBtnHandler() { // TODO move btn handler to GameBtnController
-		Player currentPlayer = referee.currentPlayer();
-		if (currentPlayer.isMoveAvailable()) {
-			currentPlayer.exchangeAllTheRack();
-			Console.message("exchange complete");
-			this.rackIhm.updateRackTiles(currentPlayer);
-			currentPlayer.setMoveAvailable(false);
-			
-			this.gameBtnController.updateExchangeAllBtn(referee);
-			this.gameBtnController.updateBuyAnActionBtn(referee);
-		}
+	public void exchangeAllTilesBtnHandler() {
+		gameBtnController.exchangeAllTilesBtnHandler(rackIhm);
 	}
 	
 	public void buyANewActionBtnHandler() {
@@ -123,8 +114,8 @@ public class GameController {
 		} catch (ShouldNotBePossibleException e) {
 			Console.message(e.getMessage());
 		}
-		this.gameBtnController.updateExchangeAllBtn(referee);
-		this.gameBtnController.updateBuyAnActionBtn(referee);
+		this.gameBtnController.updateExchangeAllBtn();
+		this.gameBtnController.updateBuyAnActionBtn();
 		this.updateScoreLabel();
 		
 	}

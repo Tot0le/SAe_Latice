@@ -111,8 +111,8 @@ public class GameScene extends Scene {
 		// The game can now start
 		
 		LabelController lblController = new LabelController(scoreLabels, currentPlayer, endMessageLbl);
-		GameBtnController gameBtnController = new GameBtnController(exchangeAllTilesBtn, buyANewActionBtn);
 		Referee referee = new Referee(gameboard, playerList);
+		GameBtnController gameBtnController = new GameBtnController(referee, exchangeAllTilesBtn, buyANewActionBtn);
 		GameController gameController = new GameController(this.gameboard, this.visualGameboard, referee, this, lblController, gameBtnController);
 		
 		// the end turn button now listen
