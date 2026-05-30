@@ -2,6 +2,7 @@ package latice.gui.controller;
 
 import javafx.scene.control.Button;
 import latice.model.Player;
+import latice.model.Referee;
 
 public class GameBtnController {
 	private Button buyANewActionBtn;
@@ -10,8 +11,10 @@ public class GameBtnController {
        this.buyANewActionBtn = buyANewActionBtn;
     }
 
-	public void updateBuyAnActionBtn(boolean isFreeMoveAvailable, Player player) {
-		if (!isFreeMoveAvailable && player.points() >= 2) {
+	public void updateBuyAnActionBtn(Referee referee) {
+		Player currentPlayer = referee.currentPlayer();
+		boolean isFreeMoveAvailable = currentPlayer.isMoveAvailable();
+		if (!isFreeMoveAvailable && currentPlayer.points() >= referee.priceNewAction()) {
 			buyANewActionBtn.setDisable(false);
 		} else {
 			buyANewActionBtn.setDisable(true);

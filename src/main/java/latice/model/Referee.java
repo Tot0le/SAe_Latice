@@ -14,11 +14,12 @@ public class Referee {
 	private int currentPlayerIndex = 0;
 	private int cycleCount = 0;
 	private boolean isTheGameEnd;
+	private int priceNewAction;
 	
 	public Referee(ArrayList<Player> playerList) {
 		this.currentPlayer = playerList.getFirst();
 		this.setPlayerList(playerList);
-		
+		this.priceNewAction = 2;
 	}
 	
 	public static void dealTheCards(Pool originPool, Pool poolPlayer1, Pool poolPlayer2) {
@@ -178,6 +179,10 @@ public class Referee {
 
 	public void setTheGameEnd(boolean isTheGameEnd) {
 		this.isTheGameEnd = isTheGameEnd;
+	}
+
+	public int priceNewAction() {
+		return priceNewAction;
 	}
 }
 
