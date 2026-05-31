@@ -15,6 +15,7 @@ import latice.model.Player;
 
 public class GameOutcomeLayout extends BorderPane {
 	private Label resultLbl;
+	private Label winnerLbl;
 	private Button closeLayoutBtn;
 	private Button mainMenuBtn;
 	private Button replaySameConfig; // TODO in GameScene, when no action has been done, a button to cancel the game
@@ -23,6 +24,7 @@ public class GameOutcomeLayout extends BorderPane {
 	public GameOutcomeLayout(Player winner, MenuBtnController menuBtnController, BorderPane gameLayout) {
 		gameLayout.setDisable(true);
 		resultLbl = new Label();
+		winnerLbl = new Label();
 		
 		if (winner == null) {
 			this.resultLbl.setTextFill(Color.GRAY);
@@ -31,7 +33,11 @@ public class GameOutcomeLayout extends BorderPane {
 		} else {
 			this.resultLbl.setTextFill(Color.GOLD);
 			this.resultLbl.setFont(Font.font("", FontWeight.BOLD, 20));
-			this.resultLbl.setText("Congratulations ! " + winner.username() + " wins !");
+			this.resultLbl.setText("Congratulations !");
+			
+			this.winnerLbl.setTextFill(Color.GOLD);
+			this.winnerLbl.setFont(Font.font("", FontWeight.BOLD, 16));
+			this.winnerLbl.setText(winner.username() + " wins !");
 		}
 		
 		this.setStyle("-fx-background-color: rgba(0, 0, 0, 0.6);");
@@ -63,18 +69,24 @@ public class GameOutcomeLayout extends BorderPane {
 
 		VBox middleVbox = new VBox();
 		HBox topMiddleHbox = new HBox();
+		VBox topTopVbox = new VBox();
 		middleVbox.setStyle("-fx-background-color: #262421;");
-		topMiddleHbox.setStyle("-fx-background-color: #3C3A38;");
+		topTopVbox.setStyle("-fx-background-color: #3C3A38;");
+		
 		topMiddleHbox.getChildren().add(resultLbl);
 		topMiddleHbox.getChildren().add(closeLayoutBtn);
 		
-		middleVbox.getChildren().add(topMiddleHbox);
+		topTopVbox.getChildren().add(topMiddleHbox);
+		topTopVbox.getChildren().add(winnerLbl);
+		
+		middleVbox.getChildren().add(topTopVbox);
+		
 		HBox bottomMiddleHbox = new HBox();
 		bottomMiddleHbox.getChildren().addAll(mainMenuBtn, replaySameConfig);
 		
 		middleVbox.getChildren().add(bottomMiddleHbox);
 		
-		middleVbox.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+		middleVbox.setMaxSize(500, 300);
 		this.setCenter(middleVbox);
 		
 	}
