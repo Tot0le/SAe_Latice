@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -46,6 +47,8 @@ public class SettingGameScene extends Scene {
 		middleVBox.getChildren().addAll(lblTypePlayer1, txtfUsername1, lblErrorTypePlayer1, lblTypePlayer2, txtfUsername2, lblErrorTypePlayer2, launchBtn);
 		root.setCenter(middleVBox);
 		BorderPane.setAlignment(middleVBox, Pos.CENTER);
+		
+		middleVBox.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 		
 		btnController.setSettingGameScene(this);
 		

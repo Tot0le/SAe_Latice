@@ -21,7 +21,7 @@ import latice.util.SetImageView;
 
 public class MainMenu extends Scene {
 	public MainMenu(Stage primaryStage) {
-		super(new BorderPane(), 900, 600);
+		super(new BorderPane(), 1920, 1080);
 		BorderPane root = (BorderPane) getRoot();
 
 		// load the image via a safe image load function and its path in ImagePath enum
