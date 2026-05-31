@@ -1,11 +1,9 @@
 package latice.gui.controller;
 
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import latice.gui.Console;
 import latice.gui.model.GameBoardIhm;
 import latice.gui.model.RackIhm;
+import latice.gui.view.GameOutcomeLayout;
 import latice.gui.view.GameScene;
 import latice.model.GameBoard;
 import latice.model.Player;
@@ -21,10 +19,12 @@ public class GameController {
 	
 	private Integer selectedTileIndex = null;
 	private GameScene gameScene;
+	
 	private LabelController lblController;
+	private MenuBtnController menuBtnController;
 	private GameBtnController gameBtnController;
 
-	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, Referee referee, GameScene gameScene, LabelController lblController, GameBtnController gameBtnController) {
+	public GameController(GameBoard gameboard, GameBoardIhm gameboardIhm, Referee referee, GameScene gameScene, LabelController lblController, MenuBtnController menuBtnController, GameBtnController gameBtnController) {
 		this.gameboard = gameboard;
 		this.gameboardIhm = gameboardIhm;
 		this.gameScene = gameScene;
@@ -35,6 +35,7 @@ public class GameController {
 		this.rackIhm.updateRackTiles(referee.currentPlayer());
 		
 		this.lblController = lblController;
+		this.menuBtnController = menuBtnController;
 		this.gameBtnController = gameBtnController;
 
 		this.lblController.currentPlayerLabel().setText(this.referee.currentPlayer().username() + "'s turn");
@@ -45,17 +46,8 @@ public class GameController {
 	public void endGame() {
 		Player winner = referee.endGame();
 		
-		if (winner == null) {
-			Console.message("It's a draw !");
-			this.lblController.endMessageLbl().setTextFill(Color.GRAY);
-			this.lblController.endMessageLbl().setFont(Font.font("", FontWeight.BOLD, 30));
-			this.lblController.endMessageLbl().setText("It's a draw !");
-		} else {
-			Console.message("The winner is the player : " + winner.username());
-			this.lblController.endMessageLbl().setTextFill(Color.GOLD);
-			this.lblController.endMessageLbl().setFont(Font.font("", FontWeight.BOLD, 30));
-			this.lblController.endMessageLbl().setText("The winner is the player : " + winner.username());
-		}
+		GameOutcomeLayout gameOutcomeLayout = new GameOutcomeLayout(winner, menuBtnController, this.gameScene.gameLayout());
+		this.gameScene.setOverlayLayout(gameOutcomeLayout);
 	}
 
 	public void nextTurn() {

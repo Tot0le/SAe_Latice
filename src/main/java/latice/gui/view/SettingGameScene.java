@@ -52,7 +52,7 @@ public class SettingGameScene extends Scene {
 		
 		btnController.setSettingGameScene(this);
 		
-		launchBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+		launchBtn.setOnAction(event -> {
 			btnController.launchBtnHandler();
 		});
 

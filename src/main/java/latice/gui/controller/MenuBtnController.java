@@ -13,15 +13,16 @@ public class MenuBtnController {
 		
 		private Stage primaryStage ;
 		private SettingGameScene settingScene;
+		private ArrayList<String> usernames;
 		
 		public MenuBtnController(Stage primaryStage) {
 	        this.primaryStage = primaryStage;
 	    }
 	
 		public void launchBtnHandler() {
-			ArrayList<String> usernames = settingScene.getUsernames();
+			this.usernames = settingScene.getUsernames();
 			if (!usernames.isEmpty()) {
-				GameScene gameScene = new GameScene(usernames);
+				GameScene gameScene = new GameScene(usernames, this);
 	    		
 	    		primaryStage.setScene(gameScene);
 	    		gameScene.launchGame();
@@ -59,5 +60,13 @@ public class MenuBtnController {
 	    }
 	    public void setSettingGameScene(SettingGameScene settingScene) {
 	    	this.settingScene = settingScene;
+	    }
+	    
+	    public Stage primaryStage() {
+	    	return primaryStage;
+	    }
+	    
+	    public ArrayList<String> usernames() {
+	    	return usernames;
 	    }
 	}
