@@ -29,6 +29,7 @@ public class GameScene extends Scene { //TODO add a resign button
 	private MenuBtnController menuBtnController;
 	private GameBtnController gameBtnController;
 	private VBox vBoxBottom;
+	private VBox vBoxLeft;
 	private HBox hBoxBottom;
 	private StackPane root;
 	private BorderPane gameLayout;
@@ -43,9 +44,17 @@ public class GameScene extends Scene { //TODO add a resign button
 	private ArrayList<String> usernames;
 	private Label currentPlayer;
 	private Label endMessageLbl;
+	private Label currentTurn;
+	private Label lblpoolTilesNumber;
 	
 	public GameScene(ArrayList<String> usernames, MenuBtnController menuBtnController) {
 		super(new StackPane(), 1920, 1080);
+		
+		int turnNumber = 0;
+		int poolTilesNumber = 0;
+		
+		this.currentTurn = new Label("Turn " + turnNumber);
+		this.lblpoolTilesNumber = new Label("Number of available tiles in the pool : " + poolTilesNumber);
 		this.usernames = usernames;
 		this.gameboard = new GameBoard();
 		this.visualGameboard = new GameBoardIhm(this.gameboard);
@@ -80,11 +89,16 @@ public class GameScene extends Scene { //TODO add a resign button
 		VBox vboxRight = new VBox();
 		vboxRight.getChildren().addAll(scorePlayer1, scorePlayer2, currentPlayer);
 		
+		vBoxLeft = new VBox();
+		vBoxLeft.getChildren().addAll(currentTurn, lblpoolTilesNumber);
+		
 		scoreLabels = new ArrayList<>();
 		scoreLabels.add(scorePlayer1);
 		scoreLabels.add(scorePlayer2);
 		
 		gameLayout.setRight(vboxRight);
+		
+		gameLayout.setLeft(vBoxLeft);
 		
 		gameLayout.setTop(vboxTop);
 		
@@ -110,6 +124,7 @@ public class GameScene extends Scene { //TODO add a resign button
 		//gridPaneBottom.setSpacing(10);
 
 		gameLayout.setBottom(vBoxBottom);
+		
 		BorderPane.setAlignment(vBoxBottom, Pos.BOTTOM_CENTER);
 		BorderPane.setAlignment(vboxTop, Pos.TOP_CENTER);
 	}
