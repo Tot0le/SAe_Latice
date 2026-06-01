@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -27,7 +28,8 @@ public class GameScene extends Scene { //TODO add a resign button
 	private GameBoard gameboard;
 	private GameBoardIhm visualGameboard;
 	private MenuBtnController menuBtnController;
-	private HBox hboxBottom;
+	private VBox vBoxBottom;
+	private HBox hBoxBottom;
 	private StackPane root;
 	private BorderPane gameLayout;
 	private BorderPane overlayLayout;
@@ -49,7 +51,8 @@ public class GameScene extends Scene { //TODO add a resign button
 		this.visualGameboard = new GameBoardIhm(this.gameboard);
 		this.menuBtnController = menuBtnController;
 		
-		this.hboxBottom = new HBox();
+		this.vBoxBottom = new VBox();
+		this.hBoxBottom = new HBox();
 		this.rackIhmEmplacement = new Group();
 		
 		this.root = (StackPane) this.getRoot();
@@ -68,7 +71,7 @@ public class GameScene extends Scene { //TODO add a resign button
 		
 		endMessageLbl = new Label("");
 
-		vboxTop.getChildren().addAll(endTurnBtn, endMessageLbl);
+		vboxTop.getChildren().add(endMessageLbl);
 		
 		Label scorePlayer1 = new Label("Score " + usernames.get(0) + " : 0");
 		Label scorePlayer2 = new Label("Score " + usernames.get(1) + " : 0");
@@ -87,16 +90,27 @@ public class GameScene extends Scene { //TODO add a resign button
 		
 		gameLayout.setCenter(visualGameboard);
 		
-		hboxBottom.getChildren().add(rackIhmEmplacement);
 		exchangeAllTilesBtn = new Button("Exchange All Tiles");
-		hboxBottom.getChildren().add(exchangeAllTilesBtn);
-		
 		buyANewActionBtn = new Button("Buy an action.");
+		
 		buyANewActionBtn.setDisable(true);
-		hboxBottom.getChildren().add(buyANewActionBtn);
+		
+		hBoxBottom.getChildren().add(exchangeAllTilesBtn);
+		hBoxBottom.getChildren().add(buyANewActionBtn);
+		hBoxBottom.setAlignment(Pos.CENTER);
+		hBoxBottom.setSpacing(100);
 
-		gameLayout.setBottom(hboxBottom);
-		BorderPane.setAlignment(hboxBottom, Pos.BOTTOM_CENTER);
+		vBoxBottom.getChildren().add(endTurnBtn);
+		vBoxBottom.getChildren().add(hBoxBottom);
+		vBoxBottom.getChildren().add(rackIhmEmplacement);
+		vBoxBottom.setAlignment(Pos.CENTER);
+		vBoxBottom.setSpacing(10);
+		
+		//gridPaneBottom.setAlignment(Pos.TOP_CENTER);
+		//gridPaneBottom.setSpacing(10);
+
+		gameLayout.setBottom(vBoxBottom);
+		BorderPane.setAlignment(vBoxBottom, Pos.BOTTOM_CENTER);
 		BorderPane.setAlignment(vboxTop, Pos.TOP_CENTER);
 	}
 	
