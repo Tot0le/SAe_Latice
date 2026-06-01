@@ -57,6 +57,7 @@ public enum ImagePath {
 	PLAY_BUTTON("/images/play_button.png", Color.None, Shape.None),
 	RULES_BUTTON("/images/rules_button.png", Color.None, Shape.None),
 	RULES_BACKGROUND("/images/rules.png", Color.None, Shape.None),
+	LAUNCH_BUTTON("/images/launch_button.png", Color.None, Shape.None),
 	
 	// Rack cell image
 	RACK_CELL("/images/rack_cell.png", Color.None, Shape.None);

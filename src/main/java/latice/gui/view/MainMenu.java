@@ -25,10 +25,10 @@ public class MainMenu extends Scene {
 		BorderPane root = (BorderPane) getRoot();
 
 		// load the image via a safe image load function and its path in ImagePath enum
-		Image image_background = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_MENU.imagePath(), 250,250);
-		Image imagePlay = ImageLoader.loadImageSafe(ImagePath.PLAY_BUTTON.imagePath(), 250,250);
-		Image imageQuit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 250,250);
-		Image imageRules = ImageLoader.loadImageSafe(ImagePath.RULES_BUTTON.imagePath(),250, 250);
+		Image image_background = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_MENU.imagePath(), 1920,1080);
+		Image imagePlay = ImageLoader.loadImageSafe(ImagePath.PLAY_BUTTON.imagePath(), 300,200);
+		Image imageQuit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 150,100);
+		Image imageRules = ImageLoader.loadImageSafe(ImagePath.RULES_BUTTON.imagePath(),150, 100);
 		
 		//Buttons creation and image attribution + size min and max
 		Button btnPlay = new Button("PLAY");
@@ -88,5 +88,4 @@ public class MainMenu extends Scene {
 		BorderPane.setMargin(hboxBottom, new Insets(0, 0, 200, 0));
 
 	}
-	
 }

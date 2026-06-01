@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -28,6 +27,7 @@ public class GameScene extends Scene { //TODO add a resign button
 	private GameBoard gameboard;
 	private GameBoardIhm visualGameboard;
 	private MenuBtnController menuBtnController;
+	private GameBtnController gameBtnController;
 	private VBox vBoxBottom;
 	private VBox vBoxLeft;
 	private HBox hBoxBottom;
@@ -153,7 +153,7 @@ public class GameScene extends Scene { //TODO add a resign button
 		
 		Referee referee = new Referee(gameboard, playerList);
 		LabelController lblController = new LabelController(referee, scoreLabels, currentPlayer, endMessageLbl);
-		GameBtnController gameBtnController = new GameBtnController(referee, exchangeAllTilesBtn, buyANewActionBtn);
+		gameBtnController = new GameBtnController(referee, exchangeAllTilesBtn, buyANewActionBtn, endTurnBtn);
 		GameController gameController = new GameController(this.gameboard, this.visualGameboard, referee, this, lblController, menuBtnController, gameBtnController);
 		
 		// the end turn button now listen
@@ -171,6 +171,13 @@ public class GameScene extends Scene { //TODO add a resign button
 		buyANewActionBtn.setOnAction(event -> {
 			gameController.buyANewActionBtnHandler();
 		});
+	}
+	
+	public void lockBoardRackAndBtns(boolean lockEndTurn) {
+		this.visualGameboard.setMouseTransparent(true);
+		this.rackIhmEmplacement.setMouseTransparent(true);
+		
+		this.gameBtnController.disableButtons(lockEndTurn);
 	}
 	
 	public Group rackEmplacement() {
