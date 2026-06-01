@@ -24,8 +24,8 @@ public class RulesScene extends Scene {
 		super(new BorderPane(), 1920, 1080);
 		
 		BorderPane root = (BorderPane) this.getRoot();
-		Image imageRulesBackground = ImageLoader.loadImageSafe(ImagePath.RULES_BACKGROUND.imagePath(), 250,250);
-		Image imageQuit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 250,250);
+		Image imageRulesBackground = ImageLoader.loadImageSafe(ImagePath.RULES_BACKGROUND.imagePath(), 1920,1080);
+		Image imageQuit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 150,100);
 		
 		Button btnQuitRules = new Button("QUIT"); 
 		btnQuitRules.setPrefSize(150, 100);
@@ -39,7 +39,7 @@ public class RulesScene extends Scene {
 		BackgroundImage rulesBackground = new BackgroundImage(imageRulesBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));
 		root.setBackground(new Background(rulesBackground));
 		
-		//VBox 
+		//VBox creation and implementation
 		VBox caseRight = new VBox();
 		
 		caseRight.getChildren().addAll(btnQuitRules);

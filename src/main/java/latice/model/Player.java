@@ -15,6 +15,7 @@ public class Player {
 	private Integer orderNumber;
 	private boolean moveAvailable;
 
+	// Two constructors for easier testing
 	public Player(String username, Integer points, Rack rack, Pool pool, GameBoard gameboard) {
 		this.username = username;
 		this.points = points;
@@ -32,7 +33,7 @@ public class Player {
 		this.gameboard = gameboard;
 		this.orderNumber = null;
 	}
-
+	// Method to buy a new action by spending points 
 	public void buyANewAction(Referee referee) throws ShouldNotBePossibleException {
 		if (moveAvailable) {
 			throw new ShouldNotBePossibleException("The user should not be able to click on the button \"buy a new action\" if a move is already available.");
@@ -41,7 +42,7 @@ public class Player {
 			this.moveAvailable = true;
 		}
 	}
-	
+	// Method to replace all the tiles of the rack to other tiles
 	public void exchangeAllTheRack() {
 		ArrayList<Integer> indexesOfTiles = new ArrayList<>();
 		for (int index = 0; index < this.rack.maxTiles()-1;index++) indexesOfTiles.add(index);
@@ -64,7 +65,7 @@ public class Player {
 		Tile tile = rack.popTile(rackIndex);
 		return gameboard.put(placementPosition, tile);
 	}
-
+	// Method to draw and add a tile from pool to the rack
 	public void drawATile() {
 		ArrayList<Tile> poolTiles = pool.getTiles();
 		if (rack.getTiles().size() < rack.maxTiles()) {

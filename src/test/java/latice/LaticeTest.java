@@ -251,7 +251,7 @@ class LaticeTest {
 		player1.drawMaxTile();
 		assertEquals(5, player1.rack().getTiles().size());
 	}
-	
+
 	@Test
 	void testForALegalMove() {
 		Tile greenGecko = new Tile(Color.Green, Shape.Gecko);

@@ -30,7 +30,6 @@ public class MainMenu extends Scene {
 		Image imageQuit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 150,100);
 		Image imageRules = ImageLoader.loadImageSafe(ImagePath.RULES_BUTTON.imagePath(),150, 100);
 		
-		
 		//Buttons creation and image attribution + size min and max
 		Button btnPlay = new Button("PLAY");
 		btnPlay.setPrefSize(300, 200);
