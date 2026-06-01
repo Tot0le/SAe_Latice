@@ -45,16 +45,15 @@ public class GameScene extends Scene { //TODO add a resign button
 	private Label currentPlayer;
 	private Label endMessageLbl;
 	private Label currentTurn;
-	private Label lblpoolTilesNumber;
+	private Label lblPoolTilesNumber;
 	
 	public GameScene(ArrayList<String> usernames, MenuBtnController menuBtnController) {
 		super(new StackPane(), 1920, 1080);
 		
-		int turnNumber = 0;
 		int poolTilesNumber = 0;
 		
-		this.currentTurn = new Label("Turn " + turnNumber);
-		this.lblpoolTilesNumber = new Label("Number of available tiles in the pool : " + poolTilesNumber);
+		this.currentTurn = new Label("Turn : 1");
+		this.lblPoolTilesNumber = new Label("Number of available tiles in the pool : " + poolTilesNumber);
 		this.usernames = usernames;
 		this.gameboard = new GameBoard();
 		this.visualGameboard = new GameBoardIhm(this.gameboard);
@@ -90,7 +89,7 @@ public class GameScene extends Scene { //TODO add a resign button
 		vboxRight.getChildren().addAll(scorePlayer1, scorePlayer2, currentPlayer);
 		
 		vBoxLeft = new VBox();
-		vBoxLeft.getChildren().addAll(currentTurn, lblpoolTilesNumber);
+		vBoxLeft.getChildren().addAll(currentTurn, lblPoolTilesNumber);
 		
 		scoreLabels = new ArrayList<>();
 		scoreLabels.add(scorePlayer1);
@@ -152,7 +151,7 @@ public class GameScene extends Scene { //TODO add a resign button
 		// The game can now start
 		
 		Referee referee = new Referee(gameboard, playerList);
-		LabelController lblController = new LabelController(referee, scoreLabels, currentPlayer, endMessageLbl);
+		LabelController lblController = new LabelController(referee, scoreLabels, currentPlayer, endMessageLbl, lblPoolTilesNumber, currentTurn);
 		gameBtnController = new GameBtnController(referee, exchangeAllTilesBtn, buyANewActionBtn, endTurnBtn);
 		GameController gameController = new GameController(this.gameboard, this.visualGameboard, referee, this, lblController, menuBtnController, gameBtnController);
 		

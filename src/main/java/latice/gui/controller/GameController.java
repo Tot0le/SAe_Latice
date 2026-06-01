@@ -56,6 +56,7 @@ public class GameController {
 		if (referee.isTheGameEnd()) {
 			this.endGame();
 		} else {
+			lblController.updateCurrentTurn();
 			this.lblController.currentPlayerLabel().setText(referee.currentPlayer().username() + "'s turn");
 			
 			// update ihm related content
