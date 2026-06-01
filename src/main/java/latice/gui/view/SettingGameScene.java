@@ -1,18 +1,22 @@
 package latice.gui.view;
 
 import java.util.ArrayList;
-
+import latice.util.SetImageView;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import latice.gui.controller.MenuBtnController;
+import latice.util.ImageLoader;
+import latice.util.ImagePath;
 
 public class SettingGameScene extends Scene {
 	private BorderPane root;
@@ -29,6 +33,8 @@ public class SettingGameScene extends Scene {
 		
 		this.root = (BorderPane) this.getRoot();
 		
+		Image imageLaunch = ImageLoader.loadImageSafe(ImagePath.LAUNCH_BUTTON.imagePath(),300, 200);
+		
 		lblTypePlayer1 = new Label("First player username :");
 		lblTypePlayer2 = new Label("Second player username :");
 		txtfUsername1 = new TextField();
@@ -41,15 +47,22 @@ public class SettingGameScene extends Scene {
 		lblErrorTypePlayer2.setFont(Font.font("", FontWeight.BOLD, 12));
 		launchBtn = new Button("LAUNCH");
 		
+		launchBtn.setPrefSize(300, 200);
+		launchBtn.setMinSize(300, 200);
+		launchBtn.setMaxSize(300, 200);
+		launchBtn = SetImageView.getImageInButtonPlay(launchBtn,imageLaunch);
+		
 		VBox middleVBox = new VBox();
 		
 		middleVBox.getChildren().addAll(lblTypePlayer1, txtfUsername1, lblErrorTypePlayer1, lblTypePlayer2, txtfUsername2, lblErrorTypePlayer2, launchBtn);
 		root.setCenter(middleVBox);
 		BorderPane.setAlignment(middleVBox, Pos.CENTER);
 		
+		middleVBox.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+		
 		btnController.setSettingGameScene(this);
 		
-		launchBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+		launchBtn.setOnAction(event -> {
 			btnController.launchBtnHandler();
 		});
 

@@ -11,11 +11,13 @@ public class GameBtnController {
 	private Referee referee;
 	private Button exchangeAllTilesBtn;
 	private Button buyANewActionBtn;
+	private Button endTurnBtn;
 	
-	public GameBtnController(Referee referee, Button exchangeAllTilesBtn, Button buyANewActionBtn) {
+	public GameBtnController(Referee referee, Button exchangeAllTilesBtn, Button buyANewActionBtn, Button endTurnBtn) {
 		this.referee = referee;
 		this.exchangeAllTilesBtn = exchangeAllTilesBtn;
 		this.buyANewActionBtn = buyANewActionBtn;
+		this.endTurnBtn = endTurnBtn;
     }
 
 	public void updateBuyAnActionBtn() {
@@ -45,12 +47,17 @@ public class GameBtnController {
 	}
 	
 	public void updateExchangeAllBtn() {
-		boolean isMoveAvailable = referee.currentPlayer().isMoveAvailable();
-		if (isMoveAvailable) {
+		if (referee.currentPlayer().isMoveAvailable()) {
 			exchangeAllTilesBtn.setDisable(false);
 		} else {
 			exchangeAllTilesBtn.setDisable(true);
 		}
+	}
+	
+	public void disableButtons(boolean lockEndTurn) {
+		exchangeAllTilesBtn.setDisable(true);
+		buyANewActionBtn.setDisable(true);
+		endTurnBtn.setDisable(lockEndTurn);
 	}
 	
 	public void exchangeAllTilesBtnHandler(RackIhm rackIhm) {
