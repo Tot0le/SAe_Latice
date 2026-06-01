@@ -88,5 +88,4 @@ public class MainMenu extends Scene {
 		BorderPane.setMargin(hboxBottom, new Insets(0, 0, 200, 0));
 
 	}
-	
 }
