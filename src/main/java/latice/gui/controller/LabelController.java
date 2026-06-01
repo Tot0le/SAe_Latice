@@ -13,13 +13,14 @@ public class LabelController {
 	private Label lblPoolTilesNumber;
 	private Label currentTurn;
 	
-	public LabelController(Referee referee, List<Label> scorePlayerLabels, Label currentPlayerLabel, Label endMessageLbl, Label lblPoolTilesNumber, Label currentTurn) {
+	public LabelController(Referee referee, List<Label> scorePlayerLabels, Label currentPlayerLabel, Label endMessageLbl, Label lblPoolTilesNumber, Label currentTurnLbl) {
 		this.referee = referee;
 		this.setScorePlayerLabels(scorePlayerLabels);
 		this.setCurrentPlayerLabel(currentPlayerLabel);
 		this.setEndMessageLbl(endMessageLbl);
 		this.setLblPoolTilesNumber(lblPoolTilesNumber);
-		this.setCurrentTurn(currentTurn);
+		this.setCurrentTurn(currentTurnLbl);
+		this.updatePoolNumber();
 	}
 
 	public void updateScoreLabel() {
@@ -29,6 +30,10 @@ public class LabelController {
 	
 	public void updateCurrentTurn() {
 		this.currentTurn.setText("Turn : " + (referee.cycleCount() + 1));
+	}
+	
+	public void updatePoolNumber() {
+		this.lblPoolTilesNumber.setText("Pool : " + (referee.currentPlayer().pool().tilesAmounts()));
 	}
 	
 	public Label currentPlayerLabel() {

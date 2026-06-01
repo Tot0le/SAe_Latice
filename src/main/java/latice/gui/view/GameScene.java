@@ -50,10 +50,8 @@ public class GameScene extends Scene { //TODO add a resign button
 	public GameScene(ArrayList<String> usernames, MenuBtnController menuBtnController) {
 		super(new StackPane(), 1920, 1080);
 		
-		int poolTilesNumber = 0;
-		
 		this.currentTurn = new Label("Turn : 1");
-		this.lblPoolTilesNumber = new Label("Number of available tiles in the pool : " + poolTilesNumber);
+		this.lblPoolTilesNumber = new Label("Pool : ");
 		this.usernames = usernames;
 		this.gameboard = new GameBoard();
 		this.visualGameboard = new GameBoardIhm(this.gameboard);
