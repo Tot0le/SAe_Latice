@@ -98,6 +98,7 @@ public class GameController {
 	
 	public void exchangeAllTilesBtnHandler() {
 		gameBtnController.exchangeAllTilesBtnHandler(rackIhm);
+		nextTurn();
 	}
 	
 	public void buyANewActionBtnHandler() {
