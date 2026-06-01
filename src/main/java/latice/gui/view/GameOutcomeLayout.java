@@ -21,7 +21,6 @@ public class GameOutcomeLayout extends BorderPane {
 	private Button closeLayoutBtn;
 	private Button mainMenuBtn;
 	private Button replaySameConfig; // TODO in GameScene, when no action has been done, a button to cancel the game
-	private Rectangle background;
 	
 	public GameOutcomeLayout(Player winner, MenuBtnController menuBtnController, BorderPane gameLayout) {
 		gameLayout.setDisable(true);

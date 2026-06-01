@@ -45,6 +45,7 @@ public class GameController {
 	
 	public void endGame() {
 		Player winner = referee.endGame();
+		gameScene.lockBoardRackAndBtns(false);
 		
 		GameOutcomeLayout gameOutcomeLayout = new GameOutcomeLayout(winner, menuBtnController, this.gameScene.gameLayout());
 		this.gameScene.setOverlayLayout(gameOutcomeLayout);
