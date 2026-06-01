@@ -53,7 +53,7 @@ public class Referee {
 		return orderedListOfPlayer;
 		
 	}
-
+	// Method is testing if a move is legal by looking if the rules are respected
 	public boolean checkIfMoveIsLegal(Integer selectedTileIndexRack, Position selectedTilePositionGmBrd ) {
 		boolean isLegal = false;
 		Tile selectedTile = currentPlayer.rack().getTile(selectedTileIndexRack);
@@ -82,7 +82,7 @@ public class Referee {
 		}
 		return isLegal;
 	}
-
+	// method is incrementing the number of points of the player who triggered the good conditions
 	public static Integer calculatePoints(ArrayList<Tile> nearbyTiles, Tile tilePlaced, boolean isSunAt) {
 		Integer numberOfTileMatches = 0;
 		Integer points = 0;
@@ -135,7 +135,7 @@ public class Referee {
 			this.isTheGameEnd = true;
 		}
 	}
-	
+	//Method to end the game, checks the total number of tiles placed by every player and determines the winner
 	public Player endGame() {
 		Player winner = null;
 		Integer winnerTotalNumber = (int) Double.POSITIVE_INFINITY;
