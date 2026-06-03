@@ -51,6 +51,8 @@ public class RackIhm extends GridPane{
 		ImageView cellImgView;
 		
 		// Reset the ihm rack
+		this.getChildren().clear();
+		
 		for (int tileIndex = 0; tileIndex < rack.maxTiles(); tileIndex++) {
 			cellImgView = new ImageView(cellBackgroundImg);
 			this.add(cellImgView, tileIndex, 0);
@@ -68,6 +70,28 @@ public class RackIhm extends GridPane{
 			
 			cellImgView = new ImageView(image);
 			this.add(cellImgView, tileIndex, 0);
+		}
+	}
+	
+	public void highlightTile(Integer selectedTileIndex) {
+		if (selectedTileIndex != null) {
+			for (Node childNode : this.getChildren()) {
+				if (childNode instanceof ImageView) {
+					Integer currentColumnIndex = GridPane.getColumnIndex(childNode);
+					if (currentColumnIndex != null && currentColumnIndex.equals(selectedTileIndex)) {
+						// apply white drop shadow to simulate a border
+						childNode.setStyle("-fx-effect: dropshadow(three-pass-box, white, 8, 0.8, 0, 0);");
+					}
+				}
+			}
+		}
+	}
+	
+	public void clearHighlights() {
+		for (Node childNode : this.getChildren()) {
+			if (childNode instanceof ImageView) {
+				childNode.setStyle("");
+			}
 		}
 	}
 

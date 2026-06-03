@@ -2,7 +2,6 @@ package latice.gui.controller;
 
 import java.util.ArrayList;
 
-import latice.gui.Console;
 import latice.gui.model.GameBoardIhm;
 import latice.gui.model.RackIhm;
 import latice.gui.view.GameOutcomeLayout;
@@ -71,9 +70,11 @@ public class GameController {
 	}
 	
 	public void handleTileSelection(Integer indexRack) {
-		// TODO highlight the selected tile
+		this.rackIhm.clearHighlights();
+		
 		if (referee.currentPlayer().rack().getTile(indexRack) != null ) {
 			this.selectedTileIndex = indexRack;
+			this.rackIhm.highlightTile(selectedTileIndex);
 		} else {
 			this.selectedTileIndex = null;
 		}
