@@ -72,10 +72,35 @@ public class CssStyle {
         exchangeAllTilesBtn.setStyle(actionBtnStyle);
         buyANewActionBtn.setStyle(actionBtnStyle);
         
-        endTurnBtn.setStyle("-fx-background-color: " + themeBlue + "; -fx-text-fill: " + themeAntiqueWhite + "; -fx-font-weight: bold; -fx-padding: 8 30; -fx-background-radius: 6; -fx-cursor: hand;");
+        String endTurnBtnStyle = "-fx-background-color: " + themeBlue + "; -fx-text-fill: " + themeAntiqueWhite + "; -fx-font-weight: bold; -fx-padding: 8 30; -fx-background-radius: 6; -fx-cursor: hand;"; 
+        endTurnBtn.setStyle(endTurnBtnStyle);
        
         gameLayout.setStyle("-fx-background-color: linear-gradient(to bottom right, " + themeBlue + ", " + themeSoftFawn + ", " + themeAntiqueWhite + ");");
 
         opponentRack.setStyle("-fx-background-color: " + themeBlue + "; -fx-background-radius: 8; -fx-border-color: " + themeAntiqueWhite + "; -fx-border-width: 3; -fx-border-radius: 8; -fx-min-width: 450; -fx-max-width: 450; -fx-min-height: 70;");
+        
+        // hover effects
+        double defaultScale = 1.0;
+        double hoveredScale = 1.05;
+        applyHoverEffect(exchangeAllTilesBtn);
+        applyHoverEffect(buyANewActionBtn);
+        applyHoverEffect(endTurnBtn);
     }
+	
+	public static void applyHoverEffect(Button targetButton) {
+	    double defaultScale = 1.0;
+	    double hoveredScale = 1.05;
+
+	    targetButton.setOnMouseEntered(event -> {
+	        // apply hovered scale
+	        targetButton.setScaleX(hoveredScale);
+	        targetButton.setScaleY(hoveredScale);
+	    });
+
+	    targetButton.setOnMouseExited(event -> {
+	        // revert to default scale
+	        targetButton.setScaleX(defaultScale);
+	        targetButton.setScaleY(defaultScale);
+	    });
+	}
 }
