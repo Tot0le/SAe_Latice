@@ -54,10 +54,8 @@ public class Referee {
 		
 	}
 	// Method is testing if a move is legal by looking if the rules are respected
-	public boolean checkIfMoveIsLegal(Integer selectedTileIndexRack, Position selectedTilePositionGmBrd ) {
+	public boolean checkIfMoveIsLegal(Position selectedTilePositionGmBrd, ArrayList<Tile> nearbyTiles, Tile selectedTile) {
 		boolean isLegal = false;
-		Tile selectedTile = currentPlayer.rack().getTile(selectedTileIndexRack);
-		ArrayList<Tile> nearbyTiles = (ArrayList<Tile>) this.gameboard.getNearbyTiles(selectedTilePositionGmBrd);
 		if (currentPlayer.isMoveAvailable()) {
 			isLegal = true;
 			
@@ -74,12 +72,6 @@ public class Referee {
 			}
 		}
 		
-		if (isLegal) {
-			currentPlayer.rack().popTile(selectedTileIndexRack);
-			gameboard.put(selectedTilePositionGmBrd, selectedTile);
-			currentPlayer.addPoints(Referee.calculatePoints(nearbyTiles, selectedTile, gameboard.isSunAt(selectedTilePositionGmBrd)));
-			currentPlayer.setMoveAvailable(false);
-		}
 		return isLegal;
 	}
 	// method is incrementing the number of points of the player who triggered the good conditions

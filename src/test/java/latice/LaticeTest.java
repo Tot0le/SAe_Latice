@@ -104,22 +104,22 @@ class LaticeTest {
 		for (int i = 0; i < 5; i++) {
 			assertEquals((nbTileMax/2) -i, poolPlayer1.tilesAmounts());
 			assertEquals((nbTileMax/2) -i, poolPlayer2.tilesAmounts());
-			assertEquals(i, rackPlayer1.tilesAmount());
-			assertEquals(i, rackPlayer2.tilesAmount());
+			assertEquals(i, rackPlayer1.size());
+			assertEquals(i, rackPlayer2.size());
 
 			player1.drawATile();
 			player2.drawATile();
 	}
 		assertEquals((nbTileMax/2) -5, poolPlayer1.tilesAmounts());
 		assertEquals((nbTileMax/2) -5, poolPlayer2.tilesAmounts());
-		assertEquals(5, rackPlayer1.tilesAmount());
-		assertEquals(5, rackPlayer2.tilesAmount());
+		assertEquals(5, rackPlayer1.size());
+		assertEquals(5, rackPlayer2.size());
 
 		player1.drawATile();
 		// shouldn't change because the rack is full
 
 		assertEquals((nbTileMax/2) -5, poolPlayer1.tilesAmounts()) ;
-		assertEquals(5, rackPlayer1.tilesAmount());
+		assertEquals(5, rackPlayer1.size());
 
 	}
 
@@ -132,16 +132,16 @@ class LaticeTest {
 
 		Console.message(gameboard.toAscii());
 
-		assertEquals(4, rackPlayer1.tilesAmount());
+		assertEquals(4, rackPlayer1.size());
 		Position center_4_4 = new Position(1,1);
 		gameboard.put(center_4_4, rackPlayer1.popTile(0));
-		assertEquals(3, rackPlayer1.tilesAmount());
+		assertEquals(3, rackPlayer1.size());
 		assertEquals(RED_DOLPHIN, gameboard.getTile(center_4_4));
 
 		Position pos_4_5 = new Position(4,5);
 		gameboard.put(pos_4_5, rackPlayer1.popTile(0));
 		assertEquals(RED_TURTLE, gameboard.getTile(pos_4_5));
-		assertEquals(2, rackPlayer1.tilesAmount());
+		assertEquals(2, rackPlayer1.size());
 		
 		String testDescription = "Red Dolphin";
 		assertEquals(testDescription, RED_DOLPHIN.toString());
@@ -281,7 +281,9 @@ class LaticeTest {
 		Referee referee = new Referee(gameboard, playerList);
 		referee.setCurrentPlayer(player1);
 		referee.currentPlayer().rack().addTile(greenGecko);
-		boolean testResult = referee.checkIfMoveIsLegal(0, pos_6_6); // attempt to put greenGecko to pos 6_6
+		ArrayList<Tile> nearbyTiles = (ArrayList<Tile>) this.gameboard.getNearbyTiles(pos_6_6);
+		Tile selectedTile = referee.currentPlayer().rack().getTile(0);
+		boolean testResult = referee.checkIfMoveIsLegal(pos_6_6, nearbyTiles, selectedTile); // attempt to put greenGecko to pos 6_6
 		assertFalse(testResult);
 		
 	}

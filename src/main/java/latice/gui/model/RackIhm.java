@@ -18,7 +18,7 @@ import latice.util.ImagePath;
 public class RackIhm extends GridPane{
 	Image cellBackgroundImg;
 
-	ArrayList<Tile> tilesIhm;
+	ArrayList<Tile> tilesRack;
 	
 	public RackIhm() {
 		Rack rack = new Rack();
@@ -46,7 +46,7 @@ public class RackIhm extends GridPane{
 	 */
 	public void updateRackTiles(Player player) {
 		Rack rack = player.rack();
-		tilesIhm = rack.getTiles();
+		tilesRack = rack.getTiles();
 		Image image;
 		ImageView cellImgView;
 		
@@ -56,15 +56,19 @@ public class RackIhm extends GridPane{
 			this.add(cellImgView, tileIndex, 0);
 		}
 		
-		for (int tileIndex = 0; tileIndex < rack.tilesAmount(); tileIndex++) {
-			image = ImageLoader.loadImageSafe(tilesIhm.get(tileIndex).path().imagePath(), 90, 90);
+		Tile currentTile;
+		
+		for (int tileIndex = 0; tileIndex < tilesRack.size(); tileIndex++) {
+			currentTile = tilesRack.get(tileIndex);
+			if (currentTile == null) {
+				image = ImageLoader.loadImageSafe(ImagePath.RACK_CELL.imagePath(), 90, 90);
+			} else {
+				image = ImageLoader.loadImageSafe(currentTile.path().imagePath(), 90, 90);
+			}
+			
 			cellImgView = new ImageView(image);
 			this.add(cellImgView, tileIndex, 0);
 		}
-		
-		// Debug prints
-		//System.out.println("rack tiles amounts : " + this.rack.tilesAmounts());
-		//System.out.println("image amount : " + images.size());
 	}
 
 	public void bindController(GameController gameController) {
