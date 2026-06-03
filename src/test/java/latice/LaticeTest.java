@@ -139,7 +139,7 @@ class LaticeTest {
 		assertEquals(RED_DOLPHIN, gameboard.getTile(center_4_4));
 
 		Position pos_4_5 = new Position(4,5);
-		gameboard.put(pos_4_5, rackPlayer1.popTile(0));
+		gameboard.put(pos_4_5, rackPlayer1.popTile(1));
 		assertEquals(RED_TURTLE, gameboard.getTile(pos_4_5));
 		assertEquals(2, rackPlayer1.size());
 		

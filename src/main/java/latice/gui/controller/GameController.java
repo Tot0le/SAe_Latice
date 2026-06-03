@@ -77,8 +77,6 @@ public class GameController {
 		} else {
 			this.selectedTileIndex = null;
 		}
-		
-	//	}
 	}
 	
 	public void handleTilePlacement(Position gameboardPosition) {
