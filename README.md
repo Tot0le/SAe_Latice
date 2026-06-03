@@ -1,10 +1,10 @@
 # SAe_Latice
-Pour exécuter le projet sans erreur de "runtime components" :
+To execute the project without "runtime components error"
 
-Faites un clic droit sur le dossier racine du projet (latice).
+Right click on the root folder of the project (latice).
 
-Sélectionnez Run As > Maven build...
+Choose Run As > Maven build...
 
-Dans le champ Goals, saisissez : javafx:run
+In the Goals field, type : javafx:run
 
-Cliquez sur Run.
+Click on Run.
