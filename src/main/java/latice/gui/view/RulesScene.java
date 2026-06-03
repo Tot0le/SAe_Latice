@@ -1,5 +1,7 @@
 package latice.gui.view;
 
+import javax.print.attribute.standard.Media;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,7 +18,11 @@ import javafx.stage.Stage;
 import latice.gui.controller.MenuBtnController;
 import latice.util.ImageLoader;
 import latice.util.ImagePath;
+import latice.util.MusicPath;
 import latice.util.SetImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
 
 public class RulesScene extends Scene {
 	
@@ -24,10 +30,22 @@ public class RulesScene extends Scene {
 		super(new BorderPane(), 1920, 1080);
 		
 		BorderPane root = (BorderPane) this.getRoot();
+		
+		//images call from ImagePath
 		Image imageRulesBackground = ImageLoader.loadImageSafe(ImagePath.RULES_BACKGROUND.imagePath(), 1920,1080);
 		Image imageQuit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 150,100);
 		Image imageBack = ImageLoader.loadImageSafe(ImagePath.BACK_BUTTON.imagePath(), 150,100);
 		
+		//Music call from MusicPath
+
+		String musicFile = MusicPath.MUSIC_SETTINGS.getPath();  
+
+		Media sound = new Media(new File(musicFile).toURI().toString());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.play();
+
+		
+		// Buttons creation with the listeners
 		Button btnQuitRules = new Button("QUIT"); 
 		btnQuitRules.setPrefSize(150, 100);
 		btnQuitRules.setMinSize(150, 100);
