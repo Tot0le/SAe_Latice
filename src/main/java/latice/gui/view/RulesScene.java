@@ -42,6 +42,7 @@ public class RulesScene extends Scene {
 		
 		MenuBtnController controller = new MenuBtnController(primaryStage);
 	    btnQuitRules.setOnMouseClicked(controller.quitBtnHandler());
+	    btnBackRules.setOnMouseClicked(event -> controller.BackBtnHandler());
 		
 	    //Background instanciation
 		BackgroundImage rulesBackground = new BackgroundImage(imageRulesBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));

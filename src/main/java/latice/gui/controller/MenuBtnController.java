@@ -3,9 +3,11 @@ package latice.gui.controller;
 import java.util.ArrayList;
 
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import latice.gui.view.GameScene;
+import latice.gui.view.MainMenu;
 import latice.gui.view.RulesScene;
 import latice.gui.view.SettingGameScene;
 
@@ -36,7 +38,15 @@ public class MenuBtnController {
     		
     		primaryStage.setScene(settingScene);
 	    }
+		
+		// Button back goes back to main menu
+		public void BackBtnHandler() {
+			MainMenu mainMenu = new MainMenu(primaryStage);
 
+			primaryStage.setScene(mainMenu);
+			primaryStage.setTitle("Game starting window");
+		}
+		
 //		handler of quit button is exiting the window
 	    public EventHandler<MouseEvent> quitBtnHandler() {
 	        return new EventHandler<MouseEvent>() {
@@ -58,6 +68,7 @@ public class MenuBtnController {
 	            }
 	        };
 	    }
+	    
 	    public void setSettingGameScene(SettingGameScene settingScene) {
 	    	this.settingScene = settingScene;
 	    }
