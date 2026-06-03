@@ -1,8 +1,5 @@
 package latice.util;
 
-import latice.model.tile.Color;
-import latice.model.tile.Shape;
-
 public enum MusicPath {
 	MUSIC_MENU("/musics/main_menu_music.mp3"),
 	MUSIC_SETTINGS("/musics/settings_music.mp3"),

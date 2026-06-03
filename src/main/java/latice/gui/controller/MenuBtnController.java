@@ -10,17 +10,21 @@ import latice.gui.view.GameScene;
 import latice.gui.view.MainMenu;
 import latice.gui.view.RulesScene;
 import latice.gui.view.SettingGameScene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class MenuBtnController {
 		
 		private Stage primaryStage ;
 		private SettingGameScene settingScene;
 		private ArrayList<String> usernames;
+		private MediaPlayer mediaPlayer;
 		
-		public MenuBtnController(Stage primaryStage) {
+		public MenuBtnController(Stage primaryStage, MediaPlayer mediaPlayer) {
 	        this.primaryStage = primaryStage;
+	        this.mediaPlayer = mediaPlayer;
 	    }
-	
+
 		public void launchBtnHandler() {
 			this.usernames = settingScene.getUsernames();
 			if (!usernames.isEmpty()) {
@@ -34,6 +38,9 @@ public class MenuBtnController {
 
 		// handler of play button is starting a was scene with gameScene
 		public void playBtnHandler() {
+			if(this.mediaPlayer != null) {
+				this.mediaPlayer.stop();
+			}
         	settingScene = new SettingGameScene(this);
     		
     		primaryStage.setScene(settingScene);
@@ -41,6 +48,10 @@ public class MenuBtnController {
 		
 		// Button back goes back to main menu
 		public void BackBtnHandler() {
+			
+			if(this.mediaPlayer != null) {
+				this.mediaPlayer.stop();
+			}
 			MainMenu mainMenu = new MainMenu(primaryStage);
 
 			primaryStage.setScene(mainMenu);
@@ -52,6 +63,7 @@ public class MenuBtnController {
 	        return new EventHandler<MouseEvent>() {
 	            @Override
 	            public void handle(MouseEvent event) {
+	            	
 	            		
 	            	primaryStage.close();
 	            }
@@ -59,9 +71,13 @@ public class MenuBtnController {
 	    }
 
 	    public EventHandler<MouseEvent> rulesBtnHandler() {
+        	if(this.mediaPlayer != null) {
+				this.mediaPlayer.stop();
+			}
 	        return new EventHandler<MouseEvent>() {
 	            @Override
 	            public void handle(MouseEvent event) {
+
 	            	RulesScene rulesScene = new RulesScene(primaryStage);
 	            	
 	            	primaryStage.setScene(rulesScene);
@@ -79,5 +95,8 @@ public class MenuBtnController {
 	    
 	    public ArrayList<String> usernames() {
 	    	return usernames;
+	    }
+	    public MediaPlayer mediaPlayer() {
+	    	return mediaPlayer;
 	    }
 	}

@@ -20,7 +20,6 @@ import latice.util.MusicPath;
 import latice.util.SetImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import java.io.File;
 import java.net.URL;
 
 public class RulesScene extends Scene {
@@ -56,7 +55,7 @@ public class RulesScene extends Scene {
 		btnBackRules.setMaxSize(150, 100);
 		btnBackRules = SetImageView.getImageInButtonByDefault(btnBackRules, imageBack);
 		
-		MenuBtnController controller = new MenuBtnController(primaryStage);
+		MenuBtnController controller = new MenuBtnController(primaryStage, mediaPlayer);
 	    btnQuitRules.setOnMouseClicked(controller.quitBtnHandler());
 	    btnBackRules.setOnMouseClicked(event -> controller.BackBtnHandler());
 		

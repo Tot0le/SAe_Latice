@@ -63,7 +63,7 @@ public class MainMenu extends Scene {
 		mediaPlayer.play();
 		
 		// Buttons listeners    we make a new primaryStage to bypass the static restrictions
-		MenuBtnController controller = new MenuBtnController(primaryStage);
+		MenuBtnController controller = new MenuBtnController(primaryStage, mediaPlayer);
 		btnPlay.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
 			controller.playBtnHandler();
 		});
@@ -75,8 +75,6 @@ public class MainMenu extends Scene {
 
 		// VBox creation
 		VBox caseTop = new VBox();
-		VBox caseBottom = new VBox();
-		VBox caseBottom2 = new VBox();
 		
 		// HBox creation
 		HBox hboxBottom = new HBox();
