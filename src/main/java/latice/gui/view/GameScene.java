@@ -128,6 +128,8 @@ public class GameScene extends Scene { //TODO add a resign button
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
 		
+		this.menuBtnController.setMediaPlayer(mediaPlayer);
+		
 		// left panel setup (turns and Pool badges)
 		Label iconTurn = new Label("⏳");
 		VBox turnBadge = new VBox(iconTurn, currentTurnLbl);

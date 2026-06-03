@@ -50,7 +50,6 @@ public class MenuBtnController {
 		
 		// Button back goes back to main menu
 		public void backBtnHandler() {
-			
 			if(this.mediaPlayer != null) {
 				this.mediaPlayer.stop();
 			}
@@ -88,6 +87,10 @@ public class MenuBtnController {
 	    
 	    public ArrayList<String> usernames() {
 	    	return usernames;
+	    }
+	    
+	    public void setMediaPlayer(MediaPlayer mediaPlayer) {
+	        this.mediaPlayer = mediaPlayer;
 	    }
 	    public MediaPlayer mediaPlayer() {
 	    	return mediaPlayer;
