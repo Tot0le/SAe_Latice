@@ -114,17 +114,16 @@ public class Referee {
 		if (!this.currentPlayer.rack().isFull()) {
 			this.currentPlayer.drawMaxTile();
 		}
+		// change current player
+		this.currentPlayerIndex = this.currentPlayerIndex + 1;
+		if (this.currentPlayerIndex >= this.playerList.size()) {
+			this.cycleCount += 1;
+			this.currentPlayerIndex = this.currentPlayerIndex % this.playerList.size();
+		}
 		
 		// if the game is not finished, 
 		if (this.cycleCount < gameboard.nbCycle() && this.currentPlayer.totalTilesNumber() > 0) {
-			
-			// change current player
-			this.currentPlayerIndex = this.currentPlayerIndex + 1;
-			if (this.currentPlayerIndex >= this.playerList.size()) {
-				this.cycleCount += 1;
-				this.currentPlayerIndex = this.currentPlayerIndex % this.playerList.size();
-			}
-		
+
 			// update the current player
 			this.currentPlayer = playerList.get(this.currentPlayerIndex);
 			
