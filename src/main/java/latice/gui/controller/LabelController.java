@@ -3,6 +3,7 @@ package latice.gui.controller;
 import java.util.List;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import latice.model.Referee;
 
 public class LabelController {
@@ -25,7 +26,9 @@ public class LabelController {
 
 	public void updateScoreLabel() {
 		int currentPlayerIndex = referee.currentPlayerIndex();
-		this.scorePlayerLabels().get(currentPlayerIndex).setText("Score " + referee.currentPlayer().username() + " : " + referee.currentPlayer().points());
+		String scoreString = "Score " + referee.currentPlayer().username() + " : " + referee.currentPlayer().points();
+		this.scorePlayerLabels().get(currentPlayerIndex).setText(scoreString);
+		this.scorePlayerLabels().get(currentPlayerIndex).setTooltip(new Tooltip(scoreString));
 	}
 	
 	public void updateCurrentTurn() {
