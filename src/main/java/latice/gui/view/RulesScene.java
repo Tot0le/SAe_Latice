@@ -1,7 +1,5 @@
 package latice.gui.view;
 
-import javax.print.attribute.standard.Media;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -23,6 +21,7 @@ import latice.util.SetImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
+import java.net.URL;
 
 public class RulesScene extends Scene {
 	
@@ -36,15 +35,14 @@ public class RulesScene extends Scene {
 		Image imageQuit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 150,100);
 		Image imageBack = ImageLoader.loadImageSafe(ImagePath.BACK_BUTTON.imagePath(), 150,100);
 		
-		//Music call from MusicPath
-
+		//Music call from MusicPath 
 		String musicFile = MusicPath.MUSIC_SETTINGS.getPath();  
-
-		Media sound = new Media(new File(musicFile).toURI().toString());
+		URL resourceUrl = RulesScene.class.getResource(musicFile);
+	    Media sound = new Media(resourceUrl.toExternalForm());
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
 
-		
 		// Buttons creation with the listeners
 		Button btnQuitRules = new Button("QUIT"); 
 		btnQuitRules.setPrefSize(150, 100);
