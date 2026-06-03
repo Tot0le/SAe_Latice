@@ -43,6 +43,10 @@ public class Pool {
 	public void shuffle() {
 		Collections.shuffle(this.getTiles());
 	}
+	
+	public Integer size() {
+		return this.tiles.size();
+	}
 
 	@Override
 	public String toString() {

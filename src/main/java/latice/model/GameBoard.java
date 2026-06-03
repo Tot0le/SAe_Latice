@@ -2,6 +2,7 @@ package latice.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import latice.gui.Console;
@@ -98,14 +99,16 @@ public class GameBoard {
 
      }
      
-     public ArrayList<Tile> getNearbyTiles(Position position){
-    	 ArrayList<Tile> nearbyTiles = new ArrayList<Tile>();
-    	 Integer row = position.row();
-    	 Integer column = position.column();
-    	 nearbyTiles.add(this.tiles.get(new Position(row + 1, column)));
-    	 nearbyTiles.add(this.tiles.get(new Position(row - 1, column)));
-    	 nearbyTiles.add(this.tiles.get(new Position(row, column + 1)));
-    	 nearbyTiles.add(this.tiles.get(new Position(row, column - 1)));
+     public List<Tile> getNearbyTiles(Position position){
+    	 ArrayList<Tile> nearbyTiles = new ArrayList<>();
+
+    	 ArrayList<Position> nearbyPositions = (ArrayList<Position>) position.getNearbyPositions();
+    	 for (Position aNearbyPosition : nearbyPositions) {
+    		 nearbyTiles.add(this.tiles.get(aNearbyPosition));
+    	 }
+    	 
+    	 // remove all null of the list, code from : https://www.baeldung.com/java-remove-nulls-from-list
+    	 while (nearbyTiles.remove(null)); 
 		 return nearbyTiles;
      }
 
@@ -157,6 +160,10 @@ public class GameBoard {
 
 	 public Position getMoonSquarePosition() {
 		 return moonSquarePosition;
+	 }
+	 
+	 public Integer nbCycle() {
+		 return nbCycle;
 	 }
 
 }

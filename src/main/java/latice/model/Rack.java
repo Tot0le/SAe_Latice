@@ -1,9 +1,9 @@
 package latice.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import latice.model.tile.Tile;
-import latice.util.TileChoosedFromRackOutOfRangeException;
 
 public class Rack {
 	private ArrayList<Tile> tiles;
@@ -18,15 +18,19 @@ public class Rack {
 		this.tiles = new ArrayList<>();
 		this.maxTiles = maxTiles;
 	}
-
+	
 	// getteur
-	public int tilesAmount() {
-		return tiles.size();
+	public int size() {
+		return (int) this.tiles.stream().filter(java.util.Objects::nonNull).count();
+	}
+
+	public boolean isFull() {
+		return this.size() >= maxTiles();
 	}
 
 	public Tile popTile(Integer index) {
 		Tile tile = getTile(index);
-		tiles.remove(getTile(index));
+		tiles.set(index, null);
 		return tile;
 
 	}
@@ -36,12 +40,11 @@ public class Rack {
 	}
 
 	public Tile getTile(Integer index) {
-		Tile tile;
-		if (index < this.tilesAmount()) {
+		Tile tile = null;
+		if (index < this.tiles.size()) {
 			tile = this.tiles.get(index);
-		} else {
-			tile = null;
 		}
+		
 		return tile;
 	}
 
@@ -54,7 +57,35 @@ public class Rack {
 	}
 
 	public void addTile(Tile tile) {
-		this.tiles.add(tile);
+		boolean tileAdded = false;
+		
+		// search for the null in the rack if exist
+		for (int i = 0; i < this.tiles.size(); i++) {
+			if (this.tiles.get(i) == null && !tileAdded) {
+				this.tiles.set(i, tile);
+				tileAdded = true;
+			}
+		}
+		if (!tileAdded) {
+			this.tiles.add(tile);
+		}
+	}
+	
+	public ArrayList<Tile> takeTilesFromRack(ArrayList<Integer> indexesOfTilesInRack) {
+		
+		ArrayList<Tile> tilesToBeExchanged = new ArrayList<>();
+		Collections.sort(indexesOfTilesInRack);
+		Collections.reverse(indexesOfTilesInRack);
+		
+		for (int indexOfTiles : indexesOfTilesInRack) {
+			tilesToBeExchanged.add(this.tiles.get(indexOfTiles));
+		}
+		
+		for (int indexOfTiles : indexesOfTilesInRack) {
+			this.tiles.set(indexOfTiles, null);
+		}
+		
+		return tilesToBeExchanged;
 	}
 
 	@Override

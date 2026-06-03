@@ -33,8 +33,7 @@ public class GameBoardIhm extends GridPane {
 			image = this.chooseRightBackgroundImage(position);
 
 			ImageView currentImageViewBackground = new ImageView(image);
-			currentImageViewBackground.setFitHeight(50);
-			currentImageViewBackground.setPreserveRatio(true);
+			configureTilesImages(currentImageViewBackground);
 			this.add(currentImageViewBackground, position.column(), position.row());
 		}
 		this.setHgap(1);
@@ -47,7 +46,7 @@ public class GameBoardIhm extends GridPane {
 
 	}
 	
-	private Image chooseRightBackgroundImage(Position position) {
+	public Image chooseRightBackgroundImage(Position position) {
 		Image image;
 		Image backgroundImage = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SEA.imagePath(), tileSize, tileSize);
 		if (gameboard.isSunAt(position)) {
@@ -59,7 +58,8 @@ public class GameBoardIhm extends GridPane {
 		}
 		return image;
 	}
-	
+
+
 	public void bindController(GameController gameController) {
 		this.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
 			Node clickedNode = (Node) event.getTarget();
@@ -90,8 +90,7 @@ public class GameBoardIhm extends GridPane {
 				currentImageView = new ImageView(image);
 				
 				// parameters of the imageview
-				currentImageView.setFitHeight(50);
-				currentImageView.setPreserveRatio(true);
+				configureTilesImages(currentImageView);
 
 				// add the image at the right position
 				this.tilesPlacedPlacement.remove(notATileHereAnymore);
@@ -106,12 +105,17 @@ public class GameBoardIhm extends GridPane {
 			currentImageView = new ImageView(image);
 
 			// parameters of the imageview
-			currentImageView.setFitHeight(50);
-			currentImageView.setPreserveRatio(true);
+			configureTilesImages(currentImageView);
 
 			// add the image at the right position
 			this.tilesPlacedPlacement.add(position); // usefull later if a tile is push
 			this.add(currentImageView, position.column(), position.row());
 		}
+	}
+	
+	public void configureTilesImages(ImageView imgView) {
+		imgView.setFitHeight(50);
+		imgView.setFitWidth(50);
+		imgView.setPreserveRatio(false);
 	}
 }
