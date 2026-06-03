@@ -1,5 +1,7 @@
 package latice.gui.view;
 
+import java.net.URL;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,10 +15,13 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import latice.gui.controller.MenuBtnController;
 import latice.util.ImageLoader;
 import latice.util.ImagePath;
+import latice.util.MusicPath;
 import latice.util.SetImageView;
 
 public class MainMenu extends Scene {
@@ -48,6 +53,14 @@ public class MainMenu extends Scene {
 		btnRules.setMinSize(150, 100);
 		btnRules.setMaxSize(150, 100);
 		btnRules = SetImageView.getImageInButtonByDefault(btnRules, imageRules);
+		
+		//music implementation 
+		String musicFile = MusicPath.MUSIC_MENU.getPath();
+		URL resourceUrl = RulesScene.class.getResource(musicFile);
+	    Media sound = new Media(resourceUrl.toExternalForm());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+		mediaPlayer.play();
 		
 		// Buttons listeners    we make a new primaryStage to bypass the static restrictions
 		MenuBtnController controller = new MenuBtnController(primaryStage);
