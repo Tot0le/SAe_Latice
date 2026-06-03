@@ -35,19 +35,19 @@ public class MainMenu extends Scene {
 		btnPlay.setPrefSize(300, 200);
 		btnPlay.setMinSize(300, 200);
 		btnPlay.setMaxSize(300, 200);
-		btnPlay = SetImageView.getImageInButtonPlay(btnPlay, imagePlay);
+		btnPlay = SetImageView.getImageInButtonBigger(btnPlay, imagePlay);
 		
 		Button btnQuit = new Button("QUIT");
 		btnQuit.setPrefSize(150, 100);
 		btnQuit.setMinSize(150, 100);
 		btnQuit.setMaxSize(150, 100);
-		btnQuit = SetImageView.getImageInButtonQuitAndRules(btnQuit, imageQuit);
+		btnQuit = SetImageView.getImageInButtonByDefault(btnQuit, imageQuit);
 		
 		Button btnRules = new Button("RULES");
 		btnRules.setPrefSize(150, 100);
 		btnRules.setMinSize(150, 100);
 		btnRules.setMaxSize(150, 100);
-		btnRules = SetImageView.getImageInButtonQuitAndRules(btnRules, imageRules);
+		btnRules = SetImageView.getImageInButtonByDefault(btnRules, imageRules);
 		
 		// Buttons listeners    we make a new primaryStage to bypass the static restrictions
 		MenuBtnController controller = new MenuBtnController(primaryStage);

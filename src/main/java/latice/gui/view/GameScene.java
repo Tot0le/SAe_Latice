@@ -229,7 +229,7 @@ public class GameScene extends Scene { //TODO add a resign button
 			gameController.buyANewActionBtnHandler();
 		});
 	}
-	
+
 	public void lockBoardRackAndBtns(boolean lockEndTurn) {
 		this.visualGameboard.setMouseTransparent(true);
 		this.rackIhmEmplacement.setMouseTransparent(true);

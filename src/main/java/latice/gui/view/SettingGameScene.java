@@ -50,7 +50,7 @@ public class SettingGameScene extends Scene {
 		launchBtn.setPrefSize(300, 200);
 		launchBtn.setMinSize(300, 200);
 		launchBtn.setMaxSize(300, 200);
-		launchBtn = SetImageView.getImageInButtonPlay(launchBtn,imageLaunch);
+		launchBtn = SetImageView.getImageInButtonBigger(launchBtn,imageLaunch);
 		
 		VBox middleVBox = new VBox();
 		
