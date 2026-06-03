@@ -51,11 +51,8 @@ public class GameOutcomeLayout extends BorderPane {
 		mainMenuBtn = new Button("Main menu");
 		
 		mainMenuBtn.setOnAction(event -> {
-			MainMenu mainMenu = new MainMenu(menuBtnController.primaryStage());
-    		
-    		menuBtnController.primaryStage().setScene(mainMenu);
+			menuBtnController.backBtnHandler();
 		});
-		
 		
 		replaySameConfig = new Button("Replay");
 		

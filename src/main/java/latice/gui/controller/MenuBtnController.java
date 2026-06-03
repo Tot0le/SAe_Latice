@@ -10,7 +10,6 @@ import latice.gui.view.GameScene;
 import latice.gui.view.MainMenu;
 import latice.gui.view.RulesScene;
 import latice.gui.view.SettingGameScene;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class MenuBtnController {
@@ -26,6 +25,9 @@ public class MenuBtnController {
 	    }
 
 		public void launchBtnHandler() {
+	    	if(this.mediaPlayer != null) {
+				this.mediaPlayer.stop();
+			}
 			this.usernames = settingScene.getUsernames();
 			if (!usernames.isEmpty()) {
 				GameScene gameScene = new GameScene(usernames, this);
@@ -47,7 +49,7 @@ public class MenuBtnController {
 	    }
 		
 		// Button back goes back to main menu
-		public void BackBtnHandler() {
+		public void backBtnHandler() {
 			
 			if(this.mediaPlayer != null) {
 				this.mediaPlayer.stop();
@@ -59,34 +61,25 @@ public class MenuBtnController {
 		}
 		
 //		handler of quit button is exiting the window
-	    public EventHandler<MouseEvent> quitBtnHandler() {
-	        return new EventHandler<MouseEvent>() {
-	            @Override
-	            public void handle(MouseEvent event) {
-	            	
-	            		
+	    public void quitBtnHandler() {
 	            	primaryStage.close();
 	            }
-	        };
-	    }
 
-	    public EventHandler<MouseEvent> rulesBtnHandler() {
+	    public void rulesBtnHandler() {
         	if(this.mediaPlayer != null) {
 				this.mediaPlayer.stop();
-			}
-	        return new EventHandler<MouseEvent>() {
-	            @Override
-	            public void handle(MouseEvent event) {
-
-	            	RulesScene rulesScene = new RulesScene(primaryStage);
-	            	
-	            	primaryStage.setScene(rulesScene);
+				}
+	            RulesScene rulesScene = new RulesScene(primaryStage);
+	            primaryStage.setScene(rulesScene);
 	            }
-	        };
-	    }
 	    
-	    public void setSettingGameScene(SettingGameScene settingScene) {
+	    public void setSettingGameScene(SettingGameScene settingScene, MediaPlayer mediaPlayer) {
+	    	if(this.mediaPlayer != null) {
+				this.mediaPlayer.stop();
+			}
 	    	this.settingScene = settingScene;
+	    	this.mediaPlayer = mediaPlayer;
+
 	    }
 	    
 	    public Stage primaryStage() {

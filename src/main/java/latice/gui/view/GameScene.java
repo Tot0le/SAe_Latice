@@ -120,6 +120,7 @@ public class GameScene extends Scene { //TODO add a resign button
 		vboxRight.getChildren().addAll(scoreBadge, playerBadge);
 		
 		// music implementation and starting
+
 		String musicFile = MusicPath.MUSIC_INGAME.getPath();  
 		URL resourceUrl = RulesScene.class.getResource(musicFile);
 	    Media sound = new Media(resourceUrl.toExternalForm());

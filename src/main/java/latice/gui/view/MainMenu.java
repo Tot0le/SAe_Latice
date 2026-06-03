@@ -34,7 +34,7 @@ public class MainMenu extends Scene {
 		Image imagePlay = ImageLoader.loadImageSafe(ImagePath.PLAY_BUTTON.imagePath(), 300,200);
 		Image imageQuit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 150,100);
 		Image imageRules = ImageLoader.loadImageSafe(ImagePath.RULES_BUTTON.imagePath(),150, 100);
-		
+
 		//Buttons creation and image attribution + size min and max
 		Button btnPlay = new Button("PLAY");
 		btnPlay.setPrefSize(300, 200);
@@ -67,12 +67,13 @@ public class MainMenu extends Scene {
 		btnPlay.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
 			controller.playBtnHandler();
 		});
-	    btnQuit.setOnMouseClicked(controller.quitBtnHandler());
-	    btnRules.setOnMouseClicked(controller.rulesBtnHandler());
-		
+	
+	    btnQuit.setOnMouseClicked(event -> controller.quitBtnHandler());
+
+	    btnRules.setOnMouseClicked(event -> controller.rulesBtnHandler());
+
 		// select the background parameters and the display
 		BackgroundImage background = new BackgroundImage(image_background, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));
-
 		// VBox creation
 		VBox caseTop = new VBox();
 		
@@ -86,7 +87,6 @@ public class MainMenu extends Scene {
 		hboxBottom.getChildren().addAll(btnQuit, btnRules);
 		hboxBottom.setAlignment(Pos.BOTTOM_CENTER);
 		hboxBottom.setSpacing(50);
-
 		// add the VBoxs to the StackPane
 		root.setTop(caseTop);
 		root.setBottom(hboxBottom);

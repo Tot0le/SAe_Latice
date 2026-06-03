@@ -1,5 +1,6 @@
 package latice.gui.view;
 
+import java.net.URL;
 import java.util.ArrayList;
 import latice.util.SetImageView;
 import javafx.geometry.Pos;
@@ -11,12 +12,15 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import latice.gui.controller.MenuBtnController;
 import latice.util.ImageLoader;
 import latice.util.ImagePath;
+import latice.util.MusicPath;
 
 public class SettingGameScene extends Scene {
 	private BorderPane root;
@@ -47,6 +51,13 @@ public class SettingGameScene extends Scene {
 		lblErrorTypePlayer2.setFont(Font.font("", FontWeight.BOLD, 12));
 		launchBtn = new Button("LAUNCH");
 		
+		String musicFile = MusicPath.MUSIC_SETTINGS.getPath();  
+		URL resourceUrl = RulesScene.class.getResource(musicFile);
+	    Media sound = new Media(resourceUrl.toExternalForm());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+		mediaPlayer.play();
+		
 		launchBtn.setPrefSize(300, 200);
 		launchBtn.setMinSize(300, 200);
 		launchBtn.setMaxSize(300, 200);
@@ -60,7 +71,7 @@ public class SettingGameScene extends Scene {
 		
 		middleVBox.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 		
-		btnController.setSettingGameScene(this);
+		btnController.setSettingGameScene(this, mediaPlayer);
 		
 		launchBtn.setOnAction(event -> {
 			btnController.launchBtnHandler();

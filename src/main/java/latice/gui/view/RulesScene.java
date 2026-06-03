@@ -56,8 +56,8 @@ public class RulesScene extends Scene {
 		btnBackRules = SetImageView.getImageInButtonByDefault(btnBackRules, imageBack);
 		
 		MenuBtnController controller = new MenuBtnController(primaryStage, mediaPlayer);
-	    btnQuitRules.setOnMouseClicked(controller.quitBtnHandler());
-	    btnBackRules.setOnMouseClicked(event -> controller.BackBtnHandler());
+	    btnQuitRules.setOnMouseClicked(event -> controller.quitBtnHandler());
+	    btnBackRules.setOnMouseClicked(event -> controller.backBtnHandler());
 		
 	    //Background instanciation
 		BackgroundImage rulesBackground = new BackgroundImage(imageRulesBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));
