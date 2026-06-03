@@ -16,7 +16,11 @@ import javafx.stage.Stage;
 import latice.gui.controller.MenuBtnController;
 import latice.util.ImageLoader;
 import latice.util.ImagePath;
+import latice.util.MusicPath;
 import latice.util.SetImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.net.URL;
 
 public class RulesScene extends Scene {
 	
@@ -24,31 +28,58 @@ public class RulesScene extends Scene {
 		super(new BorderPane(), 1920, 1080);
 		
 		BorderPane root = (BorderPane) this.getRoot();
+		
+		//images call from ImagePath
 		Image imageRulesBackground = ImageLoader.loadImageSafe(ImagePath.RULES_BACKGROUND.imagePath(), 1920,1080);
 		Image imageQuit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 150,100);
+		Image imageBack = ImageLoader.loadImageSafe(ImagePath.BACK_BUTTON.imagePath(), 150,100);
 		
+		//Music call from MusicPath 
+		String musicFile = MusicPath.MUSIC_SETTINGS.getPath();  
+		URL resourceUrl = RulesScene.class.getResource(musicFile);
+	    Media sound = new Media(resourceUrl.toExternalForm());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+		mediaPlayer.play();
+
+		// Buttons creation with the listeners
 		Button btnQuitRules = new Button("QUIT"); 
 		btnQuitRules.setPrefSize(150, 100);
 		btnQuitRules.setMinSize(150, 100);
 		btnQuitRules.setMaxSize(150, 100);
-		btnQuitRules = SetImageView.getImageInButtonQuitAndRules(btnQuitRules, imageQuit);
+		btnQuitRules = SetImageView.getImageInButtonByDefault(btnQuitRules, imageQuit);
 		
-		MenuBtnController controller = new MenuBtnController(primaryStage);
-	    btnQuitRules.setOnMouseClicked(controller.quitBtnHandler());
+		Button btnBackRules = new Button("BACK");
+		btnBackRules.setPrefSize(150, 100);
+		btnBackRules.setMinSize(150, 100);
+		btnBackRules.setMaxSize(150, 100);
+		btnBackRules = SetImageView.getImageInButtonByDefault(btnBackRules, imageBack);
 		
+		MenuBtnController controller = new MenuBtnController(primaryStage, mediaPlayer);
+	    btnQuitRules.setOnMouseClicked(event -> controller.quitBtnHandler());
+	    btnBackRules.setOnMouseClicked(event -> controller.backBtnHandler());
+		
+	    //Background instanciation
 		BackgroundImage rulesBackground = new BackgroundImage(imageRulesBackground, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));
 		root.setBackground(new Background(rulesBackground));
-		
+
 		//VBox creation and implementation
 		VBox caseRight = new VBox();
+		VBox caseLeft = new VBox();
+
+		caseLeft.getChildren().addAll(btnBackRules);
+		caseLeft.setAlignment(Pos.TOP_LEFT);
+		caseRight.setSpacing(10);
 		
 		caseRight.getChildren().addAll(btnQuitRules);
 		caseRight.setAlignment(Pos.TOP_RIGHT);
 		caseRight.setSpacing(10);
 		
 		root.setRight(caseRight);
+		root.setLeft(caseLeft);
 		
-		BorderPane.setMargin(caseRight, new Insets(0,100,100,0));
+		BorderPane.setMargin(caseRight, new Insets(100,100,100,0));
+		BorderPane.setMargin(caseLeft, new Insets(100,0,100,100));
 		
 	}
 }

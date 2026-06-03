@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class SetImageView{
-	public static Button getImageInButtonQuitAndRules(Button btn, Image image) {
+	public static Button getImageInButtonByDefault(Button btn, Image image) {
 		ImageView iv = new ImageView();
 		
 		// parameters to select size, use a better quality and use a cache to improve storage
@@ -24,7 +24,7 @@ public class SetImageView{
         return btn;
 	}
 	
-	public static Button getImageInButtonPlay(Button btn, Image image) {
+	public static Button getImageInButtonBigger(Button btn, Image image) {
 		ImageView iv = new ImageView();
 		
 		// parameters to select size, use a better quality and use a cache to improve storage

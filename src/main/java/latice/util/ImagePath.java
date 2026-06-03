@@ -1,5 +1,6 @@
 package latice.util;
 
+import javafx.scene.control.Button;
 import latice.model.tile.Color;
 import latice.model.tile.Shape;
 
@@ -58,6 +59,7 @@ public enum ImagePath {
 	RULES_BUTTON("/images/rules_button.png", Color.None, Shape.None),
 	RULES_BACKGROUND("/images/rules.png", Color.None, Shape.None),
 	LAUNCH_BUTTON("/images/launch_button.png", Color.None, Shape.None),
+	BACK_BUTTON("/images/back_button.png", Color.None, Shape.None),
 	
 	// Rack cell image
 	RACK_CELL("/images/rack_cell.png", Color.None, Shape.None);

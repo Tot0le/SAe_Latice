@@ -1,5 +1,7 @@
 package latice.gui.view;
 
+import java.net.URL;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,10 +15,13 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import latice.gui.controller.MenuBtnController;
 import latice.util.ImageLoader;
 import latice.util.ImagePath;
+import latice.util.MusicPath;
 import latice.util.SetImageView;
 
 public class MainMenu extends Scene {
@@ -29,41 +34,48 @@ public class MainMenu extends Scene {
 		Image imagePlay = ImageLoader.loadImageSafe(ImagePath.PLAY_BUTTON.imagePath(), 300,200);
 		Image imageQuit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 150,100);
 		Image imageRules = ImageLoader.loadImageSafe(ImagePath.RULES_BUTTON.imagePath(),150, 100);
-		
+
 		//Buttons creation and image attribution + size min and max
 		Button btnPlay = new Button("PLAY");
 		btnPlay.setPrefSize(300, 200);
 		btnPlay.setMinSize(300, 200);
 		btnPlay.setMaxSize(300, 200);
-		btnPlay = SetImageView.getImageInButtonPlay(btnPlay, imagePlay);
+		btnPlay = SetImageView.getImageInButtonBigger(btnPlay, imagePlay);
 		
 		Button btnQuit = new Button("QUIT");
 		btnQuit.setPrefSize(150, 100);
 		btnQuit.setMinSize(150, 100);
 		btnQuit.setMaxSize(150, 100);
-		btnQuit = SetImageView.getImageInButtonQuitAndRules(btnQuit, imageQuit);
+		btnQuit = SetImageView.getImageInButtonByDefault(btnQuit, imageQuit);
 		
 		Button btnRules = new Button("RULES");
 		btnRules.setPrefSize(150, 100);
 		btnRules.setMinSize(150, 100);
 		btnRules.setMaxSize(150, 100);
-		btnRules = SetImageView.getImageInButtonQuitAndRules(btnRules, imageRules);
+		btnRules = SetImageView.getImageInButtonByDefault(btnRules, imageRules);
+		
+		//music implementation 
+		String musicFile = MusicPath.MUSIC_MENU.getPath();
+		URL resourceUrl = RulesScene.class.getResource(musicFile);
+	    Media sound = new Media(resourceUrl.toExternalForm());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+		mediaPlayer.play();
 		
 		// Buttons listeners    we make a new primaryStage to bypass the static restrictions
-		MenuBtnController controller = new MenuBtnController(primaryStage);
+		MenuBtnController controller = new MenuBtnController(primaryStage, mediaPlayer);
 		btnPlay.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
 			controller.playBtnHandler();
 		});
-	    btnQuit.setOnMouseClicked(controller.quitBtnHandler());
-	    btnRules.setOnMouseClicked(controller.rulesBtnHandler());
-		
+	
+	    btnQuit.setOnMouseClicked(event -> controller.quitBtnHandler());
+
+	    btnRules.setOnMouseClicked(event -> controller.rulesBtnHandler());
+
 		// select the background parameters and the display
 		BackgroundImage background = new BackgroundImage(image_background, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, false));
-
 		// VBox creation
 		VBox caseTop = new VBox();
-		VBox caseBottom = new VBox();
-		VBox caseBottom2 = new VBox();
 		
 		// HBox creation
 		HBox hboxBottom = new HBox();
@@ -75,7 +87,6 @@ public class MainMenu extends Scene {
 		hboxBottom.getChildren().addAll(btnQuit, btnRules);
 		hboxBottom.setAlignment(Pos.BOTTOM_CENTER);
 		hboxBottom.setSpacing(50);
-
 		// add the VBoxs to the StackPane
 		root.setTop(caseTop);
 		root.setBottom(hboxBottom);

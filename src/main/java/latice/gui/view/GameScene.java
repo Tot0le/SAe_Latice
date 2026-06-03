@@ -1,5 +1,6 @@
 package latice.gui.view;
 
+import java.net.URL;
 import java.util.ArrayList;
 
 import javafx.geometry.Insets;
@@ -14,6 +15,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import latice.gui.CssStyle;
 import latice.gui.controller.GameBtnController;
 import latice.gui.controller.GameController;
@@ -26,6 +29,8 @@ import latice.model.Pool;
 import latice.model.Rack;
 import latice.model.Referee;
 import latice.model.StandartPool;
+import latice.util.MusicPath;
+
 
 public class GameScene extends Scene { //TODO add a resign button
 	private GameBoard gameboard;
@@ -115,6 +120,17 @@ public class GameScene extends Scene { //TODO add a resign button
 		playerBadge.setAlignment(Pos.CENTER);
 		
 		vboxRight.getChildren().addAll(scoreBadge, playerBadge);
+		
+		// music implementation and starting
+
+		String musicFile = MusicPath.MUSIC_INGAME.getPath();  
+		URL resourceUrl = RulesScene.class.getResource(musicFile);
+	    Media sound = new Media(resourceUrl.toExternalForm());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+		mediaPlayer.play();
+		
+		this.menuBtnController.setMediaPlayer(mediaPlayer);
 		
 		// left panel setup (turns and Pool badges)
 		Label iconTurn = new Label("⏳");
@@ -233,7 +249,7 @@ public class GameScene extends Scene { //TODO add a resign button
 			gameController.buyANewActionBtnHandler();
 		});
 	}
-	
+
 	public void lockBoardRackAndBtns(boolean lockEndTurn) {
 		this.visualGameboard.setMouseTransparent(true);
 		this.rackIhmEmplacement.setMouseTransparent(true);
