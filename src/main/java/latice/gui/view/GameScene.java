@@ -203,8 +203,12 @@ public class GameScene extends Scene { //TODO add a resign button
 		vBoxBottom.setSpacing(15);
 		
 		// apply CSS
-		CssStyle.gameSceneCss(currentTurnLbl, iconTurn, turnBadge, lblPoolTilesNumber, iconPool, poolBadge, scorePlayer1, scorePlayer2, currentPlayerLbl, exchangeAllTilesBtn, buyANewActionBtn, endTurnBtn, gameLayout, opponentRack, scoreBadge, playerBadge);
-
+		CssStyle.styleTurnBadge(currentTurnLbl, iconTurn, turnBadge);
+		CssStyle.stylePoolBadge(lblPoolTilesNumber, iconPool, poolBadge);
+		CssStyle.styleScoreAndPlayerBadges(scorePlayer1, scorePlayer2, currentPlayerLbl, scoreBadge, playerBadge);
+		CssStyle.styleActionButtons(exchangeAllTilesBtn, buyANewActionBtn, endTurnBtn);
+		CssStyle.styleLayoutElements(gameLayout, opponentRack);
+		
 		gameLayout.setBottom(vBoxBottom);
 		
 		BorderPane.setAlignment(vBoxBottom, Pos.BOTTOM_CENTER);
