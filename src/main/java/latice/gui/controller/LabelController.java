@@ -32,7 +32,7 @@ public class LabelController {
 	}
 	
 	public void updateCurrentTurn() {
-		this.currentTurn.setText("Turn : " + (referee.cycleCount() + 1));
+		this.currentTurn.setText(referee.cycleCount() + 1 + "");
 	}
 	
 	public void updatePoolNumber() {

@@ -47,7 +47,7 @@ public class GameScene extends Scene { //TODO add a resign button
 	private ArrayList<String> usernames;
 	private Label currentPlayerLbl;
 	private Label endMessageLbl;
-	private Label currentTurnLbl;  // TODO first currentTurnLbl update
+	private Label currentTurnLbl;
 	private Label lblPoolTilesNumber;
 	
 	private static final double SIDE_PANEL_WIDTH = 350.0;
@@ -93,8 +93,7 @@ public class GameScene extends Scene { //TODO add a resign button
 		Label scorePlayer2 = new Label("Score " + usernames.get(1) + " : 0");
 		currentPlayerLbl = new Label();
 		
-//		scorePlayer1.setWrapText(true);
-		scorePlayer1.setTooltip(new javafx.scene.control.Tooltip("Score " + usernames.get(0) + " : 0")); //TODO modify them when score change, also 1/2 chance that Player 1 & player2 are reversed
+		scorePlayer1.setTooltip(new javafx.scene.control.Tooltip("Score " + usernames.get(0) + " : 0"));
 		scorePlayer2.setTooltip(new javafx.scene.control.Tooltip("Score " + usernames.get(1) + " : 0"));
 		currentPlayerLbl.setWrapText(true);
 		
