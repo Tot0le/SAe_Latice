@@ -19,18 +19,18 @@ public class Rack {
 		this.maxTiles = maxTiles;
 	}
 	
-	public Integer size() {
-		return this.tiles.size();
-	} // TODO remove one of the two same getters
-
 	// getteur
-	public int tilesAmount() {
-		return tiles.size();
+	public int size() {
+		return (int) this.tiles.stream().filter(java.util.Objects::nonNull).count();
+	}
+
+	public boolean isFull() {
+		return this.size() >= maxTiles();
 	}
 
 	public Tile popTile(Integer index) {
 		Tile tile = getTile(index);
-		tiles.remove(getTile(index));
+		tiles.set(index, null);
 		return tile;
 
 	}
@@ -40,12 +40,11 @@ public class Rack {
 	}
 
 	public Tile getTile(Integer index) {
-		Tile tile;
-		if (index < this.tilesAmount()) {
+		Tile tile = null;
+		if (index < this.tiles.size()) {
 			tile = this.tiles.get(index);
-		} else {
-			tile = null;
 		}
+		
 		return tile;
 	}
 
@@ -58,11 +57,18 @@ public class Rack {
 	}
 
 	public void addTile(Tile tile) {
-		this.tiles.add(tile);
-	}
-	
-	public boolean isFull() {
-		return this.tilesAmount() >= maxTiles();
+		boolean tileAdded = false;
+		
+		// search for the null in the rack if exist
+		for (int i = 0; i < this.tiles.size(); i++) {
+			if (this.tiles.get(i) == null && !tileAdded) {
+				this.tiles.set(i, tile);
+				tileAdded = true;
+			}
+		}
+		if (!tileAdded) {
+			this.tiles.add(tile);
+		}
 	}
 	
 	public ArrayList<Tile> takeTilesFromRack(ArrayList<Integer> indexesOfTilesInRack) {
@@ -76,7 +82,7 @@ public class Rack {
 		}
 		
 		for (int indexOfTiles : indexesOfTilesInRack) {
-			this.tiles.remove(indexOfTiles);
+			this.tiles.set(indexOfTiles, null);
 		}
 		
 		return tilesToBeExchanged;

@@ -65,10 +65,11 @@ public class Player {
 		Tile tile = rack.popTile(rackIndex);
 		return gameboard.put(placementPosition, tile);
 	}
+	
 	// Method to draw and add a tile from pool to the rack
 	public void drawATile() {
 		ArrayList<Tile> poolTiles = pool.getTiles();
-		if (rack.getTiles().size() < rack.maxTiles()) {
+		if (!rack.isFull()) {
 			if (!poolTiles.isEmpty()) {
 				Tile tileDrawn = poolTiles.getFirst();
 				poolTiles.removeFirst();
@@ -82,9 +83,9 @@ public class Player {
 			Console.message("Impossible de piocher, nombre maximum de tuile dans le Rack.");
 		}
 	}
-
+	
 	public void drawMaxTile() {
-		while (rack.getTiles().size() < rack.maxTiles() && pool.size() > 0) {
+		while (!rack.isFull() && pool.size() > 0) {
 			drawATile();
 		}
 	}

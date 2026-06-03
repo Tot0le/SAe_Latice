@@ -1,6 +1,7 @@
 package latice.gui.controller;
 
-import latice.gui.Console;
+import java.util.ArrayList;
+
 import latice.gui.model.GameBoardIhm;
 import latice.gui.model.RackIhm;
 import latice.gui.view.GameOutcomeLayout;
@@ -9,6 +10,7 @@ import latice.model.GameBoard;
 import latice.model.Player;
 import latice.model.Position;
 import latice.model.Referee;
+import latice.model.tile.Tile;
 
 public class GameController {
 	private final GameBoard gameboard;
@@ -68,21 +70,29 @@ public class GameController {
 	}
 	
 	public void handleTileSelection(Integer indexRack) {
-		Console.message("Mouse clicked on rack index : " + indexRack);
+		this.rackIhm.clearHighlights();
 		
 		if (referee.currentPlayer().rack().getTile(indexRack) != null ) {
 			this.selectedTileIndex = indexRack;
+			this.rackIhm.highlightTile(selectedTileIndex);
 		} else {
 			this.selectedTileIndex = null;
 		}
-		
-	//	}
 	}
 	
 	public void handleTilePlacement(Position gameboardPosition) {
 		if (selectedTileIndex != null) {
-			boolean isLegal = referee.checkIfMoveIsLegal(selectedTileIndex, gameboardPosition);
+			Player currentPlayer = referee.currentPlayer();
+			ArrayList<Tile> nearbyTiles = (ArrayList<Tile>) this.gameboard.getNearbyTiles(gameboardPosition);
+			Tile selectedTile = currentPlayer.rack().getTile(selectedTileIndex);
+			boolean isLegal = referee.checkIfMoveIsLegal(gameboardPosition, nearbyTiles, selectedTile);
 			if (isLegal) {
+				// place tile
+				currentPlayer.rack().popTile(selectedTileIndex);
+				gameboard.put(gameboardPosition, selectedTile);
+				currentPlayer.addPoints(Referee.calculatePoints(nearbyTiles, selectedTile, gameboard.isSunAt(gameboardPosition)));
+				currentPlayer.setMoveAvailable(false);
+			
 				selectedTileIndex = null;
 				// IHM related :
 				lblController.updateScoreLabel();

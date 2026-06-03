@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -52,7 +53,7 @@ public class GameScene extends Scene { //TODO add a resign button
 	private ArrayList<String> usernames;
 	private Label currentPlayerLbl;
 	private Label endMessageLbl;
-	private Label currentTurnLbl;  // TODO first currentTurnLbl update
+	private Label currentTurnLbl;
 	private Label lblPoolTilesNumber;
 	
 	private static final double SIDE_PANEL_WIDTH = 350.0;
@@ -94,13 +95,14 @@ public class GameScene extends Scene { //TODO add a resign button
 		vboxTop.setSpacing(15);
 		
 		// right panel setup (scores and currentPlayer)
-		Label scorePlayer1 = new Label("Score " + usernames.get(0) + " : 0");
-		Label scorePlayer2 = new Label("Score " + usernames.get(1) + " : 0");
+		String scorePlayer1Str = "Score " + usernames.get(0) + " : 0";
+		String scorePlayer2Str = "Score " + usernames.get(1) + " : 0";
+		Label scorePlayer1 = new Label(scorePlayer1Str);
+		Label scorePlayer2 = new Label(scorePlayer2Str);
 		currentPlayerLbl = new Label();
 		
-//		scorePlayer1.setWrapText(true);
-		scorePlayer1.setTooltip(new javafx.scene.control.Tooltip("Score " + usernames.get(0) + " : 0")); //TODO modify them when score change, also 1/2 chance that Player 1 & player2 are reversed
-		scorePlayer2.setTooltip(new javafx.scene.control.Tooltip("Score " + usernames.get(1) + " : 0"));
+		scorePlayer1.setTooltip(new Tooltip(scorePlayer1Str));
+		scorePlayer2.setTooltip(new Tooltip(scorePlayer2Str));
 		currentPlayerLbl.setWrapText(true);
 		
 		VBox vboxRight = new VBox();
@@ -163,6 +165,8 @@ public class GameScene extends Scene { //TODO add a resign button
 		exchangeAllTilesBtn = new Button("Exchange All Tiles");
 		buyANewActionBtn = new Button("Buy an action.");
 		
+		buyANewActionBtn.setPrefWidth(200);
+		exchangeAllTilesBtn.setPrefWidth(200);
 		buyANewActionBtn.setDisable(true);
 		
 		hBoxBottom.getChildren().addAll(exchangeAllTilesBtn, buyANewActionBtn);
