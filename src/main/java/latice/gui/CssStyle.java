@@ -67,8 +67,8 @@ public class CssStyle {
         scoreBadge.setStyle("-fx-background-color: " + themeAntiqueWhite + "; -fx-background-radius: 12; -fx-padding: 15; -fx-border-color: " + themeSoftFawn + "; -fx-border-width: 3; -fx-border-radius: 12;");
         playerBadge.setStyle("-fx-background-color: " + themeAntiqueWhite + "; -fx-background-radius: 12; -fx-padding: 10; -fx-border-color: " + themeBlue + "; -fx-border-width: 3; -fx-border-radius: 12;");
  
-        //TODO the constrast is pretty bad, and also add setOnMouseEntered and exited
-        String actionBtnStyle = "-fx-background-color: " + themeSoftFawn + "; -fx-text-fill: " + themeBlue + "; -fx-font-weight: bold; -fx-padding: 8 20; -fx-background-radius: 6; -fx-cursor: hand;";
+        //TODO add setOnMouseEntered and exited
+        String actionBtnStyle = "-fx-background-color: " + themeSoftFawn + "; -fx-text-fill: " + themeBlue + "; -fx-font-weight: bold; -fx-padding: 8 20; -fx-background-radius: 6; -fx-cursor: hand; -fx-border-color: " + themeBlue + "; -fx-border-radius: 5;";
         exchangeAllTilesBtn.setStyle(actionBtnStyle);
         buyANewActionBtn.setStyle(actionBtnStyle);
         
