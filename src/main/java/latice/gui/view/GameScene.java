@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -49,7 +50,7 @@ public class GameScene extends Scene { //TODO add a resign button
 //	private Button exchangeTilesBtn;
 	private Button confirmBtn;
 	private Button buyANewActionBtn;
-	private ArrayList<Label> scoreLabels; //TODO if the name is to long do something (the score is unreadable)
+	private ArrayList<Label> scoreLabels;
 	private ArrayList<String> usernames;
 	private Label currentPlayerLbl;
 	private Label endMessageLbl;
@@ -104,6 +105,10 @@ public class GameScene extends Scene { //TODO add a resign button
 		scorePlayer1.setTooltip(new Tooltip(scorePlayer1Str));
 		scorePlayer2.setTooltip(new Tooltip(scorePlayer2Str));
 		currentPlayerLbl.setWrapText(true);
+		
+		// cut the label in the middle if usernames are too long to be able to see the score in all cases
+		scorePlayer1.setTextOverrun(OverrunStyle.CENTER_ELLIPSIS);
+		scorePlayer2.setTextOverrun(OverrunStyle.CENTER_ELLIPSIS);
 		
 		VBox vboxRight = new VBox();
 		vboxRight.setPrefWidth(SIDE_PANEL_WIDTH);
