@@ -1,5 +1,6 @@
 package latice.gui.controller;
 
+import java.net.URL;
 import java.util.ArrayList;
 
 import javafx.event.EventHandler;
@@ -10,6 +11,8 @@ import latice.gui.view.GameScene;
 import latice.gui.view.MainMenu;
 import latice.gui.view.RulesScene;
 import latice.gui.view.SettingGameScene;
+import latice.util.MusicPath;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class MenuBtnController {
@@ -25,6 +28,7 @@ public class MenuBtnController {
 	    }
 
 		public void launchBtnHandler() {
+			this.setMediaPlayer(mediaPlayer);
 	    	if(this.mediaPlayer != null) {
 				this.mediaPlayer.stop();
 			}
@@ -33,6 +37,15 @@ public class MenuBtnController {
 				GameScene gameScene = new GameScene(usernames, this);
 	    		
 	    		primaryStage.setScene(gameScene);
+	    		
+	    		// music implementation and starting here to avoid a loop in GameScene
+	    		String musicFile = MusicPath.MUSIC_INGAME.getPath();  
+	    		URL resourceUrl = RulesScene.class.getResource(musicFile);
+	    	    Media sound = new Media(resourceUrl.toExternalForm());
+	    		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+	    		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+	    		mediaPlayer.play();
+	    		
 	    		gameScene.launchGame();
 			}
 			
