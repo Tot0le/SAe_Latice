@@ -48,9 +48,9 @@ public class MenuBtnController {
 	    		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 	    		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 	    		mediaPlayer.play();
+	    		this.setMediaPlayer(mediaPlayer);
 	    		gameScene.launchGame();
 			}
-			
 		}
 
 		// handler of play button is starting a was scene with gameScene

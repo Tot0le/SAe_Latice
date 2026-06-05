@@ -56,6 +56,8 @@ public class GameOutcomeLayout extends BorderPane {
 		
 		replaySameConfig = new Button("Replay");
 		
+
+		
 		replaySameConfig.setOnAction(event -> {
 			GameScene gameScene = new GameScene(menuBtnController.usernames(), menuBtnController);
     		
