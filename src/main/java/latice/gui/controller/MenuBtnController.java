@@ -29,11 +29,14 @@ public class MenuBtnController {
 
 		public void launchBtnHandler() {
 			this.setMediaPlayer(mediaPlayer);
-	    	if(this.mediaPlayer != null) {
-				this.mediaPlayer.stop();
-			}
 			this.usernames = settingScene.getUsernames();
-			if (!usernames.isEmpty()) {
+			boolean validUsernames = (!usernames.isEmpty() 
+					&& !usernames.get(0).trim().isEmpty()
+					&& !usernames.get(0).trim().isEmpty()); 
+			if (validUsernames){
+				if(this.mediaPlayer != null) {
+					this.mediaPlayer.stop();
+				}
 				GameScene gameScene = new GameScene(usernames, this);
 	    		
 	    		primaryStage.setScene(gameScene);
@@ -45,7 +48,6 @@ public class MenuBtnController {
 	    		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 	    		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 	    		mediaPlayer.play();
-	    		
 	    		gameScene.launchGame();
 			}
 			
@@ -63,9 +65,11 @@ public class MenuBtnController {
 		
 		// Button back goes back to main menu
 		public void backBtnHandler() {
+
 			if(this.mediaPlayer != null) {
 				this.mediaPlayer.stop();
 			}
+			this.setMediaPlayer(mediaPlayer);
 			MainMenu mainMenu = new MainMenu(primaryStage);
 
 			primaryStage.setScene(mainMenu);
