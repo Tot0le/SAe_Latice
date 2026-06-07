@@ -1,6 +1,5 @@
 package latice.gui.view;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 import javafx.geometry.Insets;
@@ -16,8 +15,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import latice.gui.CssStyle;
 import latice.gui.controller.GameBtnController;
 import latice.gui.controller.GameController;
@@ -30,7 +27,6 @@ import latice.model.Pool;
 import latice.model.Rack;
 import latice.model.Referee;
 import latice.model.StandartPool;
-import latice.util.MusicPath;
 
 
 public class GameScene extends Scene { //TODO add a resign button
@@ -47,7 +43,7 @@ public class GameScene extends Scene { //TODO add a resign button
 	private Group rackIhmEmplacement;
 	private Button endTurnBtn;
 	private Button exchangeAllTilesBtn;
-//	private Button exchangeTilesBtn;
+	private Button exchangeTilesBtn;
 	private Button confirmBtn;
 	private Button buyANewActionBtn;
 	private ArrayList<Label> scoreLabels;
@@ -56,6 +52,7 @@ public class GameScene extends Scene { //TODO add a resign button
 	private Label endMessageLbl;
 	private Label currentTurnLbl;
 	private Label lblPoolTilesNumber;
+	private Label multipleSelectLbl;
 	
 	private static final double SIDE_PANEL_WIDTH = 350.0;
 	
@@ -157,12 +154,25 @@ public class GameScene extends Scene { //TODO add a resign button
 		gameLayout.setCenter(visualGameboard);
 		
 		endTurnBtn = new Button("End Turn");
+		exchangeTilesBtn = new Button("Exchange Tiles");
+		confirmBtn = new Button("Confirm");
 		exchangeAllTilesBtn = new Button("Exchange All Tiles");
 		buyANewActionBtn = new Button("Buy an action.");
 		
-		buyANewActionBtn.setPrefWidth(200);
-		exchangeAllTilesBtn.setPrefWidth(200);
+		ArrayList<Button> btnList = new ArrayList<>();
+		btnList.add(exchangeTilesBtn);
+		btnList.add(confirmBtn);
+		btnList.add(exchangeAllTilesBtn);
+		btnList.add(buyANewActionBtn);
+		
+		this.setPrefButtonWidth(200, btnList);
 		buyANewActionBtn.setDisable(true);
+		
+		
+		hBoxBottom.getChildren().add(exchangeTilesBtn);
+		
+		
+		hBoxBottom.getChildren().add(confirmBtn);
 		
 		hBoxBottom.getChildren().addAll(exchangeAllTilesBtn, buyANewActionBtn);
 		hBoxBottom.setAlignment(Pos.CENTER);
@@ -188,7 +198,9 @@ public class GameScene extends Scene { //TODO add a resign button
 		
 		rackAndPoolPane.getChildren().addAll(rackCenterContainer, poolBadge);
 		
-		vBoxBottom.getChildren().addAll(endTurnBtn, hBoxBottom, rackAndPoolPane);
+		multipleSelectLbl = new Label("");
+		
+		vBoxBottom.getChildren().addAll(multipleSelectLbl, endTurnBtn, hBoxBottom, rackAndPoolPane);
 		vBoxBottom.setAlignment(Pos.CENTER);
 		vBoxBottom.setSpacing(15);
 		
@@ -196,7 +208,7 @@ public class GameScene extends Scene { //TODO add a resign button
 		CssStyle.styleTurnBadge(currentTurnLbl, iconTurn, turnBadge);
 		CssStyle.stylePoolBadge(lblPoolTilesNumber, iconPool, poolBadge);
 		CssStyle.styleScoreAndPlayerBadges(scorePlayer1, scorePlayer2, currentPlayerLbl, scoreBadge, playerBadge);
-		CssStyle.styleActionButtons(exchangeAllTilesBtn, buyANewActionBtn, endTurnBtn);
+		CssStyle.styleActionButtons(exchangeAllTilesBtn, exchangeTilesBtn, confirmBtn, buyANewActionBtn, endTurnBtn);
 		CssStyle.styleLayoutElements(gameLayout, opponentRack);
 		
 		gameLayout.setBottom(vBoxBottom);
@@ -228,8 +240,8 @@ public class GameScene extends Scene { //TODO add a resign button
 		// The game can now start
 		
 		Referee referee = new Referee(gameboard, playerList);
-		LabelController lblController = new LabelController(referee, scoreLabels, currentPlayerLbl, endMessageLbl, lblPoolTilesNumber, currentTurnLbl);
-		gameBtnController = new GameBtnController(referee, exchangeAllTilesBtn, buyANewActionBtn, endTurnBtn);
+		LabelController lblController = new LabelController(referee, scoreLabels, currentPlayerLbl, endMessageLbl, lblPoolTilesNumber, currentTurnLbl, multipleSelectLbl);
+		gameBtnController = new GameBtnController(referee, exchangeAllTilesBtn, exchangeTilesBtn, confirmBtn, buyANewActionBtn, endTurnBtn);
 		GameController gameController = new GameController(this.gameboard, this.visualGameboard, referee, this, lblController, menuBtnController, gameBtnController);
 		
 		// the end turn button now listen
@@ -243,12 +255,30 @@ public class GameScene extends Scene { //TODO add a resign button
 			gameController.exchangeAllTilesBtnHandler();
 		});
 		
+		// the exchangeTilesBtn now listen
+		exchangeTilesBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+			gameController.exchangeTilesBtnHandler();
+			
+		});
+		
+		// the exchangeTilesBtn now listen
+		confirmBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+			gameController.confirmBtnHandler();
+			
+		});
+		
 		// the exchangeAllTilesBtn now listen
 		buyANewActionBtn.setOnAction(event -> {
 			gameController.buyANewActionBtnHandler();
 		});
 	}
 
+	private void setPrefButtonWidth(int width, ArrayList<Button> buttonList) {
+		for (Button btn : buttonList) {
+			btn.setPrefWidth(width);
+		}
+	}
+	
 	public void lockBoardRackAndBtns(boolean lockEndTurn) {
 		this.visualGameboard.setMouseTransparent(true);
 		this.rackIhmEmplacement.setMouseTransparent(true);

@@ -13,6 +13,7 @@ public class Player {
 	private Pool pool;
 	private GameBoard gameboard;
 	private Integer orderNumber;
+	private boolean allowedToBuy;
 	private boolean moveAvailable;
 
 	// Two constructors for easier testing
@@ -24,6 +25,7 @@ public class Player {
 		this.gameboard = gameboard;
 		this.orderNumber = null;
 		this.setMoveAvailable(true);
+		this.setAllowedToBuy(true);
 	}
 	
 	public Player(Integer points, Rack rack, Pool pool, GameBoard gameboard) {
@@ -33,6 +35,7 @@ public class Player {
 		this.gameboard = gameboard;
 		this.orderNumber = null;
 	}
+	
 	// Method to buy a new action by spending points 
 	public void buyANewAction(Referee referee) throws ShouldNotBePossibleException {
 		if (moveAvailable) {
@@ -42,6 +45,7 @@ public class Player {
 			this.moveAvailable = true;
 		}
 	}
+	
 	// Method to replace all the tiles of the rack to other tiles
 	public void exchangeAllTheRack() {
 		ArrayList<Integer> indexesOfTiles = new ArrayList<>();
@@ -59,6 +63,24 @@ public class Player {
 		}
 		
 		pool.shuffle();
+		this.allowedToBuy = false;
+	}
+	
+	public void exchangeTilesInTheRack(ArrayList<Integer> indexesOfTiles) {
+		ArrayList<Tile> tilesToBeExchanged;
+		
+		tilesToBeExchanged = this.rack.takeTilesFromRack(indexesOfTiles);
+		
+		for (int i = 0; i < indexesOfTiles.size(); i++) {
+			drawATile();
+		}
+		
+		for (int i = 0; i < tilesToBeExchanged.size(); i++) {
+			pool.addTile(tilesToBeExchanged.get(i));
+		}
+		
+		pool.shuffle();
+		this.allowedToBuy = false;
 	}
 	
 	public boolean placeATile(Integer rackIndex, Position placementPosition) {
@@ -123,6 +145,10 @@ public class Player {
 		return moveAvailable;
 	}
 	
+	public boolean isAllowedToBuy() {
+		return allowedToBuy;
+	}
+	
 	// setteurs :
 	public void setPoints(Integer points) {
 		this.points = points;
@@ -133,5 +159,9 @@ public class Player {
 
 	public void setMoveAvailable(boolean moveAvailable) {
 		this.moveAvailable = moveAvailable;
+	}
+
+	public void setAllowedToBuy(boolean allowedToBuy) {
+		this.allowedToBuy = allowedToBuy;
 	}
 }

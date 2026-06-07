@@ -74,17 +74,22 @@ public class CssStyle {
         playerBadge.setStyle("-fx-background-color: " + themeAntiqueWhite + "; -fx-background-radius: 12; -fx-padding: 10; -fx-border-color: " + themeBlue + "; -fx-border-width: 3; -fx-border-radius: 12;");
     }
 
-    public static void styleActionButtons(Button exchangeAllTilesBtn, Button buyANewActionBtn, Button endTurnBtn) {
+    public static void styleActionButtons(Button exchangeAllTilesBtn, Button exchangeSelectedTiles, Button confirmBtn, Button buyANewActionBtn, Button endTurnBtn) {
         // Applies styles and hover effects to the interactive game buttons
         String actionBtnStyle = "-fx-background-color: " + themeSoftFawn + "; -fx-text-fill: " + themeBlue + "; -fx-font-weight: bold; -fx-padding: 8 20; -fx-background-radius: 6; -fx-cursor: hand; -fx-border-color: " + themeBlue + "; -fx-border-radius: 5;";
         exchangeAllTilesBtn.setStyle(actionBtnStyle);
+        exchangeSelectedTiles.setStyle(actionBtnStyle);
+        confirmBtn.setStyle(actionBtnStyle);
         buyANewActionBtn.setStyle(actionBtnStyle);
+        
         
         String endTurnBtnStyle = "-fx-background-color: " + themeBlue + "; -fx-text-fill: " + themeAntiqueWhite + "; -fx-font-weight: bold; -fx-padding: 8 30; -fx-background-radius: 6; -fx-cursor: hand;"; 
         endTurnBtn.setStyle(endTurnBtnStyle);
        
         // hover effects
         applyHoverEffect(exchangeAllTilesBtn);
+        applyHoverEffect(exchangeSelectedTiles);
+        applyHoverEffect(confirmBtn);
         applyHoverEffect(buyANewActionBtn);
         applyHoverEffect(endTurnBtn);
     }

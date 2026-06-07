@@ -13,14 +13,16 @@ public class LabelController {
 	private Label endMessageLbl;
 	private Label lblPoolTilesNumber;
 	private Label currentTurn;
+	private Label informationLbl;
 	
-	public LabelController(Referee referee, List<Label> scorePlayerLabels, Label currentPlayerLabel, Label endMessageLbl, Label lblPoolTilesNumber, Label currentTurnLbl) {
+	public LabelController(Referee referee, List<Label> scorePlayerLabels, Label currentPlayerLabel, Label endMessageLbl, Label lblPoolTilesNumber, Label currentTurnLbl, Label informationLbl) {
 		this.referee = referee;
 		this.setScorePlayerLabels(scorePlayerLabels);
 		this.setCurrentPlayerLabel(currentPlayerLabel);
 		this.setEndMessageLbl(endMessageLbl);
 		this.setLblPoolTilesNumber(lblPoolTilesNumber);
 		this.setCurrentTurn(currentTurnLbl);
+		this.informationLbl = informationLbl;
 		this.updatePoolNumber();
 	}
 
@@ -37,6 +39,20 @@ public class LabelController {
 	
 	public void updatePoolNumber() {
 		this.lblPoolTilesNumber.setText("Pool : " + (referee.currentPlayer().pool().tilesAmounts()));
+	}
+	
+	public void updateInfoLbl(boolean multipleSelection) {
+		boolean allowedToBuy = referee.currentPlayer().isAllowedToBuy();
+		boolean moveAvailable = referee.currentPlayer().isMoveAvailable();
+		boolean canBuy = allowedToBuy && (referee.currentPlayer().points() >= referee.priceNewAction());
+		
+		if (!moveAvailable && !canBuy){
+			informationLbl.setText("Warning : You have no legal move left, please end turn.");
+		} else if (multipleSelection) {
+			informationLbl.setText("Warning : Multiple select mode is enable.");
+		} else {
+			informationLbl.setText("");
+		}
 	}
 	
 	public Label currentPlayerLabel() {

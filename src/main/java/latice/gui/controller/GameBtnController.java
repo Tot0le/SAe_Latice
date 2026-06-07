@@ -1,5 +1,7 @@
 package latice.gui.controller;
 
+import java.util.ArrayList;
+
 import javafx.scene.control.Button;
 import latice.gui.Console;
 import latice.gui.model.RackIhm;
@@ -10,24 +12,39 @@ import latice.util.ShouldNotBePossibleException;
 public class GameBtnController {
 	private Referee referee;
 	private Button exchangeAllTilesBtn;
+	private Button exchangeSelectedTilesBtn;
+	private Button confirmBtn;
 	private Button buyANewActionBtn;
 	private Button endTurnBtn;
 	
-	public GameBtnController(Referee referee, Button exchangeAllTilesBtn, Button buyANewActionBtn, Button endTurnBtn) {
+	public GameBtnController(Referee referee, Button exchangeAllTilesBtn, Button exchangeSelectedTilesBtn, Button confirmBtn, Button buyANewActionBtn, Button endTurnBtn) {
 		this.referee = referee;
 		this.exchangeAllTilesBtn = exchangeAllTilesBtn;
+		this.exchangeSelectedTilesBtn = exchangeSelectedTilesBtn;
+		this.confirmBtn = confirmBtn;
 		this.buyANewActionBtn = buyANewActionBtn;
 		this.endTurnBtn = endTurnBtn;
+		
+		this.confirmBtn.setDisable(true);
     }
+	
+	public void updateAllBtns() {
+		updateExchangeAllBtn();
+		updateExchangeSelectedBtn();
+		updateBuyAnActionBtn();
+	}
 
 	public void updateBuyAnActionBtn() {
 		Player currentPlayer = referee.currentPlayer();
-		boolean isMoveAvailable = currentPlayer.isMoveAvailable();
-		if (!isMoveAvailable && currentPlayer.points() >= referee.priceNewAction()) {
-			buyANewActionBtn.setDisable(false);
-		} else {
-			buyANewActionBtn.setDisable(true);
+		if (currentPlayer.isAllowedToBuy()) {
+			boolean isMoveAvailable = currentPlayer.isMoveAvailable();
+			if (!isMoveAvailable && currentPlayer.points() >= referee.priceNewAction()) {
+				buyANewActionBtn.setDisable(false);
+			} else {
+				buyANewActionBtn.setDisable(true);
+			}
 		}
+		
 	}
 
 	public void buyANewActionBtnHandler(LabelController lblController) {
@@ -36,8 +53,7 @@ public class GameBtnController {
 		} catch (ShouldNotBePossibleException e) {
 			Console.message(e.getMessage());
 		}
-		this.updateExchangeAllBtn();
-		this.updateBuyAnActionBtn();
+		this.updateAllBtns();
 		lblController.updateScoreLabel();
 		
 	}
@@ -54,12 +70,6 @@ public class GameBtnController {
 		}
 	}
 	
-	public void disableButtons(boolean lockEndTurn) {
-		exchangeAllTilesBtn.setDisable(true);
-		buyANewActionBtn.setDisable(true);
-		endTurnBtn.setDisable(lockEndTurn);
-	}
-	
 	public void exchangeAllTilesBtnHandler(RackIhm rackIhm) {
 		Player currentPlayer = referee.currentPlayer();
 		if (currentPlayer.isMoveAvailable()) {
@@ -67,9 +77,34 @@ public class GameBtnController {
 			rackIhm.updateRackTiles(currentPlayer);
 			currentPlayer.setMoveAvailable(false);
 			
-			this.updateExchangeAllBtn();
-			this.updateBuyAnActionBtn();
+			this.updateAllBtns();
 		}
+	}
+
+	public void updateExchangeSelectedBtn() {
+		if (referee.currentPlayer().isMoveAvailable()) {
+			exchangeSelectedTilesBtn.setDisable(false);
+		} else {
+			exchangeSelectedTilesBtn.setDisable(true);
+		}
+	}
+
+	public void updateConfirmBtn(ArrayList<Integer> selectedTilesIndex) {
+		confirmBtn.setDisable(selectedTilesIndex.isEmpty());
+//		if (!selectedTilesIndex.isEmpty())
+//		if (referee.currentPlayer().isMoveAvailable()) {
+//			confirmBtn.setDisable(false);
+//		} else {
+//			confirmBtn.setDisable(true);
+//		}
+	}
+	
+	public void disableButtons(boolean lockEndTurn) {
+		exchangeAllTilesBtn.setDisable(true);
+		exchangeSelectedTilesBtn.setDisable(true);
+		confirmBtn.setDisable(true);
+		buyANewActionBtn.setDisable(true);
+		endTurnBtn.setDisable(lockEndTurn);
 	}
 	
 }

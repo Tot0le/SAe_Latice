@@ -20,6 +20,9 @@ public class GameController {
 
 	
 	private Integer selectedTileIndex = null;
+	private boolean multipleSelection;
+	private ArrayList<Integer> selectedTilesIndex;
+	
 	private GameScene gameScene;
 	
 	private LabelController lblController;
@@ -31,6 +34,9 @@ public class GameController {
 		this.gameboardIhm = gameboardIhm;
 		this.gameScene = gameScene;
 		this.referee = referee;
+		this.multipleSelection = false;
+		this.selectedTilesIndex = new ArrayList<Integer>();
+		
 		this.rackIhm = new RackIhm();
 		rackIhm.bindController(this);
 		this.gameScene.rackEmplacement().getChildren().add(this.rackIhm);
@@ -54,6 +60,8 @@ public class GameController {
 	}
 
 	public void nextTurn() {
+		deselectAll();
+		
 		referee.nextTurn(gameboard);
 		if (referee.isTheGameEnd()) {
 			this.endGame();
@@ -62,21 +70,33 @@ public class GameController {
 			lblController.updatePoolNumber();
 			this.lblController.currentPlayerLabel().setText(referee.currentPlayer().username() + "'s turn");
 			
-			// update ihm related content
-			this.rackIhm.updateRackTiles(referee.currentPlayer());
-			this.gameBtnController.updateExchangeAllBtn();
-			this.gameBtnController.updateBuyAnActionBtn();
+			updateRackAndBtns();
+			lblController.updateInfoLbl(this.multipleSelection);
 		}
 	}
 	
 	public void handleTileSelection(Integer indexRack) {
-		this.rackIhm.clearHighlights();
-		
-		if (referee.currentPlayer().rack().getTile(indexRack) != null ) {
-			this.selectedTileIndex = indexRack;
-			this.rackIhm.highlightTile(selectedTileIndex);
-		} else {
-			this.selectedTileIndex = null;
+		if (this.referee.currentPlayer().isMoveAvailable()) {
+			if (referee.currentPlayer().rack().getTile(indexRack) != null ) {
+				if (this.multipleSelection) {
+					if (this.selectedTilesIndex.contains(indexRack)) {
+						this.selectedTilesIndex.remove(indexRack);
+						this.rackIhm.highlightTile(indexRack, false);
+					} else {
+						this.selectedTilesIndex.add(indexRack);
+						this.rackIhm.highlightTile(indexRack, true);
+					}
+					this.gameBtnController.updateConfirmBtn(selectedTilesIndex);
+				} else {
+					this.rackIhm.clearHighlights();
+					this.selectedTileIndex = indexRack;
+					this.rackIhm.highlightTile(indexRack, true);
+				
+				}
+			} else {
+				this.selectedTileIndex = null;
+			}
+			
 		}
 	}
 	
@@ -93,13 +113,11 @@ public class GameController {
 				currentPlayer.addPoints(Referee.calculatePoints(nearbyTiles, selectedTile, gameboard.isSunAt(gameboardPosition)));
 				currentPlayer.setMoveAvailable(false);
 			
-				selectedTileIndex = null;
+				deselectAll();
 				// IHM related :
 				lblController.updateScoreLabel();
 				gameboardIhm.update();
-				this.rackIhm.updateRackTiles(referee.currentPlayer());
-				this.gameBtnController.updateExchangeAllBtn();
-				this.gameBtnController.updateBuyAnActionBtn();
+				updateRackAndBtns();
 			}
 		}
 	}
@@ -110,11 +128,49 @@ public class GameController {
 	
 	public void exchangeAllTilesBtnHandler() {
 		gameBtnController.exchangeAllTilesBtnHandler(rackIhm);
-		nextTurn();
+		deselectAll();	
+		//TODO should click confirm after
+	}
+	
+	public void exchangeTilesBtnHandler() {
+		// save it because deselectAll clears it
+		boolean nextMultipleSelectionState = this.multipleSelection;
+		deselectAll();
+		
+		multipleSelection(!nextMultipleSelectionState);
+	}
+
+	public void confirmBtnHandler() {
+		if (this.multipleSelection) {
+			Player currentPlayer = referee.currentPlayer();
+			currentPlayer.exchangeTilesInTheRack(selectedTilesIndex);
+			currentPlayer.setMoveAvailable(false);
+			
+			updateRackAndBtns();
+		}
+		deselectAll();
+		this.gameBtnController.updateConfirmBtn(selectedTilesIndex);
+	}
+
+	private void updateRackAndBtns() {
+		this.rackIhm.updateRackTiles(referee.currentPlayer());
+		this.gameBtnController.updateAllBtns();
 	}
 	
 	public void buyANewActionBtnHandler() {
 		gameBtnController.buyANewActionBtnHandler(lblController);
+	}
+	
+	private void multipleSelection(boolean enable) {
+		this.multipleSelection = enable;
+		this.lblController.updateInfoLbl(multipleSelection);
+		this.selectedTilesIndex.clear();
+	}
+
+	private void deselectAll() {
+		this.selectedTileIndex = null;
+		multipleSelection(false);
+		this.rackIhm.clearHighlights();
 	}
 
 }
