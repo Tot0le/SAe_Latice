@@ -77,13 +77,14 @@ public class GameController {
 	}
 	
 	public void handleTileSelection(Integer indexRack) {
-		this.rackIhm.clearHighlights();
-		
 		if (this.multipleSelection) {
 			this.selectedTilesIndex.add(indexRack);
+			this.rackIhm.highlightTile(indexRack);
 		} else {
+			this.rackIhm.clearHighlights();
 			if (referee.currentPlayer().rack().getTile(indexRack) != null ) {
 				this.selectedTileIndex = indexRack;
+				this.rackIhm.highlightTile(indexRack);
 			} else {
 				this.selectedTileIndex = null;
 			}
@@ -124,6 +125,7 @@ public class GameController {
 	}
 	
 	public void exchangeTilesBtnHandler() {
+		this.rackIhm.clearHighlights();
 		if (referee.currentPlayer().isMoveAvailable()) {
 			if (this.multipleSelection) {
 				deselectMultipleBtn();
@@ -136,6 +138,7 @@ public class GameController {
 	}
 
 	public void confirmBtnHandler() {
+		this.rackIhm.clearHighlights();
 		if (this.multipleSelection) {
 			referee.currentPlayer().exchangeTilesInTheRack(selectedTilesIndex);
 			System.out.println("exchange complete");
