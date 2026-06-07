@@ -2,9 +2,11 @@ package latice.application;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import latice.gui.view.MainMenu;
+import latice.util.ImagePath;
 
 public class LaticeApplication extends javafx.application.Application {
 
@@ -18,6 +20,11 @@ public class LaticeApplication extends javafx.application.Application {
 
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Game starting window");
+		
+		// 
+		String iconPath = ImagePath.BACKGROUND_SUN.imagePath();
+		Image icon = new Image(getClass().getResourceAsStream(iconPath));
+		primaryStage.getIcons().add(icon);
 		
 		// Ask OS which screen you are using right now
 		Screen primaryScreen = Screen.getPrimary();
