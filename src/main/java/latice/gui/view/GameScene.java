@@ -52,6 +52,7 @@ public class GameScene extends Scene { //TODO add a resign button
 	private Label endMessageLbl;
 	private Label currentTurnLbl;
 	private Label lblPoolTilesNumber;
+	private Label multipleSelectLbl;
 	
 	private static final double SIDE_PANEL_WIDTH = 350.0;
 	
@@ -197,7 +198,9 @@ public class GameScene extends Scene { //TODO add a resign button
 		
 		rackAndPoolPane.getChildren().addAll(rackCenterContainer, poolBadge);
 		
-		vBoxBottom.getChildren().addAll(endTurnBtn, hBoxBottom, rackAndPoolPane);
+		multipleSelectLbl = new Label("");
+		
+		vBoxBottom.getChildren().addAll(multipleSelectLbl, endTurnBtn, hBoxBottom, rackAndPoolPane);
 		vBoxBottom.setAlignment(Pos.CENTER);
 		vBoxBottom.setSpacing(15);
 		
@@ -237,7 +240,7 @@ public class GameScene extends Scene { //TODO add a resign button
 		// The game can now start
 		
 		Referee referee = new Referee(gameboard, playerList);
-		LabelController lblController = new LabelController(referee, scoreLabels, currentPlayerLbl, endMessageLbl, lblPoolTilesNumber, currentTurnLbl);
+		LabelController lblController = new LabelController(referee, scoreLabels, currentPlayerLbl, endMessageLbl, lblPoolTilesNumber, currentTurnLbl, multipleSelectLbl);
 		gameBtnController = new GameBtnController(referee, exchangeAllTilesBtn, exchangeTilesBtn, confirmBtn, buyANewActionBtn, endTurnBtn);
 		GameController gameController = new GameController(this.gameboard, this.visualGameboard, referee, this, lblController, menuBtnController, gameBtnController);
 		

@@ -3,6 +3,7 @@ package latice.gui.controller;
 import java.util.ArrayList;
 
 import javafx.scene.control.Button;
+import latice.gui.Console;
 import latice.gui.model.GameBoardIhm;
 import latice.gui.model.RackIhm;
 import latice.gui.view.GameOutcomeLayout;
@@ -62,6 +63,9 @@ public class GameController {
 	}
 
 	public void nextTurn() {
+		this.multipleSelection = false;
+		this.lblController.updateMultipleSelectLbl(multipleSelection);
+		
 		referee.nextTurn(gameboard);
 		if (referee.isTheGameEnd()) {
 			this.endGame();
@@ -132,26 +136,27 @@ public class GameController {
 	
 	public void exchangeTilesBtnHandler() {
 		this.rackIhm.clearHighlights();
-		if (referee.currentPlayer().isMoveAvailable()) {
-			if (this.multipleSelection) {
-				deselectMultipleBtn();
-				System.out.println("deselect multiple");
-			} else {
-				this.multipleSelection = true;
-				System.out.println("select multiple");
-			}
+		
+		if (this.multipleSelection) {
+			deselectMultipleBtn();
+		} else {
+			this.multipleSelection = true;
 		}
+		
+		this.lblController.updateMultipleSelectLbl(multipleSelection);
 	}
 
 	public void confirmBtnHandler() {
 		this.rackIhm.clearHighlights();
 		if (this.multipleSelection) {
+			this.multipleSelection = false;
+			
 			referee.currentPlayer().exchangeTilesInTheRack(selectedTilesIndex);
-			System.out.println("exchange complete");
 			referee.currentPlayer().setMoveAvailable(false);
 			
 			this.rackIhm.updateRackTiles(referee.currentPlayer());
 			this.gameBtnController.updateAllBtns();
+			this.lblController.updateMultipleSelectLbl(multipleSelection);
 			
 			deselectMultipleBtn();
 //			nextTurn();
