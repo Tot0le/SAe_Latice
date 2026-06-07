@@ -1,6 +1,5 @@
 package latice.gui.view;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 import javafx.geometry.Insets;
@@ -16,8 +15,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import latice.gui.CssStyle;
 import latice.gui.controller.GameBtnController;
 import latice.gui.controller.GameController;
@@ -30,7 +27,6 @@ import latice.model.Pool;
 import latice.model.Rack;
 import latice.model.Referee;
 import latice.model.StandartPool;
-import latice.util.MusicPath;
 
 
 public class GameScene extends Scene { //TODO add a resign button
@@ -47,7 +43,7 @@ public class GameScene extends Scene { //TODO add a resign button
 	private Group rackIhmEmplacement;
 	private Button endTurnBtn;
 	private Button exchangeAllTilesBtn;
-//	private Button exchangeTilesBtn;
+	private Button exchangeTilesBtn;
 	private Button confirmBtn;
 	private Button buyANewActionBtn;
 	private ArrayList<Label> scoreLabels;
@@ -164,6 +160,12 @@ public class GameScene extends Scene { //TODO add a resign button
 		exchangeAllTilesBtn.setPrefWidth(200);
 		buyANewActionBtn.setDisable(true);
 		
+		exchangeTilesBtn = new Button("Exchange Tiles");
+		hBoxBottom.getChildren().add(exchangeTilesBtn);
+		
+		confirmBtn = new Button("Confirm");
+		hBoxBottom.getChildren().add(confirmBtn);
+		
 		hBoxBottom.getChildren().addAll(exchangeAllTilesBtn, buyANewActionBtn);
 		hBoxBottom.setAlignment(Pos.CENTER);
 		hBoxBottom.setSpacing(50);
@@ -241,6 +243,18 @@ public class GameScene extends Scene { //TODO add a resign button
 		// the exchangeAllTilesBtn now listen
 		exchangeAllTilesBtn.setOnAction(event -> {
 			gameController.exchangeAllTilesBtnHandler();
+		});
+		
+		// the exchangeTilesBtn now listen
+		exchangeTilesBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+			gameController.exchangeTilesBtnHandler();
+			
+		});
+		
+		// the exchangeTilesBtn now listen
+		confirmBtn.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {
+			gameController.confirmBtnHandler();
+			
 		});
 		
 		// the exchangeAllTilesBtn now listen

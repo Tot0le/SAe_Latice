@@ -2,6 +2,7 @@ package latice.gui.controller;
 
 import java.util.ArrayList;
 
+import javafx.scene.control.Button;
 import latice.gui.model.GameBoardIhm;
 import latice.gui.model.RackIhm;
 import latice.gui.view.GameOutcomeLayout;
@@ -20,6 +21,10 @@ public class GameController {
 
 	
 	private Integer selectedTileIndex = null;
+	private boolean multipleSelection;
+	private ArrayList<Integer> selectedTilesIndex;
+	private Button confirmButton;
+	
 	private GameScene gameScene;
 	
 	private LabelController lblController;
@@ -31,6 +36,9 @@ public class GameController {
 		this.gameboardIhm = gameboardIhm;
 		this.gameScene = gameScene;
 		this.referee = referee;
+		this.multipleSelection = false;
+		this.selectedTilesIndex = new ArrayList<Integer>();
+		
 		this.rackIhm = new RackIhm();
 		rackIhm.bindController(this);
 		this.gameScene.rackEmplacement().getChildren().add(this.rackIhm);
@@ -72,11 +80,15 @@ public class GameController {
 	public void handleTileSelection(Integer indexRack) {
 		this.rackIhm.clearHighlights();
 		
-		if (referee.currentPlayer().rack().getTile(indexRack) != null ) {
-			this.selectedTileIndex = indexRack;
-			this.rackIhm.highlightTile(selectedTileIndex);
+		if (this.multipleSelection) {
+			this.selectedTilesIndex.add(indexRack);
 		} else {
-			this.selectedTileIndex = null;
+			if (referee.currentPlayer().rack().getTile(indexRack) != null ) {
+				this.selectedTileIndex = indexRack;
+			} else {
+				this.selectedTileIndex = null;
+			}
+
 		}
 	}
 	
@@ -107,6 +119,33 @@ public class GameController {
 	public void endTurnBtnHandler() {        
     	nextTurn();
     }
+	
+	public void exchangeTilesBtnHandler() {
+		if (referee.currentPlayer().isMoveAvailable()) {
+			if (this.multipleSelection) {
+				deselectMultipleBtn();
+				System.out.println("deselect multiple");
+			} else {
+				this.multipleSelection = true;
+				System.out.println("select multiple");
+			}
+		}
+	}
+
+	public void confirmBtnHandler() {
+		if (this.multipleSelection) {
+			referee.currentPlayer().exchangeTilesInTheRack(selectedTilesIndex);
+			System.out.println("exchange complete");
+			this.rackIhm.updateRackTiles(referee.currentPlayer());
+			
+			deselectMultipleBtn();
+		}
+	}
+	
+	public void deselectMultipleBtn() {
+		this.multipleSelection = false;
+		this.selectedTilesIndex.clear();
+	}
 	
 	public void exchangeAllTilesBtnHandler() {
 		gameBtnController.exchangeAllTilesBtnHandler(rackIhm);

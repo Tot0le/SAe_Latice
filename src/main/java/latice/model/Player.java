@@ -42,10 +42,27 @@ public class Player {
 			this.moveAvailable = true;
 		}
 	}
+	
 	// Method to replace all the tiles of the rack to other tiles
 	public void exchangeAllTheRack() {
 		ArrayList<Integer> indexesOfTiles = new ArrayList<>();
 		for (int index = 0; index < this.rack.maxTiles()-1;index++) indexesOfTiles.add(index);
+		ArrayList<Tile> tilesToBeExchanged;
+		
+		tilesToBeExchanged = this.rack.takeTilesFromRack(indexesOfTiles);
+		
+		for (int i = 0; i < indexesOfTiles.size(); i++) {
+			drawATile();
+		}
+		
+		for (int i = 0; i < tilesToBeExchanged.size(); i++) {
+			pool.addTile(tilesToBeExchanged.get(i));
+		}
+		
+		pool.shuffle();
+	}
+	
+	public void exchangeTilesInTheRack(ArrayList<Integer> indexesOfTiles) {
 		ArrayList<Tile> tilesToBeExchanged;
 		
 		tilesToBeExchanged = this.rack.takeTilesFromRack(indexesOfTiles);
