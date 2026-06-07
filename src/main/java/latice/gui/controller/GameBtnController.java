@@ -1,5 +1,7 @@
 package latice.gui.controller;
 
+import java.util.ArrayList;
+
 import javafx.scene.control.Button;
 import latice.gui.Console;
 import latice.gui.model.RackIhm;
@@ -22,12 +24,13 @@ public class GameBtnController {
 		this.confirmBtn = confirmBtn;
 		this.buyANewActionBtn = buyANewActionBtn;
 		this.endTurnBtn = endTurnBtn;
+		
+		this.confirmBtn.setDisable(true);
     }
 	
 	public void updateAllBtns() {
 		updateExchangeAllBtn();
 		updateExchangeSelectedBtn();
-		updateConfirmBtn();
 		updateBuyAnActionBtn();
 	}
 
@@ -83,12 +86,14 @@ public class GameBtnController {
 		}
 	}
 
-	public void updateConfirmBtn() {
-		if (referee.currentPlayer().isMoveAvailable()) {
-			confirmBtn.setDisable(false);
-		} else {
-			confirmBtn.setDisable(true);
-		}
+	public void updateConfirmBtn(ArrayList<Integer> selectedTilesIndex) {
+		confirmBtn.setDisable(selectedTilesIndex.isEmpty());
+//		if (!selectedTilesIndex.isEmpty())
+//		if (referee.currentPlayer().isMoveAvailable()) {
+//			confirmBtn.setDisable(false);
+//		} else {
+//			confirmBtn.setDisable(true);
+//		}
 	}
 	
 	public void disableButtons(boolean lockEndTurn) {

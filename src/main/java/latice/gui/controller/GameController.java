@@ -85,7 +85,7 @@ public class GameController {
 						this.selectedTilesIndex.add(indexRack);
 						this.rackIhm.highlightTile(indexRack, true);
 					}
-					
+					this.gameBtnController.updateConfirmBtn(selectedTilesIndex);
 				} else {
 					this.rackIhm.clearHighlights();
 					this.selectedTileIndex = indexRack;
@@ -148,6 +148,7 @@ public class GameController {
 			updateRackAndBtns();
 		}
 		deselectAll();
+		this.gameBtnController.updateConfirmBtn(selectedTilesIndex);
 	}
 
 	private void updateRackAndBtns() {
