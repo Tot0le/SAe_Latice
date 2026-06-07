@@ -72,8 +72,7 @@ public class GameController {
 			
 			// update ihm related content
 			this.rackIhm.updateRackTiles(referee.currentPlayer());
-			this.gameBtnController.updateExchangeAllBtn();
-			this.gameBtnController.updateBuyAnActionBtn();
+			this.gameBtnController.updateAllBtns();
 		}
 	}
 	
@@ -110,8 +109,7 @@ public class GameController {
 				lblController.updateScoreLabel();
 				gameboardIhm.update();
 				this.rackIhm.updateRackTiles(referee.currentPlayer());
-				this.gameBtnController.updateExchangeAllBtn();
-				this.gameBtnController.updateBuyAnActionBtn();
+				this.gameBtnController.updateAllBtns();
 			}
 		}
 	}
@@ -119,6 +117,11 @@ public class GameController {
 	public void endTurnBtnHandler() {        
     	nextTurn();
     }
+	
+	public void exchangeAllTilesBtnHandler() {
+		gameBtnController.exchangeAllTilesBtnHandler(rackIhm);
+		//TODO should click confirm after
+	}
 	
 	public void exchangeTilesBtnHandler() {
 		if (referee.currentPlayer().isMoveAvailable()) {
@@ -136,20 +139,19 @@ public class GameController {
 		if (this.multipleSelection) {
 			referee.currentPlayer().exchangeTilesInTheRack(selectedTilesIndex);
 			System.out.println("exchange complete");
+			referee.currentPlayer().setMoveAvailable(false);
+			
 			this.rackIhm.updateRackTiles(referee.currentPlayer());
+			this.gameBtnController.updateAllBtns();
 			
 			deselectMultipleBtn();
+//			nextTurn();
 		}
 	}
 	
 	public void deselectMultipleBtn() {
 		this.multipleSelection = false;
 		this.selectedTilesIndex.clear();
-	}
-	
-	public void exchangeAllTilesBtnHandler() {
-		gameBtnController.exchangeAllTilesBtnHandler(rackIhm);
-		nextTurn();
 	}
 	
 	public void buyANewActionBtnHandler() {

@@ -153,17 +153,24 @@ public class GameScene extends Scene { //TODO add a resign button
 		gameLayout.setCenter(visualGameboard);
 		
 		endTurnBtn = new Button("End Turn");
+		exchangeTilesBtn = new Button("Exchange Tiles");
+		confirmBtn = new Button("Confirm");
 		exchangeAllTilesBtn = new Button("Exchange All Tiles");
 		buyANewActionBtn = new Button("Buy an action.");
 		
-		buyANewActionBtn.setPrefWidth(200);
-		exchangeAllTilesBtn.setPrefWidth(200);
+		ArrayList<Button> btnList = new ArrayList<>();
+		btnList.add(exchangeTilesBtn);
+		btnList.add(confirmBtn);
+		btnList.add(exchangeAllTilesBtn);
+		btnList.add(buyANewActionBtn);
+		
+		this.setPrefButtonWidth(200, btnList);
 		buyANewActionBtn.setDisable(true);
 		
-		exchangeTilesBtn = new Button("Exchange Tiles");
+		
 		hBoxBottom.getChildren().add(exchangeTilesBtn);
 		
-		confirmBtn = new Button("Confirm");
+		
 		hBoxBottom.getChildren().add(confirmBtn);
 		
 		hBoxBottom.getChildren().addAll(exchangeAllTilesBtn, buyANewActionBtn);
@@ -198,7 +205,7 @@ public class GameScene extends Scene { //TODO add a resign button
 		CssStyle.styleTurnBadge(currentTurnLbl, iconTurn, turnBadge);
 		CssStyle.stylePoolBadge(lblPoolTilesNumber, iconPool, poolBadge);
 		CssStyle.styleScoreAndPlayerBadges(scorePlayer1, scorePlayer2, currentPlayerLbl, scoreBadge, playerBadge);
-		CssStyle.styleActionButtons(exchangeAllTilesBtn, buyANewActionBtn, endTurnBtn);
+		CssStyle.styleActionButtons(exchangeAllTilesBtn, exchangeTilesBtn, confirmBtn, buyANewActionBtn, endTurnBtn);
 		CssStyle.styleLayoutElements(gameLayout, opponentRack);
 		
 		gameLayout.setBottom(vBoxBottom);
@@ -231,7 +238,7 @@ public class GameScene extends Scene { //TODO add a resign button
 		
 		Referee referee = new Referee(gameboard, playerList);
 		LabelController lblController = new LabelController(referee, scoreLabels, currentPlayerLbl, endMessageLbl, lblPoolTilesNumber, currentTurnLbl);
-		gameBtnController = new GameBtnController(referee, exchangeAllTilesBtn, buyANewActionBtn, endTurnBtn);
+		gameBtnController = new GameBtnController(referee, exchangeAllTilesBtn, exchangeTilesBtn, confirmBtn, buyANewActionBtn, endTurnBtn);
 		GameController gameController = new GameController(this.gameboard, this.visualGameboard, referee, this, lblController, menuBtnController, gameBtnController);
 		
 		// the end turn button now listen
@@ -263,6 +270,12 @@ public class GameScene extends Scene { //TODO add a resign button
 		});
 	}
 
+	private void setPrefButtonWidth(int width, ArrayList<Button> buttonList) {
+		for (Button btn : buttonList) {
+			btn.setPrefWidth(width);
+		}
+	}
+	
 	public void lockBoardRackAndBtns(boolean lockEndTurn) {
 		this.visualGameboard.setMouseTransparent(true);
 		this.rackIhmEmplacement.setMouseTransparent(true);
