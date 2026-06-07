@@ -71,8 +71,7 @@ public class GameBtnController {
 			rackIhm.updateRackTiles(currentPlayer);
 			currentPlayer.setMoveAvailable(false);
 			
-			this.updateExchangeAllBtn();
-			this.updateBuyAnActionBtn();
+			this.updateAllBtns();
 		}
 	}
 
