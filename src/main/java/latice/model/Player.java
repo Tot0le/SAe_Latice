@@ -46,7 +46,7 @@ public class Player {
 	// Method to replace all the tiles of the rack to other tiles
 	public void exchangeAllTheRack() {
 		ArrayList<Integer> indexesOfTiles = new ArrayList<>();
-		for (int index = 0; index < this.rack.maxTiles()-1;index++) indexesOfTiles.add(index);
+		for (int index = 0; index < this.rack.maxTiles();index++) indexesOfTiles.add(index);
 		ArrayList<Tile> tilesToBeExchanged;
 		
 		tilesToBeExchanged = this.rack.takeTilesFromRack(indexesOfTiles);
