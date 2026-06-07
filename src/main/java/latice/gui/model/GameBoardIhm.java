@@ -101,7 +101,7 @@ public class GameBoardIhm extends GridPane {
 		
 		for (Position position : tiles.keySet()) {
 			// this get the path by getting the path in the ImagePath
-			image = ImageLoader.loadImageSafe(tiles.get(position).path().imagePath(), tileSize, tileSize);
+			image = ImageLoader.loadImageSafe(tiles.get(position).path(), tileSize, tileSize);
 			currentImageView = new ImageView(image);
 
 			// parameters of the imageview

@@ -7,5 +7,9 @@ public enum Color {
 	Red,
 	Green,
 	Teal,
-	None
+	None;
+	
+	public String getNameInPath() {
+        return this.name().substring(0, 1).toLowerCase();
+    }
 }

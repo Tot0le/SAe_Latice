@@ -5,7 +5,7 @@ import latice.util.ImagePath;
 public class Tile {
 	private final Color color;
 	private final Shape shape;
-	private final ImagePath path;
+	private final String path;
 
 	public Tile(Color color, Shape shape){
 		this.color = color;
@@ -19,7 +19,7 @@ public class Tile {
 	public Shape shape() {
 		return shape;
 	}
-	public ImagePath path() {
+	public String path() {
 		return path;
 	}
 

@@ -7,5 +7,9 @@ public enum Shape {
 	Turtle,
 	Bird,
 	Feather,
-	None
+	None;
+	
+	public String getNameInPath() {
+        return this.name().toLowerCase();
+    }
 }

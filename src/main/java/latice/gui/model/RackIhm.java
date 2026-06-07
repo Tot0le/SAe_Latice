@@ -65,7 +65,7 @@ public class RackIhm extends GridPane{
 			if (currentTile == null) {
 				image = ImageLoader.loadImageSafe(ImagePath.RACK_CELL.imagePath(), 90, 90);
 			} else {
-				image = ImageLoader.loadImageSafe(currentTile.path().imagePath(), 90, 90);
+				image = ImageLoader.loadImageSafe(currentTile.path(), 90, 90);
 			}
 			
 			cellImgView = new ImageView(image);

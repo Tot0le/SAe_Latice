@@ -3,17 +3,14 @@ package latice.gui.controller;
 import java.net.URL;
 import java.util.ArrayList;
 
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import latice.gui.view.GameScene;
 import latice.gui.view.MainMenu;
 import latice.gui.view.RulesScene;
 import latice.gui.view.SettingGameScene;
 import latice.util.MusicPath;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 public class MenuBtnController {
 		
