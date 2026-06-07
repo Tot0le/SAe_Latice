@@ -78,13 +78,19 @@ public class GameController {
 	
 	public void handleTileSelection(Integer indexRack) {
 		if (this.multipleSelection) {
-			this.selectedTilesIndex.add(indexRack);
-			this.rackIhm.highlightTile(indexRack);
+			if (this.selectedTilesIndex.contains(indexRack)) {
+				this.selectedTilesIndex.remove(indexRack);
+				this.rackIhm.highlightTile(indexRack, false);
+			} else {
+				this.selectedTilesIndex.add(indexRack);
+				this.rackIhm.highlightTile(indexRack, true);
+			}
+			
 		} else {
 			this.rackIhm.clearHighlights();
 			if (referee.currentPlayer().rack().getTile(indexRack) != null ) {
 				this.selectedTileIndex = indexRack;
-				this.rackIhm.highlightTile(indexRack);
+				this.rackIhm.highlightTile(indexRack, true);
 			} else {
 				this.selectedTileIndex = null;
 			}

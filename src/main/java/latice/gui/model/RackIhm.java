@@ -73,14 +73,19 @@ public class RackIhm extends GridPane{
 		}
 	}
 	
-	public void highlightTile(Integer selectedTileIndex) {
+	public void highlightTile(Integer selectedTileIndex, boolean enable) {
 		if (selectedTileIndex != null) {
 			for (Node childNode : this.getChildren()) {
 				if (childNode instanceof ImageView) {
 					Integer currentColumnIndex = GridPane.getColumnIndex(childNode);
 					if (currentColumnIndex != null && currentColumnIndex.equals(selectedTileIndex)) {
-						// apply white drop shadow to simulate a border
-						childNode.setStyle("-fx-effect: dropshadow(three-pass-box, white, 8, 0.8, 0, 0);");
+						if (enable) {
+							// apply white drop shadow to simulate a border
+							childNode.setStyle("-fx-effect: dropshadow(three-pass-box, white, 8, 0.8, 0, 0);");
+						} else {
+							childNode.setStyle("");
+						}
+						
 					}
 				}
 			}
