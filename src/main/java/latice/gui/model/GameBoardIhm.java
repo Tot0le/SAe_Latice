@@ -27,7 +27,7 @@ public class GameBoardIhm extends GridPane {
 		this.tilesPlacedPlacement = new HashSet<>();
 		
 		Image image;
-		ArrayList<Position> positions = (ArrayList<Position>) Factory.createAllPositions(gameboard.getLength());
+		ArrayList<Position> positions = (ArrayList<Position>) Factory.createAllPositions(gameboard.length());
 
 		for (Position position : positions) {
 			image = this.chooseRightBackgroundImage(position);
@@ -79,7 +79,7 @@ public class GameBoardIhm extends GridPane {
 	public void update() {
 		ImageView currentImageView;
 		
-		Map<Position, Tile> tiles = gameboard.getTiles();
+		Map<Position, Tile> tiles = gameboard.tiles();
 		Image image;
 		// check if a position is not in the gameboard anymore  
 		for (Position posOfaTilePlaced: tilesPlacedPlacement) {

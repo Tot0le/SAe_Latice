@@ -44,12 +44,8 @@ public class GameBoard {
 
 		Factory.createSpecialSquares(lenght, specialSquares, moonSquarePosition);
 	}
-
-	public Integer getNbCycle() {
-		return nbCycle;
-	}
-
-	public Tile getTile(Position position) {
+	
+	public Tile tile(Position position) {
 		return tiles.get(position);
 	}
 
@@ -123,11 +119,11 @@ public class GameBoard {
     			 if (isTileAt(currentPos)) {
 
     				 if (isSunAt(currentPos)) {
-        				 result = result + Console.ANSI_YELLOW + "[" + this.getTile(currentPos) + "]" + Console.ANSI_RESET;
+        				 result = result + Console.ANSI_YELLOW + "[" + this.tile(currentPos) + "]" + Console.ANSI_RESET;
         			 } else if (isMoonAt(currentPos)) {
-        				 result = result + Console.ANSI_PURPLE + "[" + this.getTile(currentPos) + "]" + Console.ANSI_RESET;
+        				 result = result + Console.ANSI_PURPLE + "[" + this.tile(currentPos) + "]" + Console.ANSI_RESET;
         			 } else {
-        				 result = result + "[" + this.getTile(currentPos) + "]";
+        				 result = result + "[" + this.tile(currentPos) + "]";
         			 }
     			 } else {
 
@@ -146,12 +142,8 @@ public class GameBoard {
          return result;
      }
 
-	 public Integer getLength() {
+	 public Integer length() {
 		 return length;
-	 }
-
-	 public Map<Position, Tile> getTiles() {
-		 return tiles;
 	 }
 
 	 public Map<Position, SquareType> getSpecialSquares() {

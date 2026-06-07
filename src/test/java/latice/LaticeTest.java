@@ -136,11 +136,11 @@ class LaticeTest {
 		Position center_4_4 = new Position(1,1);
 		gameboard.put(center_4_4, rackPlayer1.popTile(0));
 		assertEquals(3, rackPlayer1.size());
-		assertEquals(RED_DOLPHIN, gameboard.getTile(center_4_4));
+		assertEquals(RED_DOLPHIN, gameboard.tile(center_4_4));
 
 		Position pos_4_5 = new Position(4,5);
 		gameboard.put(pos_4_5, rackPlayer1.popTile(1));
-		assertEquals(RED_TURTLE, gameboard.getTile(pos_4_5));
+		assertEquals(RED_TURTLE, gameboard.tile(pos_4_5));
 		assertEquals(2, rackPlayer1.size());
 		
 		String testDescription = "Red Dolphin";
@@ -149,7 +149,7 @@ class LaticeTest {
 	
 	@Test
 	void testingNumberOfCycles() {
-		assertEquals(10, gameboard.getNbCycle());
+		assertEquals(10, gameboard.nbCycle());
 	}
 	@Test
 	void testGameboardClearAndTileEmpty() {
@@ -163,23 +163,23 @@ class LaticeTest {
 	void testingLimitsOfGameBoard() {
 		Position pos_7_7 = new Position(7,7);
 		gameboard.put(pos_7_7, new Tile(Color.Green, Shape.Turtle));
-		assertEquals(GREEN_TURTLE, gameboard.getTile(pos_7_7));
+		assertEquals(GREEN_TURTLE, gameboard.tile(pos_7_7));
 
 		Position pos_0_0 = new Position(0,0);
 		gameboard.put(pos_0_0, new Tile(Color.Green, Shape.Turtle));
-		assertEquals(GREEN_TURTLE, gameboard.getTile(pos_0_0));
+		assertEquals(GREEN_TURTLE, gameboard.tile(pos_0_0));
 
 		Position pos_8_8 = new Position(8,8);
 		gameboard.put(pos_8_8, new Tile(Color.Green, Shape.Turtle));
-		assertEquals(GREEN_TURTLE, gameboard.getTile(pos_8_8));
+		assertEquals(GREEN_TURTLE, gameboard.tile(pos_8_8));
 
 		Position pos_8_9 = new Position(8,9);
 		gameboard.put(pos_8_9, new Tile(Color.Green, Shape.Turtle));
-		assertEquals(null, gameboard.getTile(pos_8_9));
+		assertEquals(null, gameboard.tile(pos_8_9));
 
 		Position pos_9_8 = new Position(9,8);
 		gameboard.put(pos_9_8, new Tile(Color.Green, Shape.Turtle));
-		assertEquals(null, gameboard.getTile(pos_9_8));
+		assertEquals(null, gameboard.tile(pos_9_8));
 	}
 	
 	@Test

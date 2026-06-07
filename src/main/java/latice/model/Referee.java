@@ -59,7 +59,7 @@ public class Referee {
 		if (currentPlayer.isMoveAvailable()) {
 			isLegal = true;
 			
-			if (gameboard.getTile(selectedTilePositionGmBrd) != null) {
+			if (gameboard.tile(selectedTilePositionGmBrd) != null) {
 				isLegal = false;
 			} else if (nearbyTiles.isEmpty() && ! gameboard.isEmpty() || ! gameboard.isMoonAt(selectedTilePositionGmBrd) && gameboard.isEmpty() ){
 				isLegal = false;
