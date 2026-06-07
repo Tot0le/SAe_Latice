@@ -102,6 +102,7 @@ public class Referee {
 	}
 	
 	public void nextTurn(GameBoard gameboard) {
+		this.currentPlayer().setAllowedToBuy(true);
 		// the previous player has to draw one tile if their rack is not full
 		if (!this.currentPlayer.rack().isFull()) {
 			this.currentPlayer.drawMaxTile();

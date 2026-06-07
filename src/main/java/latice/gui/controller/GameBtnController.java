@@ -36,12 +36,15 @@ public class GameBtnController {
 
 	public void updateBuyAnActionBtn() {
 		Player currentPlayer = referee.currentPlayer();
-		boolean isMoveAvailable = currentPlayer.isMoveAvailable();
-		if (!isMoveAvailable && currentPlayer.points() >= referee.priceNewAction()) {
-			buyANewActionBtn.setDisable(false);
-		} else {
-			buyANewActionBtn.setDisable(true);
+		if (currentPlayer.isAllowedToBuy()) {
+			boolean isMoveAvailable = currentPlayer.isMoveAvailable();
+			if (!isMoveAvailable && currentPlayer.points() >= referee.priceNewAction()) {
+				buyANewActionBtn.setDisable(false);
+			} else {
+				buyANewActionBtn.setDisable(true);
+			}
 		}
+		
 	}
 
 	public void buyANewActionBtnHandler(LabelController lblController) {

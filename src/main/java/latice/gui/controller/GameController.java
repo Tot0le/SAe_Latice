@@ -71,6 +71,7 @@ public class GameController {
 			this.lblController.currentPlayerLabel().setText(referee.currentPlayer().username() + "'s turn");
 			
 			updateRackAndBtns();
+			lblController.updateInfoLbl(this.multipleSelection);
 		}
 	}
 	
@@ -162,7 +163,7 @@ public class GameController {
 	
 	private void multipleSelection(boolean enable) {
 		this.multipleSelection = enable;
-		this.lblController.updateMultipleSelectLbl(multipleSelection);
+		this.lblController.updateInfoLbl(multipleSelection);
 		this.selectedTilesIndex.clear();
 	}
 
