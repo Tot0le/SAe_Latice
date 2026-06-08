@@ -13,7 +13,6 @@ public class LaticeApplication extends javafx.application.Application {
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
-
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Scene scene = new MainMenu(primaryStage);

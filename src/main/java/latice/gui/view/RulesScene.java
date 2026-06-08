@@ -47,13 +47,13 @@ public class RulesScene extends Scene {
 		btnQuitRules.setPrefSize(150, 100);
 		btnQuitRules.setMinSize(150, 100);
 		btnQuitRules.setMaxSize(150, 100);
-		btnQuitRules = SetImageView.getImageInButtonByDefault(btnQuitRules, imageQuit);
+		btnQuitRules = SetImageView.getImageInButton(btnQuitRules, imageQuit, 155, 105);
 		
 		Button btnBackRules = new Button("BACK");
 		btnBackRules.setPrefSize(150, 100);
 		btnBackRules.setMinSize(150, 100);
 		btnBackRules.setMaxSize(150, 100);
-		btnBackRules = SetImageView.getImageInButtonByDefault(btnBackRules, imageBack);
+		btnBackRules = SetImageView.getImageInButton(btnBackRules, imageBack, 155, 105);
 		
 		MenuBtnController controller = new MenuBtnController(primaryStage, mediaPlayer);
 	    btnQuitRules.setOnMouseClicked(event -> controller.quitBtnHandler());
