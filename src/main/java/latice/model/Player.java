@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import latice.gui.Console;
 import latice.model.tile.Tile;
-import latice.util.ShouldNotBePossibleException;
+import latice.util.exception.ShouldNotBePossibleException;
 
 public class Player {
 	private String username;

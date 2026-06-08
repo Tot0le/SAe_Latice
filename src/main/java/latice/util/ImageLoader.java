@@ -5,6 +5,7 @@ import java.io.InputStream;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import latice.util.exception.ImageNotFoundException;
 
 public class ImageLoader {
 	public ImageLoader() {

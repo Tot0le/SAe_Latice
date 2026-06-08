@@ -7,7 +7,7 @@ import latice.gui.Console;
 import latice.gui.model.RackIhm;
 import latice.model.Player;
 import latice.model.Referee;
-import latice.util.ShouldNotBePossibleException;
+import latice.util.exception.ShouldNotBePossibleException;
 
 public class GameBtnController {
 	private Referee referee;
