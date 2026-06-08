@@ -41,19 +41,19 @@ public class MainMenu extends Scene {
 		btnPlay.setMinSize(300, 200);
 		btnPlay.setMaxSize(300, 200);
 		btnPlay = SetImageView.getImageInButton(btnPlay, imagePlay, 305, 205);
-		
+	
 		Button btnQuit = new Button("QUIT");
 		btnQuit.setPrefSize(150, 100);
 		btnQuit.setMinSize(150, 100);
 		btnQuit.setMaxSize(150, 100);
 		btnQuit = SetImageView.getImageInButton(btnQuit, imageQuit, 155, 105);
-		
+
 		Button btnRules = new Button("RULES");
 		btnRules.setPrefSize(150, 100);
 		btnRules.setMinSize(150, 100);
 		btnRules.setMaxSize(150, 100);
 		btnRules = SetImageView.getImageInButton(btnRules, imageRules, 155, 105);
-		
+
 		//music implementation 
 		String musicFile = MusicPath.MUSIC_MENU.getPath();
 		URL resourceUrl = RulesScene.class.getResource(musicFile);
@@ -61,7 +61,7 @@ public class MainMenu extends Scene {
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
-		
+
 		// Buttons listeners    we make a new primaryStage to bypass the static restrictions
 		MenuBtnController controller = new MenuBtnController(primaryStage, mediaPlayer);
 		btnPlay.setOnMouseClicked((javafx.scene.input.MouseEvent event) -> {

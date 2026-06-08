@@ -34,7 +34,7 @@ public class RulesScene extends Scene {
 		Image imageQuit = ImageLoader.loadImageSafe(ImagePath.QUIT_BUTTON.imagePath(), 150,100);
 		Image imageBack = ImageLoader.loadImageSafe(ImagePath.BACK_BUTTON.imagePath(), 150,100);
 		
-		//Music call from MusicPath 
+		//Music call from MusicPath and music starting. It has been cleared in MenuBtnController
 		String musicFile = MusicPath.MUSIC_SETTINGS.getPath();  
 		URL resourceUrl = RulesScene.class.getResource(musicFile);
 	    Media sound = new Media(resourceUrl.toExternalForm());

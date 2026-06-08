@@ -181,7 +181,7 @@ class LaticeTest {
 		gameboard.put(pos_9_8, new Tile(Color.Green, Shape.Turtle));
 		assertEquals(null, gameboard.tile(pos_9_8));
 	}
-	
+
 	@Test
 	void testGoodBackgroundImage() {
 		Image imageSea = ImageLoader.loadImageSafe(ImagePath.BACKGROUND_SEA.imagePath(), 100, 100);
@@ -195,7 +195,7 @@ class LaticeTest {
 		assertEquals(imageSun.getUrl(), ihm.chooseRightBackgroundImage(pos_5_5).getUrl());
 		assertEquals(imageMoon.getUrl(), ihm.chooseRightBackgroundImage(pos_5_9).getUrl());
 	}
-	
+
 	@Test 
 	void testNearbyPositionsAndTiles(){
 		Position pos_5_5 = new Position(5, 5);

@@ -42,7 +42,7 @@ public class GameBoard {
 		this.specialSquares = new HashMap<>();
 		this.moonSquarePosition = new Position(Math.round((lenght-1)/2), Math.round((lenght-1)/2));
 
-		Factory.createSpecialSquares(lenght, specialSquares, moonSquarePosition);
+		Factory.createSpecialSquares(length, specialSquares, moonSquarePosition);
 	}
 	
 	public Tile tile(Position position) {
