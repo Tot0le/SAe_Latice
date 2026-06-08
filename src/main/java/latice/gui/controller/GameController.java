@@ -171,6 +171,7 @@ public class GameController {
 		this.selectedTileIndex = null;
 		multipleSelection(false);
 		this.rackIhm.clearHighlights();
+		this.gameBtnController.updateConfirmBtn(selectedTilesIndex);
 	}
 
 }
